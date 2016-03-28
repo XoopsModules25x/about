@@ -19,9 +19,7 @@
  * @version        $Id: page.php 1 2010-2-9 ezsky$
  */
 
-if (!defined("XOOPS_ROOT_PATH")) {
-    die("XOOPS root path not defined");
-}
+defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
 
 /**
  * Class AboutPage
@@ -35,11 +33,11 @@ class AboutPage extends XoopsObject
     {
         $this->initVar('page_id', XOBJ_DTYPE_INT, null, false);
         $this->initVar('page_pid', XOBJ_DTYPE_INT, 0);
-        $this->initVar('page_title', XOBJ_DTYPE_TXTBOX, "");
-        $this->initVar('page_menu_title', XOBJ_DTYPE_TXTBOX, "");
-        $this->initVar('page_image', XOBJ_DTYPE_TXTBOX, "");
-        $this->initVar('page_text', XOBJ_DTYPE_TXTBOX, "");
-        $this->initVar('page_author', XOBJ_DTYPE_TXTBOX, "");
+        $this->initVar('page_title', XOBJ_DTYPE_TXTBOX, '');
+        $this->initVar('page_menu_title', XOBJ_DTYPE_TXTBOX, '');
+        $this->initVar('page_image', XOBJ_DTYPE_TXTBOX, '');
+        $this->initVar('page_text', XOBJ_DTYPE_TXTBOX, '');
+        $this->initVar('page_author', XOBJ_DTYPE_TXTBOX, '');
         $this->initVar('page_pushtime', XOBJ_DTYPE_INT);
         $this->initVar('page_blank', XOBJ_DTYPE_INT, 0);
         $this->initVar('page_menu_status', XOBJ_DTYPE_INT, 0);
@@ -48,7 +46,7 @@ class AboutPage extends XoopsObject
         $this->initVar('page_order', XOBJ_DTYPE_INT, 0);
         //$this->initVar('page_url', XOBJ_DTYPE_TXTBOX,"");
         $this->initVar('page_index', XOBJ_DTYPE_INT, 0);
-        $this->initVar('page_tpl', XOBJ_DTYPE_TXTBOX, "");
+        $this->initVar('page_tpl', XOBJ_DTYPE_TXTBOX, '');
         $this->initVar('dohtml', XOBJ_DTYPE_INT, 1);
         $this->initVar('dosmiley', XOBJ_DTYPE_INT, 0);
         $this->initVar('doxcode', XOBJ_DTYPE_INT, 0);
@@ -64,30 +62,30 @@ class AboutPageHandler extends XoopsPersistableObjectHandler
 {
     /**
      * AboutPageHandler constructor.
-     * @param null|object $db
+     * @param null|object|XoopsDatabase $db
      */
-    public function __construct(&$db)
+    public function __construct(XoopsDatabase $db)
     {
         parent::__construct($db, 'about_page', 'AboutPage', 'page_id', 'page_title');
     }
 
     /**
-     * @param int    $pid
-     * @param string $prefix
-     * @param array  $tags
+     * @param  int    $pid
+     * @param  string $prefix
+     * @param  array  $tags
      * @return array
      */
-    public function &getTrees($pid = 0, $prefix = "--", $tags = array())
+    public function &getTrees($pid = 0, $prefix = '--', $tags = array())
     {
-        $pid = (int)($pid);
+        $pid = (int)$pid;
         if (!is_array($tags) || count($tags) == 0) {
-            $tags = array("page_id", "page_pid", "page_title", "page_title", "page_menu_title", "page_status", 'page_order');
+            $tags = array('page_id', 'page_pid', 'page_title', 'page_title', 'page_menu_title', 'page_status', 'page_order');
         }
         $criteria = new CriteriaCompo();
         $criteria->setSort('page_order');
         $criteria->setOrder('ASC');
-        $page_tree = $this->getAll($criteria, $tags);
-        require_once __DIR__ . "/tree.php";
+        $page_tree =& $this->getAll($criteria, $tags);
+        require_once __DIR__ . '/tree.php';
         $tree       = new aboutTree($page_tree);
         $page_array =& $tree->makeTree($prefix, $pid, $tags);
 
@@ -95,14 +93,14 @@ class AboutPageHandler extends XoopsPersistableObjectHandler
     }
 
     /**
-     * @param array $pages
-     * @param int   $key
-     * @param int   $level
+     * @param  array $pages
+     * @param  int   $key
+     * @param  int   $level
      * @return array|bool
      */
     public function &MenuTree($pages = array(), $key = 0, $level = 1)
     {
-        if (!is_array($pages) || empty($pages)) {
+        if (!is_array($pages) || 0 === count($pages)) {
             return false;
         }
         $menu = array();
@@ -111,7 +109,7 @@ class AboutPageHandler extends XoopsPersistableObjectHandler
             if ($v['page_pid'] == $key) {
                 $menu[$k]          = $v;
                 $menu[$k]['level'] = $level;
-                $child             = $this->MenuTree($pages, $k, $level + 1);
+                $child             =& $this->MenuTree($pages, $k, $level + 1);
                 if (!empty($child)) {
                     $menu[$k]['child'] = $child;
                 }
@@ -122,13 +120,13 @@ class AboutPageHandler extends XoopsPersistableObjectHandler
     }
 
     /**
-     * @param array $pages
-     * @param int   $key
+     * @param  array $pages
+     * @param  int   $key
      * @return array|bool
      */
     public function getBread($pages = array(), $key = 0)
     {
-        if (!is_array($pages) || empty($pages)) {
+        if (!is_array($pages) || 0 === count($pages)) {
             return false;
         }
         $bread = array();
@@ -153,11 +151,11 @@ class AboutPageHandler extends XoopsPersistableObjectHandler
     function insert()
     {
     }
-    
+
     function delete()
     {
     }
-    
+
     function getAll()
     {
     }

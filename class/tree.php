@@ -1,19 +1,23 @@
 <?php
 
-if (!defined("XOOPS_ROOT_PATH")) {
-    exit();
-}
-require_once XOOPS_ROOT_PATH . "/class/tree.php";
+defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
 
-if (!class_exists("aboutTree")) {
+require_once XOOPS_ROOT_PATH . '/class/tree.php';
+
+if (!class_exists('aboutTree')) {
     /**
      * Class aboutTree
      */
     class aboutTree extends XoopsObjectTree
     {
+        /**
+         * aboutTree constructor.
+         * @param array $objectArr
+         * @param null  $rootId
+         */
         public function __construct(&$objectArr, $rootId = null)
         {
-            $this->XoopsObjectTree($objectArr, "page_id", "page_pid", $rootId);
+            parent::__construct($objectArr, 'page_id', 'page_pid', $rootId);
         }
 
         /**
@@ -31,9 +35,9 @@ if (!class_exists("aboutTree")) {
                         $ret[$key][$tag] = $this->_tree[$key]['obj']->getVar($tag);
                     }
                 } else {
-                    $ret[$key]["page_title"] = $this->_tree[$key]['obj']->getVar("page_title");
+                    $ret[$key]['page_title'] = $this->_tree[$key]['obj']->getVar('page_title');
                 }
-                $ret[$key]["prefix"] = $prefix_curr;
+                $ret[$key]['prefix'] = $prefix_curr;
                 $prefix_curr .= $prefix_orig;
             }
             if (isset($this->_tree[$key]['child']) && !empty($this->_tree[$key]['child'])) {
@@ -44,9 +48,9 @@ if (!class_exists("aboutTree")) {
         }
 
         /**
-         * @param string $prefix
-         * @param int    $key
-         * @param null   $tags
+         * @param  string $prefix
+         * @param  int    $key
+         * @param  null   $tags
          * @return array
          */
         public function &makeTree($prefix = '-', $key = 0, $tags = null)
@@ -58,20 +62,22 @@ if (!class_exists("aboutTree")) {
         }
 
         /**
-         * @param string $name
-         * @param string $prefix
-         * @param string $selected
-         * @param bool   $EmptyOption
-         * @param int    $key
+         * @param  string $name
+         * @param string  $fieldName
+         * @param  string $prefix
+         * @param  string $selected
+         * @param bool    $addEmptyOption
+         * @param  int    $key
+         * @param string  $extra
          * @return string
          */
-        public function &makeSelBox($name, $prefix = '-', $selected = '', $EmptyOption = false, $key = 0)
+        public function makeSelBox($name, $fieldName, $prefix = '-', $selected = '', $addEmptyOption = false, $key = 0, $extra = '') 
         {
             $ret = '<select name=' . $name . '>';
             if (!empty($addEmptyOption)) {
                 $ret .= '<option value="0">' . (is_string($EmptyOption) ? $EmptyOption : '') . '</option>';
             }
-            $this->_makeSelBoxOptions("page_title", $selected, $key, $ret, $prefix);
+            $this->_makeSelBoxOptions('page_title', $selected, $key, $ret, $prefix);
             $ret .= '</select>';
 
             return $ret;
@@ -97,7 +103,7 @@ if (!class_exists("aboutTree")) {
                                 $ret['child'][$childkey][$tag] = $this->_tree[$childkey]['obj']->getVar($tag);
                             }
                         } else {
-                            $ret['child'][$childkey]["page_title"] = $this->_tree[$childkey]['obj']->getVar("page_title");
+                            $ret['child'][$childkey]['page_title'] = $this->_tree[$childkey]['obj']->getVar('page_title');
                         }
                     endif;
 
@@ -107,9 +113,9 @@ if (!class_exists("aboutTree")) {
         }
 
         /**
-         * @param int  $key
-         * @param null $tags
-         * @param int  $depth
+         * @param  int  $key
+         * @param  null $tags
+         * @param  int  $depth
          * @return array
          */
         public function &makeArrayTree($key = 0, $tags = null, $depth = 0)

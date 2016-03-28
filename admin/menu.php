@@ -22,8 +22,9 @@
 $moduleDirName = basename(dirname(__DIR__));
 
 $moduleHandler = xoops_gethandler('module');
-$module        =& $moduleHandler->getByDirname($moduleDirName);
-$pathIcon32    = '../../' . $module->getInfo('sysicons32');
+$module         = $moduleHandler->getByDirname($moduleDirName);
+$pathIcon32     = '../../' . $module->getInfo('sysicons32');
+$pathModIcon32 = './' . $module->getInfo('modicons32');
 xoops_loadLanguage('modinfo', $module->dirname());
 
 $xoopsModuleAdminPath = XOOPS_ROOT_PATH . '/' . $module->getInfo('dirmoduleadmin');

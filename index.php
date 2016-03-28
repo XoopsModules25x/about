@@ -19,11 +19,11 @@
  * @version        $Id: index.php 1 2010-2-9 ezsky$
  */
 
-include_once 'header.php';
-include_once "include/functions.render.php";
+include_once __DIR__ . '/header.php';
+include_once __DIR__ . '/include/functions.render.php';
 
 $page_id      = isset($_REQUEST['page_id']) ? $_REQUEST['page_id'] : '';
-$page_handler =& xoops_getmodulehandler('page', 'about');
+$page_handler = xoops_getModuleHandler('page', 'about');
 
 // Menu
 $menu_criteria = new CriteriaCompo();
@@ -32,16 +32,16 @@ $menu_criteria->add(new Criteria('page_menu_status', 1), 'AND');
 $menu_criteria->setSort('page_order');
 $menu_criteria->setOrder('ASC');
 $fields = array(
-    "page_id",
-    "page_pid",
-    "page_menu_title",
-    "page_blank",
-    "page_menu_status",
-    "page_status",
+    'page_id',
+    'page_pid',
+    'page_menu_title',
+    'page_blank',
+    'page_menu_status',
+    'page_status',
     'page_text');
 $menu   = $page_handler->getAll($menu_criteria, $fields, false);
 foreach ($menu as $k => $v) {
-    $menu[$k]['page_text'] = trim($v['page_text']) === "http://" ? true : false;
+    $menu[$k]['page_text'] = trim($v['page_text']) === 'http://' ? true : false;
 }
 $page_menu = $page_handler->MenuTree($menu);
 
@@ -63,14 +63,14 @@ if ($display == 1 || !empty($page_id)) {
     $page = current($page_handler->getObjects($criteria, null, false, false));
 
     $xoopsOption['xoops_pagetitle'] = $page['page_title'] . ' - ' . $xoopsModule->getVar('name');
-    $xoopsOption['template_main']   = about_getTemplate("page", $page['page_tpl']);
+    $xoopsOption['template_main']   = about_getTemplate('page', $page['page_tpl']);
     include XOOPS_ROOT_PATH . '/header.php';
 
     if (!empty($page)) {
         $myts              = MyTextSanitizer::getInstance();
         $page['page_text'] = $myts->undoHtmlSpecialChars($page['page_text']);
         if ($page['page_type'] == 2) {
-            header("location: " . $page['page_text']);
+            header('location: ' . $page['page_text']);
         }
         $xoTheme->addMeta('meta', 'description', $page['page_menu_title']);
         $xoopsTpl->assign('pagemenu', $page_menu);
@@ -103,9 +103,9 @@ $beand = array_reverse($page_handler->getBread($menu, $page_id), true);
 if (!empty($beand)) {
     foreach ($beand as $k => $v) {
         if ($k != $page_id) {
-            $xoBreadcrumbs[] = array("title" => $v, 'link' => XOOPS_URL . '/modules/about/index.php?page_id=' . $k);
+            $xoBreadcrumbs[] = array('title' => $v, 'link' => XOOPS_URL . '/modules/about/index.php?page_id=' . $k);
         } else {
-            $xoBreadcrumbs[] = array("title" => $v);
+            $xoBreadcrumbs[] = array('title' => $v);
         }
         $tree_open[$k] = $k;
     }
@@ -113,4 +113,4 @@ if (!empty($beand)) {
 }
 $xoopsTpl->assign('page_id', $page_id);
 
-include_once 'footer.php';
+include_once __DIR__ . '/footer.php';

@@ -23,4 +23,4 @@
 // _CHARSET : utf-8
 // Author: magic.shao
 
-define('_MA_ABOUT_DETAIL', "More");
+define('_MA_ABOUT_DETAIL', 'More');

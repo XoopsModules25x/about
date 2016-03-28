@@ -19,8 +19,8 @@
  * @version        $Id: vars.php 1 2010-2-9 ezsky$
  */
 
-$GLOBALS["artdirname"] = basename(dirname(__DIR__));
+$GLOBALS['artdirname'] = basename(dirname(__DIR__));
 
 // include customized variables
-if (is_object($GLOBALS["xoopsModule"]) && $GLOBALS["artdirname"] == $GLOBALS["xoopsModule"]->getVar("dirname", "n")) {
+if (is_object($GLOBALS['xoopsModule']) && $GLOBALS['artdirname'] == $GLOBALS['xoopsModule']->getVar('dirname', 'n')) {
 }

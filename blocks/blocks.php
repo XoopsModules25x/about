@@ -19,35 +19,32 @@
  * @version        $Id: blocks.php 1 2010-2-9 ezsky$
  */
 
-if (!defined('XOOPS_ROOT_PATH')) {
-    exit();
-}
+defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
 /**
  * @return mixed
  */
 function about_block_menu_show()
 {
-    $page_handler  =& xoops_getmodulehandler('page', 'about');
+    $page_handler  = xoops_getModuleHandler('page', 'about');
     $menu_criteria = new CriteriaCompo();
     $menu_criteria->add(new Criteria('page_status', 1), 'AND');
     $menu_criteria->add(new Criteria('page_menu_status', 1));
     $menu_criteria->setSort('page_order');
     $menu_criteria->setOrder('ASC');
     $fields    = array(
-        "page_id",
-        "page_menu_title",
-        "page_blank",
-        "page_menu_status",
-        "page_status");
+        'page_id',
+        'page_menu_title',
+        'page_blank',
+        'page_menu_status',
+        'page_status');
     $page_menu = $page_handler->getAll($menu_criteria, $fields, false);
 
-    include dirname(__DIR__) . "/xoops_version.php";
+    include dirname(__DIR__) . '/xoops_version.php';
     foreach ($page_menu as $k => $v) {
         $page_menu[$k]['links'] = XOOPS_URL . '/modules/' . $modversion['dirname'] . '/index.php?page_id=' . $v['page_id'];
     }
-    $block = $page_menu;
 
-    return $block;
+    return $page_menu;
 }
 
 /**
@@ -56,10 +53,10 @@ function about_block_menu_show()
  */
 function about_block_page_show($options)
 {
-    @include dirname(__DIR__) . "/xoops_version.php";
-    $myts         =& MyTextSanitizer::getInstance();
+    @include dirname(__DIR__) . '/xoops_version.php';
+    $myts         = MyTextSanitizer::getInstance();
     $block        = array();
-    $page_handler =& xoops_getmodulehandler('page', 'about');
+    $page_handler = xoops_getModuleHandler('page', 'about');
     $page         = $page_handler->get($options[0]);
     if (!is_object($page) || empty($options[0])) {
         return false;
@@ -85,14 +82,15 @@ EOF;
  */
 function about_block_page_edit($options)
 {
-    @include dirname(__DIR__) . "/xoops_version.php";
-    $page_handler =& xoops_getmodulehandler('page', 'about');
+    @include dirname(__DIR__) . '/xoops_version.php';
+    xoops_loadLanguage('blocks', 'about');
+    $page_handler = xoops_getModuleHandler('page', 'about');
     $criteria     = new CriteriaCompo();
     $criteria->add(new Criteria('page_status', 1), 'AND');
     $criteria->add(new Criteria('page_type', 1));
     $criteria->setSort('page_order');
     $criteria->setOrder('ASC');
-    $fields     = array("page_id", "page_title", "page_image");
+    $fields     = array('page_id', 'page_title', 'page_image');
     $pages      = $page_handler->getAll($criteria, $fields, false);
     $page_title = '';
     foreach ($pages as $k => $v) {
@@ -101,12 +99,12 @@ function about_block_page_edit($options)
     }
     include_once dirname(__DIR__) . '/include/xoopsformloader.php';
     $form        = new XoopsBlockForm();
-    $page_select = new XoopsFormRadio(_MI_ABOUT_BLOCKPAGE, 'options[0]', $options[0], '<br />');
+    $page_select = new XoopsFormRadio(_MB_ABOUT_BLOCKPAGE, 'options[0]', $options[0], '<br />');
     $page_select->addOptionArray($options_page);
     $form->addElement($page_select);
-    $form->addElement(new XoopsFormText(_MI_ABOUT_TEXT_LENGTH, 'options[1]', 5, 5, $options[1]));
-    $form->addElement(new XoopsFormText(_MI_ABOUT_VIEW_MORELINKTEXT, 'options[2]', 30, 50, $options[2]));
-    $form->addElement(new XoopsFormRadioYN(_MI_ABOUT_DOTITLEIMAGE, 'options[3]', $options[3]));
+    $form->addElement(new XoopsFormText(_MB_ABOUT_TEXT_LENGTH, 'options[1]', 5, 5, $options[1]));
+    $form->addElement(new XoopsFormText(_MB_ABOUT_VIEW_MORELINKTEXT, 'options[2]', 30, 50, $options[2]));
+    $form->addElement(new XoopsFormRadioYN(_MB_ABOUT_DOTITLEIMAGE, 'options[3]', $options[3]));
 
     return $form->render();
 }

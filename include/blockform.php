@@ -18,18 +18,19 @@
  * @version        $Id: blockform.php 1 2010-1-22 ezsky$
  */
 
-if (!defined('XOOPS_ROOT_PATH')) {
-    die("XOOPS root path not defined");
-}
+defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
 
-include_once XOOPS_ROOT_PATH . "/class/xoopsform/form.php";
+include_once XOOPS_ROOT_PATH . '/class/xoopsform/form.php';
 
 /**
  * Class XoopsBlockForm
  */
 class XoopsBlockForm extends XoopsForm
 {
-    public function __consntruct()
+    /**
+     * XoopsBlockForm constructor.
+     */
+    public function __construct()
     {
     }
 
@@ -41,14 +42,14 @@ class XoopsBlockForm extends XoopsForm
     public function render()
     {
         $ele_name = $this->getName();
-        $ret      = "<div>";
+        $ret      = '<div>';
         $hidden   = '';
         foreach ($this->getElements() as $ele) {
             if (!is_object($ele)) {
                 $ret .= $ele;
             } elseif (!$ele->isHidden()) {
                 if (($caption = $ele->getCaption()) != '') {
-                    $ret .= "<div class='xoops-form-element-caption" . ($ele->isRequired() ? "-required" : "") . "'>" . "<span class='caption-text'><strong>{$caption}</strong></span>" . "<span class='caption-marker'>*</span>" . "</div>";
+                    $ret .= "<div class='xoops-form-element-caption" . ($ele->isRequired() ? '-required' : '') . "'>" . "<span class='caption-text'><strong>{$caption}</strong></span>" . "<span class='caption-marker'>*</span>" . '</div>';
                 }
 
                 $ret .= "<div style='margin:5px 0 8px 0; '>" . $ele->render() . "</div>\n";
@@ -56,7 +57,7 @@ class XoopsBlockForm extends XoopsForm
                 $hidden .= $ele->render();
             }
         }
-        $ret .= "</div>";
+        $ret .= '</div>';
         $ret .= $this->renderValidationJS(true);
 
         return $ret;

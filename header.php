@@ -19,8 +19,9 @@
  * @version        $Id: header.php 1 2010-2-9 ezsky$
  */
 
-include '../../mainfile.php';
+include_once dirname(dirname(__DIR__)) . '/mainfile.php';
 
+xoops_loadLanguage('modinfo', 'about');
 $xoBreadcrumbs   = array();
-$xoBreadcrumbs[] = array("title" => _YOURHOME, 'link' => XOOPS_URL);
-$xoBreadcrumbs[] = array("title" => $xoopsModule->getVar('name'), 'link' => XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname', 'n') . '/');
+$xoBreadcrumbs[] = array('title' => _YOURHOME, 'link' => XOOPS_URL);
+$xoBreadcrumbs[] = array('title' => $xoopsModule->getVar('name'), 'link' => XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname', 'n') . '/');
