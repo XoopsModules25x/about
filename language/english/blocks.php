@@ -20,3 +20,7 @@
  */
 
 
+define('_MB_ABOUT_BLOCKPAGE', 'Block Page');
+define('_MB_ABOUT_TEXT_LENGTH', 'Length');
+define('_MB_ABOUT_VIEW_MORELINKTEXT', 'More Link Text');
+define('_MB_ABOUT_DOTITLEIMAGE', 'Title Image');

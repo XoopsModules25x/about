@@ -2,7 +2,7 @@
 <!--
 .options a {
     font-weight:normal;
-} 
+}
 -->
 </style>
 <img src="../assets/images/page_add.png" />
@@ -13,7 +13,7 @@
 <br /> <br />
 
 <form id="form" name="form" method="post" action="admin.page.php">
-    <table id="about-pageList" class="outer"> 
+    <table id="about-pageList" class="outer">
         <th width="5%" align="center"><{$smarty.const._AM_ABOUT_PAGE_MENU_ORDER}></th>
         <th width="4%" align="center"><{$smarty.const._AM_ABOUT_PAGE_CUS_INDEX}></th>
         <th align="center"><{$smarty.const._AM_ABOUT_PAGE_TITLE}></th>
@@ -35,7 +35,7 @@
                     <a href="admin.page.php?id=<{$page.page_id}>"><{$smarty.const._EDIT}></a> |
                     <a href="admin.page.php?op=delete&amp;id=<{$page.page_id}>" style="color:#f00;"><{$smarty.const._DELETE}></a>  |
                     <a href="<{$xoops_url}>/modules/about/index.php?page_id=<{$page.page_id}>"><{$smarty.const._PREVIEW}></a>
-                </div>    
+                </div>
             </td>
             <td><{$page.page_tpl}></td>
             <td align="center">
@@ -49,7 +49,7 @@
             </td>
             <td align="center"><{$page.page_pushtime}></td>
             <td><{$page.page_author}></td>
-           
+
         </tr>
     <{/foreach}>
         <tr>
@@ -60,15 +60,15 @@
     </table>
 </form>
 
-<script src="<{$xoops_url}>/modules/about/include/jquery.js" type="text/javascript"></script>
+<script src="<{$xoops_url}>/modules/about/assets/js/jquery.js" type="text/javascript"></script>
 <script type="text/javascript">
 $(document).ready(function() {
     $(".options").css("visibility","hidden");
-	$("#about-pageList tr").hover(function() {
-		$(this).find(".options").css("visibility","visible");
-	}, function() {
-		$(this).find(".options").css("visibility","hidden");
-	});
+    $("#about-pageList tr").hover(function() {
+        $(this).find(".options").css("visibility","visible");
+    }, function() {
+        $(this).find(".options").css("visibility","hidden");
+    });
 });
 </script>
 

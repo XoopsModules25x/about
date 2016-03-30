@@ -19,10 +19,10 @@
  * @version        $Id: header.php 1 2010-2-9 ezsky$
  */
 
-include("../../../include/cp_header.php");
-include_once XOOPS_ROOT_PATH . "/Frameworks/art/functions.admin.php";
+include dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
+include_once XOOPS_ROOT_PATH . '/Frameworks/art/functions.admin.php';
 
 if (!isset($xoopsTpl) || !is_object($xoopsTpl)) {
-    include_once(XOOPS_ROOT_PATH . "/class/template.php");
+    include_once(XOOPS_ROOT_PATH . '/class/template.php');
     $xoopsTpl = new XoopsTpl();
 }

@@ -24,16 +24,15 @@
 // Translator: ezsky, http://www.ezsky.org
 
 //xoops_version  add   menu
-define('_MI_ABOUT_NAME', "About us");
+define('_MI_ABOUT_NAME', 'About us');
 define('_MI_ABOUT_DESC', "Extended 'About Us' webpage module for XOOPS");
-define('_MI_ABOUT_PAGE', "Page");
-define('_MI_ABOUT_ABOUTUS', "About Us");
+define('_MI_ABOUT_PAGE', 'Page');
+define('_MI_ABOUT_ABOUTUS', 'About Us');
 
-
-define('_MI_ABOUT_CONFIG_LIST', "Display");
-define('_MI_ABOUT_CONFIG_LIST_CATEGORY', "Cateogry");
-define('_MI_ABOUT_CONFIG_LIST_PAGE', "Page");
-define('_MI_ABOUT_CONFIG_STR_EREG', "Article summary string limit");
+define('_MI_ABOUT_CONFIG_LIST', 'Display');
+define('_MI_ABOUT_CONFIG_LIST_CATEGORY', 'Category');
+define('_MI_ABOUT_CONFIG_LIST_PAGE', 'Page');
+define('_MI_ABOUT_CONFIG_STR_EREG', 'Article summary string limit');
 
 define('_MI_ABOUT_DIRNAME', basename(dirname(dirname(__DIR__))));
 define('_MI_ABOUT_HELP_HEADER', __DIR__ . '/help/helpheader.html');
