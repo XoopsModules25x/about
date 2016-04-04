@@ -15,11 +15,10 @@
  * @since          1.0.0
  * @author         Mengjue Shao <magic.shao@gmail.com>
  * @author         Susheng Yang <ezskyyoung@gmail.com>
- * @version        $Id: xoops_version.php 1 2010-2-9 ezsky$
  */
 
-$modversion['name']        = _MI_ABOUT_NAME;
-$modversion['description'] = _MI_ABOUT_DESC;
+$modversion['name']        = '_MI_ABOUT_NAME';
+$modversion['description'] = '_MI_ABOUT_DESC';
 $modversion['author']      = 'Magic.Shao <magic.shao@gmail.com>, ezsky <ezskyyoung@gmail.com>';
 $modversion['credits']     = 'xoops.org.cn';
 $modversion['help']        = 'page=help';
@@ -88,7 +87,7 @@ $modversion['blocks'] = array();
 
 $modversion['blocks'][1] = array(
     'file'        => 'blocks.php',
-    'name'        => _MI_ABOUT_ABOUTUS,
+    'name'        => '_MI_ABOUT_ABOUTUS',
     'description' => '',
     'show_func'   => 'about_block_menu_show',
     'options'     => '',
@@ -104,7 +103,7 @@ $modversion['blocks'][1] = array(
 
 $modversion['blocks'][2] = array(
     'file'        => 'blocks.php',
-    'name'        => _MI_ABOUT_PAGE,
+    'name'        => '_MI_ABOUT_PAGE',
     'description' => '',
     'show_func'   => 'about_block_page_show',
     'options'     => '1|0|[more]|0',

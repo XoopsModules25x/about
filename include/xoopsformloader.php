@@ -15,7 +15,6 @@
  * @package        links
  * @since          1.0.0
  * @author         Mengjue Shao <magic.shao@gmail.com>
- * @version        $Id: xoopsformloader.php 1 2010-1-22 ezsky$
  */
 
 defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');

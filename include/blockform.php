@@ -15,7 +15,6 @@
  * @package        about
  * @since          1.0.0
  * @author         Susheng Yang <ezskyyoung@gmail.com>
- * @version        $Id: blockform.php 1 2010-1-22 ezsky$
  */
 
 defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
