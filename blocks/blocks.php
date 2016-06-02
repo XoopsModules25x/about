@@ -38,7 +38,6 @@ function about_block_menu_show()
         'page_status'
     );
     $page_menu = $page_handler->getAll($menu_criteria, $fields, false);
-    //    include dirname(__DIR__) . '/xoops_version.php';
     foreach ($page_menu as $k => $v) {
         $page_menu[$k]['links'] = XOOPS_URL . '/modules/' . basename(dirname(__DIR__)) . '/index.php?page_id=' . $v['page_id'];
     }
@@ -52,7 +51,6 @@ function about_block_menu_show()
  */
 function about_block_page_show($options)
 {
-    //    @include dirname(__DIR__) . '/xoops_version.php';
     $myts         = MyTextSanitizer::getInstance();
     $block        = array();
     $page_handler = xoops_getModuleHandler('page', 'about');
@@ -82,7 +80,6 @@ EOF;
 function about_block_page_edit($options)
 {
     xoops_loadLanguage('blocks', 'about');
-    //    @include dirname(__DIR__) . '/xoops_version.php';
     $page_handler = xoops_getModuleHandler('page', 'about');
     $criteria     = new CriteriaCompo();
     $criteria->add(new Criteria('page_status', 1), 'AND');
