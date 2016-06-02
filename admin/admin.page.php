@@ -71,7 +71,8 @@ switch ($op) {
             'page_status',
             'page_order',
             'page_index',
-            'page_tpl');
+            'page_tpl'
+        );
 
         $criteria = new CriteriaCompo();
         $criteria->setSort('page_order');

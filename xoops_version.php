@@ -17,8 +17,8 @@
  * @author         Susheng Yang <ezskyyoung@gmail.com>
  */
 
-$modversion['name']        = '_MI_ABOUT_NAME';
-$modversion['description'] = '_MI_ABOUT_DESC';
+$modversion['name']        = _MI_ABOUT_NAME;
+$modversion['description'] = _MI_ABOUT_DESC;
 $modversion['author']      = 'Magic.Shao <magic.shao@gmail.com>, ezsky <ezskyyoung@gmail.com>';
 $modversion['credits']     = 'xoops.org.cn';
 $modversion['help']        = 'page=help';
@@ -35,8 +35,8 @@ $modversion['modicons16']     = 'assets/images/icons/16';
 $modversion['modicons32']     = 'assets/images/icons/32';
 //about
 $modversion['version']             = 1.04;
-$modversion['module_status']       = 'RC 1';
-$modversion['release_date']        = '2016/03/27';
+$modversion['module_status']       = 'RC 2';
+$modversion['release_date']        = '2016/06/01';
 $modversion['module_website_url']  = 'www.xoops.org';
 $modversion['module_website_name'] = 'XOOPS';
 $modversion['min_php']             = '5.5';
@@ -44,7 +44,8 @@ $modversion['min_xoops']           = '2.5.8';
 $modversion['min_admin']           = '1.1';
 $modversion['min_db']              = array(
     'mysql'  => '5.0.7',
-    'mysqli' => '5.0.7');
+    'mysqli' => '5.0.7'
+);
 
 $modversion['image'] = 'assets/images/logo_module.png';
 
@@ -65,7 +66,8 @@ global $xoopsModuleConfig, $xoopsUser, $xoopsModule;
 //sql
 $modversion['sqlfile']['mysql'] = 'sql/mysql.sql';
 $modversion['tables']           = array(
-    'about_page');
+    'about_page'
+);
 
 /**
  * Templates
@@ -80,19 +82,19 @@ $modversion['templates'] = array(
     array('file' => 'about_admin_page.tpl', 'description' => ''),
     array('file' => 'about_list.tpl', 'description' => ''),
     array('file' => 'about_menu.tpl', 'description' => ''),
-    array('file' => 'about_page.tpl', 'description' => ''));
+    array('file' => 'about_page.tpl', 'description' => '')
+);
 
 // Blocks
-$modversion['blocks'] = array();
-
-$modversion['blocks'][1] = array(
+$modversion['blocks'][] = array(
     'file'        => 'blocks.php',
-    'name'        => '_MI_ABOUT_ABOUTUS',
+    'name'        => _MI_ABOUT_ABOUTUS,
     'description' => '',
     'show_func'   => 'about_block_menu_show',
     'options'     => '',
     'edit_func'   => '',
-    'template'    => 'about_block_menu.tpl');
+    'template'    => 'about_block_menu.tpl'
+);
 
 /*
  * @param int $options[0] page id
@@ -101,14 +103,15 @@ $modversion['blocks'][1] = array(
  * @param int $options[3] more link text
  */
 
-$modversion['blocks'][2] = array(
+$modversion['blocks'][] = array(
     'file'        => 'blocks.php',
-    'name'        => '_MI_ABOUT_PAGE',
+    'name'        => _MI_ABOUT_PAGE,
     'description' => '',
     'show_func'   => 'about_block_page_show',
     'options'     => '1|0|[more]|0',
     'edit_func'   => 'about_block_page_edit',
-    'template'    => 'about_block_page.tpl');
+    'template'    => 'about_block_page.tpl'
+);
 
 //configs
 
@@ -116,7 +119,8 @@ $select = array(
     'y-m-d'         => '1',
     'y-m-d h:i:s'   => '2',
     '年-月-日'         => '3',
-    '年-月-日 小时:分钟:秒' => '4');
+    '年-月-日 小时:分钟:秒' => '4'
+);
 
 $modversion['config'][] = array(
     'name'        => 'display',
@@ -125,7 +129,8 @@ $modversion['config'][] = array(
     'formtype'    => 'select',
     'valuetype'   => 'int',
     'options'     => array('_MI_ABOUT_CONFIG_LIST_PAGE' => 1, '_MI_ABOUT_CONFIG_LIST_CATEGORY' => 2),
-    'default'     => 1);
+    'default'     => 1
+);
 
 $modversion['config'][] = array(
     'name'        => 'str_ereg',
@@ -133,7 +138,8 @@ $modversion['config'][] = array(
     'description' => '',
     'formtype'    => 'textbox',
     'valuetype'   => 'int',
-    'default'     => '500');
+    'default'     => '500'
+);
 
 xoops_load('xoopseditorhandler');
 $editor_handler         = XoopsEditorHandler::getInstance();
@@ -144,4 +150,5 @@ $modversion['config'][] = array(
     'formtype'    => 'select',
     'valuetype'   => 'text',
     'options'     => array_flip($editor_handler->getList()),
-    'default'     => 'dhtml');
+    'default'     => 'dhtml'
+);

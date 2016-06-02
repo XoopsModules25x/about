@@ -18,9 +18,10 @@
  * @author         Susheng Yang <ezskyyoung@gmail.com>
  */
 
+$moduleDirName = basename(__DIR__);
 include_once dirname(dirname(__DIR__)) . '/mainfile.php';
 
-xoops_loadLanguage('modinfo', 'about');
+xoops_loadLanguage('modinfo', $moduleDirName);
 $xoBreadcrumbs   = array();
 $xoBreadcrumbs[] = array('title' => _YOURHOME, 'link' => XOOPS_URL);
 $xoBreadcrumbs[] = array('title' => $xoopsModule->getVar('name'), 'link' => XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname', 'n') . '/');

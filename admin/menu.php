@@ -20,9 +20,9 @@
 
 $moduleDirName = basename(dirname(__DIR__));
 
-$moduleHandler = xoops_gethandler('module');
-$module         = $moduleHandler->getByDirname($moduleDirName);
-$pathIcon32     = '../../' . $module->getInfo('sysicons32');
+$moduleHandler = xoops_getHandler('module');
+$module        = $moduleHandler->getByDirname($moduleDirName);
+$pathIcon32    = '../../' . $module->getInfo('sysicons32');
 $pathModIcon32 = './' . $module->getInfo('modicons32');
 xoops_loadLanguage('modinfo', $module->dirname());
 
@@ -35,14 +35,17 @@ include_once $fileinc;
 $adminmenu[] = array(
     'title' => _AM_MODULEADMIN_HOME,
     'link'  => 'admin/index.php',
-    'icon'  => $pathIcon32 . '/home.png');
+    'icon'  => $pathIcon32 . '/home.png'
+);
 
 $adminmenu[] = array(
     'title' => _MI_ABOUT_PAGE,
     'link'  => 'admin/admin.page.php',
-    'icon'  => $pathIcon32 . '/manage.png');
+    'icon'  => $pathIcon32 . '/manage.png'
+);
 
 $adminmenu[] = array(
     'title' => _AM_MODULEADMIN_ABOUT,
     'link'  => 'admin/about.php',
-    'icon'  => $pathIcon32 . '/about.png');
+    'icon'  => $pathIcon32 . '/about.png'
+);

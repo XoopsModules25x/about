@@ -2,10 +2,10 @@
 defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
 
 /**
- * @param $module
+ * @param XoopsObject $module
  * @return bool
  */
-function xoops_module_install_about(&$module)
+function xoops_module_install_about(XoopsObject $module)
 {
     $data_file = XOOPS_ROOT_PATH . '/modules/about/sql/mysql.about.sql';
     $GLOBALS['xoopsDB']->queryF('SET NAMES utf8');
@@ -23,7 +23,7 @@ function xoops_module_install_about(&$module)
  * @param  null $prev_version
  * @return bool
  */
-function xoops_module_update_about(&$module, $prev_version = null)
+function xoops_module_update_about($module, $prev_version = null)
 {
     return true;
 }

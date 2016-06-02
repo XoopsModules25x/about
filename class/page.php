@@ -61,7 +61,7 @@ class AboutPageHandler extends XoopsPersistableObjectHandler
 {
     /**
      * AboutPageHandler constructor.
-     * @param null|object|XoopsDatabase $db
+     * @param null|XoopsDatabase $db
      */
     public function __construct(XoopsDatabase $db)
     {
@@ -85,19 +85,19 @@ class AboutPageHandler extends XoopsPersistableObjectHandler
         $criteria->setOrder('ASC');
         $page_tree =& $this->getAll($criteria, $tags);
         require_once __DIR__ . '/tree.php';
-        $tree       = new aboutTree($page_tree);
+        $tree       = new AboutTree($page_tree);
         $page_array =& $tree->makeTree($prefix, $pid, $tags);
 
         return $page_array;
     }
 
     /**
-     * @param  array $pages
-     * @param  int   $key
-     * @param  int   $level
+     * @param  array      $pages
+     * @param  int        $key
+     * @param  int        $level
      * @return array|bool
      */
-    public function &MenuTree($pages = array(), $key = 0, $level = 1)
+    public function &menuTree($pages = array(), $key = 0, $level = 1)
     {
         if (!is_array($pages) || 0 === count($pages)) {
             return false;
@@ -108,7 +108,7 @@ class AboutPageHandler extends XoopsPersistableObjectHandler
             if ($v['page_pid'] == $key) {
                 $menu[$k]          = $v;
                 $menu[$k]['level'] = $level;
-                $child             =& $this->MenuTree($pages, $k, $level + 1);
+                $child             =& $this->menuTree($pages, $k, $level + 1);
                 if (!empty($child)) {
                     $menu[$k]['child'] = $child;
                 }
@@ -119,8 +119,8 @@ class AboutPageHandler extends XoopsPersistableObjectHandler
     }
 
     /**
-     * @param  array $pages
-     * @param  int   $key
+     * @param  array      $pages
+     * @param  int        $key
      * @return array|bool
      */
     public function getBread($pages = array(), $key = 0)
