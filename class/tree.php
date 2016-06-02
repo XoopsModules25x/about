@@ -4,14 +4,14 @@ defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
 
 require_once XOOPS_ROOT_PATH . '/class/tree.php';
 
-if (!class_exists('aboutTree')) {
+if (!class_exists('AboutTree')) {
     /**
-     * Class aboutTree
+     * Class AboutTree
      */
-    class aboutTree extends XoopsObjectTree
+    class AboutTree extends XoopsObjectTree
     {
         /**
-         * aboutTree constructor.
+         * AboutTree constructor.
          * @param array $objectArr
          * @param null  $rootId
          */
@@ -27,7 +27,7 @@ if (!class_exists('aboutTree')) {
          * @param string $prefix_curr
          * @param null   $tags
          */
-        public function _makeTreeItems($key, &$ret, $prefix_orig, $prefix_curr = '', $tags = null)
+        public function makeTreeItems($key, &$ret, $prefix_orig, $prefix_curr = '', $tags = null)
         {
             if ($key > 0) {
                 if (count($tags) > 0) {
@@ -42,7 +42,7 @@ if (!class_exists('aboutTree')) {
             }
             if (isset($this->_tree[$key]['child']) && !empty($this->_tree[$key]['child'])) {
                 foreach ($this->_tree[$key]['child'] as $childkey) {
-                    $this->_makeTreeItems($childkey, $ret, $prefix_orig, $prefix_curr, $tags);
+                    $this->makeTreeItems($childkey, $ret, $prefix_orig, $prefix_curr, $tags);
                 }
             }
         }
@@ -56,22 +56,22 @@ if (!class_exists('aboutTree')) {
         public function &makeTree($prefix = '-', $key = 0, $tags = null)
         {
             $ret = array();
-            $this->_makeTreeItems($key, $ret, $prefix, '', $tags);
+            $this->makeTreeItems($key, $ret, $prefix, '', $tags);
 
             return $ret;
         }
 
         /**
          * @param  string $name
-         * @param string  $fieldName
+         * @param  string $fieldName
          * @param  string $prefix
          * @param  string $selected
-         * @param bool    $addEmptyOption
+         * @param  bool   $addEmptyOption
          * @param  int    $key
-         * @param string  $extra
+         * @param  string $extra
          * @return string
          */
-        public function makeSelBox($name, $fieldName, $prefix = '-', $selected = '', $addEmptyOption = false, $key = 0, $extra = '') 
+        public function makeSelBox($name, $fieldName, $prefix = '-', $selected = '', $addEmptyOption = false, $key = 0, $extra = '')
         {
             $ret = '<select name=' . $name . '>';
             if (!empty($addEmptyOption)) {
@@ -89,7 +89,7 @@ if (!class_exists('aboutTree')) {
          * @param array $tags
          * @param int   $depth
          */
-        public function getAllChild_array($key, &$ret, $tags = array(), $depth = 0)
+        public function getAllChildArray($key, &$ret, $tags = array(), $depth = 0)
         {
             if (--$depth == 0) {
                 return;
@@ -107,15 +107,15 @@ if (!class_exists('aboutTree')) {
                         }
                     endif;
 
-                    $this->getAllChild_array($childkey, $ret['child'][$childkey], $tags, $depth);
+                    $this->getAllChildArray($childkey, $ret['child'][$childkey], $tags, $depth);
                 }
             }
         }
 
         /**
-         * @param  int  $key
-         * @param  null $tags
-         * @param  int  $depth
+         * @param  int   $key
+         * @param  null  $tags
+         * @param  int   $depth
          * @return array
          */
         public function &makeArrayTree($key = 0, $tags = null, $depth = 0)
@@ -124,7 +124,7 @@ if (!class_exists('aboutTree')) {
             if ($depth > 0) {
                 $depth++;
             }
-            $this->getAllChild_array($key, $ret, $tags, $depth);
+            $this->getAllChildArray($key, $ret, $tags, $depth);
 
             return $ret;
         }

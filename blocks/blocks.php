@@ -16,7 +16,6 @@
  * @since          1.0.0
  * @author         Mengjue Shao <magic.shao@gmail.com>
  * @author         Susheng Yang <ezskyyoung@gmail.com>
- * @version        $Id: blocks.php 1 2010-2-9 ezsky$
  */
 
 defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
@@ -36,12 +35,11 @@ function about_block_menu_show()
         'page_menu_title',
         'page_blank',
         'page_menu_status',
-        'page_status');
+        'page_status'
+    );
     $page_menu = $page_handler->getAll($menu_criteria, $fields, false);
-
-    include dirname(__DIR__) . '/xoops_version.php';
     foreach ($page_menu as $k => $v) {
-        $page_menu[$k]['links'] = XOOPS_URL . '/modules/' . $modversion['dirname'] . '/index.php?page_id=' . $v['page_id'];
+        $page_menu[$k]['links'] = XOOPS_URL . '/modules/' . basename(dirname(__DIR__)) . '/index.php?page_id=' . $v['page_id'];
     }
 
     return $page_menu;
@@ -53,7 +51,6 @@ function about_block_menu_show()
  */
 function about_block_page_show($options)
 {
-    @include dirname(__DIR__) . '/xoops_version.php';
     $myts         = MyTextSanitizer::getInstance();
     $block        = array();
     $page_handler = xoops_getModuleHandler('page', 'about');
@@ -63,7 +60,7 @@ function about_block_page_show($options)
     }
     $page_text = strip_tags($page->getVar('page_text', 'n'));
     if ($options[1] > 0) {
-        $url        = XOOPS_URL . '/modules/' . $modversion['dirname'] . '/index.php?page_id=' . $options[0];
+        $url        = XOOPS_URL . '/modules/' . basename(dirname(__DIR__)) . '/index.php?page_id=' . $options[0];
         $trimmarker = <<<EOF
 <a href="{$url}" class="more">{$options[2]}</a>
 EOF;
@@ -71,7 +68,7 @@ EOF;
     }
 
     $block['page_text']  = $myts->nl2br($page_text);
-    $block['page_image'] = $options[3] == 1 ? XOOPS_UPLOAD_URL . '/' . $modversion['dirname'] . '/' . $page->getVar('page_image', 's') : '';
+    $block['page_image'] = $options[3] == 1 ? XOOPS_UPLOAD_URL . '/' . basename(dirname(__DIR__)) . '/' . $page->getVar('page_image', 's') : '';
 
     return $block;
 }
@@ -82,7 +79,6 @@ EOF;
  */
 function about_block_page_edit($options)
 {
-    @include dirname(__DIR__) . '/xoops_version.php';
     xoops_loadLanguage('blocks', 'about');
     $page_handler = xoops_getModuleHandler('page', 'about');
     $criteria     = new CriteriaCompo();
@@ -94,12 +90,12 @@ function about_block_page_edit($options)
     $pages      = $page_handler->getAll($criteria, $fields, false);
     $page_title = '';
     foreach ($pages as $k => $v) {
-        $page_title       = '<a href="' . XOOPS_URL . '/modules/' . $modversion['dirname'] . '/index.php?page_id=' . $k . '" target="_blank">' . $v['page_title'] . '</a>';
-        $options_page[$k] = empty($v['page_image']) ? $page_title : $page_title . '<img src="' . XOOPS_URL . '/modules/' . $modversion['dirname'] . '/assets/images/picture.png' . '" />';
+        $page_title       = '<a href="' . XOOPS_URL . '/modules/' . basename(dirname(__DIR__)) . '/index.php?page_id=' . $k . '" target="_blank">' . $v['page_title'] . '</a>';
+        $options_page[$k] = empty($v['page_image']) ? $page_title : $page_title . '<img src="' . XOOPS_URL . '/modules/' . basename(dirname(__DIR__)) . '/assets/images/picture.png' . '" />';
     }
     include_once dirname(__DIR__) . '/include/xoopsformloader.php';
     $form        = new XoopsBlockForm();
-    $page_select = new XoopsFormRadio(_MB_ABOUT_BLOCKPAGE, 'options[0]', $options[0], '<br />');
+    $page_select = new XoopsFormRadio(_MB_ABOUT_BLOCKPAGE, 'options[0]', $options[0], '<br>');
     $page_select->addOptionArray($options_page);
     $form->addElement($page_select);
     $form->addElement(new XoopsFormText(_MB_ABOUT_TEXT_LENGTH, 'options[1]', 5, 5, $options[1]));

@@ -15,7 +15,6 @@
  * @package        about
  * @since          1.0.0
  * @author         Susheng Yang <ezskyyoung@gmail.com>
- * @version        $Id: blockform.php 1 2010-1-22 ezsky$
  */
 
 defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
@@ -49,7 +48,12 @@ class XoopsBlockForm extends XoopsForm
                 $ret .= $ele;
             } elseif (!$ele->isHidden()) {
                 if (($caption = $ele->getCaption()) != '') {
-                    $ret .= "<div class='xoops-form-element-caption" . ($ele->isRequired() ? '-required' : '') . "'>" . "<span class='caption-text'><strong>{$caption}</strong></span>" . "<span class='caption-marker'>*</span>" . '</div>';
+                    $ret .= "<div class='xoops-form-element-caption" .
+                            ($ele->isRequired() ? '-required' : '') .
+                            "'>" .
+                            "<span class='caption-text'><strong>{$caption}</strong></span>" .
+                            "<span class='caption-marker'>*</span>" .
+                            '</div>';
                 }
 
                 $ret .= "<div style='margin:5px 0 8px 0; '>" . $ele->render() . "</div>\n";

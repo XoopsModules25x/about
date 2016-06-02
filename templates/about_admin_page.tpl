@@ -10,7 +10,7 @@
 <img src="../assets/images/link_add.png" />
 <a href="admin.page.php?op=new&amp;type=2"><{$smarty.const._AM_ABOUT_INSERT_LINK}></a>
 
-<br /> <br />
+<br> <br>
 
 <form id="form" name="form" method="post" action="admin.page.php">
     <table id="about-pageList" class="outer">

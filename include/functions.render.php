@@ -9,12 +9,11 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
- * @copyright       The XOOPS Project http://sourceforge.net/projects/xoops/
+ * @copyright       XOOPS Project (http://xoops.org)
  * @license         http://www.fsf.org/copyleft/gpl.html GNU public license
  * @package         article
  * @since           1.0
  * @author          Taiwen Jiang <phppp@users.sourceforge.net>
- * @version         $Id: functions.render.php 2283 2008-10-12 03:36:13Z phppp $
  */
 
 defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');

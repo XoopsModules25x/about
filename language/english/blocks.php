@@ -16,9 +16,7 @@
  * @since          1.0.0
  * @author         Mengjue Shao <magic.shao@gmail.com>
  * @author         Susheng Yang <ezskyyoung@gmail.com>
- * @version        $Id: blocks.php 1 2010-2-9 ezsky$
  */
-
 
 define('_MB_ABOUT_BLOCKPAGE', 'Block Page');
 define('_MB_ABOUT_TEXT_LENGTH', 'Length');

@@ -16,7 +16,6 @@
  * @since          1.0.0
  * @author         Mengjue Shao <magic.shao@gmail.com>
  * @author         Susheng Yang <ezskyyoung@gmail.com>
- * @version        $Id: index.php 1 2010-2-9 ezsky$
  */
 
 include_once __DIR__ . '/header.php';
@@ -38,12 +37,13 @@ $fields = array(
     'page_blank',
     'page_menu_status',
     'page_status',
-    'page_text');
+    'page_text'
+);
 $menu   = $page_handler->getAll($menu_criteria, $fields, false);
 foreach ($menu as $k => $v) {
     $menu[$k]['page_text'] = trim($v['page_text']) === 'http://' ? true : false;
 }
-$page_menu = $page_handler->MenuTree($menu);
+$page_menu = $page_handler->menuTree($menu);
 
 // Display
 $display = $xoopsModuleConfig['display'];

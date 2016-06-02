@@ -10,7 +10,7 @@
 
 About Us module for [XOOPS CMS](http://xoops.org) for adding a multi-page About Us section to your Website
 
-[![Tutorial Available](http://xoops.org/images/tutorial-available-blue.svg)](https://www.gitbook.com/book/xoops/xoops-about/) Tutorial: see [here](https://www.gitbook.com/book/xoops/xoops-about/).
+[![Tutorial Available](http://xoops.org/images/tutorial-available-blue.svg)](https://www.gitbook.com/book/xoops/xoops-about/) Tutorial: see [GitBook](https://www.gitbook.com/book/xoops/xoops-about/).
 To contribute to the Tutorial, [fork it on GitHub](https://github.com/XoopsDocs/about-tutorial)
 
 [![Translations on Transifex](http://xoops.org/images/translations-transifex-blue.svg)](https://www.transifex.com/xoops)

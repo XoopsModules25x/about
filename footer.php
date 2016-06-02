@@ -16,7 +16,6 @@
  * @since          1.0.0
  * @author         Mengjue Shao <magic.shao@gmail.com>
  * @author         Susheng Yang <ezskyyoung@gmail.com>
- * @version        $Id: footer.php 1 2010-2-9 ezsky$
  */
 
 if (count($xoBreadcrumbs) > 0) {

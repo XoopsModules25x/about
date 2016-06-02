@@ -1,10 +1,18 @@
+1.04 RC 2           (NOT RELEASED)
+-----------------------------------------------
+- removed @version (mamba)
+- fixed block title (mamba)
+- code cosmetics (mamba)
+- replaced <b /> with <b> (mamba)
+
+
 1.04 RC 1           (2016-03-27)
 -----------------------------------------------
-- XOOPS 2.5.8 and PHP 7 (Mamba)
+- XOOPS 2.5.8 and PHP 7 (mamba)
 
 1.04 Beta 1           (2016-01-05)
 -----------------------------------------------
-- Updated to XOOPS 2.5.7 Admin GUI (Mamba)
+- Updated to XOOPS 2.5.7 Admin GUI (mamba)
 
 
 1.03                  (2010/05/17)

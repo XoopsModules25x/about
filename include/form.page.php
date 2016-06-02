@@ -16,7 +16,6 @@
  * @since          1.0.0
  * @author         Mengjue Shao <magic.shao@gmail.com>
  * @author         Susheng Yang <ezskyyoung@gmail.com>
- * @version        $Id: form.page.php 1 2010-2-9 ezsky$
  */
 
 if (!defined('XOOPS_ROOT_PATH')) {
@@ -47,7 +46,7 @@ if ($pageType == 1) {
     $menu->addElement(new XoopsFormLabel('', _AM_ABOUT_PAGE_LINK_MENU));
     $form->addElement($menu, true);
 
-    $editorTray = new XoopsFormElementTray(_AM_ABOUT_PAGE_TEXT, '<br />');
+    $editorTray = new XoopsFormElementTray(_AM_ABOUT_PAGE_TEXT, '<br>');
     if (class_exists('XoopsFormEditor')) {
         $options['name']   = 'page_text';
         $options['value']  = $page_obj->getVar('page_text');
@@ -73,7 +72,8 @@ if ($pageType == 1) {
 } else {
     $form->addElement(new XoopsFormText(_AM_ABOUT_PAGE_MENU_TITLE . ':', 'page_menu_title', 60, 255, $page_obj->getVar('page_menu_title', $format)));
     $form->addElement(new XoopsFormHidden('page_menu_status', $menu_status));
-    $form->addElement(new XoopsFormText(_AM_ABOUT_PAGE_LINK_TEXT, 'page_text', 60, 255, $page_obj->isNew() ? 'http://' . $page_obj->getVar('page_text', $format) : $page_obj->getVar('page_text', $format)), true);
+    $form->addElement(new XoopsFormText(_AM_ABOUT_PAGE_LINK_TEXT, 'page_text', 60, 255,
+                                        $page_obj->isNew() ? 'http://' . $page_obj->getVar('page_text', $format) : $page_obj->getVar('page_text', $format)), true);
 }
 
 $page_list    = $page_handler->getTrees(0, '--');
