@@ -1,9 +1,10 @@
 ![alt XOOPS CMS](http://xoops.org/images/logoXoops4GithubRepository.png)
 ## About Us module for  [XOOPS CMS 2.5.8+](https://xoops.org)
 [![Software License](https://img.shields.io/badge/license-GPL-brightgreen.svg?style=flat)](LICENSE)
-[![Scrutinizer Code Quality](https://img.shields.io/scrutinizer/g/mambax7/about.svg?style=flat)](https://scrutinizer-ci.com/g/mambax7/about/?branch=master)
-[![Codacy Badge](https://api.codacy.com/project/badge/grade/2d27c0023ee54f0b9ba2b5d17a68b2a5)](https://www.codacy.com/app/mambax7/about)
-[![Code Climate](https://img.shields.io/codeclimate/github/mambax7/about.svg?style=flat)](https://codeclimate.com/github/mambax7/about)
+[![Scrutinizer Code Quality](https://img.shields.io/scrutinizer/g/XoopsModules25x/about.svg?style=flat)](https://scrutinizer-ci.com/g/XoopsModules25x/about/?branch=master)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/2c1ce57c3e6f4d5b9b55198b4305cd14)](https://www.codacy.com/app/XoopsModules25x/about_2)
+[![Code Climate](https://img.shields.io/codeclimate/github/XoopsModules25x/about.svg?style=flat)](https://codeclimate.com/github/XoopsModules25x/about)
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/67dff878-c997-4264-a709-7dede15759d6/mini.png)](https://insight.sensiolabs.com/projects/67dff878-c997-4264-a709-7dede15759d6)
 [![Latest Pre-Resease](https://img.shields.io/github/tag/XoopsModules25x/about.svg?style=flat)](https://github.com/XoopsModules25x/about/tags/)
 [![Latest Version](https://img.shields.io/github/release/XoopsModules25x/about.svg?style=flat)](https://github.com/XoopsModules25x/about/releases/)
 
@@ -17,4 +18,3 @@ To contribute to the Tutorial, [fork it on GitHub](https://github.com/XoopsDocs/
 Please visit us on http://xoops.org
 
 The upcoming "next generation" version of XOOPS CMS is being crafted on GitHub at: https://github.com/XOOPS
-
