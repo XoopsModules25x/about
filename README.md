@@ -5,7 +5,7 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/2c1ce57c3e6f4d5b9b55198b4305cd14)](https://www.codacy.com/app/XoopsModules25x/about_2)
 [![Code Climate](https://img.shields.io/codeclimate/github/XoopsModules25x/about.svg?style=flat)](https://codeclimate.com/github/XoopsModules25x/about)
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/67dff878-c997-4264-a709-7dede15759d6/mini.png)](https://insight.sensiolabs.com/projects/67dff878-c997-4264-a709-7dede15759d6)
-[![Latest Pre-Resease](https://img.shields.io/github/tag/XoopsModules25x/about.svg?style=flat)](https://github.com/XoopsModules25x/about/tags/)
+[![Latest Pre-Release](https://img.shields.io/github/tag/XoopsModules25x/about.svg?style=flat)](https://github.com/XoopsModules25x/about/tags/)
 [![Latest Version](https://img.shields.io/github/release/XoopsModules25x/about.svg?style=flat)](https://github.com/XoopsModules25x/about/releases/)
 
 About Us module for [XOOPS CMS](http://xoops.org) for adding a multi-page About Us section to your Website
