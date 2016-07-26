@@ -35,19 +35,19 @@ $modversion['modicons16']     = 'assets/images/icons/16';
 $modversion['modicons32']     = 'assets/images/icons/32';
 //about
 $modversion['version']             = 1.04;
-$modversion['module_status']       = 'RC 2';
+$modversion['module_status']       = 'Final';
 $modversion['release_date']        = '2016/06/01';
 $modversion['module_website_url']  = 'www.xoops.org';
 $modversion['module_website_name'] = 'XOOPS';
 $modversion['min_php']             = '5.5';
 $modversion['min_xoops']           = '2.5.8';
-$modversion['min_admin']           = '1.1';
+$modversion['min_admin']           = '1.2';
 $modversion['min_db']              = array(
     'mysql'  => '5.0.7',
     'mysqli' => '5.0.7'
 );
 
-$modversion['image'] = 'assets/images/logo_module.png';
+$modversion['image'] = 'assets/images/logoModule.png';
 
 $modversion['hasAdmin']   = 1;
 $modversion['adminindex'] = 'admin/index.php';

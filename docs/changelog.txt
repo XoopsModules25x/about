@@ -1,9 +1,17 @@
-1.04 RC 2           (NOT RELEASED)
+1.04 Final          2016-07-10
 -----------------------------------------------
 - removed @version (mamba)
 - fixed block title (mamba)
 - code cosmetics (mamba)
-- replaced <b /> with <b> (mamba)
+- removed @version (mamba)
+- addNavigation(basename(__FILE__))  (mamba)
+- dirname(__FILE__) to __DIR__ (mamba)
+- XOOPS 2.5.8, PHP 7 (mamba)
+- replaced < b /> with < b > (mamba)
+- Unnecessary double quotes (mamba)
+- reference mismatch (mamba)
+- Hardening to type safe (mamba)
+
 
 
 1.04 RC 1           (2016-03-27)

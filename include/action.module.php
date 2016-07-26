@@ -2,7 +2,7 @@
 defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
 
 /**
- * @param XoopsObject $module
+ * @param  XoopsObject $module
  * @return bool
  */
 function xoops_module_install_about(XoopsObject $module)
@@ -19,11 +19,11 @@ function xoops_module_install_about(XoopsObject $module)
 }
 
 /**
- * @param       $module
- * @param  null $prev_version
+ * @param  XoopsModule $module
+ * @param  null        $prev_version
  * @return bool
  */
-function xoops_module_update_about($module, $prev_version = null)
+function xoops_module_update_about(XoopsModule $module, $prev_version = null)
 {
     return true;
 }

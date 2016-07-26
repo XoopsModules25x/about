@@ -99,9 +99,9 @@ if ($display == 1 || !empty($page_id)) {
 }
 
 // get bread
-$beand = array_reverse($page_handler->getBread($menu, $page_id), true);
-if (!empty($beand)) {
-    foreach ($beand as $k => $v) {
+$bread = array_reverse($page_handler->getBread($menu, $page_id), true);
+if (!empty($bread)) {
+    foreach ($bread as $k => $v) {
         if ($k != $page_id) {
             $xoBreadcrumbs[] = array('title' => $v, 'link' => XOOPS_URL . '/modules/about/index.php?page_id=' . $k);
         } else {
