@@ -21,3 +21,4 @@ CREATE TABLE `about_page` (
 `dobr` 			tinyint(1) 		NOT NULL default '0',
 PRIMARY KEY ( `page_id` )
 );
+  ENGINE = MyISAM;
