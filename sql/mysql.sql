@@ -20,4 +20,5 @@ CREATE TABLE `about_page` (
 `doimage` 		tinyint(1) 		NOT NULL default '0',
 `dobr` 			tinyint(1) 		NOT NULL default '0',
 PRIMARY KEY ( `page_id` )
-);
+)
+  ENGINE = MyISAM;
