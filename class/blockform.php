@@ -22,12 +22,12 @@ defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
 include_once XOOPS_ROOT_PATH . '/class/xoopsform/form.php';
 
 /**
- * Class XoopsBlockForm
+ * Class AboutBlockForm
  */
-class XoopsBlockForm extends XoopsForm
+class AboutBlockForm extends XoopsForm
 {
     /**
-     * XoopsBlockForm constructor.
+     * AboutBlockForm constructor.
      */
     public function __construct()
     {

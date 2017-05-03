@@ -18,34 +18,18 @@
  * @author         Susheng Yang <ezskyyoung@gmail.com>
  */
 
-$moduleDirName = basename(dirname(__DIR__));
+defined('XOOPS_ROOT_PATH') || exit('Restricted access');
 
-$moduleHandler = xoops_getHandler('module');
-$module        = $moduleHandler->getByDirname($moduleDirName);
-$pathIcon32    = '../../' . $module->getInfo('sysicons32');
-$pathModIcon32 = './' . $module->getInfo('modicons32');
-xoops_loadLanguage('modinfo', $module->dirname());
-
-$xoopsModuleAdminPath = XOOPS_ROOT_PATH . '/' . $module->getInfo('dirmoduleadmin');
-if (!file_exists($fileinc = $xoopsModuleAdminPath . '/language/' . $GLOBALS['xoopsConfig']['language'] . '/' . 'main.php')) {
-    $fileinc = $xoopsModuleAdminPath . '/language/english/main.php';
-}
-include_once $fileinc;
-
-$adminmenu[] = array(
-    'title' => _AM_MODULEADMIN_HOME,
-    'link'  => 'admin/index.php',
-    'icon'  => $pathIcon32 . '/home.png'
-);
-
-$adminmenu[] = array(
-    'title' => _MI_ABOUT_PAGE,
-    'link'  => 'admin/admin.page.php',
-    'icon'  => $pathIcon32 . '/manage.png'
-);
-
-$adminmenu[] = array(
-    'title' => _AM_MODULEADMIN_ABOUT,
-    'link'  => 'admin/about.php',
-    'icon'  => $pathIcon32 . '/about.png'
+$adminmenu = array(array('title' => _MI_ABOUT_HOME,
+                          'link' => "admin/index.php",
+                          'icon' => \Xmf\Module\Admin::menuIconPath('home.png', '32')
+                      ),
+                   array('title' => _MI_ABOUT_PAGE,
+                          'link' => "admin/admin.page.php",
+                         'icon'  => \Xmf\Module\Admin::menuIconPath('manage.png', '32')
+                   ),
+                   array('title' => _MI_ABOUT_ABOUT,
+                          'link' => "admin/about.php",
+                          'icon' => \Xmf\Module\Admin::menuIconPath('about.png', '32')
+                   ),
 );

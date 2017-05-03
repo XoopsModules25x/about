@@ -19,9 +19,13 @@
  */
 
 $moduleDirName = basename(__DIR__);
-include_once dirname(dirname(__DIR__)) . '/mainfile.php';
+require_once dirname(dirname(__DIR__)) . '/mainfile.php';
 
-xoops_loadLanguage('modinfo', $moduleDirName);
-$xoBreadcrumbs   = array();
-$xoBreadcrumbs[] = array('title' => _YOURHOME, 'link' => XOOPS_URL);
-$xoBreadcrumbs[] = array('title' => $xoopsModule->getVar('name'), 'link' => XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname', 'n') . '/');
+$abtHelper = \Xmf\Module\Helper::getHelper($moduleDirName);
+
+xoops_load('constants', $moduleDirName);
+$abtHelper->loadLanguage('modinfo');
+
+$xoBreadcrumbs = array(array('title' => _YOURHOME, 'link' => XOOPS_URL),
+                       array('title' => $xoopsModule->getVar('name'), 'link' => XOOPS_URL . "/modules/{$moduleDirName}/")
+);

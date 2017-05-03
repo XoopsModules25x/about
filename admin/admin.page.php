@@ -17,15 +17,17 @@
  * @author         Susheng Yang <ezskyyoung@gmail.com>
  */
 
-include __DIR__ . '/admin_header.php';
-
+require __DIR__ . '/admin_header.php';
 xoops_cp_header();
-//loadModuleAdminMenu(1);
-$myModuleAdmin = new ModuleAdmin();
-echo $myModuleAdmin->addNavigation(basename(__FILE__));
 
-$op      = isset($_REQUEST['op']) ? $_REQUEST['op'] : (isset($_REQUEST['id']) ? 'edit' : 'list');
-$page_id = isset($_REQUEST['id']) ? $_REQUEST['id'] : '';
+$moduleAdmin = \Xmf\Module\Admin::getInstance();
+$moduleAdmin->displayNavigation(basename(__FILE__));
+
+$op      = \Xmf\Request::getCmd('op', null);
+$op      = (null !== $op) ? $op : (isset($_REQUEST['id']) ? 'edit' : 'list');
+$page_id = \Xmf\Request::getInt('id', null);
+//$op      = isset($_REQUEST['op']) ? $_REQUEST['op'] : (isset($_REQUEST['id']) ? 'edit' : 'list');
+//$page_id = isset($_REQUEST['id']) ? $_REQUEST['id'] : '';
 
 $page_handler = xoops_getModuleHandler('page', 'about');
 
@@ -34,7 +36,7 @@ switch ($op) {
     case 'list':
         //page order
         if (isset($_POST['page_order'])) {
-            $page_order = $_POST['page_order'];
+            $page_order = \Xmf\Request::getArray('page_order', array(), 'POST'); //$_POST['page_order'];
             foreach ($page_order as $page_id => $order) {
                 $page_obj = $page_handler->get($page_id);
                 if ($page_order[$page_id] != $page_obj->getVar('page_order')) {
@@ -46,15 +48,16 @@ switch ($op) {
         }
         //set index
         if (isset($_POST['page_index'])) {
-            $page_obj = $page_handler->get((int)$_POST['page_index']);
-            if ((int)$_POST['page_index'] != $page_obj->getVar('page_index')) {
-                $page_obj = $page_handler->get($_POST['page_index']);
+            $page_index = \Xmf\Request::getInt('page_index', AboutConstants::NOT_INDEX, 'POST');
+            $page_obj = $page_handler->get($page_index);
+            if ($page_index != $page_obj->getVar('page_index')) {
+                $page_obj = $page_handler->get($page_index);
                 if (!$page_obj->getVar('page_title')) {
-                    redirect_header('admin.page.php', 3, _AM_ABOUT_PAGE_ORDER_ERROR);
+                    $abtHelper->redirect('admin/admin.page.php', AboutConstants::REDIRECT_DELAY_MEDIUM, _AM_ABOUT_PAGE_ORDER_ERROR);
                 }
-                $page_handler->updateAll('page_index', 0, null);
+                $page_handler->updateAll('page_index', AboutConstants::NOT_INDEX, null);
                 unset($criteria);
-                $page_obj->setVar('page_index', 1);
+                $page_obj->setVar('page_index', AboutConstants::DEFAULT_INDEX);
                 $page_handler->insert($page_obj);
             }
             unset($page_obj);
@@ -76,13 +79,13 @@ switch ($op) {
 
         $criteria = new CriteriaCompo();
         $criteria->setSort('page_order');
-        $criteria->setOrder('ASC');
-        $pages          = $page_handler->getTrees(0, '--', $fields);
-        $member_handler = xoops_getHandler('member');
+        $criteria->order = 'ASC';
+        $pages           = $page_handler->getTrees(0, '--', $fields);
+        $member_handler  = xoops_getHandler('member');
 
         foreach ($pages as $k => $v) {
             $pages[$k]['page_menu_title'] = $v['prefix'] . $v['page_menu_title'];
-            $pages[$k]['page_pushtime']   = formatTimestamp($v['page_pushtime'], 'Y-m-d h:i:s');
+            $pages[$k]['page_pushtime']   = formatTimestamp($v['page_pushtime'], _DATESTRING);
             $thisuser                     = $member_handler->getUser($v['page_author']);
             $pages[$k]['page_author']     = $thisuser->getVar('uname');
             unset($thisuser);
@@ -93,26 +96,31 @@ switch ($op) {
         break;
 
     case 'new':
+        $GLOBALS['xoTheme']->addStylesheet("modules/{$moduleDirName}/assets/css/admin_style.css");
         $page_obj = $page_handler->create();
-        $form     = include dirname(__DIR__) . '/include/form.page.php';
+        $form     = include $abtHelper->path("include/form.page.php");
         $form->display();
         break;
 
     case 'edit':
+        $GLOBALS['xoTheme']->addStylesheet("modules/{$moduleDirName}/assets/css/admin_style.css");
         $page_obj = $page_handler->get($page_id);
-        $form     = include dirname(__DIR__) . '/include/form.page.php';
+        $form     = include $abtHelper->path("include/form.page.php");
         $form->display();
         break;
 
     case 'save':
         if (!$GLOBALS['xoopsSecurity']->check()) {
-            redirect_header('admin.page.php', 3, implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
+            $abtHelper->redirect('admin/admin.page.php', AboutConstants::REDIRECT_DELAY_MEDIUM, implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
         }
+        $page_obj = $page_handler->get($page_id); // will get page_obj if $page_id is valid, create one if not
+/*
         if (isset($page_id)) {
             $page_obj = $page_handler->get($page_id);
         } else {
             $page_obj = $page_handler->create();
         }
+*/
         //assign value to elements of objects
         foreach (array_keys($page_obj->vars) as $key) {
             if (isset($_POST[$key]) && $_POST[$key] != $page_obj->getVar($key)) {
@@ -121,21 +129,21 @@ switch ($op) {
         }
         //assign menu title
         if (empty($_POST['page_menu_title'])) {
-            $page_obj->setVar('page_menu_title', $_POST['page_title']);
+            $page_obj->setVar('page_menu_title', \Xmf\Request::getString('page_title', ''));
         }
         //set index
         if (!$page_handler->getCount()) {
-            $page_obj->setVar('page_index', 1);
+            $page_obj->setVar('page_index', AboutConstants::DEFAULT_INDEX);
         }
 
         //set submiter
-        global $xoopsUser, $xoopsModule;
+        global $xoopsUser;
         $page_obj->setVar('page_author', $xoopsUser->getVar('uid'));
         $page_obj->setVar('page_pushtime', time());
 
-        include_once dirname(__DIR__) . '/include/functions.php';
-        if (Aboutmkdirs(XOOPS_UPLOAD_PATH . '/' . $xoopsModule->dirname())) {
-            $upload_path = XOOPS_UPLOAD_PATH . '/' . $xoopsModule->dirname();
+        include_once $abtHelper->path("include/functions.php");
+        if (Aboutmkdirs(XOOPS_UPLOAD_PATH . "/{$moduleDirName}")) {
+            $upload_path = XOOPS_UPLOAD_PATH . "/{$moduleDirName}";
         }
 
         // upload image
@@ -167,32 +175,31 @@ switch ($op) {
 
         // insert object
         if ($page_handler->insert($page_obj)) {
-            redirect_header('admin.page.php', 3, sprintf(_AM_ABOUT_SAVEDSUCCESS, _AM_ABOUT_PAGE_INSERT));
+            $abtHelper->redirect('admin/admin.page.php', AboutConstants::REDIRECT_DELAY_MEDIUM, sprintf(_AM_ABOUT_SAVEDSUCCESS, _AM_ABOUT_PAGE_INSERT));
         }
 
         echo $page_obj->getHtmlErrors();
         $format = 'p';
-        $form   = include dirname(__DIR__) . '/include/form.page.php';
+        $form   = include $abtHelper->path("include/form.page.php");
         $form->display();
-
         break;
 
     case 'delete':
         $page_obj = $page_handler->get($page_id);
-        $image    = XOOPS_UPLOAD_PATH . '/' . $xoopsModule->dirname() . '/' . $page_obj->getVar('page_image');
-        if (isset($_REQUEST['ok']) && $_REQUEST['ok'] == 1) {
+        $image    = XOOPS_UPLOAD_PATH . "/{$moduleDirName}/" . $page_obj->getVar('page_image');
+        if (isset($_REQUEST['ok']) && AboutConstants::CONFIRM_OK == $_REQUEST['ok']) {
             if ($page_handler->delete($page_obj)) {
                 if (file_exists($image)) {
                     @unlink($image);
                 }
-                redirect_header('admin.page.php', 3, '保存成功');
+                $abtHelper->redirect('admin/admin.page.php', AboutConstants::REDIRECT_DELAY_MEDIUM, _AM_ABOUT_DELETESUCCESS);
             } else {
                 echo $page_obj->getHtmlErrors();
             }
         } else {
-            xoops_confirm(array('ok' => 1, 'id' => $page_obj->getVar('page_id'), 'op' => 'delete'), $_SERVER['REQUEST_URI'], sprintf(_AM_ABOUT_RUSUREDEL, $page_obj->getVar('page_menu_title')));
+            xoops_confirm(array('ok' => AboutConstants::CONFIRM_OK, 'id' => $page_obj->getVar('page_id'), 'op' => 'delete'), $_SERVER['REQUEST_URI'], sprintf(_AM_ABOUT_RUSUREDEL, $page_obj->getVar('page_menu_title')));
         }
         break;
 }
-
-xoops_cp_footer();
+include __DIR__ . "/admin_footer.php";
+//xoops_cp_footer();

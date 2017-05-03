@@ -82,11 +82,11 @@ class AboutPageHandler extends XoopsPersistableObjectHandler
         }
         $criteria = new CriteriaCompo();
         $criteria->setSort('page_order');
-        $criteria->setOrder('ASC');
-        $page_tree =& $this->getAll($criteria, $tags);
+        $criteria->order = 'ASC';
+        $page_tree = $this->getAll($criteria, $tags);
         require_once __DIR__ . '/tree.php';
         $tree       = new AboutTree($page_tree);
-        $page_array =& $tree->makeTree($prefix, $pid, $tags);
+        $page_array = $tree->makeTree($prefix, $pid, $tags);
 
         return $page_array;
     }
@@ -108,7 +108,7 @@ class AboutPageHandler extends XoopsPersistableObjectHandler
             if ($v['page_pid'] == $key) {
                 $menu[$k]          = $v;
                 $menu[$k]['level'] = $level;
-                $child             =& $this->menuTree($pages, $k, $level + 1);
+                $child             = $this->menuTree($pages, $k, $level + 1);
                 if (!empty($child)) {
                     $menu[$k]['child'] = $child;
                 }
@@ -145,18 +145,4 @@ class AboutPageHandler extends XoopsPersistableObjectHandler
 
         return $bread;
     }
-
-    /*
-    function insert()
-    {
-    }
-
-    function delete()
-    {
-    }
-
-    function getAll()
-    {
-    }
-    */
 }

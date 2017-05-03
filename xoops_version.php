@@ -34,17 +34,16 @@ $modversion['sysicons32']     = 'Frameworks/moduleclasses/icons/32';
 $modversion['modicons16']     = 'assets/images/icons/16';
 $modversion['modicons32']     = 'assets/images/icons/32';
 //about
-$modversion['version']             = 1.04;
-$modversion['module_status']       = 'Final';
-$modversion['release_date']        = '2016/06/01';
+$modversion['version']             = 1.05;
+$modversion['module_status']       = 'BETA 1';
+$modversion['release_date']        = '2017/05/02';
 $modversion['module_website_url']  = 'www.xoops.org';
 $modversion['module_website_name'] = 'XOOPS';
-$modversion['min_php']             = '5.5';
-$modversion['min_xoops']           = '2.5.8';
+$modversion['min_php']             = '5.3';
+$modversion['min_xoops']           = '2.5.9';
 $modversion['min_admin']           = '1.2';
-$modversion['min_db']              = array(
-    'mysql'  => '5.0.7',
-    'mysqli' => '5.0.7'
+$modversion['min_db']              = array('mysql'  => '5.0.7',
+                                           'mysqli' => '5.0.7'
 );
 
 $modversion['image'] = 'assets/images/logoModule.png';
@@ -54,9 +53,10 @@ $modversion['adminindex'] = 'admin/index.php';
 $modversion['adminmenu']  = 'admin/menu.php';
 
 // Is performing module install/update?
-$isModuleAction          = (!empty($_POST['fct']) && 'modulesadmin' === $_POST['fct']) ? true : false;
-$modversion['onInstall'] = 'include/action.module.php';
-$modversion['onUpdate']  = 'include/action.module.php';
+$isModuleAction             = (!empty($_POST['fct']) && 'modulesadmin' === $_POST['fct']) ? true : false;
+$modversion['onInstall']    = 'include/action.module.php';
+$modversion['onUpdate']     = 'include/action.module.php';
+$modversion['onUninstall']  = 'include/action.module.php';
 
 // Menu
 $modversion['system_menu'] = 1;
@@ -113,23 +113,18 @@ $modversion['blocks'][] = array(
     'template'    => 'about_block_page.tpl'
 );
 
-//configs
+xoops_load('constants', basename(__DIR__));
 
-$select = array(
-    'y-m-d'         => '1',
-    'y-m-d h:i:s'   => '2',
-    '年-月-日'         => '3',
-    '年-月-日 小时:分钟:秒' => '4'
-);
-
+// Module Configs
 $modversion['config'][] = array(
     'name'        => 'display',
     'title'       => '_MI_ABOUT_CONFIG_LIST',
     'description' => '',
     'formtype'    => 'select',
     'valuetype'   => 'int',
-    'options'     => array('_MI_ABOUT_CONFIG_LIST_PAGE' => 1, '_MI_ABOUT_CONFIG_LIST_CATEGORY' => 2),
-    'default'     => 1
+    'options'     => array('_MI_ABOUT_CONFIG_LIST_PAGE' => AboutConstants::PAGE,
+                       '_MI_ABOUT_CONFIG_LIST_CATEGORY' => AboutConstants::CATEGORY),
+    'default'     => AboutConstants::PAGE
 );
 
 $modversion['config'][] = array(
@@ -138,7 +133,7 @@ $modversion['config'][] = array(
     'description' => '',
     'formtype'    => 'textbox',
     'valuetype'   => 'int',
-    'default'     => '500'
+    'default'     => AboutConstants::DEFAULT_EREG
 );
 
 xoops_load('xoopseditorhandler');

@@ -1,4 +1,27 @@
-1.04 Final          2016-07-10
+1.05 Beta 1           (2017-05-02)
+-----------------------------------------------
++ add XOOPS & PHP version check on install or upgrade
++ add usage of \Xmf\Request in several places to filter input
++ add usage of \Xmf\Module (Admin & Helper) to modernize code
++ add uninstall script to remove uploads directory on uninstall
++ add Utilities class for uninstall script
++ add Constants Interface class
++ add allow for http or https filenames
++ fixed references to js after it had been moved to /assets (see issue #5)
++ fixed reference to XoopsObjectTree->tree instead of _tree (see issue #10, XOOPS 0f14078 commit)
++ fixed so page cannot select itself, or a child of itself, as the parent page
++ fixed minor typo in .language/english/help/help.html
++ fixed template bugs preventing titles from being links where appropriate
++ moved loading of js and css to immediately after header(s) in index.php
+- removed pass-by-reference for non-vars
+- removed trailing '/' for html void elements
+- renamed XoopsBlockForm to AboutBlockForm class and moved file to ./class subdirectory
+- changed Criteria->setOrder($value) to Criteria->order = $value (to compensate for bug in XOOPS core)
+- changed text for example pages created during module installation
++ updated jquery-treeview to v1.42
+- TODO: replace jquery-treeview with jsTree
+
+1.04 Final          (2016-07-10)
 -----------------------------------------------
 - removed @version (mamba)
 - fixed block title (mamba)
@@ -11,8 +34,6 @@
 - Unnecessary double quotes (mamba)
 - reference mismatch (mamba)
 - Hardening to type safe (mamba)
-
-
 
 1.04 RC 1           (2016-03-27)
 -----------------------------------------------
@@ -36,4 +57,3 @@
 1.01                   (2009/12/17)
 -----------------------------------------------
 + Join page menu blocks (ezsky)
-

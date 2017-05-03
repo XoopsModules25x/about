@@ -12,43 +12,27 @@
 /**
  * @copyright    XOOPS Project (http://xoops.org)
  * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
- * @package
- * @since
  * @author       XOOPS Development Team
  */
 
 $moduleDirName = basename(dirname(__DIR__));
-include_once dirname(dirname(dirname(__DIR__))) . '/mainfile.php';
-include_once $GLOBALS['xoops']->path('www/include/cp_functions.php');
-include_once $GLOBALS['xoops']->path('www/include/cp_header.php');
-include_once $GLOBALS['xoops']->path('www/class/xoopsformloader.php');
+require_once dirname(dirname(dirname(__DIR__))) . '/mainfile.php';
+include_once $GLOBALS['xoops']->path('include/cp_header.php');
+xoops_load('xoopsformloader');
+xoops_load('constants', $moduleDirName);
 
-xoops_load('XoopsRequest');
-
-//$moduleDirName = $GLOBALS['xoopsModule']->getVar('dirname');
-
-$pathIcon16           = $GLOBALS['xoops']->url('www/' . $GLOBALS['xoopsModule']->getInfo('sysicons16'));
-$pathIcon32           = $GLOBALS['xoops']->url('www/' . $GLOBALS['xoopsModule']->getInfo('sysicons32'));
-$xoopsModuleAdminPath = $GLOBALS['xoops']->path('www/' . $GLOBALS['xoopsModule']->getInfo('dirmoduleadmin'));
-require_once "{$xoopsModuleAdminPath}/moduleadmin.php";
+$abtHelper = \Xmf\Module\Helper::getHelper($moduleDirName);
 
 $myts = MyTextSanitizer::getInstance();
+
 if (!isset($GLOBALS['xoopsTpl']) || !($GLOBALS['xoopsTpl'] instanceof XoopsTpl)) {
     include_once $GLOBALS['xoops']->path('class/template.php');
     $xoopsTpl = new XoopsTpl();
 }
 
-//Module specific elements
-//include_once $GLOBALS['xoops']->path("modules/{$moduleDirName}/include/functions.php");
-//include_once $GLOBALS['xoops']->path("modules/{$moduleDirName}/include/config.php");
-
-//Handlers
-//$XXXHandler = xoops_getModuleHandler('XXX', $moduleDirName);
-
 // Load language files
-xoops_loadLanguage('admin', $moduleDirName);
-xoops_loadLanguage('modinfo', $moduleDirName);
-xoops_loadLanguage('main', $moduleDirName);
-
-//xoops_cp_header();
-$adminObject = new ModuleAdmin();
+$abtHelper->loadLanguage('modinfo');
+$abtHelper->loadLanguage('main');
+//xoops_loadLanguage('admin', $moduleDirName);
+//xoops_loadLanguage('modinfo', $moduleDirName);
+//xoops_loadLanguage('main', $moduleDirName);
