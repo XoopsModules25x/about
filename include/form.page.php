@@ -21,13 +21,13 @@
 defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
 $moduleDirName = basename(dirname(__DIR__));
-$abtHelper = \Xmf\Module\Helper::getHelper($moduleDirName);
+$abtHelper = Xmf\Module\Helper::getHelper($moduleDirName);
 
 include_once __DIR__ . '/functions.render.php';
 //include_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 $page_handler = $abtHelper->getHandler('page');
 
-$pageType = isset($_REQUEST['type']) ? \Xmf\Request::getInt('type', 0) : $page_obj->getVar('page_type');
+$pageType = isset($_REQUEST['type']) ? Xmf\Request::getInt('type', 0) : $page_obj->getVar('page_type');
 $format   = empty($format) ? 'e' : $format;
 
 $menu_status = $page_obj->isNew() ? 1 : $page_obj->getVar('page_menu_status');

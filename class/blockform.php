@@ -40,7 +40,6 @@ class AboutBlockForm extends XoopsForm
      */
     public function render()
     {
-        $ele_name = $this->getName();
         $ret      = '<div>';
         $hidden   = '';
         foreach ($this->getElements() as $ele) {

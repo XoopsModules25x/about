@@ -1,6 +1,6 @@
 <?php
 /*
- About Utilities Class Definition
+ About Utility Class Definition
 
  You may not change or alter any portion of this comment or credits of
  supporting developers from this source code or any supporting source code
@@ -23,12 +23,12 @@
  */
 
  /**
-  * AboutUtilities
+  * AboutUtility
   *
-  * Static utilities class to provide common functionality
+  * Static utility class to provide common functionality
   *
   */
-class AboutUtilities
+class AboutUtility
 {
     /**
      *
@@ -38,7 +38,7 @@ class AboutUtilities
      *
      * @return bool true if meets requirements, false if not
      */
-    public static function checkXoopsVer(XoopsModule $module)
+    public static function checkVerXoops(XoopsModule $module)
     {
         xoops_loadLanguage('admin', $module->dirname());
         //check for minimum XOOPS version
@@ -79,7 +79,7 @@ class AboutUtilities
      *
      * @return bool true if meets requirements, false if not
      */
-    public static function checkPHPVer(XoopsModule $module)
+    public static function checkVerPHP(XoopsModule $module)
     {
         xoops_loadLanguage('admin', $module->dirname());
         // check for minimum PHP version
@@ -100,8 +100,8 @@ class AboutUtilities
      *
      * @param string $src source directory to delete
      *
-     * @uses \Xmf\Module\Helper::getHelper()
-     * @uses \Xmf\Module\Helper::isUserAdmin()
+     * @see Xmf\Module\Helper::getHelper()
+     * @see Xmf\Module\Helper::isUserAdmin()
      *
      * @return bool true on success
      */
@@ -231,8 +231,8 @@ class AboutUtilities
      * @param string $src  - Source of files being moved
      * @param string $dest - Destination of files being moved
      *
-     * @uses \Xmf\Module\Helper::getHelper()
-     * @uses \Xmf\Module\Helper::isUserAdmin()
+     * @see Xmf\Module\Helper::getHelper()
+     * @see Xmf\Module\Helper::isUserAdmin()
      *
      * @return bool true on success
      */

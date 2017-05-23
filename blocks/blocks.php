@@ -27,8 +27,8 @@ function about_block_menu_show()
     $moduleDirName = basename(dirname(__DIR__));
     xoops_load('constants', $moduleDirName);
 
-    $abtHelper = \Xmf\Module\Helper::getHelper($moduleDirName);
-    $page_handler = $abtHelper->getHandler('page');
+    $abtHelper     = Xmf\Module\Helper::getHelper($moduleDirName);
+    $page_handler  = $abtHelper->getHandler('page');
     $menu_criteria = new CriteriaCompo();
     $menu_criteria->add(new Criteria('page_status', AboutConstants::PUBLISHED), 'AND');
     $menu_criteria->add(new Criteria('page_menu_status', AboutConstants::IN_MENU));
@@ -55,7 +55,7 @@ function about_block_page_show($options)
         return false;
     }
     $moduleDirName = basename(dirname(__DIR__));
-    $abtHelper     = \Xmf\Module\Helper::getHelper($moduleDirName);
+    $abtHelper     = Xmf\Module\Helper::getHelper($moduleDirName);
 
     $myts         = MyTextSanitizer::getInstance();
     $block        = array();
@@ -86,7 +86,7 @@ EOF;
 function about_block_page_edit($options)
 {
     $moduleDirName = basename(dirname(__DIR__));
-    $abtHelper     = \Xmf\Module\Helper::getHelper($moduleDirName);
+    $abtHelper     = Xmf\Module\Helper::getHelper($moduleDirName);
     xoops_load('constants', $moduleDirName);
 
     $abtHelper->loadLanguage('blocks');

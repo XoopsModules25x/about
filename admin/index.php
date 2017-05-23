@@ -17,18 +17,18 @@
  * @author       XOOPS Development Team
  */
 
-include_once __DIR__ . '/admin_header.php';
 // Display Admin header
+include_once __DIR__ . '/admin_header.php';
 xoops_cp_header();
 
-$moduleAdmin  = \Xmf\Module\Admin::getInstance();
+$adminObject  = Xmf\Module\Admin::getInstance();
 
 // Get number of pages, grouped by status
-$page_handler = $abtHelper->getHandler('page');
+$pageHandler = $abtHelper->getHandler('page');
 $criteria = new CriteriaCompo();
 $criteria->add(new Criteria('page_type', AboutConstants::PAGE_TYPE_PAGE));
 $criteria->setGroupBy('page_status');
-$page_results = $page_handler->getCount($criteria);
+$page_results = $pageHandler->getCount($criteria);
 
 $page_results[AboutConstants::PUBLISHED]     = array_key_exists(AboutConstants::PUBLISHED, $page_results) ? $page_results[AboutConstants::PUBLISHED] : 0;
 $page_results[AboutConstants::NOT_PUBLISHED] = array_key_exists(AboutConstants::NOT_PUBLISHED, $page_results) ? $page_results[AboutConstants::NOT_PUBLISHED] : 0;
@@ -37,18 +37,18 @@ $page_results[AboutConstants::NOT_PUBLISHED] = array_key_exists(AboutConstants::
 $criteria = new CriteriaCompo();
 $criteria->add(new Criteria('page_type', AboutConstants::PAGE_TYPE_LINK));
 $criteria->setGroupBy('page_status');
-$link_results = $page_handler->getCount($criteria);
+$link_results = $pageHandler->getCount($criteria);
 $link_results[AboutConstants::PUBLISHED]     = array_key_exists(AboutConstants::PUBLISHED, $link_results) ? $link_results[AboutConstants::PUBLISHED] : 0;
 $link_results[AboutConstants::NOT_PUBLISHED] = array_key_exists(AboutConstants::NOT_PUBLISHED, $link_results) ? $link_results[AboutConstants::NOT_PUBLISHED] : 0;
 
 // Display totals
-$moduleAdmin->addInfoBox(_MD_ABOUT_DASHBOARD);
-$moduleAdmin->addInfoBoxLine(sprintf("<span class='infolabel'>" . _MD_ABOUT_TOTAL_PAGES_PUBLISHED . "</span>", "<span class='infotext green bold'>" . $page_results[AboutConstants::PUBLISHED] . "</span>"));
-$moduleAdmin->AddInfoBoxLine(sprintf("<span class='infolabel'>" . _MD_ABOUT_TOTAL_PAGES_DRAFT . "</span>", "<span class='infotext red bold'>" . $page_results[AboutConstants::NOT_PUBLISHED] . "</span>"));
-$moduleAdmin->addInfoBoxLine(sprintf("<span class='infolabel'>" . _MD_ABOUT_TOTAL_LINKS_PUBLISHED . "</span>", "<span class='infotext green bold'>" . $link_results[AboutConstants::PUBLISHED] . "</span>"));
-$moduleAdmin->AddInfoBoxLine(sprintf("<span class='infolabel'>" . _MD_ABOUT_TOTAL_LINKS_DRAFT . "</span>", "<span class='infotext red bold'>" . $link_results[AboutConstants::NOT_PUBLISHED] . "</span>"));
+$adminObject->addInfoBox(_MD_ABOUT_DASHBOARD);
+$adminObject->addInfoBoxLine(sprintf("<span class='infolabel'>" . _MD_ABOUT_TOTAL_PAGES_PUBLISHED . "</span>", "<span class='infotext green bold'>" . $page_results[AboutConstants::PUBLISHED] . "</span>"));
+$adminObject->AddInfoBoxLine(sprintf("<span class='infolabel'>" . _MD_ABOUT_TOTAL_PAGES_DRAFT . "</span>", "<span class='infotext red bold'>" . $page_results[AboutConstants::NOT_PUBLISHED] . "</span>"));
+$adminObject->addInfoBoxLine(sprintf("<span class='infolabel'>" . _MD_ABOUT_TOTAL_LINKS_PUBLISHED . "</span>", "<span class='infotext green bold'>" . $link_results[AboutConstants::PUBLISHED] . "</span>"));
+$adminObject->AddInfoBoxLine(sprintf("<span class='infolabel'>" . _MD_ABOUT_TOTAL_LINKS_DRAFT . "</span>", "<span class='infotext red bold'>" . $link_results[AboutConstants::NOT_PUBLISHED] . "</span>"));
 
-$moduleAdmin->displayNavigation(basename(__FILE__));
-$moduleAdmin->displayIndex();
+$adminObject->displayNavigation(basename(__FILE__));
+$adminObject->displayIndex();
 
 include_once __DIR__ . '/admin_footer.php';

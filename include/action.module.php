@@ -7,23 +7,24 @@ defined('XOOPS_ROOT_PATH') || exit('Restricted access');
  *
  * @param XoopsModule $module
  *
- * @return bool true if ready to install, false if not
+ * @return bool       true if ready to install, false if not
  */
 function xoops_module_pre_install_about(XoopsModule $module)
 {
-    $utilsClass = ucfirst($module->dirname()) . "Utilities";
+    $utilsClass = ucfirst($module->dirname()) . "Utility";
     if (!class_exists($utilsClass)) {
-        xoops_load('utilities', $module->dirname());
+        xoops_load('utility', $module->dirname());
     }
 
-    $xoopsSuccess = $utilsClass::checkXoopsVer($module);
-    $phpSuccess   = $utilsClass::checkPHPVer($module);
+    $xoopsSuccess = $utilsClass::checkVerXoops($module);
+    $phpSuccess   = $utilsClass::checkVerPHPr($module);
+
     return $xoopsSuccess && $phpSuccess;
 }
 
 /**
  * @param  XoopsObject $module
- * @return bool
+ * @return bool        true if install successful, false if not
  */
 function xoops_module_install_about(XoopsModule $module)
 {
@@ -39,7 +40,8 @@ function xoops_module_install_about(XoopsModule $module)
     // Delete files from previous version (if they exist)
     // this is only executed if this version copied over old version without running module update
     $oldFiles = array(XOOPS_ROOT_PATH . "/modules/" . $module->dirname() . "/include/xoopsformloader.php",
-                      XOOPS_ROOT_PATH . "/modules/" . $module->dirname() . "/include/blockform.php"
+                      XOOPS_ROOT_PATH . "/modules/" . $module->dirname() . "/include/blockform.php",
+                      XOOPS_ROOT_PATH . "/modules/" . $module->dirname() . "/class/utilities.php",
     );
     foreach($oldFiles as $file) {
         if (is_file($file)) {
@@ -47,12 +49,18 @@ function xoops_module_install_about(XoopsModule $module)
             if (false === $delOk) {
                 $module->setErrors(sprintf(_AM_ABOUT_ERROR_BAD_REMOVE, $file));
             } else {
-                $module->setErrors(sprintf("%s deleted", $file));
+                $module->setErrors(sprintf(_AM_ABOUT_DELETED, $file));
             }
             $success = $success && $delOk;
         }
     }
-    return $success;
+    // Create uploads folder
+    $dirOk = mkdir(XOOPS_UPLOAD_PATH . '/' . $module->dirname());
+    if (false === $dirOk) {
+        $module->setErrors(_AM_ABOUT_ERROR_BAD_UPLOAD_DIR);
+    }
+
+    return $dirOk && $success;
 }
 
 /**
@@ -61,17 +69,18 @@ function xoops_module_install_about(XoopsModule $module)
  *
  * @param XoopsModule $module
  *
- * @return bool true if ready to install, false if not
+ * @return bool       true if ready to install, false if not
  */
 function xoops_module_pre_update_about(XoopsModule $module)
 {
-    $utilsClass = ucfirst($module->dirname()) . "Utilities";
+    $utilsClass = ucfirst($module->dirname()) . "Utility";
     if (!class_exists($utilsClass)) {
-        xoops_load('utilities', $module->dirname());
+        xoops_load('utility', $module->dirname());
     }
 
-    $xoopsSuccess = $utilsClass::checkXoopsVer($module);
-    $phpSuccess   = $utilsClass::checkPHPVer($module);
+    $xoopsSuccess = $utilsClass::checkVerXoops($module);
+    $phpSuccess   = $utilsClass::checkVerPHP($module);
+
     return $xoopsSuccess && $phpSuccess;
 }
 
@@ -79,14 +88,15 @@ function xoops_module_pre_update_about(XoopsModule $module)
 /**
  * @param  XoopsModule $module
  * @param  null        $prev_version
- * @return bool
+ * @return bool        true if update successful, false if not
  */
 function xoops_module_update_about(XoopsModule $module, $prev_version = null)
 {
     $success = true;
     // Delete files from previous version (if they exist)
     $oldFiles = array(XOOPS_ROOT_PATH . "/modules/" . $module->dirname() . "/include/xoopsformloader.php",
-                      XOOPS_ROOT_PATH . "/modules/" . $module->dirname() . "/include/blockform.php"
+                      XOOPS_ROOT_PATH . "/modules/" . $module->dirname() . "/include/blockform.php",
+                      XOOPS_ROOT_PATH . "/modules/" . $module->dirname() . "/class/utilities.php"
     );
     foreach($oldFiles as $file) {
         if (is_file($file)) {
@@ -100,7 +110,7 @@ function xoops_module_update_about(XoopsModule $module, $prev_version = null)
     // Delete files from previous version (if they exist)
     // this is only executed if this version copied over old version without running module update
     $oldFiles = array(XOOPS_PATH . "/modules/" . $module->dirname() . "/include/xoopsformloader.php",
-        XOOPS_PATH . "/modules/" . $module->dirname() . "/include/blockform.php"
+                      XOOPS_PATH . "/modules/" . $module->dirname() . "/include/blockform.php"
     );
     foreach($oldFiles as $file) {
         if (is_file($file)) {
@@ -110,7 +120,18 @@ function xoops_module_update_about(XoopsModule $module, $prev_version = null)
             $success = $success && $delOk;
         }
     }
-    return $success;
+
+    // Create uploads folder if it doesn't exist
+    $dirOk = true;
+    if (false === file_exists(XOOPS_UPLOAD_PATH . '/' . $module->dirname())) {
+        // File doesn't exist so try and create it
+        $dirOk = mkdir(XOOPS_UPLOAD_PATH . '/' . $module->dirname());
+        if (false === $dirOk) {
+            $module->setErrors(_AM_ABOUT_ERROR_BAD_UPLOAD_DIR);
+        }
+    }
+
+    return $dirOk && $success;
 }
 
 /**
@@ -119,15 +140,15 @@ function xoops_module_update_about(XoopsModule $module, $prev_version = null)
  *
  * @param XoopsModule $module
  *
- * @return bool true if successfully executed uninstall of module, false if not
+ * @return bool       true if successfully executed uninstall of module, false if not
  */
 function xoops_module_uninstall_about(XoopsModule $module)
 {
     $moduleDirName = $module->dirname();
-    $aboutHelper = \Xmf\Module\Helper::getHelper($moduleDirName);
-    $utilsClass = ucfirst($moduleDirName) . 'Utilities';
+    $aboutHelper = Xmf\Module\Helper::getHelper($moduleDirName);
+    $utilsClass = ucfirst($moduleDirName) . 'Utility';
     if (!class_exists($utilsClass)) {
-        xoops_load('utilities', $moduleDirName);
+        xoops_load('utility', $moduleDirName);
     }
 
     $success = true;

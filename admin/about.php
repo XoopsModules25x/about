@@ -1,29 +1,30 @@
 <?php
 /*
- * You may not change or alter any portion of this comment or credits
- * of supporting developers from this source code or any supporting source code
- * which is considered copyrighted (c) material of the original comment or credit authors.
+ * You may not change or alter any portion of this comment or credits of
+ * supporting developers from this source code or any supporting source code
+ * which is considered copyrighted (c) material of the original comment or
+ * credit authors.
  *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE.
  */
-
 /**
- * @copyright    XOOPS Project (http://xoops.org)
- * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
- * @package
- * @since
- * @author       XOOPS Development Team
+ * Display the Administration About page
+ *
+ * @package    module\about\admin
+ * @copyright  http://xoops.org 2001-2017 XOOPS Project
+ * @license    GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
+ * @author     XOOPS Module Development Team
  */
 
 include_once __DIR__ . '/admin_header.php';
 
 xoops_cp_header();
 
-$moduleAdmin = \Xmf\Module\Admin::getInstance();
-$moduleAdmin->displayNavigation(basename(__FILE__));
-$moduleAdmin->setPaypal('xoopsfoundation@gmail.com');
-$moduleAdmin->displayAbout(false);
+$adminObject = Xmf\Module\Admin::getInstance();
+$adminObject->displayNavigation(basename(__FILE__));
+$adminObject->setPaypal('xoopsfoundation@gmail.com');
+$adminObject->displayAbout(false);
 
 include_once __DIR__ . '/admin_footer.php';

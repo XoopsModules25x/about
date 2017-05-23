@@ -60,10 +60,13 @@ define('_AM_ABOUT_PAGE_STATUS_LIST', 'Status');
 define('_AM_ABOUT_PAGE_MENU', 'Menu');
 define('_AM_ABOUT_PAGE_AUTHOR', 'Editor');
 
-// error msgs
-define('_AM_ABOUT_ERROR_BAD_DEL_PATH', "Could not delete %s directory");
-define('_AM_ABOUT_ERROR_BAD_PHP', "This module requires PHP version %s+ (%s installed)");
-define('_AM_ABOUT_ERROR_BAD_XOOPS', "This module requires XOOPS %s+ (%s installed)");
-define('_AM_ABOUT_ERROR_BAD_REMOVE', "Could not delete %s file");
+// Install/Uninstall/Update
+define('_AM_ABOUT_DELETED', '%s deleted');
 
+// error msgs
+define('_AM_ABOUT_ERROR_BAD_DEL_PATH', 'Could not delete %s directory');
+define('_AM_ABOUT_ERROR_BAD_PHP', 'This module requires PHP version %s+ (%s installed)');
+define('_AM_ABOUT_ERROR_BAD_XOOPS', 'This module requires XOOPS %s+ (%s installed)');
+define('_AM_ABOUT_ERROR_BAD_REMOVE', 'Could not delete %s file');
+define('_AM_ABOUT_ERROR_BAD_UPLOAD_DIR', 'Could not create the upload directory');
 

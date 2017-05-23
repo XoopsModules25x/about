@@ -1,8 +1,8 @@
 1.05 Beta 1           (2017-05-02)
 -----------------------------------------------
 + add XOOPS & PHP version check on install or upgrade
-+ add usage of \Xmf\Request in several places to filter input
-+ add usage of \Xmf\Module (Admin & Helper) to modernize code
++ add usage of Xmf\Request in several places to filter input
++ add usage of Xmf\Module (Admin & Helper) to modernize code
 + add uninstall script to remove uploads directory on uninstall
 + add Utilities class for uninstall script
 + add Constants Interface class

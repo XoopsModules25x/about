@@ -21,7 +21,7 @@
 $moduleDirName = basename(__DIR__);
 require_once dirname(dirname(__DIR__)) . '/mainfile.php';
 
-$abtHelper = \Xmf\Module\Helper::getHelper($moduleDirName);
+$abtHelper = Xmf\Module\Helper::getHelper($moduleDirName);
 
 xoops_load('constants', $moduleDirName);
 $abtHelper->loadLanguage('modinfo');
