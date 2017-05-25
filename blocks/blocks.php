@@ -18,28 +18,28 @@
  * @author         Susheng Yang <ezskyyoung@gmail.com>
  */
 
-defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
+defined('XOOPS_ROOT_PATH') || exit('Restricted access');
 /**
  * @return mixed
  */
 function about_block_menu_show()
 {
-    $page_handler  = xoops_getModuleHandler('page', 'about');
+    $moduleDirName = basename(dirname(__DIR__));
+    xoops_load('constants', $moduleDirName);
+
+    $abtHelper     = Xmf\Module\Helper::getHelper($moduleDirName);
+    $page_handler  = $abtHelper->getHandler('page');
     $menu_criteria = new CriteriaCompo();
-    $menu_criteria->add(new Criteria('page_status', 1), 'AND');
-    $menu_criteria->add(new Criteria('page_menu_status', 1));
+    $menu_criteria->add(new Criteria('page_status', AboutConstants::PUBLISHED), 'AND');
+    $menu_criteria->add(new Criteria('page_menu_status', AboutConstants::IN_MENU));
     $menu_criteria->setSort('page_order');
-    $menu_criteria->setOrder('ASC');
-    $fields    = array(
-        'page_id',
-        'page_menu_title',
-        'page_blank',
-        'page_menu_status',
-        'page_status'
+    $menu_criteria->order = 'ASC';
+    $fields = array('page_id', 'page_menu_title', 'page_blank',
+                    'page_menu_status', 'page_status'
     );
     $page_menu = $page_handler->getAll($menu_criteria, $fields, false);
     foreach ($page_menu as $k => $v) {
-        $page_menu[$k]['links'] = XOOPS_URL . '/modules/' . basename(dirname(__DIR__)) . '/index.php?page_id=' . $v['page_id'];
+        $page_menu[$k]['links'] = $abtHelper->url("index.php?page_id={$v['page_id']}");
     }
 
     return $page_menu;
@@ -51,16 +51,22 @@ function about_block_menu_show()
  */
 function about_block_page_show($options)
 {
+    if (empty($options[0])) {
+        return false;
+    }
+    $moduleDirName = basename(dirname(__DIR__));
+    $abtHelper     = Xmf\Module\Helper::getHelper($moduleDirName);
+
     $myts         = MyTextSanitizer::getInstance();
     $block        = array();
-    $page_handler = xoops_getModuleHandler('page', 'about');
+    $page_handler = $abtHelper->getHandler('page');
     $page         = $page_handler->get($options[0]);
-    if (!is_object($page) || empty($options[0])) {
+    if (!is_object($page)) {
         return false;
     }
     $page_text = strip_tags($page->getVar('page_text', 'n'));
     if ($options[1] > 0) {
-        $url        = XOOPS_URL . '/modules/' . basename(dirname(__DIR__)) . '/index.php?page_id=' . $options[0];
+        $url        = $abtHelper->url("index.php?page_id={$options[0]}");
         $trimmarker = <<<EOF
 <a href="{$url}" class="more">{$options[2]}</a>
 EOF;
@@ -68,7 +74,7 @@ EOF;
     }
 
     $block['page_text']  = $myts->nl2br($page_text);
-    $block['page_image'] = $options[3] == 1 ? XOOPS_UPLOAD_URL . '/' . basename(dirname(__DIR__)) . '/' . $page->getVar('page_image', 's') : '';
+    $block['page_image'] = $options[3] == 1 ? $abtHelper->url($page->getVar('page_image', 's')) : '';
 
     return $block;
 }
@@ -79,22 +85,27 @@ EOF;
  */
 function about_block_page_edit($options)
 {
-    xoops_loadLanguage('blocks', 'about');
-    $page_handler = xoops_getModuleHandler('page', 'about');
+    $moduleDirName = basename(dirname(__DIR__));
+    $abtHelper     = Xmf\Module\Helper::getHelper($moduleDirName);
+    xoops_load('constants', $moduleDirName);
+
+    $abtHelper->loadLanguage('blocks');
+    $page_handler = $abtHelper->getHandler('page');
     $criteria     = new CriteriaCompo();
-    $criteria->add(new Criteria('page_status', 1), 'AND');
-    $criteria->add(new Criteria('page_type', 1));
+    $criteria->add(new Criteria('page_status', AboutConstants::PUBLISHED), 'AND');
+    $criteria->add(new Criteria('page_type', AboutConstants::PAGE_TYPE_PAGE));
     $criteria->setSort('page_order');
-    $criteria->setOrder('ASC');
+    $criteria->order = 'ASC';
     $fields     = array('page_id', 'page_title', 'page_image');
     $pages      = $page_handler->getAll($criteria, $fields, false);
     $page_title = '';
     foreach ($pages as $k => $v) {
-        $page_title       = '<a href="' . XOOPS_URL . '/modules/' . basename(dirname(__DIR__)) . '/index.php?page_id=' . $k . '" target="_blank">' . $v['page_title'] . '</a>';
-        $options_page[$k] = empty($v['page_image']) ? $page_title : $page_title . '<img src="' . XOOPS_URL . '/modules/' . basename(dirname(__DIR__)) . '/assets/images/picture.png' . '" />';
+        $page_title       = '<a href="' . $abtHelper->url("index.php?page_id={$k}") . '" target="_blank">' . $v['page_title'] . '</a>';
+        $options_page[$k] = empty($v['page_image']) ? $page_title : $page_title . '<img src="' . $abtHelper->url("assets/images/picture.png") . '">';
     }
-    include_once dirname(__DIR__) . '/include/xoopsformloader.php';
-    $form        = new XoopsBlockForm();
+//    include_once dirname(__DIR__) . '/include/xoopsformloader.php';
+    xoops_load('blockform', $moduleDirName);
+    $form        = new AboutBlockForm();
     $page_select = new XoopsFormRadio(_MB_ABOUT_BLOCKPAGE, 'options[0]', $options[0], '<br>');
     $page_select->addOptionArray($options_page);
     $form->addElement($page_select);

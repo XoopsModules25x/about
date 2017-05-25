@@ -1,0 +1,5 @@
+/* about */
+body#about label, body#about input[type='radio']{
+    display: inline;
+    float: none;
+}
