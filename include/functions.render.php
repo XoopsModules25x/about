@@ -143,7 +143,7 @@ function &about_getTplPageList($page = '', $refresh = true)
  */
 function &about_template_lookup($index_by_page = false)
 {
-    include_once XOOPS_ROOT_PATH . '/class/xoopslists.php';
+    require_once XOOPS_ROOT_PATH . '/class/xoopslists.php';
 
     $files = XoopsLists::getHtmlListAsArray(XOOPS_ROOT_PATH . '/modules/' . $GLOBALS['artdirname'] . '/templates/');
     $list  = array();
