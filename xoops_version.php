@@ -17,6 +17,9 @@
  * @author         Susheng Yang <ezskyyoung@gmail.com>
  */
 
+$modversion['version']       = 1.05;
+$modversion['module_status'] = 'Beta 2';
+$modversion['release_date']  = '2017/05/24';
 $modversion['name']        = _MI_ABOUT_NAME;
 $modversion['description'] = _MI_ABOUT_DESC;
 $modversion['author']      = 'Magic.Shao <magic.shao@gmail.com>, ezsky <ezskyyoung@gmail.com>';
@@ -28,23 +31,17 @@ $modversion['license_url'] = 'www.gnu.org/licenses/gpl-2.0.html';
 //$moduleDirName = basename(__DIR__);
 
 $modversion['dirname']        = basename(__DIR__);
-$modversion['dirmoduleadmin'] = 'Frameworks/moduleclasses/moduleadmin';
-$modversion['sysicons16']     = 'Frameworks/moduleclasses/icons/16';
-$modversion['sysicons32']     = 'Frameworks/moduleclasses/icons/32';
+//$modversion['dirmoduleadmin']      = 'Frameworks/moduleclasses/moduleadmin';
+//$modversion['sysicons16']          = 'Frameworks/moduleclasses/icons/16';
+//$modversion['sysicons32']          = 'Frameworks/moduleclasses/icons/32';
 $modversion['modicons16']     = 'assets/images/icons/16';
 $modversion['modicons32']     = 'assets/images/icons/32';
-//about
-$modversion['version']             = 1.05;
-$modversion['module_status']       = 'BETA 1';
-$modversion['release_date']        = '2017/05/02';
 $modversion['module_website_url']  = 'www.xoops.org';
 $modversion['module_website_name'] = 'XOOPS';
-$modversion['min_php']             = '5.3';
+$modversion['min_php']             = '5.5';
 $modversion['min_xoops']           = '2.5.9';
 $modversion['min_admin']           = '1.2';
-$modversion['min_db']              = array('mysql'  => '5.0.7',
-                                           'mysqli' => '5.0.7'
-);
+$modversion['min_db']              = array('mysql' => '5.5');
 
 $modversion['image'] = 'assets/images/logoModule.png';
 
@@ -73,7 +70,7 @@ $modversion['tables']           = array(
  * Templates
  */
 if ($isModuleAction) {
-    include_once __DIR__ . '/include/functions.render.php';
+    require_once __DIR__ . '/include/functions.render.php';
     $modversion['templates'] =& about_getTplPageList('', true);
 }
 
@@ -137,13 +134,13 @@ $modversion['config'][] = array(
 );
 
 xoops_load('xoopseditorhandler');
-$editor_handler         = XoopsEditorHandler::getInstance();
+$editorHandler         = XoopsEditorHandler::getInstance();
 $modversion['config'][] = array(
     'name'        => 'editorAdmin',
     'title'       => '_MI_ABOUT_EDITOR',
     'description' => '_MI_ABOUT_EDITOR_DESC',
     'formtype'    => 'select',
     'valuetype'   => 'text',
-    'options'     => array_flip($editor_handler->getList()),
+    'options'     => array_flip($editorHandler->getList()),
     'default'     => 'dhtml'
 );

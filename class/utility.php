@@ -34,7 +34,7 @@ class AboutUtility
      *
      * Verifies XOOPS version meets minimum requirements for this module
      * @static
-     * @param XoopsModule
+     * @param XoopsModule $module
      *
      * @return bool true if meets requirements, false if not
      */
@@ -75,7 +75,7 @@ class AboutUtility
      *
      * Verifies PHP version meets minimum requirements for this module
      * @static
-     * @param XoopsModule
+     * @param XoopsModule $module
      *
      * @return bool true if meets requirements, false if not
      */
