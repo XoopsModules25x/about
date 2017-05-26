@@ -18,8 +18,14 @@
  * @author         Susheng Yang <ezskyyoung@gmail.com>
  */
 
-// _LANGCODE: zh-CN
-// _CHARSET : utf-8
-// Author: magic.shao
+define('_MD_ABOUT_DETAIL', 'More');
+define('_MD_ABOUT_INDEX', 'Index');
 
-define('_MA_ABOUT_DETAIL', 'More');
+/**
+ * Admin Defines
+ */
+define('_MD_ABOUT_DASHBOARD', "About Us Dashboard");
+define('_MD_ABOUT_TOTAL_PAGES_PUBLISHED', "%s Published Page(s)");
+define('_MD_ABOUT_TOTAL_PAGES_DRAFT', "%s Draft Page(s)");
+define('_MD_ABOUT_TOTAL_LINKS_PUBLISHED', "%s Published Link(s)");
+define('_MD_ABOUT_TOTAL_LINKS_DRAFT', "%s Draft Link(s)");

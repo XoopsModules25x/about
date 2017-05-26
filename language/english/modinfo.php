@@ -23,9 +23,11 @@
 // Translator: ezsky, http://www.ezsky.org
 
 //xoops_version  add   menu
-define('_MI_ABOUT_NAME', 'About us');
+define('_MI_ABOUT_NAME', 'About Us');
 define('_MI_ABOUT_DESC', "Extended 'About Us' webpage module for XOOPS");
 define('_MI_ABOUT_PAGE', 'Page');
+define('_MI_ABOUT_HOME', 'Home');
+define('_MI_ABOUT_ABOUT', 'About');
 define('_MI_ABOUT_ABOUTUS', 'About Us');
 
 define('_MI_ABOUT_CONFIG_LIST', 'Display');
@@ -36,8 +38,6 @@ define('_MI_ABOUT_CONFIG_STR_EREG', 'Article summary string limit');
 define('_MI_ABOUT_DIRNAME', basename(dirname(dirname(__DIR__))));
 define('_MI_ABOUT_HELP_HEADER', __DIR__ . '/help/helpheader.html');
 define('_MI_ABOUT_BACK_2_ADMIN', 'Back to Administration of ');
-
-//define('_MI_ABOUT_HELP_DIR', __DIR__);
 
 //help
 define('_MI_ABOUT_HELP_OVERVIEW', 'Overview');

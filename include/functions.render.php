@@ -39,6 +39,7 @@ function about_getTemplate($page = 'index', $style = null)
     if (file_exists($template_dir . $file_name)) {
         return $file_name;
     }
+    // Couldn't find file, try to see if the "default" style for this page exists
     if (!empty($style)) {
         $style     = '';
         $file_name = "{$GLOBALS['artdirname']}_{$page}{$style}.tpl";
@@ -46,7 +47,7 @@ function about_getTemplate($page = 'index', $style = null)
             return $file_name;
         }
     }
-
+    // Couldn't find a suitable template for this page
     return null;
 }
 
@@ -60,7 +61,7 @@ function about_getTemplate($page = 'index', $style = null)
  */
 function &about_getTemplateList($page = 'index', $refresh = false)
 {
-    $TplFiles =& about_getTplPageList($page, $refresh);
+    $TplFiles = about_getTplPageList($page, $refresh);
     $template = array();
     if (is_array($TplFiles) && count($TplFiles) > 0) {
         foreach (array_keys($TplFiles) as $temp) {
@@ -84,8 +85,8 @@ function about_getCss($style = 'default')
 {
     global $xoops;
 
-    if (is_readable($xoops->path('modules/' . $GLOBALS['artdirname'] . '/assets/style_' . strtolower($style) . '.css'))) {
-        return $xoops->path('modules/' . $GLOBALS['artdirname'] . '/assets/style_' . strtolower($style) . '.css', true);
+    if (is_readable($xoops->path('modules/' . $GLOBALS['artdirname'] . '/assets/css/style_' . strtolower($style) . '.css'))) {
+        return $xoops->path('modules/' . $GLOBALS['artdirname'] . '/assets/css/style_' . strtolower($style) . '.css', true);
     }
 
     return $xoops->path('modules/' . $GLOBALS['artdirname'] . '/assets/css/style.css', true);
@@ -100,7 +101,7 @@ function about_getCss($style = 'default')
  */
 function about_getModuleHeader($style = 'default')
 {
-    $xoops_module_header = "<link rel=\"stylesheet\" type=\"text/css\" href=\"" . about_getCss($style) . "\" />";
+    $xoops_module_header = "<link rel=\"stylesheet\" type=\"text/css\" href=\"" . about_getCss($style) . "\">";
 
     return $xoops_module_header;
 }
@@ -128,7 +129,7 @@ function &about_getTplPageList($page = '', $refresh = true)
     $list = XoopsCache::read($key);
 
     if (!is_array($list) || $refresh) {
-        $list =& about_template_lookup(!empty($page));
+        $list = about_template_lookup(!empty($page));
     }
 
     $ret = empty($page) ? $list : @$list[$page];

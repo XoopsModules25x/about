@@ -32,16 +32,16 @@ if (!class_exists('AboutTree')) {
             if ($key > 0) {
                 if (count($tags) > 0) {
                     foreach ($tags as $tag) {
-                        $ret[$key][$tag] = $this->_tree[$key]['obj']->getVar($tag);
+                        $ret[$key][$tag] = $this->tree[$key]['obj']->getVar($tag);
                     }
                 } else {
-                    $ret[$key]['page_title'] = $this->_tree[$key]['obj']->getVar('page_title');
+                    $ret[$key]['page_title'] = $this->tree[$key]['obj']->getVar('page_title');
                 }
                 $ret[$key]['prefix'] = $prefix_curr;
                 $prefix_curr .= $prefix_orig;
             }
-            if (isset($this->_tree[$key]['child']) && !empty($this->_tree[$key]['child'])) {
-                foreach ($this->_tree[$key]['child'] as $childkey) {
+            if (isset($this->tree[$key]['child']) && !empty($this->tree[$key]['child'])) {
+                foreach ($this->tree[$key]['child'] as $childkey) {
                     $this->makeTreeItems($childkey, $ret, $prefix_orig, $prefix_curr, $tags);
                 }
             }
@@ -95,15 +95,15 @@ if (!class_exists('AboutTree')) {
                 return;
             }
 
-            if (isset($this->_tree[$key]['child'])) {
-                foreach ($this->_tree[$key]['child'] as $childkey) {
-                    if (isset($this->_tree[$childkey]['obj'])):
+            if (isset($this->tree[$key]['child'])) {
+                foreach ($this->tree[$key]['child'] as $childkey) {
+                    if (isset($this->tree[$childkey]['obj'])):
                         if (count($tags) > 0) {
                             foreach ($tags as $tag) {
-                                $ret['child'][$childkey][$tag] = $this->_tree[$childkey]['obj']->getVar($tag);
+                                $ret['child'][$childkey][$tag] = $this->tree[$childkey]['obj']->getVar($tag);
                             }
                         } else {
-                            $ret['child'][$childkey]['page_title'] = $this->_tree[$childkey]['obj']->getVar('page_title');
+                            $ret['child'][$childkey]['page_title'] = $this->tree[$childkey]['obj']->getVar('page_title');
                         }
                     endif;
 

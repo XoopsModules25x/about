@@ -1,8 +1,6 @@
 <?php
 
-if (!defined('XOOPS_ROOT_PATH')) {
-    exit();
-}
+defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
 /**
  * @param       $dir
