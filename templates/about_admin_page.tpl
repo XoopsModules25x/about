@@ -14,6 +14,7 @@
 <br> <br>
 
 <form id="form" name="form" method="post" action="admin.page.php">
+    <{securityToken}><{*//mb*}>
     <table id="about-pageList" class="outer">
         <th width="5%" class="center"><{$smarty.const._AM_ABOUT_PAGE_MENU_ORDER}></th>
         <th width="4%" class="center"><{$smarty.const._AM_ABOUT_PAGE_CUS_INDEX}></th>

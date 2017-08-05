@@ -10,7 +10,7 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
  * @copyright      The XOOPS Co.Ltd. http://www.xoops.com.cn
- * @copyright      XOOPS Project (http://xoops.org)
+ * @copyright      XOOPS Project (https://xoops.org)
  * @license        GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
  * @package        about
  * @since          1.0.0
@@ -18,8 +18,8 @@
  * @author         Susheng Yang <ezskyyoung@gmail.com>
  */
 
-include dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
-include_once XOOPS_ROOT_PATH . '/Frameworks/art/functions.admin.php';
+include __DIR__ . '/../../../include/cp_header.php';
+require_once XOOPS_ROOT_PATH . '/Frameworks/art/functions.admin.php';
 
 if (!isset($xoopsTpl) || !is_object($xoopsTpl)) {
     require_once XOOPS_ROOT_PATH . '/class/template.php';

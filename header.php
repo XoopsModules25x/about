@@ -10,7 +10,7 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
  * @copyright      The XOOPS Co.Ltd. http://www.xoops.com.cn
- * @copyright      XOOPS Project (http://xoops.org)
+ * @copyright      XOOPS Project (https://xoops.org)
  * @license        GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
  * @package        about
  * @since          1.0.0
@@ -19,7 +19,7 @@
  */
 
 $moduleDirName = basename(__DIR__);
-require_once dirname(dirname(__DIR__)) . '/mainfile.php';
+require_once __DIR__ . '/../../mainfile.php';
 
 $abtHelper = Xmf\Module\Helper::getHelper($moduleDirName);
 

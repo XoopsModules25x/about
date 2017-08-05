@@ -1,6 +1,6 @@
 <?php
 
-defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
+defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
 require_once XOOPS_ROOT_PATH . '/class/tree.php';
 
@@ -38,7 +38,7 @@ if (!class_exists('AboutTree')) {
                     $ret[$key]['page_title'] = $this->tree[$key]['obj']->getVar('page_title');
                 }
                 $ret[$key]['prefix'] = $prefix_curr;
-                $prefix_curr .= $prefix_orig;
+                $prefix_curr         .= $prefix_orig;
             }
             if (isset($this->tree[$key]['child']) && !empty($this->tree[$key]['child'])) {
                 foreach ($this->tree[$key]['child'] as $childkey) {
@@ -71,8 +71,15 @@ if (!class_exists('AboutTree')) {
          * @param  string $extra
          * @return string
          */
-        public function makeSelBox($name, $fieldName, $prefix = '-', $selected = '', $addEmptyOption = false, $key = 0, $extra = '')
-        {
+        public function makeSelBox(
+            $name,
+            $fieldName,
+            $prefix = '-',
+            $selected = '',
+            $addEmptyOption = false,
+            $key = 0,
+            $extra = ''
+        ) {
             $ret = '<select name=' . $name . '>';
             if (!empty($addEmptyOption)) {
                 $ret .= '<option value="0">' . (is_string($EmptyOption) ? $EmptyOption : '') . '</option>';
@@ -113,9 +120,9 @@ if (!class_exists('AboutTree')) {
         }
 
         /**
-         * @param  int   $key
-         * @param  null  $tags
-         * @param  int   $depth
+         * @param  int  $key
+         * @param  null $tags
+         * @param  int  $depth
          * @return array
          */
         public function &makeArrayTree($key = 0, $tags = null, $depth = 0)

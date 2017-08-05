@@ -10,7 +10,7 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
  * @copyright      The XOOPS Co.Ltd. http://www.xoops.com.cn
- * @copyright      XOOPS Project (http://xoops.org)
+ * @copyright      XOOPS Project (https://xoops.org)
  * @license        GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
  * @since          1.0.0
  * @author         Mengjue Shao <magic.shao@gmail.com>
@@ -18,24 +18,24 @@
  */
 
 $modversion['version']       = 1.05;
-$modversion['module_status'] = 'Beta 2';
-$modversion['release_date']  = '2017/05/24';
-$modversion['name']        = _MI_ABOUT_NAME;
-$modversion['description'] = _MI_ABOUT_DESC;
-$modversion['author']      = 'Magic.Shao <magic.shao@gmail.com>, ezsky <ezskyyoung@gmail.com>';
-$modversion['credits']     = 'xoops.org.cn';
-$modversion['help']        = 'page=help';
-$modversion['license']     = 'GNU GPL 2.0 or later';
-$modversion['license_url'] = 'www.gnu.org/licenses/gpl-2.0.html';
+$modversion['module_status'] = 'RC 1';
+$modversion['release_date']  = '2017/08/04';
+$modversion['name']          = _MI_ABOUT_NAME;
+$modversion['description']   = _MI_ABOUT_DESC;
+$modversion['author']        = 'Magic.Shao <magic.shao@gmail.com>, ezsky <ezskyyoung@gmail.com>';
+$modversion['credits']       = 'xoops.org.cn';
+$modversion['help']          = 'page=help';
+$modversion['license']       = 'GNU GPL 2.0 or later';
+$modversion['license_url']   = 'www.gnu.org/licenses/gpl-2.0.html';
 
 //$moduleDirName = basename(__DIR__);
 
-$modversion['dirname']        = basename(__DIR__);
+$modversion['dirname'] = basename(__DIR__);
 //$modversion['dirmoduleadmin']      = 'Frameworks/moduleclasses/moduleadmin';
 //$modversion['sysicons16']          = 'Frameworks/moduleclasses/icons/16';
 //$modversion['sysicons32']          = 'Frameworks/moduleclasses/icons/32';
-$modversion['modicons16']     = 'assets/images/icons/16';
-$modversion['modicons32']     = 'assets/images/icons/32';
+$modversion['modicons16']          = 'assets/images/icons/16';
+$modversion['modicons32']          = 'assets/images/icons/32';
 $modversion['module_website_url']  = 'www.xoops.org';
 $modversion['module_website_name'] = 'XOOPS';
 $modversion['min_php']             = '5.5';
@@ -50,10 +50,10 @@ $modversion['adminindex'] = 'admin/index.php';
 $modversion['adminmenu']  = 'admin/menu.php';
 
 // Is performing module install/update?
-$isModuleAction             = (!empty($_POST['fct']) && 'modulesadmin' === $_POST['fct']) ? true : false;
-$modversion['onInstall']    = 'include/action.module.php';
-$modversion['onUpdate']     = 'include/action.module.php';
-$modversion['onUninstall']  = 'include/action.module.php';
+$isModuleAction            = (!empty($_POST['fct']) && 'modulesadmin' === $_POST['fct']) ? true : false;
+$modversion['onInstall']   = 'include/action.module.php';
+$modversion['onUpdate']    = 'include/action.module.php';
+$modversion['onUninstall'] = 'include/action.module.php';
 
 // Menu
 $modversion['system_menu'] = 1;
@@ -119,8 +119,10 @@ $modversion['config'][] = array(
     'description' => '',
     'formtype'    => 'select',
     'valuetype'   => 'int',
-    'options'     => array('_MI_ABOUT_CONFIG_LIST_PAGE' => AboutConstants::PAGE,
-                       '_MI_ABOUT_CONFIG_LIST_CATEGORY' => AboutConstants::CATEGORY),
+    'options'     => array(
+        '_MI_ABOUT_CONFIG_LIST_PAGE'     => AboutConstants::PAGE,
+        '_MI_ABOUT_CONFIG_LIST_CATEGORY' => AboutConstants::CATEGORY
+    ),
     'default'     => AboutConstants::PAGE
 );
 
@@ -134,7 +136,7 @@ $modversion['config'][] = array(
 );
 
 xoops_load('xoopseditorhandler');
-$editorHandler         = XoopsEditorHandler::getInstance();
+$editorHandler          = XoopsEditorHandler::getInstance();
 $modversion['config'][] = array(
     'name'        => 'editorAdmin',
     'title'       => '_MI_ABOUT_EDITOR',

@@ -1,5 +1,12 @@
-1.05 Beta 1           (2017-05-02)
------------------------------------------------
+<h5>1.05 RC-1           [2017-08-04]</h5>
+<hr>
+- changed _handler to Handler (mamba)
+- added <{securityToken}> to about_admin_page.tpl (mamba)
+- added SCANDIR_SORT_NONE to scandir() (mamba)
+
+
+<h5>1.05 Beta 1           [2017-05-02]</h5>
+<hr>
 + add XOOPS & PHP version check on install or upgrade
 + add usage of Xmf\Request in several places to filter input
 + add usage of Xmf\Module (Admin & Helper) to modernize code
@@ -21,8 +28,8 @@
 + updated jquery-treeview to v1.42
 - TODO: replace jquery-treeview with jsTree
 
-1.04 Final          (2016-07-10)
------------------------------------------------
+<h5>1.04 Final          [2016-07-10]</h5>
+<hr>
 - removed @version (mamba)
 - fixed block title (mamba)
 - code cosmetics (mamba)
@@ -35,25 +42,25 @@
 - reference mismatch (mamba)
 - Hardening to type safe (mamba)
 
-1.04 RC 1           (2016-03-27)
------------------------------------------------
+<h5>1.04 RC 1           [2016-03-27]</h5>
+<hr>
 - XOOPS 2.5.8 and PHP 7 (mamba)
 
-1.04 Beta 1           (2016-01-05)
------------------------------------------------
+<h5>1.04 Beta 1           [2016-01-05]</h5>
+<hr>
 - Updated to XOOPS 2.5.7 Admin GUI (mamba)
 
 
-1.03                  (2010/05/17)
------------------------------------------------
+<h5>1.03                  [2010/05/17]</h5>
+<hr>
 +  Add sub-classification function (Magic.Shao)
 
 
-1.02                   (2010/05/07)
------------------------------------------------
+<h5>1.02                   [2010/05/07]</h5>
+<hr>
 + Switchable Home List style or menu style (Magic.Shao)
 
 
-1.01                   (2009/12/17)
------------------------------------------------
+<h5>1.01                   [2009/12/17]</h5>
+<hr>
 + Join page menu blocks (ezsky)

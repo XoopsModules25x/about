@@ -10,7 +10,7 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
  * @copyright      The XOOPS Co.Ltd. http://www.xoops.com.cn
- * @copyright      XOOPS Project (http://xoops.org)
+ * @copyright      XOOPS Project (https://xoops.org)
  * @license        GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
  * @package        about
  * @since          1.0.0
@@ -18,7 +18,7 @@
  * @author         Susheng Yang <ezskyyoung@gmail.com>
  */
 
-defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
+defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
 /**
  * Class AboutPage
@@ -78,7 +78,15 @@ class AboutPageHandler extends XoopsPersistableObjectHandler
     {
         $pid = (int)$pid;
         if (!is_array($tags) || count($tags) == 0) {
-            $tags = array('page_id', 'page_pid', 'page_title', 'page_title', 'page_menu_title', 'page_status', 'page_order');
+            $tags = array(
+                'page_id',
+                'page_pid',
+                'page_title',
+                'page_title',
+                'page_menu_title',
+                'page_status',
+                'page_order'
+            );
         }
         $criteria = new CriteriaCompo();
         $criteria->setSort('page_order');
@@ -92,9 +100,9 @@ class AboutPageHandler extends XoopsPersistableObjectHandler
     }
 
     /**
-     * @param  array      $pages
-     * @param  int        $key
-     * @param  int        $level
+     * @param  array $pages
+     * @param  int   $key
+     * @param  int   $level
      * @return array|bool
      */
     public function &menuTree($pages = array(), $key = 0, $level = 1)
@@ -119,8 +127,8 @@ class AboutPageHandler extends XoopsPersistableObjectHandler
     }
 
     /**
-     * @param  array      $pages
-     * @param  int        $key
+     * @param  array $pages
+     * @param  int   $key
      * @return array|bool
      */
     public function getBread($pages = array(), $key = 0)

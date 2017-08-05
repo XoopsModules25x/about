@@ -1,5 +1,5 @@
 <?php
-defined('XOOPS_ROOT_PATH') || exit('Restricted access');
+defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
 /**
  *
@@ -11,19 +11,20 @@ defined('XOOPS_ROOT_PATH') || exit('Restricted access');
  */
 function xoops_module_pre_install_about(XoopsModule $module)
 {
-    $utilsClass = ucfirst($module->dirname()) . "Utility";
+    $utilsClass = ucfirst($module->dirname()) . 'Utility';
     if (!class_exists($utilsClass)) {
         xoops_load('utility', $module->dirname());
     }
 
+    /** @var AboutUtility $utilsClass */
     $xoopsSuccess = $utilsClass::checkVerXoops($module);
-    $phpSuccess   = $utilsClass::checkVerPHPr($module);
+    $phpSuccess   = $utilsClass::checkVerPhp($module);
 
     return $xoopsSuccess && $phpSuccess;
 }
 
 /**
- * @param  XoopsObject $module
+ * @param  XoopsModule $module
  * @return bool        true if install successful, false if not
  */
 function xoops_module_install_about(XoopsModule $module)
@@ -39,9 +40,9 @@ function xoops_module_install_about(XoopsModule $module)
 
     // Delete files from previous version (if they exist)
     // this is only executed if this version copied over old version without running module update
-    $oldFiles = array(XOOPS_ROOT_PATH . "/modules/" . $module->dirname() . "/include/xoopsformloader.php",
-                      XOOPS_ROOT_PATH . "/modules/" . $module->dirname() . "/include/blockform.php",
-                      XOOPS_ROOT_PATH . "/modules/" . $module->dirname() . "/class/utilities.php",
+    $oldFiles = array(XOOPS_ROOT_PATH . '/modules/' . $module->dirname() . '/include/xoopsformloader.php',
+                      XOOPS_ROOT_PATH . '/modules/' . $module->dirname() . '/include/blockform.php',
+                      XOOPS_ROOT_PATH . '/modules/' . $module->dirname() . '/class/utilities.php',
     );
     foreach($oldFiles as $file) {
         if (is_file($file)) {
@@ -73,7 +74,7 @@ function xoops_module_install_about(XoopsModule $module)
  */
 function xoops_module_pre_update_about(XoopsModule $module)
 {
-    $utilsClass = ucfirst($module->dirname()) . "Utility";
+    $utilsClass = ucfirst($module->dirname()) . 'Utility';
     if (!class_exists($utilsClass)) {
         xoops_load('utility', $module->dirname());
     }
@@ -94,9 +95,9 @@ function xoops_module_update_about(XoopsModule $module, $prev_version = null)
 {
     $success = true;
     // Delete files from previous version (if they exist)
-    $oldFiles = array(XOOPS_ROOT_PATH . "/modules/" . $module->dirname() . "/include/xoopsformloader.php",
-                      XOOPS_ROOT_PATH . "/modules/" . $module->dirname() . "/include/blockform.php",
-                      XOOPS_ROOT_PATH . "/modules/" . $module->dirname() . "/class/utilities.php"
+    $oldFiles = array(XOOPS_ROOT_PATH . '/modules/' . $module->dirname() . '/include/xoopsformloader.php',
+                      XOOPS_ROOT_PATH . '/modules/' . $module->dirname() . '/include/blockform.php',
+                      XOOPS_ROOT_PATH . '/modules/' . $module->dirname() . '/class/utilities.php'
     );
     foreach($oldFiles as $file) {
         if (is_file($file)) {
@@ -109,8 +110,8 @@ function xoops_module_update_about(XoopsModule $module, $prev_version = null)
 
     // Delete files from previous version (if they exist)
     // this is only executed if this version copied over old version without running module update
-    $oldFiles = array(XOOPS_PATH . "/modules/" . $module->dirname() . "/include/xoopsformloader.php",
-                      XOOPS_PATH . "/modules/" . $module->dirname() . "/include/blockform.php"
+    $oldFiles = array(XOOPS_PATH . '/modules/' . $module->dirname() . '/include/xoopsformloader.php',
+                      XOOPS_PATH . '/modules/' . $module->dirname() . '/include/blockform.php'
     );
     foreach($oldFiles as $file) {
         if (is_file($file)) {

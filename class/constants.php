@@ -39,8 +39,11 @@
  * @since::      1.05
  **/
 
-defined('XOOPS_ROOT_PATH') || exit('Restricted access');
+defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
+/**
+ * Interface AboutConstants
+ */
 interface AboutConstants
 {
 /**#@+

@@ -9,14 +9,14 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
- * @copyright       XOOPS Project (http://xoops.org)
+ * @copyright       XOOPS Project (https://xoops.org)
  * @license         http://www.fsf.org/copyleft/gpl.html GNU public license
  * @package         article
  * @since           1.0
  * @author          Taiwen Jiang <phppp@users.sourceforge.net>
  */
 
-defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
+defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
 include __DIR__ . '/vars.php';
 define($GLOBALS['artdirname'] . '_FUNCTIONS_RENDER_LOADED', true);
@@ -47,6 +47,7 @@ function about_getTemplate($page = 'index', $style = null)
             return $file_name;
         }
     }
+
     // Couldn't find a suitable template for this page
     return null;
 }
@@ -54,7 +55,7 @@ function about_getTemplate($page = 'index', $style = null)
 /**
  * Function to get a list of template files of a page, indexed by file name
  *
- * @var    string      $page page name
+ * @var    string       $page    page name
  * @param  bool|boolean $refresh recreate the data
  * @return array
  *
@@ -101,7 +102,7 @@ function about_getCss($style = 'default')
  */
 function about_getModuleHeader($style = 'default')
 {
-    $xoops_module_header = "<link rel=\"stylesheet\" type=\"text/css\" href=\"" . about_getCss($style) . "\">";
+    $xoops_module_header = '<link rel="stylesheet" type="text/css" href="' . about_getCss($style) . '">';
 
     return $xoops_module_header;
 }

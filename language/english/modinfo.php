@@ -10,7 +10,7 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
  * @copyright      The XOOPS Co.Ltd. http://www.xoops.com.cn
- * @copyright      XOOPS Project (http://xoops.org)
+ * @copyright      XOOPS Project (https://xoops.org)
  * @license        GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
  * @package        about
  * @since          1.0.0
@@ -36,7 +36,7 @@ define('_MI_ABOUT_CONFIG_LIST_PAGE', 'Page');
 define('_MI_ABOUT_CONFIG_STR_EREG', 'Article summary string limit');
 
 define('_MI_ABOUT_DIRNAME', basename(dirname(dirname(__DIR__))));
-define('_MI_ABOUT_HELP_HEADER', __DIR__ . '/help/helpheader.html');
+define('_MI_ABOUT_HELP_HEADER', __DIR__ . '/help/helpheader.tpl');
 define('_MI_ABOUT_BACK_2_ADMIN', 'Back to Administration of ');
 
 //help
