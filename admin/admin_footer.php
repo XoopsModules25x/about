@@ -10,15 +10,15 @@
  */
 
 /**
- * @copyright    XOOPS Project (http://xoops.org)
- * @license    GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
+ * @copyright    XOOPS Project (https://xoops.org)
+ * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
  * @author     XOOPS Module Development Team
  */
 echo "<div class='adminfooter'>\n"
    . "  <div class='txtcenter'>\n"
    . "    <a href='http://www.xoops.org' rel='external' target='_blank'><img src='" . Xmf\Module\Admin::iconUrl('xoopsmicrobutton.gif', '32') . "' alt='XOOPS' title='XOOPS'></a>\n"
-   . "  </div>\n"
-   . "  " . _AM_MODULEADMIN_ADMIN_FOOTER . "\n"
+     . "  </div>\n"
+     . '  ' . _AM_MODULEADMIN_ADMIN_FOOTER . "\n"
    . "</div>\n";
 
 xoops_cp_footer();

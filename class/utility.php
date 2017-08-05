@@ -14,20 +14,20 @@
 /**
  * Module:  About
  *
- * @package::    \module\about\class
+ * @package      ::    \module\about\class
  * @license      http://www.fsf.org/copyleft/gpl.html GNU public license
- * @copyright    http://xoops.org 2001-2017 &copy; XOOPS Project
+ * @copyright    https://xoops.org 2001-2017 &copy; XOOPS Project
  * @author       ZySpec <owners@zyspec.com>
  * @author       Mamba <mambax7@gmail.com>
- * @since::      File available since version 1.54
+ * @since        ::      File available since version 1.54
  */
 
- /**
-  * AboutUtility
-  *
-  * Static utility class to provide common functionality
-  *
-  */
+/**
+ * AboutUtility
+ *
+ * Static utility class to provide common functionality
+ *
+ */
 class AboutUtility
 {
     /**
@@ -35,18 +35,25 @@ class AboutUtility
      * Verifies XOOPS version meets minimum requirements for this module
      * @static
      * @param XoopsModule $module
+     * @param null|string $requiredVer
      *
      * @return bool true if meets requirements, false if not
      */
-    public static function checkVerXoops(XoopsModule $module)
+    public static function checkVerXoops(XoopsModule $module = null, $requiredVer = null)
     {
-        xoops_loadLanguage('admin', $module->dirname());
+        $moduleDirName = basename(dirname(__DIR__));
+        if (null === $module) {
+            $module = XoopsModule::getByDirname($moduleDirName);
+        }
+        xoops_loadLanguage('admin', $moduleDirName);
         //check for minimum XOOPS version
-        $currentVer  = substr(XOOPS_VERSION, 6); // get the numeric part of string
-        $currArray   = explode('.', $currentVer);
-        $requiredVer = '' . $module->getInfo('min_xoops'); //making sure it's a string
-        $reqArray    = explode('.', $requiredVer);
-        $success     = true;
+        $currentVer = substr(XOOPS_VERSION, 6); // get the numeric part of string
+        $currArray  = explode('.', $currentVer);
+        if (null === $requiredVer) {
+            $requiredVer = '' . $module->getInfo('min_xoops'); //making sure it's a string
+        }
+        $reqArray = explode('.', $requiredVer);
+        $success  = true;
         foreach ($reqArray as $k => $v) {
             if (isset($currArray[$k])) {
                 if ($currArray[$k] > $v) {
@@ -71,6 +78,7 @@ class AboutUtility
 
         return $success;
     }
+
     /**
      *
      * Verifies PHP version meets minimum requirements for this module
@@ -79,14 +87,14 @@ class AboutUtility
      *
      * @return bool true if meets requirements, false if not
      */
-    public static function checkVerPHP(XoopsModule $module)
+    public static function checkVerPhp(XoopsModule $module)
     {
         xoops_loadLanguage('admin', $module->dirname());
         // check for minimum PHP version
         $success = true;
-        $verNum  = phpversion();
+        $verNum  = PHP_VERSION;
         $reqVer  = $module->getInfo('min_php');
-        if ((false !== $reqVer) && ('' !== $reqVer)) {
+        if (false !== $reqVer && '' !== $reqVer) {
             if (version_compare($verNum, (string)$reqVer, '<')) {
                 $module->setErrors(sprintf(_AM_ABOUT_ERROR_BAD_PHP, $reqVer, $verNum));
                 $success = false;
@@ -94,6 +102,8 @@ class AboutUtility
         }
         return $success;
     }
+
+
     /**
      *
      * Remove files and (sub)directories
@@ -117,7 +127,7 @@ class AboutUtility
         $dirInfo = new SplFileInfo($src);
         // validate is a directory
         if ($dirInfo->isDir()) {
-            $fileList = array_diff(scandir($src), array('..', '.'));
+            $fileList = array_diff(scandir($src, SCANDIR_SORT_NONE), array('..', '.'));
             foreach ($fileList as $k => $v) {
                 $fileInfo = new SplFileInfo("{$src}/{$v}");
                 if ($fileInfo->isDir()) {

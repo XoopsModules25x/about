@@ -10,7 +10,7 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
  * @copyright      The XOOPS Co.Ltd. http://www.xoops.com.cn
- * @copyright      XOOPS Project (http://xoops.org)
+ * @copyright      XOOPS Project (https://xoops.org)
  * @license        GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
  * @package        about
  * @since          1.0.0
@@ -25,7 +25,7 @@ $abtHelper = Xmf\Module\Helper::getHelper($moduleDirName);
 
 include_once __DIR__ . '/functions.render.php';
 //include_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
-$page_handler = $abtHelper->getHandler('page');
+$pageHandler = $abtHelper->getHandler('page');
 
 $pageType = isset($_REQUEST['type']) ? Xmf\Request::getInt('type', 0) : $page_obj->getVar('page_type');
 $format   = empty($format) ? 'e' : $format;
@@ -33,15 +33,16 @@ $format   = empty($format) ? 'e' : $format;
 $menu_status = $page_obj->isNew() ? 1 : $page_obj->getVar('page_menu_status');
 $list_status = $page_obj->isNew() ? 1 : $page_obj->getVar('page_status');
 $page_blank  = $page_obj->isNew() ? 0 : $page_obj->getVar('page_blank');
-$title       = $page_obj->isNew() ? _AM_ABOUT_PAGE_INSERT : _AM_ABOUT_EDIT;
+
+$title = $page_obj->isNew() ? _AM_ABOUT_PAGE_INSERT : _AM_ABOUT_EDIT;
 
 $form = new XoopsThemeForm($title, 'form', 'admin.page.php', 'post', true);
-$form->setExtra("enctype=\"multipart/form-data\"");
+$form->setExtra('enctype="multipart/form-data"');
 
 if (AboutConstants::PAGE_TYPE_PAGE == $pageType) {
     $form->addElement(new XoopsFormText(_AM_ABOUT_PAGE_TITLE, 'page_title', 60, 255, $page_obj->getVar('page_title', $format)), true);
-
     $menu = new XoopsFormElementTray(_AM_ABOUT_PAGE_MENU_LIST);
+
     $menu->addElement(new XoopsFormRadioYN('', 'page_menu_status', $menu_status));
     $menu->addElement(new XoopsFormText(_AM_ABOUT_PAGE_MENU_TITLE . ':', 'page_menu_title', 30, 255, $page_obj->getVar('page_menu_title', $format)));
     $menu->addElement(new XoopsFormLabel('', _AM_ABOUT_PAGE_LINK_MENU));
@@ -73,13 +74,13 @@ if (AboutConstants::PAGE_TYPE_PAGE == $pageType) {
 } else {
     $form->addElement(new XoopsFormText(_AM_ABOUT_PAGE_MENU_TITLE . ':', 'page_menu_title', 60, 255, $page_obj->getVar('page_menu_title', $format)));
     $form->addElement(new XoopsFormHidden('page_menu_status', $menu_status));
-    $form->addElement(new XoopsFormText(_AM_ABOUT_PAGE_LINK_TEXT, 'page_text', 60, 255, $page_obj->isNew() ? XOOPS_PROT . $page_obj->getVar('page_text', $format) : $page_obj->getVar('page_text', $format)), true);
+    $form->addElement(new XoopsFormText(_AM_ABOUT_PAGE_LINK_TEXT, 'page_text', 60, 255, $page_obj->isNew() ? XOOPS_ROOT . $page_obj->getVar('page_text', $format) : $page_obj->getVar('page_text', $format)), true);
 }
 
 // Get list of possible parent pages
-$page_list  = $page_handler->getTrees(0, '--');
+$page_list    = $pageHandler->getTrees(0, '--');
 if (!$page_obj->isNew()) {
-    $child_list = $page_handler->getTrees($page_obj->getVar('page_id'));
+    $child_list = $pageHandler->getTrees($page_obj->getVar('page_id'));
     $page_list  = array_diff_key($page_list, $child_list);  // remove this class' children from 'parent' list
     unset($page_list[$page_obj->getVar('page_id')]);        // remove this id from 'parent' list
 }
@@ -89,7 +90,6 @@ if ($page_list) {
         $page_options[$id] = $page['prefix'] . $page['page_menu_title'];
     }
 }
-
 $page_select = new XoopsFormSelect(_AM_ABOUT_PAGE_HIGHER, 'page_pid', $page_obj->getVar('page_pid'));
 $page_select->addOption(0, _NONE);
 $page_select->addOptionArray($page_options);
@@ -100,13 +100,12 @@ $image_uploader = new XoopsFormFile('', 'userfile', 500000);
 $image_tray->addElement($image_uploader);
 $page_image = $page_obj->getVar('page_image');
 if (!empty($page_image) && file_exists(XOOPS_ROOT_PATH . '/uploads/' . $xoopsModule->dirname() . '/' . $page_image)) {
-    $image_tray->addElement(new XoopsFormLabel('', "<div style=\"padding: 8px;\"><img src=\"" . XOOPS_URL . '/uploads/' . $xoopsModule->dirname() . '/' . $page_image . "\"></div>"));
+    $image_tray->addElement(new XoopsFormLabel('', '<div style="padding: 8px;"><img src="' . XOOPS_URL . '/uploads/' . $xoopsModule->dirname() . '/' . $page_image . '"></div>'));
     $delete_check = new XoopsFormCheckBox('', 'delete_image');
     $delete_check->addOption(1, _DELETE);
     $image_tray->addElement($delete_check);
 }
 $form->addElement($image_tray);
-
 $form->addElement(new XoopsFormRadioYN(_AM_ABOUT_PAGE_LINK_BLANK, 'page_blank', $page_blank));
 $form->addElement(new XoopsFormRadioYN(_AM_ABOUT_PAGE_STATUS, 'page_status', $list_status, $yes = _AM_ABOUT_PAGE_SUB, $no = _AM_ABOUT_PAGE_DRAFT));
 

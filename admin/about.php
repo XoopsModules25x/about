@@ -13,7 +13,7 @@
  * Display the Administration About page
  *
  * @package    module\about\admin
- * @copyright  http://xoops.org 2001-2017 XOOPS Project
+ * @copyright  https://xoops.org 2001-2017 XOOPS Project
  * @license    GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
  * @author     XOOPS Module Development Team
  */

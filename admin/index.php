@@ -10,7 +10,7 @@
  */
 
 /**
- * @copyright    XOOPS Project (http://xoops.org)
+ * @copyright    XOOPS Project (https://xoops.org)
  * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
  * @package
  * @since
@@ -18,7 +18,7 @@
  */
 
 // Display Admin header
-include_once __DIR__ . '/admin_header.php';
+require_once __DIR__ . '/admin_header.php';
 xoops_cp_header();
 
 $adminObject  = Xmf\Module\Admin::getInstance();
@@ -43,12 +43,12 @@ $link_results[AboutConstants::NOT_PUBLISHED] = array_key_exists(AboutConstants::
 
 // Display totals
 $adminObject->addInfoBox(_MD_ABOUT_DASHBOARD);
-$adminObject->addInfoBoxLine(sprintf("<span class='infolabel'>" . _MD_ABOUT_TOTAL_PAGES_PUBLISHED . "</span>", "<span class='infotext green bold'>" . $page_results[AboutConstants::PUBLISHED] . "</span>"));
-$adminObject->AddInfoBoxLine(sprintf("<span class='infolabel'>" . _MD_ABOUT_TOTAL_PAGES_DRAFT . "</span>", "<span class='infotext red bold'>" . $page_results[AboutConstants::NOT_PUBLISHED] . "</span>"));
-$adminObject->addInfoBoxLine(sprintf("<span class='infolabel'>" . _MD_ABOUT_TOTAL_LINKS_PUBLISHED . "</span>", "<span class='infotext green bold'>" . $link_results[AboutConstants::PUBLISHED] . "</span>"));
-$adminObject->AddInfoBoxLine(sprintf("<span class='infolabel'>" . _MD_ABOUT_TOTAL_LINKS_DRAFT . "</span>", "<span class='infotext red bold'>" . $link_results[AboutConstants::NOT_PUBLISHED] . "</span>"));
+$adminObject->addInfoBoxLine(sprintf("<span class='infolabel'>" . _MD_ABOUT_TOTAL_PAGES_PUBLISHED . '</span>', "<span class='infotext green bold'>" . $page_results[AboutConstants::PUBLISHED] . '</span>'));
+$adminObject->AddInfoBoxLine(sprintf("<span class='infolabel'>" . _MD_ABOUT_TOTAL_PAGES_DRAFT . '</span>', "<span class='infotext red bold'>" . $page_results[AboutConstants::NOT_PUBLISHED] . '</span>'));
+$adminObject->addInfoBoxLine(sprintf("<span class='infolabel'>" . _MD_ABOUT_TOTAL_LINKS_PUBLISHED . '</span>', "<span class='infotext green bold'>" . $link_results[AboutConstants::PUBLISHED] . '</span>'));
+$adminObject->AddInfoBoxLine(sprintf("<span class='infolabel'>" . _MD_ABOUT_TOTAL_LINKS_DRAFT . '</span>', "<span class='infotext red bold'>" . $link_results[AboutConstants::NOT_PUBLISHED] . '</span>'));
 
 $adminObject->displayNavigation(basename(__FILE__));
 $adminObject->displayIndex();
 
-include_once __DIR__ . '/admin_footer.php';
+require_once __DIR__ . '/admin_footer.php';

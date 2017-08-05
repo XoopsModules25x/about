@@ -14,7 +14,7 @@
  *
  * @package    module\about\admin
  * @copyright  The XOOPS Co.Ltd. http://www.xoops.com.cn
- * @copyright  http://xoops.org 2001-2017 XOOPS Project
+ * @copyright  https://xoops.org 2001-2017 XOOPS Project
  * @license    GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
  * @since      1.0.0
  * @author     Mengjue Shao <magic.shao@gmail.com>
@@ -24,15 +24,15 @@
 defined('XOOPS_ROOT_PATH') || exit('Restricted access');
 
 $adminmenu = array(array('title' => _MI_ABOUT_HOME,
-                          'link' => "admin/index.php",
-                          'icon' => Xmf\Module\Admin::menuIconPath('home.png')
+                         'link' => 'admin/index.php',
+                         'icon' => Xmf\Module\Admin::menuIconPath('home.png')
                       ),
                    array('title' => _MI_ABOUT_PAGE,
-                          'link' => "admin/admin.page.php",
+                         'link' => 'admin/admin.page.php',
                          'icon'  => Xmf\Module\Admin::menuIconPath('manage.png')
                    ),
                    array('title' => _MI_ABOUT_ABOUT,
-                          'link' => "admin/about.php",
-                          'icon' => Xmf\Module\Admin::menuIconPath('about.png')
+                         'link' => 'admin/about.php',
+                         'icon' => Xmf\Module\Admin::menuIconPath('about.png')
                    ),
 );
