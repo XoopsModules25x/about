@@ -69,4 +69,3 @@ define('_AM_ABOUT_ERROR_BAD_PHP', 'This module requires PHP version %s+ (%s inst
 define('_AM_ABOUT_ERROR_BAD_XOOPS', 'This module requires XOOPS %s+ (%s installed)');
 define('_AM_ABOUT_ERROR_BAD_REMOVE', 'Could not delete %s file');
 define('_AM_ABOUT_ERROR_BAD_UPLOAD_DIR', 'Could not create the upload directory');
-
