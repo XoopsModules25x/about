@@ -1,0 +1,6 @@
+TODO: Planned features in the future
+=====================================
+
+Featuers that are being considered/planned for the future releases:
+
+- replace jquery-treeview with jsTree (zyspec)
