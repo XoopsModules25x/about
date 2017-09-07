@@ -63,7 +63,7 @@ function about_getTemplate($page = 'index', $style = null)
 function &about_getTemplateList($page = 'index', $refresh = false)
 {
     $TplFiles = about_getTplPageList($page, $refresh);
-    $template = array();
+    $template = [];
     if (is_array($TplFiles) && count($TplFiles) > 0) {
         foreach (array_keys($TplFiles) as $temp) {
             $template[$temp] = $temp;
@@ -147,7 +147,7 @@ function &about_template_lookup($index_by_page = false)
     require_once XOOPS_ROOT_PATH . '/class/xoopslists.php';
 
     $files = XoopsLists::getHtmlListAsArray(XOOPS_ROOT_PATH . '/modules/' . $GLOBALS['artdirname'] . '/templates/');
-    $list  = array();
+    $list  = [];
     foreach ($files as $file => $name) {
         // The valid file name must be: art_article_mytpl.html OR art_category-1_your-trial.html
         if (preg_match('/^' . $GLOBALS['artdirname'] . "_([^_]*)(_(.*))?\.(tpl|xotpl)$/i", $name, $matches)) {
@@ -158,7 +158,7 @@ function &about_template_lookup($index_by_page = false)
                 $matches[3] = 'default';
             }
             if (empty($index_by_page)) {
-                $list[] = array('file' => $name, 'description' => $matches[3]);
+                $list[] = ['file' => $name, 'description' => $matches[3]];
             } else {
                 $list[$matches[1]][$matches[3]] = $name;
             }

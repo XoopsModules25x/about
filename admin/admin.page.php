@@ -35,7 +35,7 @@ switch ($op) {
     case 'list':
         // Page order
         if (isset($_POST['page_order'])) {
-            $page_order = Xmf\Request::getArray('page_order', array(), 'POST'); //$_POST['page_order'];
+            $page_order = Xmf\Request::getArray('page_order', [], 'POST'); //$_POST['page_order'];
             foreach ($page_order as $page_id => $order) {
                 $page_obj = $pageHandler->get($page_id);
                 if ($page_order[$page_id] != $page_obj->getVar('page_order')) {
@@ -61,7 +61,7 @@ switch ($op) {
             }
             unset($page_obj);
         }
-        $fields = array(
+        $fields = [
             'page_id',
             'page_pid',
             'page_menu_title',
@@ -74,7 +74,7 @@ switch ($op) {
             'page_order',
             'page_index',
             'page_tpl'
-        );
+        ];
 
         $criteria = new CriteriaCompo();
         $criteria->setSort('page_order');
@@ -144,7 +144,7 @@ switch ($op) {
         // Upload image
         if (!empty($_FILES['userfile']['name'])) {
             include_once XOOPS_ROOT_PATH . '/class/uploader.php';
-            $allowed_mimetypes = array('image/gif', 'image/jpeg', 'image/jpg', 'image/png', 'image/x-png');
+            $allowed_mimetypes = ['image/gif', 'image/jpeg', 'image/jpg', 'image/png', 'image/x-png'];
             $maxfilesize       = 500000;
             $maxfilewidth      = 1200;
             $maxfileheight     = 1200;
@@ -193,7 +193,7 @@ switch ($op) {
                 echo $page_obj->getHtmlErrors();
             }
         } else {
-            xoops_confirm(array('ok' => AboutConstants::CONFIRM_OK, 'id' => $page_obj->getVar('page_id'), 'op' => 'delete'), $_SERVER['REQUEST_URI'], sprintf(_AM_ABOUT_RUSUREDEL, $page_obj->getVar('page_menu_title')));
+            xoops_confirm(['ok' => AboutConstants::CONFIRM_OK, 'id' => $page_obj->getVar('page_id'), 'op' => 'delete'], $_SERVER['REQUEST_URI'], sprintf(_AM_ABOUT_RUSUREDEL, $page_obj->getVar('page_menu_title')));
         }
         break;
 }

@@ -74,11 +74,11 @@ class AboutPageHandler extends XoopsPersistableObjectHandler
      * @param  array  $tags
      * @return array
      */
-    public function &getTrees($pid = 0, $prefix = '--', $tags = array())
+    public function &getTrees($pid = 0, $prefix = '--', $tags = [])
     {
         $pid = (int)$pid;
         if (!is_array($tags) || count($tags) == 0) {
-            $tags = array(
+            $tags = [
                 'page_id',
                 'page_pid',
                 'page_title',
@@ -86,7 +86,7 @@ class AboutPageHandler extends XoopsPersistableObjectHandler
                 'page_menu_title',
                 'page_status',
                 'page_order'
-            );
+            ];
         }
         $criteria = new CriteriaCompo();
         $criteria->setSort('page_order');
@@ -105,12 +105,12 @@ class AboutPageHandler extends XoopsPersistableObjectHandler
      * @param  int   $level
      * @return array|bool
      */
-    public function &menuTree($pages = array(), $key = 0, $level = 1)
+    public function &menuTree($pages = [], $key = 0, $level = 1)
     {
         if (!is_array($pages) || 0 === count($pages)) {
             return false;
         }
-        $menu = array();
+        $menu = [];
 
         foreach ($pages as $k => $v) {
             if ($v['page_pid'] == $key) {
@@ -131,16 +131,16 @@ class AboutPageHandler extends XoopsPersistableObjectHandler
      * @param  int   $key
      * @return array|bool
      */
-    public function getBread($pages = array(), $key = 0)
+    public function getBread($pages = [], $key = 0)
     {
         if (!is_array($pages) || 0 === count($pages)) {
             return false;
         }
-        $bread = array();
+        $bread = [];
 
         if (isset($pages[$key])) {
             $current = $pages[$key];
-            $bread   = array($current['page_id'] => $current['page_menu_title']);
+            $bread   = [$current['page_id'] => $current['page_menu_title']];
             if ($current['page_pid'] > 0) {
                 $p_brend = $this->getBread($pages, $current['page_pid']);
                 if (!empty($p_brend)) {

@@ -55,7 +55,7 @@ if (!class_exists('AboutTree')) {
          */
         public function &makeTree($prefix = '-', $key = 0, $tags = null)
         {
-            $ret = array();
+            $ret = [];
             $this->makeTreeItems($key, $ret, $prefix, '', $tags);
 
             return $ret;
@@ -96,7 +96,7 @@ if (!class_exists('AboutTree')) {
          * @param array $tags
          * @param int   $depth
          */
-        public function getAllChildArray($key, &$ret, $tags = array(), $depth = 0)
+        public function getAllChildArray($key, &$ret, $tags = [], $depth = 0)
         {
             if (--$depth == 0) {
                 return;
@@ -127,7 +127,7 @@ if (!class_exists('AboutTree')) {
          */
         public function &makeArrayTree($key = 0, $tags = null, $depth = 0)
         {
-            $ret = array();
+            $ret = [];
             if ($depth > 0) {
                 $depth++;
             }

@@ -34,13 +34,13 @@ function about_block_menu_show()
     $menu_criteria->add(new Criteria('page_menu_status', AboutConstants::IN_MENU));
     $menu_criteria->setSort('page_order');
     $menu_criteria->order = 'ASC';
-    $fields    = array(
+    $fields    = [
         'page_id',
         'page_menu_title',
         'page_blank',
         'page_menu_status',
         'page_status'
-    );
+    ];
     $page_menu = $pageHandler->getAll($menu_criteria, $fields, false);
     foreach ($page_menu as $k => $v) {
         $page_menu[$k]['links'] = $abtHelper->url("index.php?page_id={$v['page_id']}");
@@ -62,7 +62,7 @@ function about_block_page_show($options)
     $abtHelper     = Xmf\Module\Helper::getHelper($moduleDirName);
 
     $myts        = MyTextSanitizer::getInstance();
-    $block       = array();
+    $block       = [];
     $pageHandler = $abtHelper->getHandler('page');
     $page        = $pageHandler->get($options[0]);
     if (!is_object($page)) {
@@ -100,7 +100,7 @@ function about_block_page_edit($options)
     $criteria->add(new Criteria('page_type', AboutConstants::PAGE_TYPE_PAGE));
     $criteria->setSort('page_order');
     $criteria->order = 'ASC';
-    $fields     = array('page_id', 'page_title', 'page_image');
+    $fields     = ['page_id', 'page_title', 'page_image'];
     $pages      = $pageHandler->getAll($criteria, $fields, false);
     $page_title = '';
     foreach ($pages as $k => $v) {

@@ -26,6 +26,7 @@ $abtHelper = Xmf\Module\Helper::getHelper($moduleDirName);
 xoops_load('constants', $moduleDirName);
 $abtHelper->loadLanguage('modinfo');
 
-$xoBreadcrumbs = array(array('title' => _YOURHOME, 'link' => XOOPS_URL),
-                       array('title' => $xoopsModule->getVar('name'), 'link' => XOOPS_URL . "/modules/{$moduleDirName}/")
-);
+$xoBreadcrumbs = [
+    ['title' => _YOURHOME, 'link' => XOOPS_URL],
+    ['title' => $xoopsModule->getVar('name'), 'link' => XOOPS_URL . "/modules/{$moduleDirName}/"]
+];

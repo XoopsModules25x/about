@@ -84,7 +84,7 @@ if (!$page_obj->isNew()) {
     $page_list  = array_diff_key($page_list, $child_list);  // remove this class' children from 'parent' list
     unset($page_list[$page_obj->getVar('page_id')]);        // remove this id from 'parent' list
 }
-$page_options = array();
+$page_options = [];
 if ($page_list) {
     foreach ($page_list as $id => $page) {
         $page_options[$id] = $page['prefix'] . $page['page_menu_title'];

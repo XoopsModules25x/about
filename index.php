@@ -33,7 +33,7 @@ $menu_criteria->add(new Criteria('page_status', AboutConstants::PUBLISHED), 'AND
 $menu_criteria->add(new Criteria('page_menu_status', AboutConstants::IN_MENU), 'AND');
 $menu_criteria->setSort('page_order');
 $menu_criteria->order = 'ASC';
-$fields = array(
+$fields = [
     'page_id',
     'page_pid',
     'page_menu_title',
@@ -41,7 +41,7 @@ $fields = array(
     'page_menu_status',
     'page_status',
     'page_text'
-);
+];
 $menu   = $pageHandler->getAll($menu_criteria, $fields, false);
 foreach ($menu as $k => $v) {
     $page_text = trim($v['page_text']);
@@ -113,12 +113,12 @@ if (AboutConstants::PAGE == $abtHelper->getConfig('display', AboutConstants::PAG
 
 // get bread
 if (!empty($bread)) {
-$bread = array_reverse($pageHandler->getBread($menu, $page_id), true);
+    $bread = array_reverse($pageHandler->getBread($menu, $page_id), true);
     foreach ($bread as $k => $v) {
         if ($k != $page_id) {
-            $xoBreadcrumbs[] = array('title' => $v, 'link' => $abtHelper->url("index.php?page_id={$k}"));
+            $xoBreadcrumbs[] = ['title' => $v, 'link' => $abtHelper->url("index.php?page_id={$k}")];
         } else {
-            $xoBreadcrumbs[] = array('title' => $v);
+            $xoBreadcrumbs[] = ['title' => $v];
         }
         $tree_open[$k] = $k;
     }

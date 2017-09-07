@@ -23,16 +23,20 @@
 
 defined('XOOPS_ROOT_PATH') || exit('Restricted access');
 
-$adminmenu = array(array('title' => _MI_ABOUT_HOME,
-                         'link' => 'admin/index.php',
-                         'icon' => Xmf\Module\Admin::menuIconPath('home.png')
-                      ),
-                   array('title' => _MI_ABOUT_PAGE,
-                         'link' => 'admin/admin.page.php',
-                         'icon'  => Xmf\Module\Admin::menuIconPath('manage.png')
-                   ),
-                   array('title' => _MI_ABOUT_ABOUT,
-                         'link' => 'admin/about.php',
-                         'icon' => Xmf\Module\Admin::menuIconPath('about.png')
-                   ),
-);
+$adminmenu = [
+    [
+        'title' => _MI_ABOUT_HOME,
+        'link'  => 'admin/index.php',
+        'icon'  => Xmf\Module\Admin::menuIconPath('home.png')
+    ],
+    [
+        'title' => _MI_ABOUT_PAGE,
+        'link'  => 'admin/admin.page.php',
+        'icon'  => Xmf\Module\Admin::menuIconPath('manage.png')
+    ],
+    [
+        'title' => _MI_ABOUT_ABOUT,
+        'link'  => 'admin/about.php',
+        'icon'  => Xmf\Module\Admin::menuIconPath('about.png')
+    ],
+];

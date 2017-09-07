@@ -34,7 +34,7 @@ class AboutUtility
      *
      * Verifies XOOPS version meets minimum requirements for this module
      * @static
-     * @param XoopsModule $module
+     * @param null|XoopsModule $module
      * @param null|string $requiredVer
      *
      * @return bool true if meets requirements, false if not
@@ -127,7 +127,7 @@ class AboutUtility
         $dirInfo = new SplFileInfo($src);
         // validate is a directory
         if ($dirInfo->isDir()) {
-            $fileList = array_diff(scandir($src, SCANDIR_SORT_NONE), array('..', '.'));
+            $fileList = array_diff(scandir($src, SCANDIR_SORT_NONE), ['..', '.']);
             foreach ($fileList as $k => $v) {
                 $fileInfo = new SplFileInfo("{$src}/{$v}");
                 if ($fileInfo->isDir()) {
@@ -179,7 +179,7 @@ class AboutUtility
 
         // Open the source directory to read in files
         $iterator = new DirectoryIterator($src);
-       foreach ($iterator as $fObj) {
+        foreach ($iterator as $fObj) {
             if ($fObj->isFile()) {
                 $filename = $fObj->getPathname();
                 $fObj = null; // clear this iterator object to close the file
@@ -265,10 +265,10 @@ class AboutUtility
 
         // Open the source directory to read in files
         $iterator = new DirectoryIterator($src);
-        foreach($iterator as $fObj) {
-            if($fObj->isFile()) {
+        foreach ($iterator as $fObj) {
+            if ($fObj->isFile()) {
                 copy($fObj->getPathname(), "{$dest}/" . $fObj->getFilename());
-            } else if(!$fObj->isDot() && $fObj->isDir()) {
+            } elseif (!$fObj->isDot() && $fObj->isDir()) {
                 self::rcopy($fObj->getPathname(), "{$dest}/" . $fObj-getFilename());
             }
         }

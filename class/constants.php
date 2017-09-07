@@ -46,9 +46,9 @@ defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
  */
 interface AboutConstants
 {
-/**#@+
- * Constant definition
- */
+    /**#@+
+     * Constant definition
+     */
     /**
      * display - page
      */
@@ -132,5 +132,5 @@ interface AboutConstants
      * Unset flag
      */
     const NOT_SET = 0;
-/**#@-*/
+    /**#@-*/
 }
