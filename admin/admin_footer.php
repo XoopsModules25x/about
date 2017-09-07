@@ -16,7 +16,7 @@
  */
 echo "<div class='adminfooter'>\n"
    . "  <div class='txtcenter'>\n"
-   . "    <a href='http://www.xoops.org' rel='external' target='_blank'><img src='" . Xmf\Module\Admin::iconUrl('xoopsmicrobutton.gif', '32') . "' alt='XOOPS' title='XOOPS'></a>\n"
+   . "    <a href='https://xoops.org' rel='external' target='_blank'><img src='" . Xmf\Module\Admin::iconUrl('xoopsmicrobutton.gif', '32') . "' alt='XOOPS' title='XOOPS'></a>\n"
      . "  </div>\n"
      . '  ' . _AM_MODULEADMIN_ADMIN_FOOTER . "\n"
    . "</div>\n";
