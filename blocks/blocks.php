@@ -78,7 +78,7 @@ EOF;
     }
 
     $block['page_text']  = $myts->nl2br($page_text);
-    $block['page_image'] = $options[3] == 1 ? $abtHelper->url($page->getVar('page_image', 's')) : '';
+    $block['page_image'] = 1 == $options[3] ? $abtHelper->url($page->getVar('page_image', 's')) : '';
 
     return $block;
 }

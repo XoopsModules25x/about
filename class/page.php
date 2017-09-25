@@ -77,7 +77,7 @@ class AboutPageHandler extends XoopsPersistableObjectHandler
     public function &getTrees($pid = 0, $prefix = '--', $tags = [])
     {
         $pid = (int)$pid;
-        if (!is_array($tags) || count($tags) == 0) {
+        if (!is_array($tags) || 0 == count($tags)) {
             $tags = [
                 'page_id',
                 'page_pid',

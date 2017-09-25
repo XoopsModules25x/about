@@ -98,7 +98,7 @@ if (!class_exists('AboutTree')) {
          */
         public function getAllChildArray($key, &$ret, $tags = [], $depth = 0)
         {
-            if (--$depth == 0) {
+            if (0 == --$depth) {
                 return;
             }
 
