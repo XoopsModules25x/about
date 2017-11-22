@@ -18,7 +18,7 @@
  * @author         Susheng Yang <ezskyyoung@gmail.com>
  */
 
-if (count($xoBreadcrumbs) > 0) {
+if (is_array($xoBreadcrumbs) && count($xoBreadcrumbs) > 0) {
     $xoopsTpl->assign('xoBreadcrumbs', $xoBreadcrumbs);
 }
 

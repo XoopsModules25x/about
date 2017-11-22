@@ -21,7 +21,14 @@
  * @author     Susheng Yang <ezskyyoung@gmail.com>
  */
 
-defined('XOOPS_ROOT_PATH') || exit('Restricted access');
+use Xoopsmodules\about;
+
+require_once __DIR__ . '/../class/Helper.php';
+//require_once __DIR__ . '/../include/common.php';
+$helper = about\Helper::getInstance();
+
+$pathIcon32 = \Xmf\Module\Admin::menuIconPath('');
+$pathModIcon32 = $helper->getModule()->getInfo('modicons32');
 
 $adminmenu = [
     [
