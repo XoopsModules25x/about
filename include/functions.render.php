@@ -16,6 +16,8 @@
  * @author          Taiwen Jiang <phppp@users.sourceforge.net>
  */
 
+use Xoopsmodules\about;
+
 defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
 include __DIR__ . '/vars.php';

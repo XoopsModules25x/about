@@ -5,7 +5,7 @@
 - added SCANDIR_SORT_NONE to scandir() (mamba)
 
 
-<h5>1.05 Beta 1           [2017-05-02]</h5>
+<h5>1.05 Beta 1   (Zyspec)        [2017-05-02]</h5>
 <hr>
 + add XOOPS & PHP version check on install or upgrade
 + add usage of Xmf\Request in several places to filter input

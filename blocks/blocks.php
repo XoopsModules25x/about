@@ -27,11 +27,11 @@ function about_block_menu_show()
     $moduleDirName = basename(dirname(__DIR__));
     xoops_load('constants', $moduleDirName);
 
-    $abtHelper     = Xmf\Module\Helper::getHelper($moduleDirName);
-    $pageHandler  = $abtHelper->getHandler('page');
-    $menu_criteria = new CriteriaCompo();
-    $menu_criteria->add(new Criteria('page_status', AboutConstants::PUBLISHED), 'AND');
-    $menu_criteria->add(new Criteria('page_menu_status', AboutConstants::IN_MENU));
+    $helper     = Xmf\Module\Helper::getHelper($moduleDirName);
+    $pageHandler  = $helper->getHandler('page');
+    $menu_criteria = new \CriteriaCompo();
+    $menu_criteria->add(new \Criteria('page_status', AboutConstants::PUBLISHED), 'AND');
+    $menu_criteria->add(new \Criteria('page_menu_status', AboutConstants::IN_MENU));
     $menu_criteria->setSort('page_order');
     $menu_criteria->order = 'ASC';
     $fields    = [
@@ -43,7 +43,7 @@ function about_block_menu_show()
     ];
     $page_menu = $pageHandler->getAll($menu_criteria, $fields, false);
     foreach ($page_menu as $k => $v) {
-        $page_menu[$k]['links'] = $abtHelper->url("index.php?page_id={$v['page_id']}");
+        $page_menu[$k]['links'] = $helper->url("index.php?page_id={$v['page_id']}");
     }
 
     return $page_menu;
@@ -59,18 +59,18 @@ function about_block_page_show($options)
         return false;
     }
     $moduleDirName = basename(dirname(__DIR__));
-    $abtHelper     = Xmf\Module\Helper::getHelper($moduleDirName);
+    $helper     = Xmf\Module\Helper::getHelper($moduleDirName);
 
-    $myts        = MyTextSanitizer::getInstance();
+    $myts        = \MyTextSanitizer::getInstance();
     $block       = [];
-    $pageHandler = $abtHelper->getHandler('page');
+    $pageHandler = $helper->getHandler('page');
     $page        = $pageHandler->get($options[0]);
     if (!is_object($page)) {
         return false;
     }
     $page_text = strip_tags($page->getVar('page_text', 'n'));
     if ($options[1] > 0) {
-        $url        = $abtHelper->url("index.php?page_id={$options[0]}");
+        $url        = $helper->url("index.php?page_id={$options[0]}");
         $trimmarker = <<<EOF
 <a href="{$url}" class="more">{$options[2]}</a>
 EOF;
@@ -78,7 +78,7 @@ EOF;
     }
 
     $block['page_text']  = $myts->nl2br($page_text);
-    $block['page_image'] = 1 == $options[3] ? $abtHelper->url($page->getVar('page_image', 's')) : '';
+    $block['page_image'] = 1 == $options[3] ? $helper->url($page->getVar('page_image', 's')) : '';
 
     return $block;
 }
@@ -90,22 +90,22 @@ EOF;
 function about_block_page_edit($options)
 {
     $moduleDirName = basename(dirname(__DIR__));
-    $abtHelper     = Xmf\Module\Helper::getHelper($moduleDirName);
+    $helper     = Xmf\Module\Helper::getHelper($moduleDirName);
     xoops_load('constants', $moduleDirName);
 
-    $abtHelper->loadLanguage('blocks');
-    $pageHandler = $abtHelper->getHandler('page');
-    $criteria    = new CriteriaCompo();
-    $criteria->add(new Criteria('page_status', AboutConstants::PUBLISHED), 'AND');
-    $criteria->add(new Criteria('page_type', AboutConstants::PAGE_TYPE_PAGE));
+    $helper->loadLanguage('blocks');
+    $pageHandler = $helper->getHandler('page');
+    $criteria    = new \CriteriaCompo();
+    $criteria->add(new \Criteria('page_status', AboutConstants::PUBLISHED), 'AND');
+    $criteria->add(new \Criteria('page_type', AboutConstants::PAGE_TYPE_PAGE));
     $criteria->setSort('page_order');
     $criteria->order = 'ASC';
     $fields     = ['page_id', 'page_title', 'page_image'];
     $pages      = $pageHandler->getAll($criteria, $fields, false);
     $page_title = '';
     foreach ($pages as $k => $v) {
-        $page_title       = '<a href="' . $abtHelper->url("index.php?page_id={$k}") . '" target="_blank">' . $v['page_title'] . '</a>';
-        $options_page[$k] = empty($v['page_image']) ? $page_title : $page_title . '<img src="' . $abtHelper->url('assets/images/picture.png') . '">';
+        $page_title       = '<a href="' . $helper->url("index.php?page_id={$k}") . '" target="_blank">' . $v['page_title'] . '</a>';
+        $options_page[$k] = empty($v['page_image']) ? $page_title : $page_title . '<img src="' . $helper->url('assets/images/picture.png') . '">';
     }
 //    include_once dirname(__DIR__) . '/include/xoopsformloader.php';
     xoops_load('blockform', $moduleDirName);

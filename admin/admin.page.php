@@ -17,6 +17,8 @@
  * @author         Susheng Yang <ezskyyoung@gmail.com>
  */
 
+use Xoopsmodules\about;
+
 require_once __DIR__ . '/admin_header.php';
 
 xoops_cp_header();
@@ -28,7 +30,7 @@ $op      = Xmf\Request::getCmd('op', null);
 $op      = (null !== $op) ? $op : (isset($_REQUEST['id']) ? 'edit' : 'list');
 $page_id = Xmf\Request::getInt('id', null);
 
-$pageHandler = xoops_getModuleHandler('page', 'about');
+//$pageHandler = new about\AboutPageHandler();
 
 switch ($op) {
     default:
@@ -52,7 +54,7 @@ switch ($op) {
             if ($page_index != $page_obj->getVar('page_index')) {
                 $page_obj = $pageHandler->get($page_index);
                 if (!$page_obj->getVar('page_title')) {
-                    $abtHelper->redirect('admin/admin.page.php', AboutConstants::REDIRECT_DELAY_MEDIUM, _AM_ABOUT_PAGE_ORDER_ERROR);
+                    $helper->redirect('admin/admin.page.php', AboutConstants::REDIRECT_DELAY_MEDIUM, _AM_ABOUT_PAGE_ORDER_ERROR);
                 }
                 $pageHandler->updateAll('page_index', AboutConstants::NOT_INDEX, null);
                 unset($criteria);
@@ -76,7 +78,7 @@ switch ($op) {
             'page_tpl'
         ];
 
-        $criteria = new CriteriaCompo();
+        $criteria = new \CriteriaCompo();
         $criteria->setSort('page_order');
         $criteria->order = 'ASC';
         $pages         = $pageHandler->getTrees(0, '--', $fields);
@@ -97,20 +99,20 @@ switch ($op) {
     case 'new':
         $GLOBALS['xoTheme']->addStylesheet("modules/{$moduleDirName}/assets/css/admin_style.css");
         $page_obj = $pageHandler->create();
-        $form     = include $abtHelper->path('include/form.page.php');
+        $form     = include $helper->path('include/form.page.php');
         $form->display();
         break;
 
     case 'edit':
         $GLOBALS['xoTheme']->addStylesheet("modules/{$moduleDirName}/assets/css/admin_style.css");
         $page_obj = $pageHandler->get($page_id);
-        $form     = include $abtHelper->path('include/form.page.php');
+        $form     = include $helper->path('include/form.page.php');
         $form->display();
         break;
 
     case 'save':
         if (!$GLOBALS['xoopsSecurity']->check()) {
-            $abtHelper->redirect('admin/admin.page.php', AboutConstants::REDIRECT_DELAY_MEDIUM, implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
+            $helper->redirect('admin/admin.page.php', AboutConstants::REDIRECT_DELAY_MEDIUM, implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
         }
         $page_obj = $pageHandler->get($page_id); // will get page_obj if $page_id is valid, create one if not
 
@@ -135,7 +137,7 @@ switch ($op) {
         $page_obj->setVar('page_pushtime', time());
 
         /* removed - this is now done during module install/update
-        require_once $abtHelper->path("include/functions.php");
+        require_once $helper->path("include/functions.php");
         if (aboutmkdirs(XOOPS_UPLOAD_PATH . "/{$moduleDirName}")) {
             $upload_path = XOOPS_UPLOAD_PATH . "/{$moduleDirName}";
         }
@@ -148,7 +150,7 @@ switch ($op) {
             $maxfilesize       = 500000;
             $maxfilewidth      = 1200;
             $maxfileheight     = 1200;
-            $uploader          = new XoopsMediaUploader($upload_path, $allowed_mimetypes, $maxfilesize, $maxfilewidth, $maxfileheight);
+            $uploader          = new \XoopsMediaUploader($upload_path, $allowed_mimetypes, $maxfilesize, $maxfilewidth, $maxfileheight);
             if ($uploader->fetchMedia($_POST['xoops_upload_file'][0])) {
                 $uploader->setPrefix('attch_');
                 if (!$uploader->upload()) {
@@ -170,12 +172,12 @@ switch ($op) {
 
         // Insert object
         if ($pageHandler->insert($page_obj)) {
-            $abtHelper->redirect('admin/admin.page.php', AboutConstants::REDIRECT_DELAY_MEDIUM, sprintf(_AM_ABOUT_SAVEDSUCCESS, _AM_ABOUT_PAGE_INSERT));
+            $helper->redirect('admin/admin.page.php', AboutConstants::REDIRECT_DELAY_MEDIUM, sprintf(_AM_ABOUT_SAVEDSUCCESS, _AM_ABOUT_PAGE_INSERT));
         }
 
         echo $page_obj->getHtmlErrors();
         $format = 'p';
-        $form   = include $abtHelper->path('include/form.page.php');
+        $form   = include $helper->path('include/form.page.php');
         $form->display();
 
         break;
@@ -188,7 +190,7 @@ switch ($op) {
                 if (file_exists($image)) {
                     @unlink($image);
                 }
-                $abtHelper->redirect('admin/admin.page.php', AboutConstants::REDIRECT_DELAY_MEDIUM, _AM_ABOUT_DELETESUCCESS);
+                $helper->redirect('admin/admin.page.php', AboutConstants::REDIRECT_DELAY_MEDIUM, _AM_ABOUT_DELETESUCCESS);
             } else {
                 echo $page_obj->getHtmlErrors();
             }

@@ -18,13 +18,17 @@
  * @author         Susheng Yang <ezskyyoung@gmail.com>
  */
 
+use Xoopsmodules\about;
+
 $moduleDirName = basename(__DIR__);
 require_once __DIR__ . '/../../mainfile.php';
 
-$abtHelper = Xmf\Module\Helper::getHelper($moduleDirName);
+require_once __DIR__ . '/include/common.php';
+
+//$helper = Xmf\Module\Helper::getHelper($moduleDirName);
 
 xoops_load('constants', $moduleDirName);
-$abtHelper->loadLanguage('modinfo');
+$helper->loadLanguage('modinfo');
 
 $xoBreadcrumbs = [
     ['title' => _YOURHOME, 'link' => XOOPS_URL],

@@ -1,4 +1,4 @@
-<?php
+<?php namespace Xoopsmodules\about;
 /**
  * About
  *
@@ -24,7 +24,7 @@ include_once XOOPS_ROOT_PATH . '/class/xoopsform/form.php';
 /**
  * Class AboutBlockForm
  */
-class AboutBlockForm extends XoopsForm
+class AboutBlockForm extends \XoopsForm
 {
     /**
      * AboutBlockForm constructor.

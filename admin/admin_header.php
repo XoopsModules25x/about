@@ -18,19 +18,24 @@
  * @author       XOOPS Module Development Team
  */
 
+use Xoopsmodules\about;
+
 $moduleDirName = basename(dirname(__DIR__));
 require_once __DIR__ . '/../../../include/cp_header.php';
+require_once __DIR__ . '/../include/common.php';
+
 xoops_load('xoopsformloader');
 xoops_load('constants', $moduleDirName);
 
-$abtHelper = Xmf\Module\Helper::getHelper($moduleDirName);
-$myts = MyTextSanitizer::getInstance();
+/** @var \Xoopsmodules\about\Helper $helper */
+$helper = about\Helper::getInstance();
+$myts = \MyTextSanitizer::getInstance();
 
 if (!isset($GLOBALS['xoopsTpl']) || !($GLOBALS['xoopsTpl'] instanceof XoopsTpl)) {
     require_once $GLOBALS['xoops']->path('class/template.php');
-    $xoopsTpl = new XoopsTpl();
+    $xoopsTpl = new \XoopsTpl();
 }
 
 // Load language files
-$abtHelper->loadLanguage('modinfo');
-$abtHelper->loadLanguage('main');
+$helper->loadLanguage('modinfo');
+$helper->loadLanguage('main');

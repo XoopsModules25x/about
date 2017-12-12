@@ -17,6 +17,8 @@
  * @author       XOOPS Development Team
  */
 
+use Xoopsmodules\about;
+
 // Display Admin header
 require_once __DIR__ . '/admin_header.php';
 xoops_cp_header();
@@ -24,9 +26,9 @@ xoops_cp_header();
 $adminObject  = Xmf\Module\Admin::getInstance();
 
 // Get number of pages, grouped by status
-$pageHandler = $abtHelper->getHandler('page');
-$criteria = new CriteriaCompo();
-$criteria->add(new Criteria('page_type', AboutConstants::PAGE_TYPE_PAGE));
+//$pageHandler = $helper->getHandler('page');
+$criteria = new \CriteriaCompo();
+$criteria->add(new \Criteria('page_type', AboutConstants::PAGE_TYPE_PAGE));
 $criteria->setGroupBy('page_status');
 $page_results = $pageHandler->getCount($criteria);
 
@@ -34,8 +36,8 @@ $page_results[AboutConstants::PUBLISHED]     = array_key_exists(AboutConstants::
 $page_results[AboutConstants::NOT_PUBLISHED] = array_key_exists(AboutConstants::NOT_PUBLISHED, $page_results) ? $page_results[AboutConstants::NOT_PUBLISHED] : 0;
 
 // Get number of links, grouped by status
-$criteria = new CriteriaCompo();
-$criteria->add(new Criteria('page_type', AboutConstants::PAGE_TYPE_LINK));
+$criteria = new \CriteriaCompo();
+$criteria->add(new \Criteria('page_type', AboutConstants::PAGE_TYPE_LINK));
 $criteria->setGroupBy('page_status');
 $link_results = $pageHandler->getCount($criteria);
 $link_results[AboutConstants::PUBLISHED]     = array_key_exists(AboutConstants::PUBLISHED, $link_results) ? $link_results[AboutConstants::PUBLISHED] : 0;
@@ -50,5 +52,8 @@ $adminObject->AddInfoBoxLine(sprintf("<span class='infolabel'>" . _MD_ABOUT_TOTA
 
 $adminObject->displayNavigation(basename(__FILE__));
 $adminObject->displayIndex();
+
+echo $utility::getServerStats();
+
 
 require_once __DIR__ . '/admin_footer.php';

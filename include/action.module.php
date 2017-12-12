@@ -1,4 +1,7 @@
 <?php
+
+use Xoopsmodules\about;
+
 defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
 /**
@@ -11,14 +14,18 @@ defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
  */
 function xoops_module_pre_install_about(XoopsModule $module)
 {
-    $utilityClass = ucfirst($module->dirname()) . 'Utility';
-    if (!class_exists($utilityClass)) {
-        xoops_load('utility', $module->dirname());
-    }
+    include __DIR__ . '/../preloads/autoloader.php';
+    /** @var about\Utility $utility */
+    $utility = new about\Utility();
+    $xoopsSuccess = $utility::checkVerXoops($module);
+    $phpSuccess   = $utility::checkVerPhp($module);
 
-    /** @var AboutUtility $utilityClass */
-    $xoopsSuccess = $utilityClass::checkVerXoops($module);
-    $phpSuccess   = $utilityClass::checkVerPhp($module);
+    if (false !== $xoopsSuccess && false !==  $phpSuccess) {
+        $moduleTables =& $module->getInfo('tables');
+        foreach ($moduleTables as $table) {
+            $GLOBALS['xoopsDB']->queryF('DROP TABLE IF EXISTS ' . $GLOBALS['xoopsDB']->prefix($table) . ';');
+        }
+    }
 
     return $xoopsSuccess && $phpSuccess;
 }
@@ -75,14 +82,14 @@ function xoops_module_install_about(XoopsModule $module)
  */
 function xoops_module_pre_update_about(XoopsModule $module)
 {
-    $utilityClass = ucfirst($module->dirname()) . 'Utility';
-    if (!class_exists($utilityClass)) {
-        xoops_load('utility', $module->dirname());
-    }
+    /** @var about\Helper $helper */
+    /** @var about\Utility $utility */
+    $moduleDirName = basename(dirname(__DIR__));
+    $helper       = about\Helper::getInstance();
+    $utility      = new about\Utility();
 
-    $xoopsSuccess = $utilityClass::checkVerXoops($module);
-    $phpSuccess   = $utilityClass::checkVerPHP($module);
-
+    $xoopsSuccess = $utility::checkVerXoops($module);
+    $phpSuccess   = $utility::checkVerPhp($module);
     return $xoopsSuccess && $phpSuccess;
 }
 
@@ -149,14 +156,14 @@ function xoops_module_update_about(XoopsModule $module, $prev_version = null)
 function xoops_module_uninstall_about(XoopsModule $module)
 {
     $moduleDirName = $module->dirname();
-    $aboutHelper = Xmf\Module\Helper::getHelper($moduleDirName);
+//    $aboutHelper = Xmf\Module\Helper::getHelper($moduleDirName);
     $utilityClass = ucfirst($moduleDirName) . 'Utility';
     if (!class_exists($utilityClass)) {
         xoops_load('utility', $moduleDirName);
     }
 
     $success = true;
-    $aboutHelper->loadLanguage('admin');
+    $helper->loadLanguage('admin');
 
     //------------------------------------------------------------------
     // Remove module uploads folder (and all subfolders) if they exist

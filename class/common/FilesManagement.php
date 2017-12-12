@@ -1,91 +1,76 @@
-<?php
+<?php namespace Xoopsmodules\about\common;
+
 /*
- About Utility Class Definition
+ You may not change or alter any portion of this comment or credits
+ of supporting developers from this source code or any supporting source code
+ which is considered copyrighted (c) material of the original comment or credit authors.
 
- You may not change or alter any portion of this comment or credits of
- supporting developers from this source code or any supporting source code
- which is considered copyrighted (c) material of the original comment or credit
- authors.
-
- This program is distributed in the hope that it will be useful, but
- WITHOUT ANY WARRANTY; without even the implied warranty of
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  */
-/**
- * Module:  About
- *
- * @package      ::    \module\about\class
- * @license      http://www.fsf.org/copyleft/gpl.html GNU public license
- * @copyright    https://xoops.org 2001-2017 &copy; XOOPS Project
- * @author       ZySpec <owners@zyspec.com>
- * @author       Mamba <mambax7@gmail.com>
- * @since        ::      File available since version 1.54
- */
 
 /**
- * AboutUtility
- *
- * Static utility class to provide common functionality
- *
+ * @copyright   XOOPS Project (https://xoops.org)
+ * @license     http://www.fsf.org/copyleft/gpl.html GNU public license
+ * @author      mamba <mambax7@gmail.com>
  */
-class AboutUtility
+trait FilesManagement
 {
     /**
+     * Function responsible for checking if a directory exists, we can also write in and create an index.html file
      *
-     * Verifies XOOPS version meets minimum requirements for this module
-     * @static
-     * @param null|XoopsModule $module
-     * @param null|string $requiredVer
+     * @param string $folder The full path of the directory to check
      *
-     * @return bool true if meets requirements, false if not
+     * @return void
      */
-    public static function checkVerXoops(XoopsModule $module = null, $requiredVer = null)
+    public static function createFolder($folder)
     {
-        $moduleDirName = basename(dirname(__DIR__));
-        if (null === $module) {
-            $module = XoopsModule::getByDirname($moduleDirName);
-        }
-        xoops_loadLanguage('admin', $moduleDirName);
+        try {
+            if (!file_exists($folder)) {
+                if (!mkdir($folder) && !is_dir($folder)) {
+                    throw new \RuntimeException(sprintf('Unable to create the %s directory', $folder));
+                }
 
-        //check for minimum XOOPS version
-        $currentVer = substr(XOOPS_VERSION, 6); // get the numeric part of string
-        if (null === $requiredVer) {
-            $requiredVer = '' . $module->getInfo('min_xoops'); //making sure it's a string
+                file_put_contents($folder . '/index.html', '<script>history.go(-1);</script>');
+            }
         }
-        $success     = true;
-
-        if (version_compare($currentVer, $module->getInfo('min_xoops'), '<')) {
-            $success     = false;
-            $module->setErrors(sprintf(AM_ABOUT_ERROR_BAD_XOOPS, $requiredVer, $currentVer));
+        catch (Exception $e) {
+            echo 'Caught exception: ', $e->getMessage(), "\n", '<br>';
         }
-
-        return $success;
     }
 
     /**
-     *
-     * Verifies PHP version meets minimum requirements for this module
-     * @static
-     * @param XoopsModule $module
-     *
-     * @return bool true if meets requirements, false if not
+     * @param $file
+     * @param $folder
+     * @return bool
      */
-    public static function checkVerPhp(XoopsModule $module)
+    public static function copyFile($file, $folder)
     {
-        xoops_loadLanguage('admin', $module->dirname());
-        // check for minimum PHP version
-        $success = true;
-        $verNum  = PHP_VERSION;
-        $reqVer  = $module->getInfo('min_php');
-        if (false !== $reqVer && '' !== $reqVer) {
-            if (version_compare($verNum, (string)$reqVer, '<')) {
-                $module->setErrors(sprintf(_AM_ABOUT_ERROR_BAD_PHP, $reqVer, $verNum));
-                $success = false;
-            }
-        }
-        return $success;
+        return copy($file, $folder);
     }
 
+    /**
+     * @param $src
+     * @param $dst
+     */
+    public static function recurseCopy($src, $dst)
+    {
+        $dir = opendir($src);
+        //        @mkdir($dst);
+        if (!mkdir($dst) && !is_dir($dst)) {
+            while (false !== ($file = readdir($dir))) {
+                if (('.' !== $file) && ('..' !== $file)) {
+                    if (is_dir($src . '/' . $file)) {
+                        self::recurseCopy($src . '/' . $file, $dst . '/' . $file);
+                    } else {
+                        copy($src . '/' . $file, $dst . '/' . $file);
+                    }
+                }
+            }
+        }
+        closedir($dir);
+    }
 
     /**
      *
@@ -93,8 +78,8 @@ class AboutUtility
      *
      * @param string $src source directory to delete
      *
-     * @see Xmf\Module\Helper::getHelper()
-     * @see Xmf\Module\Helper::isUserAdmin()
+     * @uses \Xmf\Module\Helper::getHelper()
+     * @uses \Xmf\Module\Helper::isUserAdmin()
      *
      * @return bool true on success
      */
@@ -165,7 +150,7 @@ class AboutUtility
         foreach ($iterator as $fObj) {
             if ($fObj->isFile()) {
                 $filename = $fObj->getPathname();
-                $fObj = null; // clear this iterator object to close the file
+                $fObj     = null; // clear this iterator object to close the file
                 if (!unlink($filename)) {
                     return false; // couldn't delete the file
                 }
@@ -181,7 +166,7 @@ class AboutUtility
     /**
      * Recursively move files from one directory to another
      *
-     * @param string $src - Source of files being moved
+     * @param string $src  - Source of files being moved
      * @param string $dest - Destination of files being moved
      *
      * @return bool true on success
@@ -211,7 +196,7 @@ class AboutUtility
             } elseif (!$fObj->isDot() && $fObj->isDir()) {
                 // Try recursively on directory
                 self::rmove($fObj->getPathname(), "{$dest}/" . $fObj->getFilename());
-//                rmdir($fObj->getPath()); // now delete the directory
+                //                rmdir($fObj->getPath()); // now delete the directory
             }
         }
         $iterator = null;   // clear iterator Obj to close file/directory
@@ -224,8 +209,8 @@ class AboutUtility
      * @param string $src  - Source of files being moved
      * @param string $dest - Destination of files being moved
      *
-     * @see Xmf\Module\Helper::getHelper()
-     * @see Xmf\Module\Helper::isUserAdmin()
+     * @uses \Xmf\Module\Helper::getHelper()
+     * @uses \Xmf\Module\Helper::isUserAdmin()
      *
      * @return bool true on success
      */
@@ -252,7 +237,7 @@ class AboutUtility
             if ($fObj->isFile()) {
                 copy($fObj->getPathname(), "{$dest}/" . $fObj->getFilename());
             } elseif (!$fObj->isDot() && $fObj->isDir()) {
-                self::rcopy($fObj->getPathname(), "{$dest}/" . $fObj-getFilename());
+                self::rcopy($fObj->getPathname(), "{$dest}/" . $fObj->getFilename());
             }
         }
         return true;

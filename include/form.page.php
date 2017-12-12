@@ -18,14 +18,15 @@
  * @author         Susheng Yang <ezskyyoung@gmail.com>
  */
 
+use Xoopsmodules\about;
+
 defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
 $moduleDirName = basename(dirname(__DIR__));
-$abtHelper = Xmf\Module\Helper::getHelper($moduleDirName);
+$helper = Xmf\Module\Helper::getHelper($moduleDirName);
 
 include_once __DIR__ . '/functions.render.php';
 //include_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
-$pageHandler = $abtHelper->getHandler('page');
 
 $pageType = isset($_REQUEST['type']) ? Xmf\Request::getInt('type', 0) : $page_obj->getVar('page_type');
 $format   = empty($format) ? 'e' : $format;
@@ -36,19 +37,19 @@ $page_blank  = $page_obj->isNew() ? 0 : $page_obj->getVar('page_blank');
 
 $title = $page_obj->isNew() ? _AM_ABOUT_PAGE_INSERT : _AM_ABOUT_EDIT;
 
-$form = new XoopsThemeForm($title, 'form', 'admin.page.php', 'post', true);
+$form = new \XoopsThemeForm($title, 'form', 'admin.page.php', 'post', true);
 $form->setExtra('enctype="multipart/form-data"');
 
 if (AboutConstants::PAGE_TYPE_PAGE == $pageType) {
     $form->addElement(new XoopsFormText(_AM_ABOUT_PAGE_TITLE, 'page_title', 60, 255, $page_obj->getVar('page_title', $format)), true);
-    $menu = new XoopsFormElementTray(_AM_ABOUT_PAGE_MENU_LIST);
+    $menu = new \XoopsFormElementTray(_AM_ABOUT_PAGE_MENU_LIST);
 
-    $menu->addElement(new XoopsFormRadioYN('', 'page_menu_status', $menu_status));
-    $menu->addElement(new XoopsFormText(_AM_ABOUT_PAGE_MENU_TITLE . ':', 'page_menu_title', 30, 255, $page_obj->getVar('page_menu_title', $format)));
-    $menu->addElement(new XoopsFormLabel('', _AM_ABOUT_PAGE_LINK_MENU));
+    $menu->addElement(new \XoopsFormRadioYN('', 'page_menu_status', $menu_status));
+    $menu->addElement(new \XoopsFormText(_AM_ABOUT_PAGE_MENU_TITLE . ':', 'page_menu_title', 30, 255, $page_obj->getVar('page_menu_title', $format)));
+    $menu->addElement(new \XoopsFormLabel('', _AM_ABOUT_PAGE_LINK_MENU));
     $form->addElement($menu, true);
 
-    $editorTray = new XoopsFormElementTray(_AM_ABOUT_PAGE_TEXT, '<br>');
+    $editorTray = new \XoopsFormElementTray(_AM_ABOUT_PAGE_TEXT, '<br>');
     if (class_exists('XoopsFormEditor')) {
         $options['name']   = 'page_text';
         $options['value']  = $page_obj->getVar('page_text');
@@ -59,7 +60,7 @@ if (AboutConstants::PAGE_TYPE_PAGE == $pageType) {
         $pageEditor        = new XoopsFormEditor('', $xoopsModuleConfig['editorAdmin'], $options, $nohtml = false, $onfailure = 'textarea');
         $editorTray->addElement($pageEditor);
     } else {
-        $pageEditor = new XoopsFormDhtmlTextArea('', 'page_text', $page_obj->getVar('page_text'), '100%', '100%');
+        $pageEditor = new \XoopsFormDhtmlTextArea('', 'page_text', $page_obj->getVar('page_text'), '100%', '100%');
         $editorTray->addElement($pageEditor);
     }
     $form->addElement($editorTray);
@@ -67,14 +68,14 @@ if (AboutConstants::PAGE_TYPE_PAGE == $pageType) {
     // Template set
     $templates = about_getTemplateList('page');
     if (is_array($templates) && count($templates) > 0) {
-        $template_select = new XoopsFormSelect(_AM_ABOUT_TEMPLATE_SELECT, 'page_tpl', $page_obj->getVar('page_tpl'));
+        $template_select = new \XoopsFormSelect(_AM_ABOUT_TEMPLATE_SELECT, 'page_tpl', $page_obj->getVar('page_tpl'));
         $template_select->addOptionArray($templates);
         $form->addElement($template_select);
     }
 } else {
-    $form->addElement(new XoopsFormText(_AM_ABOUT_PAGE_MENU_TITLE . ':', 'page_menu_title', 60, 255, $page_obj->getVar('page_menu_title', $format)));
-    $form->addElement(new XoopsFormHidden('page_menu_status', $menu_status));
-    $form->addElement(new XoopsFormText(_AM_ABOUT_PAGE_LINK_TEXT, 'page_text', 60, 255, $page_obj->isNew() ? XOOPS_ROOT . $page_obj->getVar('page_text', $format) : $page_obj->getVar('page_text', $format)), true);
+    $form->addElement(new \XoopsFormText(_AM_ABOUT_PAGE_MENU_TITLE . ':', 'page_menu_title', 60, 255, $page_obj->getVar('page_menu_title', $format)));
+    $form->addElement(new \XoopsFormHidden('page_menu_status', $menu_status));
+    $form->addElement(new \XoopsFormText(_AM_ABOUT_PAGE_LINK_TEXT, 'page_text', 60, 255, $page_obj->isNew() ? XOOPS_ROOT . $page_obj->getVar('page_text', $format) : $page_obj->getVar('page_text', $format)), true);
 }
 
 // Get list of possible parent pages
@@ -90,30 +91,30 @@ if ($page_list) {
         $page_options[$id] = $page['prefix'] . $page['page_menu_title'];
     }
 }
-$page_select = new XoopsFormSelect(_AM_ABOUT_PAGE_HIGHER, 'page_pid', $page_obj->getVar('page_pid'));
+$page_select = new \XoopsFormSelect(_AM_ABOUT_PAGE_HIGHER, 'page_pid', $page_obj->getVar('page_pid'));
 $page_select->addOption(0, _NONE);
 $page_select->addOptionArray($page_options);
 $form->addElement($page_select);
 
-$image_tray     = new XoopsFormElementTray(_AM_ABOUT_PAGE_IMAGE);
-$image_uploader = new XoopsFormFile('', 'userfile', 500000);
+$image_tray     = new \XoopsFormElementTray(_AM_ABOUT_PAGE_IMAGE);
+$image_uploader = new \XoopsFormFile('', 'userfile', 500000);
 $image_tray->addElement($image_uploader);
 $page_image = $page_obj->getVar('page_image');
 if (!empty($page_image) && file_exists(XOOPS_ROOT_PATH . '/uploads/' . $xoopsModule->dirname() . '/' . $page_image)) {
-    $image_tray->addElement(new XoopsFormLabel('', '<div style="padding: 8px;"><img src="' . XOOPS_URL . '/uploads/' . $xoopsModule->dirname() . '/' . $page_image . '"></div>'));
-    $delete_check = new XoopsFormCheckBox('', 'delete_image');
+    $image_tray->addElement(new \XoopsFormLabel('', '<div style="padding: 8px;"><img src="' . XOOPS_URL . '/uploads/' . $xoopsModule->dirname() . '/' . $page_image . '"></div>'));
+    $delete_check = new \XoopsFormCheckBox('', 'delete_image');
     $delete_check->addOption(1, _DELETE);
     $image_tray->addElement($delete_check);
 }
 $form->addElement($image_tray);
-$form->addElement(new XoopsFormRadioYN(_AM_ABOUT_PAGE_LINK_BLANK, 'page_blank', $page_blank));
-$form->addElement(new XoopsFormRadioYN(_AM_ABOUT_PAGE_STATUS, 'page_status', $list_status, $yes = _AM_ABOUT_PAGE_SUB, $no = _AM_ABOUT_PAGE_DRAFT));
+$form->addElement(new \XoopsFormRadioYN(_AM_ABOUT_PAGE_LINK_BLANK, 'page_blank', $page_blank));
+$form->addElement(new \XoopsFormRadioYN(_AM_ABOUT_PAGE_STATUS, 'page_status', $list_status, $yes = _AM_ABOUT_PAGE_SUB, $no = _AM_ABOUT_PAGE_DRAFT));
 
-$form->addElement(new XoopsFormHidden('id', $page_obj->getVar('page_id')));
-$form->addElement(new XoopsFormHidden('page_type', $pageType));
-$form->addElement(new XoopsFormHidden('op', 'save'));
+$form->addElement(new \XoopsFormHidden('id', $page_obj->getVar('page_id')));
+$form->addElement(new \XoopsFormHidden('page_type', $pageType));
+$form->addElement(new \XoopsFormHidden('op', 'save'));
 //$form->addElement(new XoopsFormButton('', 'submit', _SUBMIT, 'submit'));
-$form->addElement(new XoopsFormButtonTray('submit', _SUBMIT, 'submit'));
+$form->addElement(new \XoopsFormButtonTray('submit', _SUBMIT, 'submit'));
 
 
 return $form;

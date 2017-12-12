@@ -1,4 +1,4 @@
-<?php
+<?php namespace Xoopsmodules\about;
 
 defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
@@ -8,7 +8,7 @@ if (!class_exists('AboutTree')) {
     /**
      * Class AboutTree
      */
-    class AboutTree extends XoopsObjectTree
+    class AboutTree extends \XoopsObjectTree
     {
         /**
          * AboutTree constructor.

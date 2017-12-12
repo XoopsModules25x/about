@@ -1,5 +1,7 @@
 <?php
 
+use Xoopsmodules\about;
+
 defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
 /**
