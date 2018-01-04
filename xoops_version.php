@@ -16,6 +16,7 @@
  * @author         Mengjue Shao <magic.shao@gmail.com>
  * @author         Susheng Yang <ezskyyoung@gmail.com>
  */
+include __DIR__ . '/preloads/autoloader.php';
 
 $modversion['version']       = 1.05;
 $modversion['module_status'] = 'RC 1';

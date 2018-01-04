@@ -17,7 +17,7 @@
  * @author         Susheng Yang <ezskyyoung@gmail.com>
  */
 
-use Xoopsmodules\about;
+use XoopsModules\About;
 
 require_once __DIR__ . '/admin_header.php';
 
@@ -30,7 +30,7 @@ $op      = Xmf\Request::getCmd('op', null);
 $op      = (null !== $op) ? $op : (isset($_REQUEST['id']) ? 'edit' : 'list');
 $page_id = Xmf\Request::getInt('id', null);
 
-//$pageHandler = new about\AboutPageHandler();
+//$pageHandler = new About\AboutPageHandler();
 
 switch ($op) {
     default:

@@ -16,7 +16,7 @@
  * @author          Taiwen Jiang <phppp@users.sourceforge.net>
  */
 
-use Xoopsmodules\about;
+use XoopsModules\About;
 
 defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
@@ -62,7 +62,7 @@ function about_getTemplate($page = 'index', $style = null)
  * @return array
  *
  */
-function &about_getTemplateList($page = 'index', $refresh = false)
+function about_getTemplateList($page = 'index', $refresh = false)
 {
     $TplFiles = about_getTplPageList($page, $refresh);
     $template = [];

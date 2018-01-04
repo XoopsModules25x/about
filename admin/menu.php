@@ -12,7 +12,7 @@
 /**
  * Display the Administration About page
  *
- * @package    module\about\admin
+ * @package    module\About\admin
  * @copyright  The XOOPS Co.Ltd. http://www.xoops.com.cn
  * @copyright  https://xoops.org 2001-2017 XOOPS Project
  * @license    GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
@@ -21,9 +21,11 @@
  * @author     Susheng Yang <ezskyyoung@gmail.com>
  */
 
-use Xoopsmodules\about;
+use XoopsModules\About;
 
-$helper = about\Helper::getInstance();
+require_once __DIR__ . '/../include/common.php';
+
+$helper = About\Helper::getInstance();
 
 $pathIcon32 = \Xmf\Module\Admin::menuIconPath('');
 $pathModIcon32 = $helper->getModule()->getInfo('modicons32');

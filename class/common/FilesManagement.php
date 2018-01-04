@@ -1,4 +1,4 @@
-<?php namespace Xoopsmodules\about\common;
+<?php namespace XoopsModules\About\Common;
 
 /*
  You may not change or alter any portion of this comment or credits
@@ -23,6 +23,7 @@ trait FilesManagement
      * @param string $folder The full path of the directory to check
      *
      * @return void
+     * @throws \RuntimeException
      */
     public static function createFolder($folder)
     {

@@ -17,28 +17,42 @@
  * @author     XOOPS Development Team
  */
 
-use Xoopsmodules\about;
+use XoopsModules\About;
 
 defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
 
 include __DIR__ . '/../preloads/autoloader.php';
 
 $moduleDirName = basename(dirname(__DIR__));
+$moduleDirNameUpper   = strtoupper($moduleDirName); //$capsDirName
 
-require_once __DIR__ . '/../class/Helper.php';
-require_once __DIR__ . '/../class/Utility.php';
+/** @var \XoopsDatabase $db */
+/** @var About\Helper $helper */
+/** @var About\Utility $utility */
+$db      = \XoopsDatabaseFactory::getDatabaseConnection();
+$helper  = About\Helper::getInstance();
+$utility = new About\Utility();
+//$configurator = new About\Common\Configurator();
+
+$helper->loadLanguage('common');
 
 
-if (!defined('ABOUT_MODULE_PATH')) {
-    define('ABOUT_DIRNAME', basename(dirname(__DIR__)));
-    define('ABOUT_URL', XOOPS_URL . '/modules/' . ABOUT_DIRNAME);
-    define('ABOUT_IMAGE_URL', ABOUT_URL . '/assets/images/');
-    define('ABOUT_ROOT_PATH', XOOPS_ROOT_PATH . '/modules/' . ABOUT_DIRNAME);
-    define('ABOUT_IMAGE_PATH', ABOUT_ROOT_PATH . '/assets/images');
-    define('ABOUT_ADMIN_URL', ABOUT_URL . '/admin/');
-    define('ABOUT_UPLOAD_URL', XOOPS_UPLOAD_URL . '/' . ABOUT_DIRNAME);
-    define('ABOUT_UPLOAD_PATH', XOOPS_UPLOAD_PATH . '/' . ABOUT_DIRNAME);
+if (!defined($moduleDirNameUpper . '_CONSTANTS_DEFINED')) {
+    define($moduleDirNameUpper . '_DIRNAME', basename(dirname(__DIR__)));
+    define($moduleDirNameUpper . '_ROOT_PATH', XOOPS_ROOT_PATH . '/modules/' . $moduleDirName . '/');
+    define($moduleDirNameUpper . '_URL', XOOPS_URL . '/modules/' . $moduleDirName . '/');
+    define($moduleDirNameUpper . '_IMAGE_URL', constant($moduleDirNameUpper . '_URL') . '/assets/images/');
+    define($moduleDirNameUpper . '_IMAGE_PATH', constant($moduleDirNameUpper . '_ROOT_PATH') . '/assets/images');
+    define($moduleDirNameUpper . '_ADMIN_URL', constant($moduleDirNameUpper . '_URL') . '/admin/');
+    define($moduleDirNameUpper . '_ADMIN_PATH', constant($moduleDirNameUpper . '_ROOT_PATH') . '/admin/');
+    define($moduleDirNameUpper . '_PATH', XOOPS_ROOT_PATH . '/modules/' . constant($moduleDirNameUpper . '_DIRNAME'));
+    define($moduleDirNameUpper . '_ADMIN', constant($moduleDirNameUpper . '_URL') . '/admin/index.php');
+    define($moduleDirNameUpper . '_AUTHOR_LOGOIMG', constant($moduleDirNameUpper . '_URL') . '/assets/images/logoModule.png');
+    define($moduleDirNameUpper . '_UPLOAD_URL', XOOPS_UPLOAD_URL . '/' . $moduleDirName); // WITHOUT Trailing slash
+    define($moduleDirNameUpper . '_UPLOAD_PATH', XOOPS_UPLOAD_PATH . '/' . $moduleDirName); // WITHOUT Trailing slash
+    define($moduleDirNameUpper . '_CONSTANTS_DEFINED', 1);
 }
+
 xoops_loadLanguage('common', ABOUT_DIRNAME);
 
 require_once ABOUT_ROOT_PATH . '/include/functions.php';
@@ -50,20 +64,12 @@ require_once ABOUT_ROOT_PATH . '/include/functions.php';
 //require_once ABOUT_ROOT_PATH . '/class/request.php';
 
 
-/** @var \XoopsDatabase $db */
-/** @var wfdownloads\Helper $helper */
-/** @var wfdownloads\Utility $utility */
-$db           = \XoopsDatabaseFactory::getDatabase();
-$helper       = about\Helper::getInstance();
-$utility      = new about\Utility();
-$configurator = new about\Configurator();
-
-$pageHandler     = new about\AboutPageHandler($db);
+$pageHandler     = new About\AboutPageHandler($db);
 
 $pathIcon16    = Xmf\Module\Admin::iconUrl('', 16);
 $pathIcon32    = Xmf\Module\Admin::iconUrl('', 32);
-$pathModIcon16 = $helper->getModule()->getInfo('modicons16');
-$pathModIcon32 = $helper->getModule()->getInfo('modicons32');
+//$pathModIcon16 = $helper->getModule()->getInfo('modicons16');
+//$pathModIcon32 = $helper->getModule()->getInfo('modicons32');
 
 $icons = [
     'edit'    => "<img src='" . $pathIcon16 . "/edit.png'  alt=" . _EDIT . "' align='middle'>",
@@ -73,14 +79,26 @@ $icons = [
     'print'   => "<img src='" . $pathIcon16 . "/printer.png' alt='" . _CLONE . "' align='middle'>",
     'pdf'     => "<img src='" . $pathIcon16 . "/pdf.png' alt='" . _CLONE . "' align='middle'>",
     'add'     => "<img src='" . $pathIcon16 . "/add.png' alt='" . _ADD . "' align='middle'>",
-    '0'       => "<img src='" . $pathIcon16 . "/0.png' alt='" . _ADD . "' align='middle'>",
-    '1'       => "<img src='" . $pathIcon16 . "/1.png' alt='" . _ADD . "' align='middle'>",
+    '0'       => "<img src='" . $pathIcon16 . "/0.png' alt='" . 0 . "' align='middle'>",
+    '1'       => "<img src='" . $pathIcon16 . "/1.png' alt='" . 1 . "' align='middle'>",
 ];
+
+$debug = false;
 
 // MyTextSanitizer object
 $myts = \MyTextSanitizer::getInstance();
 
-$debug = false;
+if (!isset($GLOBALS['xoopsTpl']) || !($GLOBALS['xoopsTpl'] instanceof \XoopsTpl)) {
+    require_once $GLOBALS['xoops']->path('class/template.php');
+    $GLOBALS['xoopsTpl'] = new \XoopsTpl();
+}
 
-$debug = false;
+$GLOBALS['xoopsTpl']->assign('mod_url', XOOPS_URL . '/modules/' . $moduleDirName);
+// Local icons path
+if (is_object($helper->getModule())) {
+    $pathModIcon16 = $helper->getModule()->getInfo('modicons16');
+    $pathModIcon32 = $helper->getModule()->getInfo('modicons32');
 
+    $GLOBALS['xoopsTpl']->assign('pathModIcon16', XOOPS_URL . '/modules/' . $moduleDirName . '/' . $pathModIcon16);
+    $GLOBALS['xoopsTpl']->assign('pathModIcon32', $pathModIcon32);
+}

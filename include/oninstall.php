@@ -18,7 +18,7 @@
  */
 
 
-use Xoopsmodules\about;
+use XoopsModules\About;
 
 
 /**
@@ -33,7 +33,7 @@ function xoops_module_pre_install_about(XoopsModule $module)
 
     include __DIR__ . '/../preloads/autoloader.php';
     /** @var \Utility $utility */
-    $utility = new \Xoopsmodules\about\Utility();
+    $utility = new \XoopsModules\About\Utility();
     $xoopsSuccess = $utility::checkVerXoops($module);
     $phpSuccess   = $utility::checkVerPhp($module);
 
@@ -61,9 +61,9 @@ function xoops_module_install_about(XoopsModule $module)
 
     $moduleDirName = basename(dirname(__DIR__));
 
-    $helper       = about\Helper::getInstance();
-    $utility      = new about\Utility();
-    $configurator = new about\Configurator();
+    $helper       = About\Helper::getInstance();
+    $utility      = new About\Utility();
+    $configurator = new About\Configurator();
     // Load language files
     $helper->loadLanguage('admin');
     $helper->loadLanguage('modinfo');

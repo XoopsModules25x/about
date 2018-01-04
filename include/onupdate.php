@@ -17,7 +17,7 @@
  * @author       XOOPS Development Team
  */
 
-use Xoopsmodules\about;
+use XoopsModules\About;
 
 if ((!defined('XOOPS_ROOT_PATH')) || !($GLOBALS['xoopsUser'] instanceof XoopsUser)
     || !$GLOBALS['xoopsUser']->IsAdmin()
@@ -46,11 +46,11 @@ function tableExists($tablename)
  */
 function xoops_module_pre_update_about(XoopsModule $module)
 {
-    /** @var about\Helper $helper */
-    /** @var about\Utility $utility */
+    /** @var About\Helper $helper */
+    /** @var About\Utility $utility */
     $moduleDirName = basename(dirname(__DIR__));
-    $helper       = about\Helper::getInstance();
-    $utility      = new about\Utility();
+    $helper       = About\Helper::getInstance();
+    $utility      = new About\Utility();
 
     $xoopsSuccess = $utility::checkVerXoops($module);
     $phpSuccess   = $utility::checkVerPhp($module);
@@ -71,12 +71,12 @@ function xoops_module_update_about(XoopsModule $module, $previousVersion = null)
     $moduleDirName = basename(dirname(__DIR__));
     $capsDirName   = strtoupper($moduleDirName);
 
-    /** @var about\Helper $helper */
-    /** @var about\Utility $utility */
-    /** @var about\Configurator $configurator */
-    $helper  = about\Helper::getInstance();
-    $utility = new about\Utility();
-    $configurator = new about\Configurator();
+    /** @var About\Helper $helper */
+    /** @var About\Utility $utility */
+    /** @var About\Configurator $configurator */
+    $helper  = About\Helper::getInstance();
+    $utility = new About\Utility();
+    $configurator = new About\Configurator();
 
     if ($previousVersion < 240) {
 

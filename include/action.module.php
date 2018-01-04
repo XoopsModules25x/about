@@ -1,6 +1,6 @@
 <?php
 
-use Xoopsmodules\about;
+use XoopsModules\About;
 
 defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
@@ -15,8 +15,8 @@ defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 function xoops_module_pre_install_about(XoopsModule $module)
 {
     include __DIR__ . '/../preloads/autoloader.php';
-    /** @var about\Utility $utility */
-    $utility = new about\Utility();
+    /** @var About\Utility $utility */
+    $utility = new About\Utility();
     $xoopsSuccess = $utility::checkVerXoops($module);
     $phpSuccess   = $utility::checkVerPhp($module);
 
@@ -82,11 +82,11 @@ function xoops_module_install_about(XoopsModule $module)
  */
 function xoops_module_pre_update_about(XoopsModule $module)
 {
-    /** @var about\Helper $helper */
-    /** @var about\Utility $utility */
+    /** @var About\Helper $helper */
+    /** @var About\Utility $utility */
     $moduleDirName = basename(dirname(__DIR__));
-    $helper       = about\Helper::getInstance();
-    $utility      = new about\Utility();
+    $helper       = About\Helper::getInstance();
+    $utility      = new About\Utility();
 
     $xoopsSuccess = $utility::checkVerXoops($module);
     $phpSuccess   = $utility::checkVerPhp($module);

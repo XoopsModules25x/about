@@ -18,7 +18,7 @@
  * @author         Susheng Yang <ezskyyoung@gmail.com>
  */
 
-use Xoopsmodules\about;
+use XoopsModules\About;
 
 $moduleDirName = basename(__DIR__);
 require_once __DIR__ . '/../../mainfile.php';

@@ -12,13 +12,13 @@
 /**
  * Create and display the Administration Header for pages
  *
- * @package      module\about\admin
+ * @package      module\About\admin
  * @copyright    https://xoops.org 2001-2017 XOOPS Project
  * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
  * @author       XOOPS Module Development Team
  */
 
-use Xoopsmodules\about;
+use XoopsModules\About;
 
 $moduleDirName = basename(dirname(__DIR__));
 require_once __DIR__ . '/../../../include/cp_header.php';
@@ -27,8 +27,8 @@ require_once __DIR__ . '/../include/common.php';
 xoops_load('xoopsformloader');
 xoops_load('constants', $moduleDirName);
 
-/** @var \Xoopsmodules\about\Helper $helper */
-$helper = about\Helper::getInstance();
+/** @var \XoopsModules\About\Helper $helper */
+$helper = About\Helper::getInstance();
 $myts = \MyTextSanitizer::getInstance();
 
 if (!isset($GLOBALS['xoopsTpl']) || !($GLOBALS['xoopsTpl'] instanceof XoopsTpl)) {

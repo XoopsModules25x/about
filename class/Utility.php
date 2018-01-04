@@ -1,4 +1,4 @@
-<?php namespace Xoopsmodules\about;
+<?php namespace XoopsModules\About;
 /*
  About Utility Class Definition
 
@@ -14,7 +14,7 @@
 /**
  * Module:  About
  *
- * @package      ::    \module\about\class
+ * @package      ::    \module\About\class
  * @license      http://www.fsf.org/copyleft/gpl.html GNU public license
  * @copyright    https://xoops.org 2001-2017 &copy; XOOPS Project
  * @author       ZySpec <owners@zyspec.com>
@@ -23,12 +23,9 @@
  */
 
 use Xmf\Request;
-use Xoopsmodules\about;
-use Xoopsmodules\about\common;
+use XoopsModules\About;
+use XoopsModules\About\Common;
 
-require_once __DIR__ . '/common/VersionChecks.php';
-require_once __DIR__ . '/common/ServerStats.php';
-require_once __DIR__ . '/common/FilesManagement.php';
 
 require_once __DIR__ . '/../include/common.php';
 

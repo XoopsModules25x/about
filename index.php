@@ -18,14 +18,14 @@
  * @author         Susheng Yang <ezskyyoung@gmail.com>
  */
 
-use Xoopsmodules\about;
+use XoopsModules\About;
 
 require_once __DIR__ . '/header.php';
 require_once __DIR__ . '/include/functions.render.php';
 
 $page_id      = Xmf\Request::getInt('page_id', 0);
 //$page_id      = isset($_REQUEST['page_id']) ? $_REQUEST['page_id'] : '';
-//$pageHandler     = new about\AboutPageHandler($db);
+//$pageHandler     = new About\AboutPageHandler($db);
 
 $myts = \MyTextSanitizer::getInstance();
 
@@ -68,7 +68,7 @@ if (AboutConstants::PAGE == $helper->getConfig('display', AboutConstants::PAGE) 
 
     $criteria->setSort('page_order');
     $criteria->order = 'ASC';
-    $page = current($pageHandler->getObjects($criteria, null, false, false));
+    $page = current($pageHandler->getObjects($criteria, null, false));
     if (!empty($page)) {
         $xoopsOption['xoops_pagetitle'] = $myts->htmlSpecialChars($page['page_title'] . ' - ' . $helper->getModule()->name());
         $xoopsOption['template_main']   = about_getTemplate('page', $page['page_tpl']);

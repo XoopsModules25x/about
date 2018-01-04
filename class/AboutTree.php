@@ -1,4 +1,4 @@
-<?php namespace Xoopsmodules\about;
+<?php namespace XoopsModules\About;
 
 defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 

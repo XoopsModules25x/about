@@ -17,11 +17,11 @@
  * @author     XOOPS Development Team
  */
 
-//require_once  __DIR__ . '/../../../mainfile.php';
+require_once __DIR__ . '/common.php';
 
 $moduleDirName = basename(dirname(__DIR__));
 $capsDirName   = strtoupper($moduleDirName);
-
+/*
 if (!defined($capsDirName . '_DIRNAME')) {
     //if (!defined(constant($capsDirName . '_DIRNAME'))) {
     define($capsDirName . '_DIRNAME', $GLOBALS['xoopsModule']->dirname());
@@ -33,6 +33,8 @@ if (!defined($capsDirName . '_DIRNAME')) {
     define($capsDirName . '_UPLOAD_URL', XOOPS_UPLOAD_URL . '/' . $moduleDirName); // WITHOUT Trailing slash
     define($capsDirName . '_UPLOAD_PATH', XOOPS_UPLOAD_PATH . '/' . $moduleDirName); // WITHOUT Trailing slash
 }
+
+*/
 
 //Configurator
 return (object)[

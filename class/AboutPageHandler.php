@@ -1,4 +1,4 @@
-<?php namespace Xoopsmodules\about;
+<?php namespace XoopsModules\About;
 /**
  * About
  *
@@ -43,7 +43,7 @@ class AboutPageHandler extends \XoopsPersistableObjectHandler
      * @param  array  $tags
      * @return array
      */
-    public function &getTrees($pid = 0, $prefix = '--', $tags = [])
+    public function getTrees($pid = 0, $prefix = '--', $tags = [])
     {
         $pid = (int)$pid;
         if (!is_array($tags) || 0 == count($tags)) {

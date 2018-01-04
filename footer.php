@@ -18,7 +18,7 @@
  * @author         Susheng Yang <ezskyyoung@gmail.com>
  */
 
-use Xoopsmodules\about;
+use XoopsModules\About;
 
 if (is_array($xoBreadcrumbs) && count($xoBreadcrumbs) > 0) {
     $xoopsTpl->assign('xoBreadcrumbs', $xoBreadcrumbs);

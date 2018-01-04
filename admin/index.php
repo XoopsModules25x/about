@@ -17,7 +17,7 @@
  * @author       XOOPS Development Team
  */
 
-use Xoopsmodules\about;
+use XoopsModules\About;
 
 // Display Admin header
 require_once __DIR__ . '/admin_header.php';

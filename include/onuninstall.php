@@ -9,7 +9,7 @@
  */
 
 
-use Xoopsmodules\about;
+use XoopsModules\About;
 
 /**
  * Prepares system prior to attempting to uninstall module
@@ -37,9 +37,9 @@ function xoops_module_uninstall_about(XoopsModule $module)
 
     include __DIR__ . '/../preloads/autoloader.php';
 
-    $helper       = about\Helper::getInstance();
-    /** @var about\Utility $utility */
-    $utility = new about\Utility();
+    $helper       = About\Helper::getInstance();
+    /** @var About\Utility $utility */
+    $utility = new About\Utility();
 
 
     $success = true;
