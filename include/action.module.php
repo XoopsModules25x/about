@@ -171,7 +171,7 @@ function xoops_module_uninstall_about(XoopsModule $module)
 
     $old_directories = [XOOPS_UPLOAD_PATH . "/{$moduleDirName}"];
     foreach ($old_directories as $old_dir) {
-        $dirInfo = new SplFileInfo($old_dir);
+        $dirInfo = new \SplFileInfo($old_dir);
         if ($dirInfo->isDir()) {
             // The directory exists so delete it
             if (false === $utilityClass::rrmdir($old_dir)) {

@@ -1,4 +1,4 @@
-<?php namespace XoopsModules\About\Common\Common;
+<?php namespace XoopsModules\About\Common;
 
 /*
  You may not change or alter any portion of this comment or credits
@@ -45,7 +45,8 @@ class Configurator
         $moduleDirName = basename(dirname(__DIR__));
         $capsDirName   = strtoupper($moduleDirName);
 
-        $config = include __DIR__ . '/../../include/config.php';
+        include_once __DIR__ . '/../../include/config.php';
+        $config = getConfig();
 
         $this->name            = $config->name;
         $this->paths           = $config->paths;
