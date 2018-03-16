@@ -18,7 +18,7 @@ use XoopsModules\About;
  * @return bool true if ready to uninstall, false if not
  */
 
-function xoops_module_pre_uninstall_about(XoopsModule $module)
+function xoops_module_pre_uninstall_about(\XoopsModule $module)
 {
     // Do some synchronization
     return true;
@@ -31,7 +31,7 @@ function xoops_module_pre_uninstall_about(XoopsModule $module)
  *
  * @return bool true if uninstallation successful, false if not
  */
-function xoops_module_uninstall_about(XoopsModule $module)
+function xoops_module_uninstall_about(\XoopsModule $module)
 {
 //    return true;
 

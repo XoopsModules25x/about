@@ -1,4 +1,5 @@
-<?php
+<?php namespace XoopsModules\About;
+
 /*
                XOOPS - PHP Content Management System
                    Copyright (c) 2000 XOOPS.org
@@ -22,6 +23,7 @@
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
 */
+
 /**
  * About module
  *
@@ -39,12 +41,12 @@
  * @since::      1.05
  **/
 
-defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
+defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 /**
- * Interface AboutConstants
+ * Class Constants
  */
-interface AboutConstants
+class Constants
 {
     /**#@+
      * Constant definition

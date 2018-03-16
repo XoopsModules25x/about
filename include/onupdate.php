@@ -44,7 +44,7 @@ function tableExists($tablename)
  *
  * @return bool true if ready to install, false if not
  */
-function xoops_module_pre_update_about(XoopsModule $module)
+function xoops_module_pre_update_about(\XoopsModule $module)
 {
     /** @var About\Helper $helper */
     /** @var About\Utility $utility */
@@ -66,7 +66,7 @@ function xoops_module_pre_update_about(XoopsModule $module)
  * @return bool true if update successful, false if not
  */
 
-function xoops_module_update_about(XoopsModule $module, $previousVersion = null)
+function xoops_module_update_about(\XoopsModule $module, $previousVersion = null)
 {
     $moduleDirName = basename(dirname(__DIR__));
     $capsDirName   = strtoupper($moduleDirName);
@@ -144,10 +144,10 @@ function xoops_module_update_about(XoopsModule $module, $previousVersion = null)
         }
 
         //  ---  COPY blank.png FILES ---------------
-        if (count($configurator->blankFiles) > 0) {
+        if (count($configurator->copyBlankFiles) > 0) {
             $file = __DIR__ . '/../assets/images/blank.png';
-            foreach (array_keys($configurator->blankFiles) as $i) {
-                $dest = $configurator->blankFiles[$i] . '/blank.png';
+            foreach (array_keys($configurator->copyBlankFiles) as $i) {
+                $dest = $configurator->copyBlankFiles[$i] . '/blank.png';
                 $utilityClass::copyFile($file, $dest);
             }
         }

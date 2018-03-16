@@ -18,7 +18,7 @@
  * @author         Susheng Yang <ezskyyoung@gmail.com>
  */
 
-use XoopsModules\About;
+use XoopsModules\About\Constants;
 
 require_once __DIR__ . '/header.php';
 require_once __DIR__ . '/include/functions.render.php';
@@ -31,8 +31,8 @@ $myts = \MyTextSanitizer::getInstance();
 
 // Menu
 $menu_criteria = new \CriteriaCompo();
-$menu_criteria->add(new \Criteria('page_status', AboutConstants::PUBLISHED), 'AND');
-$menu_criteria->add(new \Criteria('page_menu_status', AboutConstants::IN_MENU), 'AND');
+$menu_criteria->add(new \Criteria('page_status', Constants::PUBLISHED), 'AND');
+$menu_criteria->add(new \Criteria('page_menu_status', Constants::IN_MENU), 'AND');
 $menu_criteria->setSort('page_order');
 $menu_criteria->order = 'ASC';
 $fields = [
@@ -56,15 +56,15 @@ foreach ($menu as $k => $v) {
 $page_menu = $pageHandler->menuTree($menu);
 
 // Display
-if (AboutConstants::PAGE == $helper->getConfig('display', AboutConstants::PAGE) || !empty($page_id)) {
+if (Constants::PAGE == $helper->getConfig('display', Constants::PAGE) || !empty($page_id)) {
     // Fun menu display
     $criteria = new \CriteriaCompo();
     if (!empty($page_id)) {
-        $criteria->add(new Criteria('page_id', $page_id));
+        $criteria->add(new \Criteria('page_id', $page_id));
     } else {
-        $criteria->add(new Criteria('page_index', AboutConstants::DEFAULT_INDEX));
+        $criteria->add(new \Criteria('page_index', Constants::DEFAULT_INDEX));
     }
-    $criteria->add(new Criteria('page_status', AboutConstants::PUBLISHED));
+    $criteria->add(new \Criteria('page_status', Constants::PUBLISHED));
 
     $criteria->setSort('page_order');
     $criteria->order = 'ASC';
@@ -85,7 +85,7 @@ if (AboutConstants::PAGE == $helper->getConfig('display', AboutConstants::PAGE) 
 
     if (!empty($page)) {
         $page['page_text'] = $myts->undoHtmlSpecialChars($page['page_text']);
-        if (AboutConstants::PAGE_TYPE_LINK == $page['page_type']) {
+        if (Constants::PAGE_TYPE_LINK == $page['page_type']) {
             header('location: ' . $page['page_text']);
         }
         /** @var xos_opal_Theme $xoTheme */
@@ -101,13 +101,13 @@ if (AboutConstants::PAGE == $helper->getConfig('display', AboutConstants::PAGE) 
     $GLOBALS['xoTheme']->addStylesheet("modules/{$moduleDirName}/assets/css/style.css");
 
     $criteria = new \CriteriaCompo();
-    $criteria->add(new \Criteria('page_status', AboutConstants::PUBLISHED));
+    $criteria->add(new \Criteria('page_status', Constants::PUBLISHED));
     $criteria->setSort('page_order');
     $criteria->order = 'ASC';
     $list = $pageHandler->getAll($criteria, null, false);
     foreach ($list as $k => $v) {
         $text                      = strip_tags($myts->undoHtmlSpecialChars($v['page_text']));
-        $list[$k]['page_text']     = xoops_substr($text, 0, $helper->getConfig('str_ereg', AboutConstants::DEFAULT_EREG));
+        $list[$k]['page_text']     = xoops_substr($text, 0, $helper->getConfig('str_ereg', Constants::DEFAULT_EREG));
         $list[$k]['page_pushtime'] = formatTimestamp($v['page_pushtime'], _SHORTDATESTRING);
     }
     $xoopsTpl->assign('list', $list);

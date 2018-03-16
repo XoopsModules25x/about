@@ -17,7 +17,7 @@
  * @author         Susheng Yang <ezskyyoung@gmail.com>
  */
 
-use XoopsModules\About;
+use XoopsModules\About\Constants;
 
 require_once __DIR__ . '/admin_header.php';
 
@@ -49,16 +49,16 @@ switch ($op) {
         }
         // Set index
         if (isset($_POST['page_index'])) {
-            $page_index = Xmf\Request::getInt('page_index', AboutConstants::NOT_INDEX, 'POST');
+            $page_index = Xmf\Request::getInt('page_index', Constants::NOT_INDEX, 'POST');
             $page_obj = $pageHandler->get($page_index);
             if ($page_index != $page_obj->getVar('page_index')) {
                 $page_obj = $pageHandler->get($page_index);
                 if (!$page_obj->getVar('page_title')) {
-                    $helper->redirect('admin/admin.page.php', AboutConstants::REDIRECT_DELAY_MEDIUM, _AM_ABOUT_PAGE_ORDER_ERROR);
+                    $helper->redirect('admin/admin.page.php', Constants::REDIRECT_DELAY_MEDIUM, _AM_ABOUT_PAGE_ORDER_ERROR);
                 }
-                $pageHandler->updateAll('page_index', AboutConstants::NOT_INDEX, null);
+                $pageHandler->updateAll('page_index', Constants::NOT_INDEX, null);
                 unset($criteria);
-                $page_obj->setVar('page_index', AboutConstants::DEFAULT_INDEX);
+                $page_obj->setVar('page_index', Constants::DEFAULT_INDEX);
                 $pageHandler->insert($page_obj);
             }
             unset($page_obj);
@@ -112,7 +112,7 @@ switch ($op) {
 
     case 'save':
         if (!$GLOBALS['xoopsSecurity']->check()) {
-            $helper->redirect('admin/admin.page.php', AboutConstants::REDIRECT_DELAY_MEDIUM, implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
+            $helper->redirect('admin/admin.page.php', Constants::REDIRECT_DELAY_MEDIUM, implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
         }
         $page_obj = $pageHandler->get($page_id); // will get page_obj if $page_id is valid, create one if not
 
@@ -128,7 +128,7 @@ switch ($op) {
         }
         // Set index
         if (!$pageHandler->getCount()) {
-            $page_obj->setVar('page_index', AboutConstants::DEFAULT_INDEX);
+            $page_obj->setVar('page_index', Constants::DEFAULT_INDEX);
         }
 
         // Set submitter
@@ -172,7 +172,7 @@ switch ($op) {
 
         // Insert object
         if ($pageHandler->insert($page_obj)) {
-            $helper->redirect('admin/admin.page.php', AboutConstants::REDIRECT_DELAY_MEDIUM, sprintf(_AM_ABOUT_SAVEDSUCCESS, _AM_ABOUT_PAGE_INSERT));
+            $helper->redirect('admin/admin.page.php', Constants::REDIRECT_DELAY_MEDIUM, sprintf(_AM_ABOUT_SAVEDSUCCESS, _AM_ABOUT_PAGE_INSERT));
         }
 
         echo $page_obj->getHtmlErrors();
@@ -185,17 +185,17 @@ switch ($op) {
     case 'delete':
         $page_obj = $pageHandler->get($page_id);
         $image    = XOOPS_UPLOAD_PATH . "/{$moduleDirName}/" . $page_obj->getVar('page_image');
-        if (isset($_REQUEST['ok']) && AboutConstants::CONFIRM_OK == $_REQUEST['ok']) {
+        if (isset($_REQUEST['ok']) && Constants::CONFIRM_OK == $_REQUEST['ok']) {
             if ($pageHandler->delete($page_obj)) {
                 if (file_exists($image)) {
                     @unlink($image);
                 }
-                $helper->redirect('admin/admin.page.php', AboutConstants::REDIRECT_DELAY_MEDIUM, _AM_ABOUT_DELETESUCCESS);
+                $helper->redirect('admin/admin.page.php', Constants::REDIRECT_DELAY_MEDIUM, _AM_ABOUT_DELETESUCCESS);
             } else {
                 echo $page_obj->getHtmlErrors();
             }
         } else {
-            xoops_confirm(['ok' => AboutConstants::CONFIRM_OK, 'id' => $page_obj->getVar('page_id'), 'op' => 'delete'], $_SERVER['REQUEST_URI'], sprintf(_AM_ABOUT_RUSUREDEL, $page_obj->getVar('page_menu_title')));
+            xoops_confirm(['ok' => Constants::CONFIRM_OK, 'id' => $page_obj->getVar('page_id'), 'op' => 'delete'], $_SERVER['REQUEST_URI'], sprintf(_AM_ABOUT_RUSUREDEL, $page_obj->getVar('page_menu_title')));
         }
         break;
 }

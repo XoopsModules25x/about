@@ -18,7 +18,9 @@
  * @author         Susheng Yang <ezskyyoung@gmail.com>
  */
 
-defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
+use XoopsModules\About\Constants;
+
+defined('XOOPS_ROOT_PATH') || die('Restricted access');
 /**
  * @return mixed
  */
@@ -30,8 +32,8 @@ function about_block_menu_show()
     $helper     = Xmf\Module\Helper::getHelper($moduleDirName);
     $pageHandler  = $helper->getHandler('page');
     $menu_criteria = new \CriteriaCompo();
-    $menu_criteria->add(new \Criteria('page_status', AboutConstants::PUBLISHED), 'AND');
-    $menu_criteria->add(new \Criteria('page_menu_status', AboutConstants::IN_MENU));
+    $menu_criteria->add(new \Criteria('page_status', Constants::PUBLISHED), 'AND');
+    $menu_criteria->add(new \Criteria('page_menu_status', Constants::IN_MENU));
     $menu_criteria->setSort('page_order');
     $menu_criteria->order = 'ASC';
     $fields    = [
@@ -96,8 +98,8 @@ function about_block_page_edit($options)
     $helper->loadLanguage('blocks');
     $pageHandler = $helper->getHandler('page');
     $criteria    = new \CriteriaCompo();
-    $criteria->add(new \Criteria('page_status', AboutConstants::PUBLISHED), 'AND');
-    $criteria->add(new \Criteria('page_type', AboutConstants::PAGE_TYPE_PAGE));
+    $criteria->add(new \Criteria('page_status', Constants::PUBLISHED), 'AND');
+    $criteria->add(new \Criteria('page_type', Constants::PAGE_TYPE_PAGE));
     $criteria->setSort('page_order');
     $criteria->order = 'ASC';
     $fields     = ['page_id', 'page_title', 'page_image'];
@@ -110,12 +112,12 @@ function about_block_page_edit($options)
 //    include_once dirname(__DIR__) . '/include/xoopsformloader.php';
     xoops_load('blockform', $moduleDirName);
     $form        = new AboutBlockForm();
-    $page_select = new XoopsFormRadio(_MB_ABOUT_BLOCKPAGE, 'options[0]', $options[0], '<br>');
+    $page_select = new \XoopsFormRadio(_MB_ABOUT_BLOCKPAGE, 'options[0]', $options[0], '<br>');
     $page_select->addOptionArray($options_page);
     $form->addElement($page_select);
-    $form->addElement(new XoopsFormText(_MB_ABOUT_TEXT_LENGTH, 'options[1]', 5, 5, $options[1]));
-    $form->addElement(new XoopsFormText(_MB_ABOUT_VIEW_MORELINKTEXT, 'options[2]', 30, 50, $options[2]));
-    $form->addElement(new XoopsFormRadioYN(_MB_ABOUT_DOTITLEIMAGE, 'options[3]', $options[3]));
+    $form->addElement(new \XoopsFormText(_MB_ABOUT_TEXT_LENGTH, 'options[1]', 5, 5, $options[1]));
+    $form->addElement(new \XoopsFormText(_MB_ABOUT_VIEW_MORELINKTEXT, 'options[2]', 30, 50, $options[2]));
+    $form->addElement(new \XoopsFormRadioYN(_MB_ABOUT_DOTITLEIMAGE, 'options[3]', $options[3]));
 
     return $form->render();
 }

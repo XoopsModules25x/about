@@ -16,6 +16,9 @@
  * @author         Mengjue Shao <magic.shao@gmail.com>
  * @author         Susheng Yang <ezskyyoung@gmail.com>
  */
+
+use XoopsModules\About\Constants;
+
 include __DIR__ . '/preloads/autoloader.php';
 
 $modversion['version']       = 1.05;
@@ -121,10 +124,10 @@ $modversion['config'][] = [
     'formtype'    => 'select',
     'valuetype'   => 'int',
     'options'     => [
-        '_MI_ABOUT_CONFIG_LIST_PAGE'     => AboutConstants::PAGE,
-        '_MI_ABOUT_CONFIG_LIST_CATEGORY' => AboutConstants::CATEGORY
+        '_MI_ABOUT_CONFIG_LIST_PAGE'     => Constants::PAGE,
+        '_MI_ABOUT_CONFIG_LIST_CATEGORY' => Constants::CATEGORY
     ],
-    'default'     => AboutConstants::PAGE
+    'default'     => Constants::PAGE
 ];
 
 $modversion['config'][] = [
@@ -133,7 +136,7 @@ $modversion['config'][] = [
     'description' => '',
     'formtype'    => 'textbox',
     'valuetype'   => 'int',
-    'default'     => AboutConstants::DEFAULT_EREG
+    'default'     => Constants::DEFAULT_EREG
 ];
 
 xoops_load('xoopseditorhandler');

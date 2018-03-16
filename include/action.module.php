@@ -2,7 +2,7 @@
 
 use XoopsModules\About;
 
-defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
+defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 /**
  *
@@ -12,7 +12,7 @@ defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
  *
  * @return bool       true if ready to install, false if not
  */
-function xoops_module_pre_install_about(XoopsModule $module)
+function xoops_module_pre_install_about(\XoopsModule $module)
 {
     include __DIR__ . '/../preloads/autoloader.php';
     /** @var About\Utility $utility */
@@ -34,7 +34,7 @@ function xoops_module_pre_install_about(XoopsModule $module)
  * @param  XoopsModule $module
  * @return bool        true if install successful, false if not
  */
-function xoops_module_install_about(XoopsModule $module)
+function xoops_module_install_about(\XoopsModule $module)
 {
     $success = true;
     $data_file = XOOPS_ROOT_PATH . '/modules/about/sql/mysql.about.sql';
@@ -80,7 +80,7 @@ function xoops_module_install_about(XoopsModule $module)
  *
  * @return bool       true if ready to install, false if not
  */
-function xoops_module_pre_update_about(XoopsModule $module)
+function xoops_module_pre_update_about(\XoopsModule $module)
 {
     /** @var About\Helper $helper */
     /** @var About\Utility $utility */
@@ -99,7 +99,7 @@ function xoops_module_pre_update_about(XoopsModule $module)
  * @param  null        $prev_version
  * @return bool        true if update successful, false if not
  */
-function xoops_module_update_about(XoopsModule $module, $prev_version = null)
+function xoops_module_update_about(\XoopsModule $module, $prev_version = null)
 {
     $success = true;
     // Delete files from previous version (if they exist)
@@ -153,7 +153,7 @@ function xoops_module_update_about(XoopsModule $module, $prev_version = null)
  *
  * @return bool       true if successfully executed uninstall of module, false if not
  */
-function xoops_module_uninstall_about(XoopsModule $module)
+function xoops_module_uninstall_about(\XoopsModule $module)
 {
     $moduleDirName = $module->dirname();
 //    $aboutHelper = Xmf\Module\Helper::getHelper($moduleDirName);

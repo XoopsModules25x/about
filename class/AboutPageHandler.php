@@ -20,7 +20,7 @@
 
 
 
-defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
+defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 
 /**
@@ -43,10 +43,10 @@ class AboutPageHandler extends \XoopsPersistableObjectHandler
      * @param  array  $tags
      * @return array
      */
-    public function getTrees($pid = 0, $prefix = '--', $tags = [])
+    public function getTrees($pid = 0, $prefix = '--', array $tags = [])
     {
         $pid = (int)$pid;
-        if (!is_array($tags) || 0 == count($tags)) {
+        if (!is_array($tags) || 0 === count($tags)) {
             $tags = [
                 'page_id',
                 'page_pid',
@@ -60,12 +60,12 @@ class AboutPageHandler extends \XoopsPersistableObjectHandler
         $criteria = new \CriteriaCompo();
         $criteria->setSort('page_order');
         $criteria->order = 'ASC';
-        $page_tree = $this->getAll($criteria, $tags);
+        $pageTree =& $this->getAll($criteria, $tags);
         require_once __DIR__ . '/AboutTree.php';
-        $tree       = new AboutTree($page_tree);
-        $page_array = $tree->makeTree($prefix, $pid, $tags);
-
-        return $page_array;
+        $tree       = new AboutTree($pageTree);
+//        $page_array = $tree->makeTree($prefix, $pid, $tags);
+//        return $page_array;
+        return $tree->makeTree($prefix, $pid, $tags);
     }
 
     /**
@@ -74,15 +74,16 @@ class AboutPageHandler extends \XoopsPersistableObjectHandler
      * @param  int   $level
      * @return array|bool
      */
-    public function &menuTree($pages = [], $key = 0, $level = 1)
+    public function menuTree(array $pages = [], $key = 0, $level = 1)
     {
+        $ret = false;
         if (!is_array($pages) || 0 === count($pages)) {
-            return false;
+            return $ret;
         }
         $menu = [];
 
         foreach ($pages as $k => $v) {
-            if ($v['page_pid'] == $key) {
+            if ($v['page_pid'] === $key) {
                 $menu[$k]          = $v;
                 $menu[$k]['level'] = $level;
                 $child             = $this->menuTree($pages, $k, $level + 1);
@@ -100,7 +101,7 @@ class AboutPageHandler extends \XoopsPersistableObjectHandler
      * @param  int   $key
      * @return array|bool
      */
-    public function getBread($pages = [], $key = 0)
+    public function getBread(array $pages = [], $key = 0)
     {
         if (!is_array($pages) || 0 === count($pages)) {
             return false;
@@ -111,9 +112,9 @@ class AboutPageHandler extends \XoopsPersistableObjectHandler
             $current = $pages[$key];
             $bread   = [$current['page_id'] => $current['page_menu_title']];
             if ($current['page_pid'] > 0) {
-                $p_brend = $this->getBread($pages, $current['page_pid']);
-                if (!empty($p_brend)) {
-                    foreach ($p_brend as $k => $v) {
+                $pageBread = $this->getBread($pages, $current['page_pid']);
+                if (!empty($pageBread)) {
+                    foreach ($pageBread as $k => $v) {
                         $bread[$k] = $v;
                     }
                 }

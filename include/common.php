@@ -56,7 +56,6 @@ if (!defined($moduleDirNameUpper . '_CONSTANTS_DEFINED')) {
 xoops_loadLanguage('common', ABOUT_DIRNAME);
 
 require_once ABOUT_ROOT_PATH . '/include/functions.php';
-//require_once ABOUT_ROOT_PATH . '/include/constants.php';
 //require_once ABOUT_ROOT_PATH . '/include/seo_functions.php';
 //require_once ABOUT_ROOT_PATH . '/class/metagen.php';
 //require_once ABOUT_ROOT_PATH . '/class/session.php';

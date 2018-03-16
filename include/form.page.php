@@ -18,9 +18,9 @@
  * @author         Susheng Yang <ezskyyoung@gmail.com>
  */
 
-use XoopsModules\About;
+use XoopsModules\About\Constants;
 
-defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
+defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 $moduleDirName = basename(dirname(__DIR__));
 $helper = Xmf\Module\Helper::getHelper($moduleDirName);
@@ -40,8 +40,8 @@ $title = $page_obj->isNew() ? _AM_ABOUT_PAGE_INSERT : _AM_ABOUT_EDIT;
 $form = new \XoopsThemeForm($title, 'form', 'admin.page.php', 'post', true);
 $form->setExtra('enctype="multipart/form-data"');
 
-if (AboutConstants::PAGE_TYPE_PAGE == $pageType) {
-    $form->addElement(new XoopsFormText(_AM_ABOUT_PAGE_TITLE, 'page_title', 60, 255, $page_obj->getVar('page_title', $format)), true);
+if (Constants::PAGE_TYPE_PAGE == $pageType) {
+    $form->addElement(new \XoopsFormText(_AM_ABOUT_PAGE_TITLE, 'page_title', 60, 255, $page_obj->getVar('page_title', $format)), true);
     $menu = new \XoopsFormElementTray(_AM_ABOUT_PAGE_MENU_LIST);
 
     $menu->addElement(new \XoopsFormRadioYN('', 'page_menu_status', $menu_status));
@@ -57,7 +57,7 @@ if (AboutConstants::PAGE_TYPE_PAGE == $pageType) {
         $options['cols']   = '100%';
         $options['width']  = '100%';
         $options['height'] = '400px';
-        $pageEditor        = new XoopsFormEditor('', $xoopsModuleConfig['editorAdmin'], $options, $nohtml = false, $onfailure = 'textarea');
+        $pageEditor        = new \XoopsFormEditor('', $xoopsModuleConfig['editorAdmin'], $options, $nohtml = false, $onfailure = 'textarea');
         $editorTray->addElement($pageEditor);
     } else {
         $pageEditor = new \XoopsFormDhtmlTextArea('', 'page_text', $page_obj->getVar('page_text'), '100%', '100%');
@@ -113,7 +113,7 @@ $form->addElement(new \XoopsFormRadioYN(_AM_ABOUT_PAGE_STATUS, 'page_status', $l
 $form->addElement(new \XoopsFormHidden('id', $page_obj->getVar('page_id')));
 $form->addElement(new \XoopsFormHidden('page_type', $pageType));
 $form->addElement(new \XoopsFormHidden('op', 'save'));
-//$form->addElement(new XoopsFormButton('', 'submit', _SUBMIT, 'submit'));
+//$form->addElement(new \XoopsFormButton('', 'submit', _SUBMIT, 'submit'));
 $form->addElement(new \XoopsFormButtonTray('submit', _SUBMIT, 'submit'));
 
 
