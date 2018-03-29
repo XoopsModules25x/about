@@ -109,7 +109,7 @@ function about_block_page_edit($options)
         $page_title       = '<a href="' . $helper->url("index.php?page_id={$k}") . '" target="_blank">' . $v['page_title'] . '</a>';
         $options_page[$k] = empty($v['page_image']) ? $page_title : $page_title . '<img src="' . $helper->url('assets/images/picture.png') . '">';
     }
-//    include_once dirname(__DIR__) . '/include/xoopsformloader.php';
+//    require_once dirname(__DIR__) . '/include/xoopsformloader.php';
     xoops_load('blockform', $moduleDirName);
     $form        = new AboutBlockForm();
     $page_select = new \XoopsFormRadio(_MB_ABOUT_BLOCKPAGE, 'options[0]', $options[0], '<br>');

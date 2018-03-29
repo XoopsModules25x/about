@@ -159,8 +159,6 @@ function xoops_module_update_about(\XoopsModule $module, $previousVersion = null
         /** @var XoopsGroupPermHandler $gpermHandler */
         $gpermHandler = xoops_getHandler('groupperm');
         return $gpermHandler->deleteByModule($module->getVar('mid'), 'item_read');
-
     }
     return true;
 }
-

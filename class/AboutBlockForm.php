@@ -1,4 +1,5 @@
 <?php namespace XoopsModules\About;
+
 /**
  * About
  *
@@ -19,7 +20,7 @@
 
 defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
-include_once XOOPS_ROOT_PATH . '/class/xoopsform/form.php';
+require_once XOOPS_ROOT_PATH . '/class/xoopsform/form.php';
 
 /**
  * Class AboutBlockForm

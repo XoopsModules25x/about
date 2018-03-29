@@ -25,8 +25,8 @@ defined('XOOPS_ROOT_PATH') || die('Restricted access');
 $moduleDirName = basename(dirname(__DIR__));
 $helper = Xmf\Module\Helper::getHelper($moduleDirName);
 
-include_once __DIR__ . '/functions.render.php';
-//include_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
+require_once __DIR__ . '/functions.render.php';
+//require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 
 $pageType = isset($_REQUEST['type']) ? Xmf\Request::getInt('type', 0) : $page_obj->getVar('page_type');
 $format   = empty($format) ? 'e' : $format;
@@ -57,7 +57,7 @@ if (Constants::PAGE_TYPE_PAGE == $pageType) {
         $options['cols']   = '100%';
         $options['width']  = '100%';
         $options['height'] = '400px';
-        $pageEditor        = new \XoopsFormEditor('', $xoopsModuleConfig['editorAdmin'], $options, $nohtml = false, $onfailure = 'textarea');
+        $pageEditor        = new \XoopsFormEditor('', $helper->getConfig('editorAdmin'), $options, $nohtml = false, $onfailure = 'textarea');
         $editorTray->addElement($pageEditor);
     } else {
         $pageEditor = new \XoopsFormDhtmlTextArea('', 'page_text', $page_obj->getVar('page_text'), '100%', '100%');

@@ -20,7 +20,6 @@
 
 use XoopsModules\About;
 
-
 /**
  *
  * Prepares system prior to attempting to install module
@@ -30,7 +29,6 @@ use XoopsModules\About;
  */
 function xoops_module_pre_install_about(\XoopsModule $module)
 {
-
     include __DIR__ . '/../preloads/autoloader.php';
     /** @var \Utility $utility */
     $utility = new \XoopsModules\About\Utility();
@@ -104,4 +102,3 @@ function xoops_module_install_about(\XoopsModule $module)
 
     return true;
 }
-

@@ -1,4 +1,5 @@
 <?php namespace XoopsModules\About;
+
 /*
  About Utility Class Definition
 
@@ -26,7 +27,6 @@ use Xmf\Request;
 use XoopsModules\About;
 use XoopsModules\About\Common;
 
-
 require_once __DIR__ . '/../include/common.php';
 
 /**
@@ -44,5 +44,4 @@ class Utility
     use Common\FilesManagement; // Files Management Trait
 
     //--------------- Custom module methods -----------------------------
-
 }

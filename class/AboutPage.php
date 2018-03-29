@@ -1,4 +1,5 @@
 <?php namespace XoopsModules\About;
+
 /**
  * About
  *

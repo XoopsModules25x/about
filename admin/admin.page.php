@@ -145,7 +145,7 @@ switch ($op) {
 
         // Upload image
         if (!empty($_FILES['userfile']['name'])) {
-            include_once XOOPS_ROOT_PATH . '/class/uploader.php';
+            require_once XOOPS_ROOT_PATH . '/class/uploader.php';
             $allowed_mimetypes = ['image/gif', 'image/jpeg', 'image/jpg', 'image/png', 'image/x-png'];
             $maxfilesize       = 500000;
             $maxfilewidth      = 1200;
