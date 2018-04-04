@@ -36,7 +36,7 @@ function about_getTemplate($page = 'index', $style = null)
     global $xoops;
 
     $template_dir = $xoops->path("modules/{$GLOBALS['artdirname']}/templates/");
-    $style        = empty($style) ? '' : '_' . $style;
+    $style        = null === $style ? '' : '_' . $style;
     $file_name    = "{$GLOBALS['artdirname']}_{$page}{$style}.tpl";
     if (file_exists($template_dir . $file_name)) {
         return $file_name;

@@ -157,8 +157,8 @@ function xoops_module_uninstall_about(\XoopsModule $module)
 {
     $moduleDirName = $module->dirname();
 //    $aboutHelper = Xmf\Module\Helper::getHelper($moduleDirName);
-    $utilityClass = ucfirst($moduleDirName) . 'Utility';
-    if (!class_exists($utilityClass)) {
+    $utility = ucfirst($moduleDirName) . 'Utility';
+    if (!class_exists($utility)) {
         xoops_load('utility', $moduleDirName);
     }
 
@@ -174,7 +174,7 @@ function xoops_module_uninstall_about(\XoopsModule $module)
         $dirInfo = new \SplFileInfo($old_dir);
         if ($dirInfo->isDir()) {
             // The directory exists so delete it
-            if (false === $utilityClass::rrmdir($old_dir)) {
+            if (false === $utility::rrmdir($old_dir)) {
                 $module->setErrors(sprintf(_AM_ABOUT_ERROR_BAD_DEL_PATH, $old_dir));
                 $success = false;
             }

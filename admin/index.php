@@ -17,6 +17,7 @@
  * @author       XOOPS Development Team
  */
 
+use XoopsModules\About;
 use XoopsModules\About\Constants;
 
 // Display Admin header
@@ -26,8 +27,9 @@ xoops_cp_header();
 $adminObject  = Xmf\Module\Admin::getInstance();
 
 // Get number of pages, grouped by status
-//$pageHandler = $helper->getHandler('page');
-$criteria = new \CriteriaCompo();
+/** @var About\AboutPageHandler $pageHandler */
+$pageHandler = $helper->getHandler('AboutPage');
+$criteria    = new \CriteriaCompo();
 $criteria->add(new \Criteria('page_type', Constants::PAGE_TYPE_PAGE));
 $criteria->setGroupBy('page_status');
 $pageResults = $pageHandler->getCount($criteria);

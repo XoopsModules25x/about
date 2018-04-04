@@ -36,6 +36,9 @@ if (!defined($capsDirName . '_DIRNAME')) {
 
 */
 
+/**
+ * @return object
+ */
 function getConfig()
 {
     return (object)[
