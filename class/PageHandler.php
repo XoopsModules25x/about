@@ -25,17 +25,17 @@ defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 
 /**
- * Class AboutPageHandler
+ * Class PageHandler
  */
-class AboutPageHandler extends \XoopsPersistableObjectHandler
+class PageHandler extends \XoopsPersistableObjectHandler
 {
     /**
-     * AboutPageHandler constructor.
+     * PageHandler constructor.
      * @param null|\XoopsDatabase $db
      */
     public function __construct(\XoopsDatabase $db)
     {
-        parent::__construct($db, 'about_page', AboutPage::class, 'page_id', 'page_title');
+        parent::__construct($db, 'about_page', Page::class, 'page_id', 'page_title');
     }
 
     /**

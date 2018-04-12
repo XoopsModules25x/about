@@ -148,7 +148,7 @@ function &about_template_lookup($index_by_page = false)
 {
     require_once XOOPS_ROOT_PATH . '/class/xoopslists.php';
 
-    $files = XoopsLists::getHtmlListAsArray(XOOPS_ROOT_PATH . '/modules/' . $GLOBALS['artdirname'] . '/templates/');
+    $files = \XoopsLists::getHtmlListAsArray(XOOPS_ROOT_PATH . '/modules/' . $GLOBALS['artdirname'] . '/templates/');
     $list  = [];
     foreach ($files as $file => $name) {
         // The valid file name must be: art_article_mytpl.html OR art_category-1_your-trial.html

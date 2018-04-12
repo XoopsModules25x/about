@@ -21,8 +21,8 @@
 use XoopsModules\About;
 
 $moduleDirName = basename(dirname(__DIR__));
-require_once __DIR__ . '/../../../include/cp_header.php';
-require_once __DIR__ . '/../include/common.php';
+require_once  dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
+require_once  dirname(__DIR__) . '/include/common.php';
 
 xoops_load('xoopsformloader');
 xoops_load('constants', $moduleDirName);

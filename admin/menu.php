@@ -23,7 +23,7 @@
 
 use XoopsModules\About;
 
-require_once __DIR__ . '/../include/common.php';
+require_once  dirname(__DIR__) . '/include/common.php';
 
 $helper = About\Helper::getInstance();
 

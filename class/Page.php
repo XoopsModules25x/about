@@ -22,12 +22,12 @@
 defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 /**
- * Class AboutPage
+ * Class Page
  */
-class AboutPage extends \XoopsObject
+class Page extends \XoopsObject
 {
     /**
-     * AboutPage constructor.
+     * Page constructor.
      */
     public function __construct()
     {

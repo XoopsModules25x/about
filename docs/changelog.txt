@@ -22,7 +22,7 @@
 + moved loading of js and css to immediately after header(s) in index.php
 - removed pass-by-reference for non-vars
 - removed trailing '/' for html void elements
-- renamed XoopsBlockForm to AboutBlockForm class and moved file to ./class subdirectory
+- renamed XoopsBlockForm to BlockForm class and moved file to ./class subdirectory
 - changed Criteria->setOrder($value) to Criteria->order = $value (to compensate for bug in XOOPS core)
 - changed text for example pages created during module installation
 + updated jquery-treeview to v1.42

@@ -78,12 +78,11 @@ if ($isModuleAction) {
     $modversion['templates'] =& about_getTplPageList('', true);
 }
 
-$modversion['templates'] = [
-    // User
+$modversion['templates'][] = [
     ['file' => 'about_admin_page.tpl', 'description' => ''],
     ['file' => 'about_list.tpl', 'description' => ''],
     ['file' => 'about_menu.tpl', 'description' => ''],
-    ['file' => 'about_page.tpl', 'description' => '']
+    ['file' => 'about_page.tpl', 'description' => ''],
 ];
 
 // Blocks

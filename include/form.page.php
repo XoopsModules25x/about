@@ -18,12 +18,10 @@
  * @author         Susheng Yang <ezskyyoung@gmail.com>
  */
 
+use XoopsModules\About;
 use XoopsModules\About\Constants;
 
 defined('XOOPS_ROOT_PATH') || die('Restricted access');
-
-$moduleDirName = basename(dirname(__DIR__));
-$helper = Xmf\Module\Helper::getHelper($moduleDirName);
 
 require_once __DIR__ . '/functions.render.php';
 //require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';

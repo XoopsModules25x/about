@@ -30,7 +30,7 @@ $op      = Xmf\Request::getCmd('op', null);
 $op      = (null !== $op) ? $op : (isset($_REQUEST['id']) ? 'edit' : 'list');
 $page_id = Xmf\Request::getInt('id', null);
 
-//$pageHandler = new About\AboutPageHandler();
+//$pageHandler = new About\PageHandler();
 
 switch ($op) {
     default:

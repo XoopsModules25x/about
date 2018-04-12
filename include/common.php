@@ -21,17 +21,17 @@ use XoopsModules\About;
 
 defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
 
-include __DIR__ . '/../preloads/autoloader.php';
+include  dirname(__DIR__) . '/preloads/autoloader.php';
 
 $moduleDirName = basename(dirname(__DIR__));
 $moduleDirNameUpper   = strtoupper($moduleDirName); //$capsDirName
 
 /** @var \XoopsDatabase $db */
-/** @var About\Helper $helper */
-/** @var About\Utility $utility */
+/** @var \XoopsModules\About\Helper $helper */
+/** @var \XoopsModules\About\Utility $utility */
 $db      = \XoopsDatabaseFactory::getDatabaseConnection();
-$helper  = About\Helper::getInstance();
-$utility = new About\Utility();
+$helper  = \XoopsModules\About\Helper::getInstance();
+$utility = new \XoopsModules\About\Utility();
 //$configurator = new About\Common\Configurator();
 
 $helper->loadLanguage('common');
@@ -63,10 +63,10 @@ require_once ABOUT_ROOT_PATH . '/include/functions.php';
 //require_once ABOUT_ROOT_PATH . '/class/request.php';
 
 
-$pageHandler     = new About\AboutPageHandler($db);
+$pageHandler     = new About\PageHandler($db);
 
-$pathIcon16    = Xmf\Module\Admin::iconUrl('', 16);
-$pathIcon32    = Xmf\Module\Admin::iconUrl('', 32);
+$pathIcon16    = \Xmf\Module\Admin::iconUrl('', 16);
+$pathIcon32    = \Xmf\Module\Admin::iconUrl('', 32);
 //$pathModIcon16 = $helper->getModule()->getInfo('modicons16');
 //$pathModIcon32 = $helper->getModule()->getInfo('modicons32');
 

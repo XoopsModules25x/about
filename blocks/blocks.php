@@ -29,7 +29,7 @@ function about_block_menu_show()
     $moduleDirName = basename(dirname(__DIR__));
     xoops_load('constants', $moduleDirName);
 
-    $helper     = Xmf\Module\Helper::getHelper($moduleDirName);
+    $helper     = \XoopsModules\About\Helper::getInstance();
     $pageHandler  = $helper->getHandler('page');
     $menu_criteria = new \CriteriaCompo();
     $menu_criteria->add(new \Criteria('page_status', Constants::PUBLISHED), 'AND');
@@ -61,7 +61,7 @@ function about_block_page_show($options)
         return false;
     }
     $moduleDirName = basename(dirname(__DIR__));
-    $helper     = Xmf\Module\Helper::getHelper($moduleDirName);
+    $helper     = \XoopsModules\About\Helper::getInstance();
 
     $myts        = \MyTextSanitizer::getInstance();
     $block       = [];
@@ -92,11 +92,11 @@ EOF;
 function about_block_page_edit($options)
 {
     $moduleDirName = basename(dirname(__DIR__));
-    $helper     = Xmf\Module\Helper::getHelper($moduleDirName);
+    $helper     = \XoopsModules\About\Helper::getInstance();
     xoops_load('constants', $moduleDirName);
 
     $helper->loadLanguage('blocks');
-    $pageHandler = $helper->getHandler('page');
+    $pageHandler = $helper->getHandler('Page');
     $criteria    = new \CriteriaCompo();
     $criteria->add(new \Criteria('page_status', Constants::PUBLISHED), 'AND');
     $criteria->add(new \Criteria('page_type', Constants::PAGE_TYPE_PAGE));
@@ -111,7 +111,7 @@ function about_block_page_edit($options)
     }
 //    require_once dirname(__DIR__) . '/include/xoopsformloader.php';
     xoops_load('blockform', $moduleDirName);
-    $form        = new AboutBlockForm();
+    $form        = new XoopsModules\About\BlockForm();
     $page_select = new \XoopsFormRadio(_MB_ABOUT_BLOCKPAGE, 'options[0]', $options[0], '<br>');
     $page_select->addOptionArray($options_page);
     $form->addElement($page_select);

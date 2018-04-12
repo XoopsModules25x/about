@@ -18,7 +18,7 @@
  * @author         Susheng Yang <ezskyyoung@gmail.com>
  */
 
-include __DIR__ . '/../../../include/cp_header.php';
+include  dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
 require_once XOOPS_ROOT_PATH . '/Frameworks/art/functions.admin.php';
 
 if (!isset($xoopsTpl) || !is_object($xoopsTpl)) {

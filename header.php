@@ -21,11 +21,11 @@
 use XoopsModules\About;
 
 $moduleDirName = basename(__DIR__);
-require_once __DIR__ . '/../../mainfile.php';
+require_once  dirname(dirname(__DIR__)) . '/mainfile.php';
 
 require_once __DIR__ . '/include/common.php';
 
-//$helper = Xmf\Module\Helper::getHelper($moduleDirName);
+//$helper = \XoopsModules\AboutHelper::getInstance();
 
 xoops_load('constants', $moduleDirName);
 $helper->loadLanguage('modinfo');

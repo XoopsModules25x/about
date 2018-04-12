@@ -14,7 +14,7 @@ defined('XOOPS_ROOT_PATH') || die('Restricted access');
  */
 function xoops_module_pre_install_about(\XoopsModule $module)
 {
-    include __DIR__ . '/../preloads/autoloader.php';
+    include  dirname(__DIR__) . '/preloads/autoloader.php';
     /** @var About\Utility $utility */
     $utility = new About\Utility();
     $xoopsSuccess = $utility::checkVerXoops($module);
@@ -157,10 +157,8 @@ function xoops_module_uninstall_about(\XoopsModule $module)
 {
     $moduleDirName = $module->dirname();
 //    $aboutHelper = Xmf\Module\Helper::getHelper($moduleDirName);
-    $utility = ucfirst($moduleDirName) . 'Utility';
-    if (!class_exists($utility)) {
-        xoops_load('utility', $moduleDirName);
-    }
+    $utility = new \XoopsModules\About\Utility();
+
 
     $success = true;
     $helper->loadLanguage('admin');

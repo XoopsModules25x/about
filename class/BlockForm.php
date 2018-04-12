@@ -23,12 +23,12 @@ defined('XOOPS_ROOT_PATH') || die('Restricted access');
 require_once XOOPS_ROOT_PATH . '/class/xoopsform/form.php';
 
 /**
- * Class AboutBlockForm
+ * Class BlockForm
  */
-class AboutBlockForm extends \XoopsForm
+class BlockForm extends \XoopsForm
 {
     /**
-     * AboutBlockForm constructor.
+     * BlockForm constructor.
      */
     public function __construct()
     {

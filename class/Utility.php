@@ -27,7 +27,6 @@ use Xmf\Request;
 use XoopsModules\About;
 use XoopsModules\About\Common;
 
-require_once __DIR__ . '/../include/common.php';
 
 /**
  * Utility
