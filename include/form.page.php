@@ -73,7 +73,7 @@ if (Constants::PAGE_TYPE_PAGE == $pageType) {
 } else {
     $form->addElement(new \XoopsFormText(_AM_ABOUT_PAGE_MENU_TITLE . ':', 'page_menu_title', 60, 255, $page_obj->getVar('page_menu_title', $format)));
     $form->addElement(new \XoopsFormHidden('page_menu_status', $menu_status));
-    $form->addElement(new \XoopsFormText(_AM_ABOUT_PAGE_LINK_TEXT, 'page_text', 60, 255, $page_obj->isNew() ? XOOPS_ROOT . $page_obj->getVar('page_text', $format) : $page_obj->getVar('page_text', $format)), true);
+    $form->addElement(new \XoopsFormText(_AM_ABOUT_PAGE_LINK_TEXT, 'page_text', 60, 255, $page_obj->isNew() ? XOOPS_URL . $page_obj->getVar('page_text', $format) : $page_obj->getVar('page_text', $format)), true);
 }
 
 // Get list of possible parent pages
