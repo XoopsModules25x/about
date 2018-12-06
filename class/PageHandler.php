@@ -33,7 +33,7 @@ class PageHandler extends \XoopsPersistableObjectHandler
      * PageHandler constructor.
      * @param null|\XoopsDatabase $db
      */
-    public function __construct(\XoopsDatabase $db)
+    public function __construct(\XoopsDatabase $db = null)
     {
         parent::__construct($db, 'about_page', Page::class, 'page_id', 'page_title');
     }

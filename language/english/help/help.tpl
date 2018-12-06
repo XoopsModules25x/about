@@ -12,21 +12,21 @@
         extract the module folder into the ./modules directory. Install the module through
         Admin -> System Module -> Modules.<br><br>
         Detailed instructions on installing modules are available in the
-        <a href="https://www.gitbook.com/book/xoops/xoops-operations-guide/" target="_blank">XOOPS Operations Manual</a></p>
+        <a href="https://xoops.gitbook.io/xoops-operations-guide/" target="_blank">XOOPS Operations Manual</a></p>
 
 
     <h4 class="odd">OPERATING INSTRUCTIONS</h4>
 
     This module and its operations are very simple.<br> <br>
     Detailed instructions on configuring the access rights for user groups are available in the
-    <a href="https://www.gitbook.com/book/xoops/xoops-operations-guide/" target="_blank">XOOPS Operations Manual</a><br> <br>
+    <a href="https://xoops.gitbook.io/xoops-operations-guide/" target="_blank">XOOPS Operations Manual</a><br> <br>
 
     <h4 class="odd">Tutorial</h4>
 
     <p class="even">
-        Tutorial has been started, but we might need your help! Please check it out the status of the tutorial <a href="https://www.gitbook.com/book/xoops/about-tutorial/" target="_blank">here </a>.
+        Tutorial has been started, but we might need your help! Please check it out the status of the tutorial <a href="https://xoops.gitbook.io/about-tutorial/" target="_blank">here </a>.
         <br><br>To contribute to this Tutorial, <a href="https://github.com/XoopsDocs/about-tutorial/" target="_blank">please fork it on GitHub</a>.
-        <br> This document describes our <a href="https://www.gitbook.com/book/xoops/xoops-documentation-process/details/" target="_blank">Documentation Process</a> and it will help you to understand how to contribute.
+        <br> This document describes our <a href="https://xoops.gitbook.io/xoops-documentation-process/details/" target="_blank">Documentation Process</a> and it will help you to understand how to contribute.
         <br><br>
         There are more XOOPS Tutorials, so check them out in our <a href="https://www.gitbook.com/@xoops/" target="_blank">XOOPS Tutorial Repository on GitBook</a>.
     </p>

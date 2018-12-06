@@ -82,7 +82,7 @@ if (!class_exists('AboutTree')) {
         ) {
             $ret = '<select name=' . $name . '>';
             if (!empty($addEmptyOption)) {
-                $ret .= '<option value="0">' . (is_string($EmptyOption) ? $EmptyOption : '') . '</option>';
+                $ret .= '<option value="0">' . (is_string($addEmptyOption) ? $addEmptyOption : '') . '</option>';
             }
             $this->_makeSelBoxOptions('page_title', $selected, $key, $ret, $prefix);
             $ret .= '</select>';

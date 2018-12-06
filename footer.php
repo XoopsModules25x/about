@@ -24,4 +24,4 @@ if (is_array($xoBreadcrumbs) && count($xoBreadcrumbs) > 0) {
     $xoopsTpl->assign('xoBreadcrumbs', $xoBreadcrumbs);
 }
 
-include XOOPS_ROOT_PATH . '/footer.php';
+require_once XOOPS_ROOT_PATH . '/footer.php';

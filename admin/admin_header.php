@@ -28,7 +28,7 @@ xoops_load('xoopsformloader');
 xoops_load('constants', $moduleDirName);
 
 /** @var \XoopsModules\About\Helper $helper */
-$helper = About\Helper::getInstance();
+$helper = \XoopsModules\About\Helper::getInstance();
 $myts = \MyTextSanitizer::getInstance();
 
 if (!isset($GLOBALS['xoopsTpl']) || !($GLOBALS['xoopsTpl'] instanceof XoopsTpl)) {

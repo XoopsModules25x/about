@@ -29,21 +29,22 @@ function about_block_menu_show()
     $moduleDirName = basename(dirname(__DIR__));
     xoops_load('constants', $moduleDirName);
 
-    $helper     = \XoopsModules\About\Helper::getInstance();
-    $pageHandler  = $helper->getHandler('page');
+    /** @var \XoopsModules\About\Helper $helper */
+    $helper        = \XoopsModules\About\Helper::getInstance();
+    $pageHandler   = $helper->getHandler('Page');
     $menu_criteria = new \CriteriaCompo();
     $menu_criteria->add(new \Criteria('page_status', Constants::PUBLISHED), 'AND');
     $menu_criteria->add(new \Criteria('page_menu_status', Constants::IN_MENU));
     $menu_criteria->setSort('page_order');
     $menu_criteria->order = 'ASC';
-    $fields    = [
+    $fields               = [
         'page_id',
         'page_menu_title',
         'page_blank',
         'page_menu_status',
         'page_status'
     ];
-    $page_menu = $pageHandler->getAll($menu_criteria, $fields, false);
+    $page_menu            = $pageHandler->getAll($menu_criteria, $fields, false);
     foreach ($page_menu as $k => $v) {
         $page_menu[$k]['links'] = $helper->url("index.php?page_id={$v['page_id']}");
     }
@@ -61,11 +62,12 @@ function about_block_page_show($options)
         return false;
     }
     $moduleDirName = basename(dirname(__DIR__));
-    $helper     = \XoopsModules\About\Helper::getInstance();
+    /** @var \XoopsModules\About\Helper $helper */
+    $helper = \XoopsModules\About\Helper::getInstance();
 
     $myts        = \MyTextSanitizer::getInstance();
     $block       = [];
-    $pageHandler = $helper->getHandler('page');
+    $pageHandler = $helper->getHandler('Page');
     $page        = $pageHandler->get($options[0]);
     if (!is_object($page)) {
         return false;
@@ -92,8 +94,10 @@ EOF;
 function about_block_page_edit($options)
 {
     $moduleDirName = basename(dirname(__DIR__));
-    $helper     = \XoopsModules\About\Helper::getInstance();
+    /** @var \XoopsModules\About\Helper $helper */
+    $helper = \XoopsModules\About\Helper::getInstance();
     xoops_load('constants', $moduleDirName);
+    $options_page = [];
 
     $helper->loadLanguage('blocks');
     $pageHandler = $helper->getHandler('Page');
@@ -102,14 +106,14 @@ function about_block_page_edit($options)
     $criteria->add(new \Criteria('page_type', Constants::PAGE_TYPE_PAGE));
     $criteria->setSort('page_order');
     $criteria->order = 'ASC';
-    $fields     = ['page_id', 'page_title', 'page_image'];
-    $pages      = $pageHandler->getAll($criteria, $fields, false);
-    $page_title = '';
+    $fields          = ['page_id', 'page_title', 'page_image'];
+    $pages           = $pageHandler->getAll($criteria, $fields, false);
+    $page_title      = '';
     foreach ($pages as $k => $v) {
         $page_title       = '<a href="' . $helper->url("index.php?page_id={$k}") . '" target="_blank">' . $v['page_title'] . '</a>';
         $options_page[$k] = empty($v['page_image']) ? $page_title : $page_title . '<img src="' . $helper->url('assets/images/picture.png') . '">';
     }
-//    require_once dirname(__DIR__) . '/include/xoopsformloader.php';
+    //    require_once dirname(__DIR__) . '/include/xoopsformloader.php';
     xoops_load('blockform', $moduleDirName);
     $form        = new XoopsModules\About\BlockForm();
     $page_select = new \XoopsFormRadio(_MB_ABOUT_BLOCKPAGE, 'options[0]', $options[0], '<br>');

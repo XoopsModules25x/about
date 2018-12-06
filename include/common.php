@@ -21,7 +21,7 @@ use XoopsModules\About;
 
 defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
 
-include  dirname(__DIR__) . '/preloads/autoloader.php';
+require_once dirname(__DIR__) . '/preloads/autoloader.php';
 
 $moduleDirName = basename(dirname(__DIR__));
 $moduleDirNameUpper   = strtoupper($moduleDirName); //$capsDirName
@@ -30,7 +30,8 @@ $moduleDirNameUpper   = strtoupper($moduleDirName); //$capsDirName
 /** @var \XoopsModules\About\Helper $helper */
 /** @var \XoopsModules\About\Utility $utility */
 $db      = \XoopsDatabaseFactory::getDatabaseConnection();
-$helper  = \XoopsModules\About\Helper::getInstance();
+/** @var \XoopsModules\About\Helper $helper */
+$helper = \XoopsModules\About\Helper::getInstance();
 $utility = new \XoopsModules\About\Utility();
 //$configurator = new About\Common\Configurator();
 
@@ -53,7 +54,7 @@ if (!defined($moduleDirNameUpper . '_CONSTANTS_DEFINED')) {
     define($moduleDirNameUpper . '_CONSTANTS_DEFINED', 1);
 }
 
-xoops_loadLanguage('common', ABOUT_DIRNAME);
+$helper->loadLanguage('common');
 
 require_once ABOUT_ROOT_PATH . '/include/functions.php';
 //require_once ABOUT_ROOT_PATH . '/include/seo_functions.php';

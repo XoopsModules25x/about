@@ -14,7 +14,7 @@ defined('XOOPS_ROOT_PATH') || die('Restricted access');
  */
 function xoops_module_pre_install_about(\XoopsModule $module)
 {
-    include  dirname(__DIR__) . '/preloads/autoloader.php';
+    require_once dirname(__DIR__) . '/preloads/autoloader.php';
     /** @var About\Utility $utility */
     $utility = new About\Utility();
     $xoopsSuccess = $utility::checkVerXoops($module);
@@ -85,7 +85,8 @@ function xoops_module_pre_update_about(\XoopsModule $module)
     /** @var About\Helper $helper */
     /** @var About\Utility $utility */
     $moduleDirName = basename(dirname(__DIR__));
-    $helper       = About\Helper::getInstance();
+    /** @var \XoopsModules\About\Helper $helper */
+    $helper = \XoopsModules\About\Helper::getInstance();
     $utility      = new About\Utility();
 
     $xoopsSuccess = $utility::checkVerXoops($module);
@@ -156,7 +157,8 @@ function xoops_module_update_about(\XoopsModule $module, $prev_version = null)
 function xoops_module_uninstall_about(\XoopsModule $module)
 {
     $moduleDirName = $module->dirname();
-//    $aboutHelper = Xmf\Module\Helper::getHelper($moduleDirName);
+    /** @var \XoopsModules\About\Helper $helper */
+    $helper = \XoopsModules\About\Helper::getInstance();
     $utility = new \XoopsModules\About\Utility();
 
 

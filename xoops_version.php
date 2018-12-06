@@ -19,14 +19,14 @@
 
 use XoopsModules\About\Constants;
 
-include __DIR__ . '/preloads/autoloader.php';
+require_once __DIR__   . '/preloads/autoloader.php';
 
-$modversion['version']       = 1.05;
-$modversion['module_status'] = 'RC 1';
-$modversion['release_date']  = '2017/08/04';
+$modversion['version']       = 1.06;
+$modversion['module_status'] = 'Beta 1';
+$modversion['release_date']  = '2018/12/04';
 $modversion['name']          = _MI_ABOUT_NAME;
 $modversion['description']   = _MI_ABOUT_DESC;
-$modversion['author']        = 'Magic.Shao <magic.shao@gmail.com>, ezsky <ezskyyoung@gmail.com>';
+$modversion['author']        = 'Magic.Shao <magic.shao@gmail.com>, ezsky <ezskyyoung@gmail.com>, Mamba, Zyspec';
 $modversion['credits']       = 'xoops.org.cn';
 $modversion['help']          = 'page=help';
 $modversion['license']       = 'GNU GPL 2.0 or later';
@@ -42,7 +42,7 @@ $modversion['modicons16']          = 'assets/images/icons/16';
 $modversion['modicons32']          = 'assets/images/icons/32';
 $modversion['module_website_url']  = 'www.xoops.org';
 $modversion['module_website_name'] = 'XOOPS';
-$modversion['min_php']             = '5.5';
+$modversion['min_php']             = '5.6';
 $modversion['min_xoops']           = '2.5.9';
 $modversion['min_admin']           = '1.2';
 $modversion['min_db']              = ['mysql' => '5.5'];

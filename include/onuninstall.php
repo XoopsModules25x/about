@@ -35,9 +35,11 @@ function xoops_module_uninstall_about(\XoopsModule $module)
 {
 //    return true;
 
-    include  dirname(__DIR__) . '/preloads/autoloader.php';
+    require_once dirname(__DIR__) . '/preloads/autoloader.php';
+    $moduleDirName = basename(dirname(__DIR__));
 
-    $helper       = About\Helper::getInstance();
+    /** @var \XoopsModules\About\Helper $helper */
+    $helper = \XoopsModules\About\Helper::getInstance();
     /** @var About\Utility $utility */
     $utility = new About\Utility();
 

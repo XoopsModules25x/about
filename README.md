@@ -1,5 +1,5 @@
 ![alt XOOPS CMS](https://xoops.org/images/logoXoops4GithubRepository.png)
-## About Us module for  [XOOPS CMS 2.5.8+](https://xoops.org)
+## About Us module for  [XOOPS CMS 2.5.9+](https://xoops.org)
 [![XOOPS CMS Module](https://img.shields.io/badge/XOOPS%20CMS-Module-blue.svg)](https://xoops.org)
 [![Software License](https://img.shields.io/badge/license-GPL-brightgreen.svg?style=flat)](http://www.gnu.org/licenses/gpl-2.0.html)
 
@@ -12,7 +12,7 @@
 
 **About Us module** for [XOOPS CMS](https://xoops.org) is a module for adding a multi-page About Us section to your Website
 
-[![Tutorial Available](https://xoops.org/images/tutorial-available-blue.svg)](https://www.gitbook.com/book/xoops/xoops-about/) Tutorial: see [GitBook](https://www.gitbook.com/book/xoops/xoops-about/).
+[![Tutorial Available](https://xoops.org/images/tutorial-available-blue.svg)](https://xoops.gitbook.io/xoops-about/) Tutorial: see [GitBook](https://xoops.gitbook.io/xoops-about/).
 To contribute to the Tutorial, [fork it on GitHub](https://github.com/XoopsDocs/about-tutorial)
 
 [![Translations on Transifex](https://xoops.org/images/translations-transifex-blue.svg)](https://www.transifex.com/xoops)

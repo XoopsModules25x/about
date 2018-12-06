@@ -36,7 +36,7 @@ switch ($op) {
     default:
     case 'list':
         // Page order
-        if (isset($_POST['page_order'])) {
+        if (\Xmf\Request::hasVar('page_order', 'POST')) {
             $page_order = Xmf\Request::getArray('page_order', [], 'POST'); //$_POST['page_order'];
             foreach ($page_order as $page_id => $order) {
                 $page_obj = $pageHandler->get($page_id);
@@ -48,7 +48,7 @@ switch ($op) {
             }
         }
         // Set index
-        if (isset($_POST['page_index'])) {
+        if (\Xmf\Request::hasVar('page_index', 'POST')) {
             $page_index = Xmf\Request::getInt('page_index', Constants::NOT_INDEX, 'POST');
             $page_obj = $pageHandler->get($page_index);
             if ($page_index != $page_obj->getVar('page_index')) {
@@ -99,14 +99,14 @@ switch ($op) {
     case 'new':
         $GLOBALS['xoTheme']->addStylesheet("modules/{$moduleDirName}/assets/css/admin_style.css");
         $page_obj = $pageHandler->create();
-        $form     = include $helper->path('include/form.page.php');
+        $form     = require $helper->path('include/form.page.php');
         $form->display();
         break;
 
     case 'edit':
         $GLOBALS['xoTheme']->addStylesheet("modules/{$moduleDirName}/assets/css/admin_style.css");
         $page_obj = $pageHandler->get($page_id);
-        $form     = include $helper->path('include/form.page.php');
+        $form     = require $helper->path('include/form.page.php');
         $form->display();
         break;
 
@@ -165,7 +165,7 @@ switch ($op) {
         }
 
         // Delete image
-        if (isset($_POST['delete_image']) && empty($_FILES['userfile']['name'])) {
+        if (\Xmf\Request::hasVar('delete_image', 'POST') && empty($_FILES['userfile']['name'])) {
             @unlink($upload_path . '/' . $page_obj->getVar('page_image'));
             $page_obj->setVar('page_image', '');
         }
@@ -177,7 +177,7 @@ switch ($op) {
 
         echo $page_obj->getHtmlErrors();
         $format = 'p';
-        $form   = include $helper->path('include/form.page.php');
+        $form   = require $helper->path('include/form.page.php');
         $form->display();
 
         break;
@@ -185,7 +185,7 @@ switch ($op) {
     case 'delete':
         $page_obj = $pageHandler->get($page_id);
         $image    = XOOPS_UPLOAD_PATH . "/{$moduleDirName}/" . $page_obj->getVar('page_image');
-        if (isset($_REQUEST['ok']) && Constants::CONFIRM_OK == $_REQUEST['ok']) {
+        if (\Xmf\Request::hasVar('ok', 'REQUEST') && Constants::CONFIRM_OK == $_REQUEST['ok']) {
             if ($pageHandler->delete($page_obj)) {
                 if (file_exists($image)) {
                     @unlink($image);

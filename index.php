@@ -48,7 +48,7 @@ $menu   = $pageHandler->getAll($menu_criteria, $fields, false);
 foreach ($menu as $k => $v) {
     $page_text = trim($v['page_text']);
     $menu[$k]['page_text'] = false;
-    if (preg_match('/https?\:\/\//', $page_text)) {
+    if (preg_match('/^https?\:\/\//', $page_text)) {
         $menu[$k]['page_text'] = true;
     }
 //    $menu[$k]['page_text'] = trim($v['page_text']) === 'http://' ? true : false;
@@ -77,7 +77,7 @@ if (Constants::PAGE == $helper->getConfig('display', Constants::PAGE) || !empty(
         $xoopsOption['template_main']   = about_getTemplate();
     }
 
-    include XOOPS_ROOT_PATH . '/header.php';
+    require_once XOOPS_ROOT_PATH . '/header.php';
     $GLOBALS['xoTheme']->addStylesheet("modules/{$moduleDirName}/assets/css/style.css");
     $GLOBALS['xoTheme']->addStylesheet("modules/{$moduleDirName}/assets/js/jquery-treeview/jquery.treeview.css");
     $GLOBALS['xoTheme']->addScript('browse.php?Frameworks/jquery/jquery.js');
@@ -97,7 +97,7 @@ if (Constants::PAGE == $helper->getConfig('display', Constants::PAGE) || !empty(
     // List (Category) display
     $xoopsOption['xoops_pagetitle'] = $helper->getModule()->name();
     $xoopsOption['template_main']   = about_getTemplate('list');
-    include XOOPS_ROOT_PATH . '/header.php';
+    require_once XOOPS_ROOT_PATH . '/header.php';
     $GLOBALS['xoTheme']->addStylesheet("modules/{$moduleDirName}/assets/css/style.css");
 
     $criteria = new \CriteriaCompo();
@@ -114,6 +114,7 @@ if (Constants::PAGE == $helper->getConfig('display', Constants::PAGE) || !empty(
 }
 
 // get bread
+$tree_open = [];
 if (!empty($bread)) {
     $bread = array_reverse($pageHandler->getBread($menu, $page_id), true);
     foreach ($bread as $k => $v) {

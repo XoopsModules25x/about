@@ -29,7 +29,7 @@ use XoopsModules\About;
  */
 function xoops_module_pre_install_about(\XoopsModule $module)
 {
-    include  dirname(__DIR__) . '/preloads/autoloader.php';
+    require_once dirname(__DIR__) . '/preloads/autoloader.php';
     /** @var \XoopsModules\About\Utility $utility */
     $utility = new \XoopsModules\About\Utility();
     $xoopsSuccess = $utility::checkVerXoops($module);
@@ -59,7 +59,8 @@ function xoops_module_install_about(\XoopsModule $module)
 
     $moduleDirName = basename(dirname(__DIR__));
 
-    $helper       = About\Helper::getInstance();
+    /** @var \XoopsModules\About\Helper $helper */
+    $helper = \XoopsModules\About\Helper::getInstance();
     $utility      = new About\Utility();
     $configurator = new About\Common\Configurator();
     // Load language files
@@ -71,7 +72,7 @@ function xoops_module_install_about(\XoopsModule $module)
     // default Permission Settings ----------------------
     global $xoopsModule;
     $moduleId     = $xoopsModule->getVar('mid');
-    $moduleId2    = $helper->getModule()->mid();
+//    $moduleId2    = $helper->getModule()->mid();
     $grouppermHandler = xoops_getHandler('groupperm');
     // access rights ------------------------------------------
     $grouppermHandler->addRight($moduleDirName . '_approve', 1, XOOPS_GROUP_ADMIN, $moduleId);
@@ -97,8 +98,8 @@ function xoops_module_install_about(\XoopsModule $module)
         }
     }
     //delete .html entries from the tpl table
-    $sql = 'DELETE FROM ' . $xoopsDB->prefix('tplfile') . " WHERE `tpl_module` = '" . $xoopsModule->getVar('dirname', 'n') . "' AND `tpl_file` LIKE '%.html%'";
-    $xoopsDB->queryF($sql);
+$sql = 'DELETE FROM ' . $GLOBALS['xoopsDB']->prefix('tplfile') . " WHERE `tpl_module` = '" . $xoopsModule->getVar('dirname', 'n') . "' AND `tpl_file` LIKE '%.html%'";
+$GLOBALS['xoopsDB']->queryF($sql);
 
     return true;
 }
