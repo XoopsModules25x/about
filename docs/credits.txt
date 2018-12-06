@@ -1,6 +1,7 @@
 Credits
 ===============
 
-Originally developed by Susheng Yang (ezsky) and Mengjue Shao (magic.shao)
+Originally developed by Susheng Yang (ezsky) <ezskyyoung@gmail.com> and Mengjue Shao (magic.shao) <magic.shao@gmail.com>
 
 Version 1.04 was updated to XOOPS 2.5.7 Standard GUI by Michael Beck (Mamba)
+Version 1.05 was updated by Jim Garrett (Zyspec)

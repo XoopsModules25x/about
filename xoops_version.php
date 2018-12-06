@@ -26,7 +26,7 @@ $modversion['module_status'] = 'Beta 1';
 $modversion['release_date']  = '2018/12/04';
 $modversion['name']          = _MI_ABOUT_NAME;
 $modversion['description']   = _MI_ABOUT_DESC;
-$modversion['author']        = 'Magic.Shao <magic.shao@gmail.com>, ezsky <ezskyyoung@gmail.com>, Mamba, Zyspec';
+$modversion['author']        = 'Magic.Shao, ezsky, Mamba, Zyspec';
 $modversion['credits']       = 'xoops.org.cn';
 $modversion['help']          = 'page=help';
 $modversion['license']       = 'GNU GPL 2.0 or later';
@@ -35,9 +35,6 @@ $modversion['license_url']   = 'www.gnu.org/licenses/gpl-2.0.html';
 //$moduleDirName = basename(__DIR__);
 
 $modversion['dirname'] = basename(__DIR__);
-//$modversion['dirmoduleadmin']      = 'Frameworks/moduleclasses/moduleadmin';
-//$modversion['sysicons16']          = 'Frameworks/moduleclasses/icons/16';
-//$modversion['sysicons32']          = 'Frameworks/moduleclasses/icons/32';
 $modversion['modicons16']          = 'assets/images/icons/16';
 $modversion['modicons32']          = 'assets/images/icons/32';
 $modversion['module_website_url']  = 'www.xoops.org';
@@ -78,12 +75,12 @@ if ($isModuleAction) {
     $modversion['templates'] =& about_getTplPageList('', true);
 }
 
-$modversion['templates'][] = [
-    ['file' => 'about_admin_page.tpl', 'description' => ''],
-    ['file' => 'about_list.tpl', 'description' => ''],
-    ['file' => 'about_menu.tpl', 'description' => ''],
-    ['file' => 'about_page.tpl', 'description' => ''],
-];
+//$modversion['templates'][] = [
+//    ['file' => 'about_admin_page.tpl', 'description' => ''],
+//    ['file' => 'about_list.tpl', 'description' => ''],
+//    ['file' => 'about_menu.tpl', 'description' => ''],
+//    ['file' => 'about_page.tpl', 'description' => ''],
+//];
 
 // Blocks
 $modversion['blocks'][] = [

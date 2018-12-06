@@ -4,3 +4,4 @@ TODO: Planned features in the future
 Features that are being considered/planned for the future releases:
 
 - replace jquery-treeview with jsTree (zyspec)
+- replace $GLOBALS['artdirname']? (mamba)
