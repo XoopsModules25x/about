@@ -17,19 +17,16 @@
  * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
  * @author       XOOPS Module Development Team
  */
-
-use XoopsModules\About;
-
 $moduleDirName = basename(dirname(__DIR__));
-require_once  dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
-require_once  dirname(__DIR__) . '/include/common.php';
+require_once dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
+require_once dirname(__DIR__) . '/include/common.php';
 
 xoops_load('xoopsformloader');
 xoops_load('constants', $moduleDirName);
 
 /** @var \XoopsModules\About\Helper $helper */
 $helper = \XoopsModules\About\Helper::getInstance();
-$myts = \MyTextSanitizer::getInstance();
+$myts   = \MyTextSanitizer::getInstance();
 
 if (!isset($GLOBALS['xoopsTpl']) || !($GLOBALS['xoopsTpl'] instanceof XoopsTpl)) {
     require_once $GLOBALS['xoops']->path('class/template.php');

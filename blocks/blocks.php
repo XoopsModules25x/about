@@ -42,7 +42,7 @@ function about_block_menu_show()
         'page_menu_title',
         'page_blank',
         'page_menu_status',
-        'page_status'
+        'page_status',
     ];
     $page_menu            = $pageHandler->getAll($menu_criteria, $fields, false);
     foreach ($page_menu as $k => $v) {

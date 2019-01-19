@@ -1,4 +1,6 @@
-<?php namespace XoopsModules\About;
+<?php
+
+namespace XoopsModules\About;
 
 /**
  * About
@@ -18,7 +20,6 @@
  * @author         Mengjue Shao <magic.shao@gmail.com>
  * @author         Susheng Yang <ezskyyoung@gmail.com>
  */
-
 defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 /**

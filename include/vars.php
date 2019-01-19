@@ -17,7 +17,6 @@
  * @author         Mengjue Shao <magic.shao@gmail.com>
  * @author         Susheng Yang <ezskyyoung@gmail.com>
  */
-
 $GLOBALS['artdirname'] = basename(dirname(__DIR__));
 
 // include customized variables

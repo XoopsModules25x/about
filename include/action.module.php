@@ -5,7 +5,6 @@ use XoopsModules\About;
 defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 /**
- *
  * Prepares system prior to attempting to install module
  *
  * @param XoopsModule $module
@@ -16,12 +15,12 @@ function xoops_module_pre_install_about(\XoopsModule $module)
 {
     require_once dirname(__DIR__) . '/preloads/autoloader.php';
     /** @var About\Utility $utility */
-    $utility = new About\Utility();
+    $utility      = new About\Utility();
     $xoopsSuccess = $utility::checkVerXoops($module);
     $phpSuccess   = $utility::checkVerPhp($module);
 
-    if (false !== $xoopsSuccess && false !==  $phpSuccess) {
-        $moduleTables =& $module->getInfo('tables');
+    if (false !== $xoopsSuccess && false !== $phpSuccess) {
+        $moduleTables = &$module->getInfo('tables');
         foreach ($moduleTables as $table) {
             $GLOBALS['xoopsDB']->queryF('DROP TABLE IF EXISTS ' . $GLOBALS['xoopsDB']->prefix($table) . ';');
         }
@@ -36,7 +35,7 @@ function xoops_module_pre_install_about(\XoopsModule $module)
  */
 function xoops_module_install_about(\XoopsModule $module)
 {
-    $success = true;
+    $success   = true;
     $data_file = XOOPS_ROOT_PATH . '/modules/about/sql/mysql.about.sql';
     $GLOBALS['xoopsDB']->queryF('SET NAMES utf8');
     if (!$GLOBALS['xoopsDB']->queryFromFile($data_file)) {
@@ -49,8 +48,8 @@ function xoops_module_install_about(\XoopsModule $module)
     // this is only executed if this version copied over old version without running module update
     $oldFiles = [
         XOOPS_ROOT_PATH . '/modules/' . $module->dirname() . '/include/xoopsformloader.php',
-                      XOOPS_ROOT_PATH . '/modules/' . $module->dirname() . '/include/blockform.php',
-                      XOOPS_ROOT_PATH . '/modules/' . $module->dirname() . '/class/utilities.php',
+        XOOPS_ROOT_PATH . '/modules/' . $module->dirname() . '/include/blockform.php',
+        XOOPS_ROOT_PATH . '/modules/' . $module->dirname() . '/class/utilities.php',
     ];
     foreach ($oldFiles as $file) {
         if (is_file($file)) {
@@ -73,7 +72,6 @@ function xoops_module_install_about(\XoopsModule $module)
 }
 
 /**
- *
  * Prepares system prior to attempting to install module
  *
  * @param XoopsModule $module
@@ -86,14 +84,14 @@ function xoops_module_pre_update_about(\XoopsModule $module)
     /** @var About\Utility $utility */
     $moduleDirName = basename(dirname(__DIR__));
     /** @var \XoopsModules\About\Helper $helper */
-    $helper = \XoopsModules\About\Helper::getInstance();
-    $utility      = new About\Utility();
+    $helper  = \XoopsModules\About\Helper::getInstance();
+    $utility = new About\Utility();
 
     $xoopsSuccess = $utility::checkVerXoops($module);
     $phpSuccess   = $utility::checkVerPhp($module);
+
     return $xoopsSuccess && $phpSuccess;
 }
-
 
 /**
  * @param  XoopsModule $module
@@ -106,8 +104,8 @@ function xoops_module_update_about(\XoopsModule $module, $prev_version = null)
     // Delete files from previous version (if they exist)
     $oldFiles = [
         XOOPS_ROOT_PATH . '/modules/' . $module->dirname() . '/include/xoopsformloader.php',
-                      XOOPS_ROOT_PATH . '/modules/' . $module->dirname() . '/include/blockform.php',
-                      XOOPS_ROOT_PATH . '/modules/' . $module->dirname() . '/class/utilities.php'
+        XOOPS_ROOT_PATH . '/modules/' . $module->dirname() . '/include/blockform.php',
+        XOOPS_ROOT_PATH . '/modules/' . $module->dirname() . '/class/utilities.php',
     ];
     foreach ($oldFiles as $file) {
         if (is_file($file)) {
@@ -122,7 +120,7 @@ function xoops_module_update_about(\XoopsModule $module, $prev_version = null)
     // this is only executed if this version copied over old version without running module update
     $oldFiles = [
         XOOPS_PATH . '/modules/' . $module->dirname() . '/include/xoopsformloader.php',
-                      XOOPS_PATH . '/modules/' . $module->dirname() . '/include/blockform.php'
+        XOOPS_PATH . '/modules/' . $module->dirname() . '/include/blockform.php',
     ];
     foreach ($oldFiles as $file) {
         if (is_file($file)) {
@@ -147,7 +145,6 @@ function xoops_module_update_about(\XoopsModule $module, $prev_version = null)
 }
 
 /**
- *
  * Function to complete upon module uninstall
  *
  * @param XoopsModule $module
@@ -158,9 +155,8 @@ function xoops_module_uninstall_about(\XoopsModule $module)
 {
     $moduleDirName = $module->dirname();
     /** @var \XoopsModules\About\Helper $helper */
-    $helper = \XoopsModules\About\Helper::getInstance();
+    $helper  = \XoopsModules\About\Helper::getInstance();
     $utility = new \XoopsModules\About\Utility();
-
 
     $success = true;
     $helper->loadLanguage('admin');
@@ -181,5 +177,6 @@ function xoops_module_uninstall_about(\XoopsModule $module)
         }
         unset($dirInfo);
     }
+
     return $success;
 }

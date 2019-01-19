@@ -77,7 +77,7 @@ if (Constants::PAGE_TYPE_PAGE == $pageType) {
 }
 
 // Get list of possible parent pages
-$page_list    = $pageHandler->getTrees(0, '--');
+$page_list = $pageHandler->getTrees(0, '--');
 if (!$page_obj->isNew()) {
     $child_list = $pageHandler->getTrees($page_obj->getVar('page_id'));
     $page_list  = array_diff_key($page_list, $child_list);  // remove this class' children from 'parent' list
@@ -113,6 +113,5 @@ $form->addElement(new \XoopsFormHidden('page_type', $pageType));
 $form->addElement(new \XoopsFormHidden('op', 'save'));
 //$form->addElement(new \XoopsFormButton('', 'submit', _SUBMIT, 'submit'));
 $form->addElement(new \XoopsFormButtonTray('submit', _SUBMIT, 'submit'));
-
 
 return $form;

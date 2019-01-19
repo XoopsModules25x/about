@@ -24,7 +24,7 @@ use XoopsModules\About\Constants;
 require_once __DIR__ . '/admin_header.php';
 xoops_cp_header();
 
-$adminObject  = Xmf\Module\Admin::getInstance();
+$adminObject = Xmf\Module\Admin::getInstance();
 
 // Get number of pages, grouped by status
 /** @var About\PageHandler $pageHandler */
@@ -41,7 +41,7 @@ $pageResults[Constants::NOT_PUBLISHED] = array_key_exists(Constants::NOT_PUBLISH
 $criteria = new \CriteriaCompo();
 $criteria->add(new \Criteria('page_type', Constants::PAGE_TYPE_LINK));
 $criteria->setGroupBy('page_status');
-$linkResults = $pageHandler->getCount($criteria);
+$linkResults                           = $pageHandler->getCount($criteria);
 $linkResults[Constants::PUBLISHED]     = array_key_exists(Constants::PUBLISHED, $linkResults) ? $linkResults[Constants::PUBLISHED] : 0;
 $linkResults[Constants::NOT_PUBLISHED] = array_key_exists(Constants::NOT_PUBLISHED, $linkResults) ? $linkResults[Constants::NOT_PUBLISHED] : 0;
 
@@ -56,6 +56,5 @@ $adminObject->displayNavigation(basename(__FILE__));
 $adminObject->displayIndex();
 
 echo $utility::getServerStats();
-
 
 require_once __DIR__ . '/admin_footer.php';

@@ -14,7 +14,7 @@
  * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
  * @package
  * @since
- * @author     XOOPS Development Team
+ * @author       XOOPS Development Team
  */
 
 use XoopsModules\About;
@@ -23,20 +23,19 @@ defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
 
 require_once dirname(__DIR__) . '/preloads/autoloader.php';
 
-$moduleDirName = basename(dirname(__DIR__));
-$moduleDirNameUpper   = strtoupper($moduleDirName); //$capsDirName
+$moduleDirName      = basename(dirname(__DIR__));
+$moduleDirNameUpper = mb_strtoupper($moduleDirName); //$capsDirName
 
 /** @var \XoopsDatabase $db */
 /** @var \XoopsModules\About\Helper $helper */
 /** @var \XoopsModules\About\Utility $utility */
-$db      = \XoopsDatabaseFactory::getDatabaseConnection();
+$db = \XoopsDatabaseFactory::getDatabaseConnection();
 /** @var \XoopsModules\About\Helper $helper */
-$helper = \XoopsModules\About\Helper::getInstance();
+$helper  = \XoopsModules\About\Helper::getInstance();
 $utility = new \XoopsModules\About\Utility();
 //$configurator = new About\Common\Configurator();
 
 $helper->loadLanguage('common');
-
 
 if (!defined($moduleDirNameUpper . '_CONSTANTS_DEFINED')) {
     define($moduleDirNameUpper . '_DIRNAME', basename(dirname(__DIR__)));
@@ -63,11 +62,10 @@ require_once ABOUT_ROOT_PATH . '/include/functions.php';
 //require_once ABOUT_ROOT_PATH . '/class/xoalbum.php';
 //require_once ABOUT_ROOT_PATH . '/class/request.php';
 
+$pageHandler = new About\PageHandler($db);
 
-$pageHandler     = new About\PageHandler($db);
-
-$pathIcon16    = \Xmf\Module\Admin::iconUrl('', 16);
-$pathIcon32    = \Xmf\Module\Admin::iconUrl('', 32);
+$pathIcon16 = \Xmf\Module\Admin::iconUrl('', 16);
+$pathIcon32 = \Xmf\Module\Admin::iconUrl('', 32);
 //$pathModIcon16 = $helper->getModule()->getInfo('modicons16');
 //$pathModIcon32 = $helper->getModule()->getInfo('modicons32');
 

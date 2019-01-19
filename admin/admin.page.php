@@ -50,7 +50,7 @@ switch ($op) {
         // Set index
         if (\Xmf\Request::hasVar('page_index', 'POST')) {
             $page_index = Xmf\Request::getInt('page_index', Constants::NOT_INDEX, 'POST');
-            $page_obj = $pageHandler->get($page_index);
+            $page_obj   = $pageHandler->get($page_index);
             if ($page_index != $page_obj->getVar('page_index')) {
                 $page_obj = $pageHandler->get($page_index);
                 if (!$page_obj->getVar('page_title')) {
@@ -75,14 +75,14 @@ switch ($op) {
             'page_status',
             'page_order',
             'page_index',
-            'page_tpl'
+            'page_tpl',
         ];
 
         $criteria = new \CriteriaCompo();
         $criteria->setSort('page_order');
         $criteria->order = 'ASC';
-        $pages         = $pageHandler->getTrees(0, '--', $fields);
-        $memberHandler = xoops_getHandler('member');
+        $pages           = $pageHandler->getTrees(0, '--', $fields);
+        $memberHandler   = xoops_getHandler('member');
 
         foreach ($pages as $k => $v) {
             $pages[$k]['page_menu_title'] = $v['prefix'] . $v['page_menu_title'];
@@ -95,21 +95,18 @@ switch ($op) {
         $xoopsTpl->assign('pages', $pages);
         $xoopsTpl->display('db:about_admin_page.tpl');
         break;
-
     case 'new':
         $GLOBALS['xoTheme']->addStylesheet("modules/{$moduleDirName}/assets/css/admin_style.css");
         $page_obj = $pageHandler->create();
         $form     = require $helper->path('include/form.page.php');
         $form->display();
         break;
-
     case 'edit':
         $GLOBALS['xoTheme']->addStylesheet("modules/{$moduleDirName}/assets/css/admin_style.css");
         $page_obj = $pageHandler->get($page_id);
         $form     = require $helper->path('include/form.page.php');
         $form->display();
         break;
-
     case 'save':
         if (!$GLOBALS['xoopsSecurity']->check()) {
             $helper->redirect('admin/admin.page.php', Constants::REDIRECT_DELAY_MEDIUM, implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
@@ -181,7 +178,6 @@ switch ($op) {
         $form->display();
 
         break;
-
     case 'delete':
         $page_obj = $pageHandler->get($page_id);
         $image    = XOOPS_UPLOAD_PATH . "/{$moduleDirName}/" . $page_obj->getVar('page_image');

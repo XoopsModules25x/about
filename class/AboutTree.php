@@ -1,4 +1,6 @@
-<?php namespace XoopsModules\About;
+<?php
+
+namespace XoopsModules\About;
 
 defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
@@ -21,11 +23,11 @@ if (!class_exists('AboutTree')) {
         }
 
         /**
-         * @param        $key
-         * @param        $ret
-         * @param        $prefix_orig
-         * @param string $prefix_curr
-         * @param null|array   $tags
+         * @param            $key
+         * @param            $ret
+         * @param            $prefix_orig
+         * @param string     $prefix_curr
+         * @param null|array $tags
          */
         public function makeTreeItems($key, &$ret, $prefix_orig, $prefix_curr = '', $tags = null)
         {
@@ -78,8 +80,8 @@ if (!class_exists('AboutTree')) {
             $selected = '',
             $addEmptyOption = false,
             $key = 0,
-            $extra = ''
-        ) {
+            $extra = '')
+        {
             $ret = '<select name=' . $name . '>';
             if (!empty($addEmptyOption)) {
                 $ret .= '<option value="0">' . (is_string($addEmptyOption) ? $addEmptyOption : '') . '</option>';

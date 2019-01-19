@@ -15,20 +15,19 @@
  * @since           1.0
  * @author          Taiwen Jiang <phppp@users.sourceforge.net>
  */
-
-use XoopsModules\About;
-
 defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
-require_once __DIR__   . '/vars.php';
+require_once __DIR__ . '/vars.php';
 define($GLOBALS['artdirname'] . '_FUNCTIONS_RENDER_LOADED', true);
 
 /**
  * Function to get template file of a specified style of a specified page
  *
- * @var string $page  page name
- * @var string $style template style
+ * @var string       $page  page name
+ * @var string       $style template style
  *
+ * @param mixed      $page
+ * @param null|mixed $style
  * @return string template file name, using default style if style is invalid
  */
 function about_getTemplate($page = 'index', $style = null)
@@ -57,10 +56,10 @@ function about_getTemplate($page = 'index', $style = null)
 /**
  * Function to get a list of template files of a page, indexed by file name
  *
- * @var    string       $page    page name
- * @param  bool|boolean $refresh recreate the data
+ * @var    string    $page    page name
+ * @param  bool|bool $refresh recreate the data
+ * @param mixed      $page
  * @return array
- *
  */
 function about_getTemplateList($page = 'index', $refresh = false)
 {
@@ -80,16 +79,17 @@ function about_getTemplateList($page = 'index', $refresh = false)
  *
  * The hardcoded path is not desirable for theme switch, however, we have to keabout it before getting a good solution for cache
  *
- * @var string $style
+ * @var string  $style
  *
+ * @param mixed $style
  * @return string file URL, false if not found
  */
 function about_getCss($style = 'default')
 {
     global $xoops;
 
-    if (is_readable($xoops->path('modules/' . $GLOBALS['artdirname'] . '/assets/css/style_' . strtolower($style) . '.css'))) {
-        return $xoops->path('modules/' . $GLOBALS['artdirname'] . '/assets/css/style_' . strtolower($style) . '.css', true);
+    if (is_readable($xoops->path('modules/' . $GLOBALS['artdirname'] . '/assets/css/style_' . mb_strtolower($style) . '.css'))) {
+        return $xoops->path('modules/' . $GLOBALS['artdirname'] . '/assets/css/style_' . mb_strtolower($style) . '.css', true);
     }
 
     return $xoops->path('modules/' . $GLOBALS['artdirname'] . '/assets/css/style.css', true);
@@ -98,8 +98,9 @@ function about_getCss($style = 'default')
 /**
  * Function to module header for a page with specified style
  *
- * @var string $style
+ * @var string  $style
  *
+ * @param mixed $style
  * @return string
  */
 function about_getModuleHeader($style = 'default')
@@ -115,6 +116,7 @@ function about_getModuleHeader($style = 'default')
  * @var string  $page page name
  *
  * @param  bool $refresh
+ * @param mixed $page
  * @return array
  */
 function &about_getTplPageList($page = '', $refresh = true)

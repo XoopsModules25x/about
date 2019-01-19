@@ -1,4 +1,6 @@
-<?php namespace XoopsModules\About;
+<?php
+
+namespace XoopsModules\About;
 
 /*
                XOOPS - PHP Content Management System
@@ -35,12 +37,11 @@
  * work correctly if trying to upgrade if these values have been changed.
  *
  * @copyright::  {@link http://sourceforge.net/projects/xoops/ The XOOPS Project}
- * @license::    {@link http://www.gnu.org/licenses/gpl-2.0.html GNU Public License}
- * @author::     zyspec <owners@zyspec.com>
- * @package::    about
- * @since::      1.05
+ * @license  ::    {@link http://www.gnu.org/licenses/gpl-2.0.html GNU Public License}
+ * @author   ::     zyspec <owners@zyspec.com>
+ * @package  ::    about
+ * @since    ::      1.05
  **/
-
 defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 /**

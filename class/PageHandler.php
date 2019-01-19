@@ -1,4 +1,6 @@
-<?php namespace XoopsModules\About;
+<?php
+
+namespace XoopsModules\About;
 
 /**
  * About
@@ -18,11 +20,7 @@
  * @author         Mengjue Shao <magic.shao@gmail.com>
  * @author         Susheng Yang <ezskyyoung@gmail.com>
  */
-
-
-
 defined('XOOPS_ROOT_PATH') || die('Restricted access');
-
 
 /**
  * Class PageHandler
@@ -55,17 +53,17 @@ class PageHandler extends \XoopsPersistableObjectHandler
                 'page_title',
                 'page_menu_title',
                 'page_status',
-                'page_order'
+                'page_order',
             ];
         }
         $criteria = new \CriteriaCompo();
         $criteria->setSort('page_order');
         $criteria->order = 'ASC';
-        $pageTree =& $this->getAll($criteria, $tags);
+        $pageTree        = &$this->getAll($criteria, $tags);
         require_once __DIR__ . '/AboutTree.php';
-        $tree       = new AboutTree($pageTree);
-//        $page_array = $tree->makeTree($prefix, $pid, $tags);
-//        return $page_array;
+        $tree = new AboutTree($pageTree);
+        //        $page_array = $tree->makeTree($prefix, $pid, $tags);
+        //        return $page_array;
         return $tree->makeTree($prefix, $pid, $tags);
     }
 

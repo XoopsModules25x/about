@@ -23,7 +23,7 @@ use XoopsModules\About\Constants;
 require_once __DIR__ . '/header.php';
 require_once __DIR__ . '/include/functions.render.php';
 
-$page_id      = Xmf\Request::getInt('page_id', 0);
+$page_id = Xmf\Request::getInt('page_id', 0);
 //$page_id      = isset($_REQUEST['page_id']) ? $_REQUEST['page_id'] : '';
 //$pageHandler     = new About\PageHandler($db);
 
@@ -35,23 +35,23 @@ $menu_criteria->add(new \Criteria('page_status', Constants::PUBLISHED), 'AND');
 $menu_criteria->add(new \Criteria('page_menu_status', Constants::IN_MENU), 'AND');
 $menu_criteria->setSort('page_order');
 $menu_criteria->order = 'ASC';
-$fields = [
+$fields               = [
     'page_id',
     'page_pid',
     'page_menu_title',
     'page_blank',
     'page_menu_status',
     'page_status',
-    'page_text'
+    'page_text',
 ];
-$menu   = $pageHandler->getAll($menu_criteria, $fields, false);
+$menu                 = $pageHandler->getAll($menu_criteria, $fields, false);
 foreach ($menu as $k => $v) {
-    $page_text = trim($v['page_text']);
+    $page_text             = trim($v['page_text']);
     $menu[$k]['page_text'] = false;
     if (preg_match('/^https?\:\/\//', $page_text)) {
         $menu[$k]['page_text'] = true;
     }
-//    $menu[$k]['page_text'] = trim($v['page_text']) === 'http://' ? true : false;
+    //    $menu[$k]['page_text'] = trim($v['page_text']) === 'http://' ? true : false;
 }
 $page_menu = $pageHandler->menuTree($menu);
 
@@ -68,7 +68,7 @@ if (Constants::PAGE == $helper->getConfig('display', Constants::PAGE) || !empty(
 
     $criteria->setSort('page_order');
     $criteria->order = 'ASC';
-    $page = current($pageHandler->getObjects($criteria, null, false));
+    $page            = current($pageHandler->getObjects($criteria, null, false));
     if (!empty($page)) {
         $xoopsOption['xoops_pagetitle'] = $myts->htmlSpecialChars($page['page_title'] . ' - ' . $helper->getModule()->name());
         $xoopsOption['template_main']   = about_getTemplate('page', $page['page_tpl']);
@@ -104,7 +104,7 @@ if (Constants::PAGE == $helper->getConfig('display', Constants::PAGE) || !empty(
     $criteria->add(new \Criteria('page_status', Constants::PUBLISHED));
     $criteria->setSort('page_order');
     $criteria->order = 'ASC';
-    $list = $pageHandler->getAll($criteria, null, false);
+    $list            = $pageHandler->getAll($criteria, null, false);
     foreach ($list as $k => $v) {
         $text                      = strip_tags($myts->undoHtmlSpecialChars($v['page_text']));
         $list[$k]['page_text']     = xoops_substr($text, 0, $helper->getConfig('str_ereg', Constants::DEFAULT_EREG));

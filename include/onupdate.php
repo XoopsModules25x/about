@@ -37,7 +37,6 @@ function tableExists($tablename)
 }
 
 /**
- *
  * Prepares system prior to attempting to install module
  * @param XoopsModule $module {@link XoopsModule}
  *
@@ -45,8 +44,6 @@ function tableExists($tablename)
  */
 function xoops_module_pre_update_about(\XoopsModule $module)
 {
-
-
     $moduleDirName = basename(dirname(__DIR__));
     /** @var \XoopsModules\About\Helper $helper */
     $helper = \XoopsModules\About\Helper::getInstance();
@@ -55,33 +52,30 @@ function xoops_module_pre_update_about(\XoopsModule $module)
 
     $xoopsSuccess = $utility::checkVerXoops($module);
     $phpSuccess   = $utility::checkVerPhp($module);
+
     return $xoopsSuccess && $phpSuccess;
 }
 
 /**
- *
  * Performs tasks required during update of the module
  * @param XoopsModule $module {@link XoopsModule}
  * @param null        $previousVersion
  *
  * @return bool true if update successful, false if not
  */
-
 function xoops_module_update_about(\XoopsModule $module, $previousVersion = null)
 {
-    $moduleDirName = basename(dirname(__DIR__));
-    $moduleDirNameUpper   = strtoupper($moduleDirName);
+    $moduleDirName      = basename(dirname(__DIR__));
+    $moduleDirNameUpper = mb_strtoupper($moduleDirName);
 
     /** @var \XoopsModules\About\Helper $helper */
     /** @var About\Utility $utility */
     /** @var About\Common\Configurator $configurator */
-    $helper = \XoopsModules\About\Helper::getInstance();
+    $helper       = \XoopsModules\About\Helper::getInstance();
     $utility      = new About\Utility();
     $configurator = new About\Common\Configurator();
 
     if ($previousVersion < 240) {
-
-
         //delete old HTML templates
         if (count($configurator->templateFolders) > 0) {
             foreach ($configurator->templateFolders as $folder) {
@@ -144,9 +138,11 @@ function xoops_module_update_about(\XoopsModule $module, $previousVersion = null
         $sql = 'DELETE FROM ' . $GLOBALS['xoopsDB']->prefix('tplfile') . " WHERE `tpl_module` = '" . $module->getVar('dirname', 'n') . '\' AND `tpl_file` LIKE \'%.html%\'';
         $GLOBALS['xoopsDB']->queryF($sql);
 
-        /** @var XoopsGroupPermHandler $grouppermHandler */
+        /** @var \XoopsGroupPermHandler $grouppermHandler */
         $grouppermHandler = xoops_getHandler('groupperm');
+
         return $grouppermHandler->deleteByModule($module->getVar('mid'), 'item_read');
     }
+
     return true;
 }

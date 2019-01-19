@@ -1,4 +1,6 @@
-<?php namespace XoopsModules\About;
+<?php
+
+namespace XoopsModules\About;
 
 /**
  * About
@@ -17,7 +19,6 @@
  * @since          1.0.0
  * @author         Susheng Yang <ezskyyoung@gmail.com>
  */
-
 defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 require_once XOOPS_ROOT_PATH . '/class/xoopsform/form.php';

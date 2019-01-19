@@ -8,7 +8,6 @@
  * @link            https://xoops.org XOOPS
  */
 
-
 use XoopsModules\About;
 
 /**
@@ -17,7 +16,6 @@ use XoopsModules\About;
  *
  * @return bool true if ready to uninstall, false if not
  */
-
 function xoops_module_pre_uninstall_about(\XoopsModule $module)
 {
     // Do some synchronization
@@ -25,7 +23,6 @@ function xoops_module_pre_uninstall_about(\XoopsModule $module)
 }
 
 /**
- *
  * Performs tasks required during uninstallation of the module
  * @param XoopsModule $module {@link XoopsModule}
  *
@@ -33,7 +30,7 @@ function xoops_module_pre_uninstall_about(\XoopsModule $module)
  */
 function xoops_module_uninstall_about(\XoopsModule $module)
 {
-//    return true;
+    //    return true;
 
     require_once dirname(__DIR__) . '/preloads/autoloader.php';
     $moduleDirName = basename(dirname(__DIR__));
@@ -43,10 +40,8 @@ function xoops_module_uninstall_about(\XoopsModule $module)
     /** @var About\Utility $utility */
     $utility = new About\Utility();
 
-
     $success = true;
     $helper->loadLanguage('admin');
-
 
     //------------------------------------------------------------------
     // Remove uploads folder (and all subfolders) if they exist

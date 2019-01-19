@@ -19,7 +19,7 @@
 
 use XoopsModules\About\Constants;
 
-require_once __DIR__   . '/preloads/autoloader.php';
+require_once __DIR__ . '/preloads/autoloader.php';
 
 $modversion['version']       = 1.06;
 $modversion['module_status'] = 'Beta 1';
@@ -34,12 +34,12 @@ $modversion['license_url']   = 'www.gnu.org/licenses/gpl-2.0.html';
 
 //$moduleDirName = basename(__DIR__);
 
-$modversion['dirname'] = basename(__DIR__);
+$modversion['dirname']             = basename(__DIR__);
 $modversion['modicons16']          = 'assets/images/icons/16';
 $modversion['modicons32']          = 'assets/images/icons/32';
 $modversion['module_website_url']  = 'www.xoops.org';
 $modversion['module_website_name'] = 'XOOPS';
-$modversion['min_php']             = '5.6';
+$modversion['min_php']             = '5.5';
 $modversion['min_xoops']           = '2.5.9';
 $modversion['min_admin']           = '1.2';
 $modversion['min_db']              = ['mysql' => '5.5'];
@@ -64,7 +64,7 @@ global $xoopsModuleConfig, $xoopsUser, $xoopsModule;
 //sql
 $modversion['sqlfile']['mysql'] = 'sql/mysql.sql';
 $modversion['tables']           = [
-    'about_page'
+    'about_page',
 ];
 
 /**
@@ -72,7 +72,7 @@ $modversion['tables']           = [
  */
 if ($isModuleAction) {
     require_once __DIR__ . '/include/functions.render.php';
-    $modversion['templates'] =& about_getTplPageList('', true);
+    $modversion['templates'] = &about_getTplPageList('', true);
 }
 
 //$modversion['templates'][] = [
@@ -90,7 +90,7 @@ $modversion['blocks'][] = [
     'show_func'   => 'about_block_menu_show',
     'options'     => '',
     'edit_func'   => '',
-    'template'    => 'about_block_menu.tpl'
+    'template'    => 'about_block_menu.tpl',
 ];
 
 /*
@@ -107,7 +107,7 @@ $modversion['blocks'][] = [
     'show_func'   => 'about_block_page_show',
     'options'     => '1|0|[more]|0',
     'edit_func'   => 'about_block_page_edit',
-    'template'    => 'about_block_page.tpl'
+    'template'    => 'about_block_page.tpl',
 ];
 
 xoops_load('constants', basename(__DIR__));
@@ -121,9 +121,9 @@ $modversion['config'][] = [
     'valuetype'   => 'int',
     'options'     => [
         '_MI_ABOUT_CONFIG_LIST_PAGE'     => Constants::PAGE,
-        '_MI_ABOUT_CONFIG_LIST_CATEGORY' => Constants::CATEGORY
+        '_MI_ABOUT_CONFIG_LIST_CATEGORY' => Constants::CATEGORY,
     ],
-    'default'     => Constants::PAGE
+    'default'     => Constants::PAGE,
 ];
 
 $modversion['config'][] = [
@@ -132,7 +132,7 @@ $modversion['config'][] = [
     'description' => '',
     'formtype'    => 'textbox',
     'valuetype'   => 'int',
-    'default'     => Constants::DEFAULT_EREG
+    'default'     => Constants::DEFAULT_EREG,
 ];
 
 xoops_load('xoopseditorhandler');
@@ -144,5 +144,5 @@ $modversion['config'][] = [
     'formtype'    => 'select',
     'valuetype'   => 'text',
     'options'     => array_flip($editorHandler->getList()),
-    'default'     => 'dhtml'
+    'default'     => 'dhtml',
 ];

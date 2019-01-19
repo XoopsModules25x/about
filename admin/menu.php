@@ -9,6 +9,7 @@
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
  * FITNESS FOR A PARTICULAR PURPOSE.
  */
+
 /**
  * Display the Administration About page
  *
@@ -23,7 +24,7 @@
 
 use XoopsModules\About;
 
-require_once  dirname(__DIR__) . '/include/common.php';
+require_once dirname(__DIR__) . '/include/common.php';
 
 /** @var \XoopsModules\About\Helper $helper */
 $helper = \XoopsModules\About\Helper::getInstance();
@@ -37,16 +38,16 @@ $adminmenu = [
     [
         'title' => _MI_ABOUT_HOME,
         'link'  => 'admin/index.php',
-        'icon'  => Xmf\Module\Admin::menuIconPath('home.png')
+        'icon'  => Xmf\Module\Admin::menuIconPath('home.png'),
     ],
     [
         'title' => _MI_ABOUT_PAGE,
         'link'  => 'admin/admin.page.php',
-        'icon'  => Xmf\Module\Admin::menuIconPath('manage.png')
+        'icon'  => Xmf\Module\Admin::menuIconPath('manage.png'),
     ],
     [
         'title' => _MI_ABOUT_ABOUT,
         'link'  => 'admin/about.php',
-        'icon'  => Xmf\Module\Admin::menuIconPath('about.png')
+        'icon'  => Xmf\Module\Admin::menuIconPath('about.png'),
     ],
 ];

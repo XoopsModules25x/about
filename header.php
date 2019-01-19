@@ -21,7 +21,7 @@
 use XoopsModules\About;
 
 $moduleDirName = basename(__DIR__);
-require_once  dirname(dirname(__DIR__)) . '/mainfile.php';
+require_once dirname(dirname(__DIR__)) . '/mainfile.php';
 
 require_once __DIR__ . '/include/common.php';
 
@@ -32,5 +32,5 @@ $helper->loadLanguage('modinfo');
 
 $xoBreadcrumbs = [
     ['title' => _YOURHOME, 'link' => XOOPS_URL],
-    ['title' => $xoopsModule->getVar('name'), 'link' => XOOPS_URL . "/modules/{$moduleDirName}/"]
+    ['title' => $xoopsModule->getVar('name'), 'link' => XOOPS_URL . "/modules/{$moduleDirName}/"],
 ];

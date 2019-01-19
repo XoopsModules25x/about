@@ -17,7 +17,6 @@
  * @license    GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
  * @author     XOOPS Module Development Team
  */
-
 require_once __DIR__ . '/admin_header.php';
 
 xoops_cp_header();

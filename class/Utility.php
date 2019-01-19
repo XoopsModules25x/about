@@ -1,4 +1,6 @@
-<?php namespace XoopsModules\About;
+<?php
+
+namespace XoopsModules\About;
 
 /*
  About Utility Class Definition
@@ -12,6 +14,7 @@
  WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  */
+
 /**
  * Module:  About
  *
@@ -23,16 +26,12 @@
  * @since        ::      File available since version 1.54
  */
 
-use Xmf\Request;
 use XoopsModules\About;
-use XoopsModules\About\Common;
-
 
 /**
  * Utility
  *
  * Static utility class to provide common functionality
- *
  */
 class Utility
 {
