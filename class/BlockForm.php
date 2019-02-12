@@ -1,4 +1,7 @@
 <?php
+
+namespace XoopsModules\About;
+
 /**
  * About
  *
@@ -16,18 +19,17 @@
  * @since          1.0.0
  * @author         Susheng Yang <ezskyyoung@gmail.com>
  */
+defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
-defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
-
-include_once XOOPS_ROOT_PATH . '/class/xoopsform/form.php';
+require_once XOOPS_ROOT_PATH . '/class/xoopsform/form.php';
 
 /**
- * Class AboutBlockForm
+ * Class BlockForm
  */
-class AboutBlockForm extends XoopsForm
+class BlockForm extends \XoopsForm
 {
     /**
-     * AboutBlockForm constructor.
+     * BlockForm constructor.
      */
     public function __construct()
     {
@@ -46,7 +48,7 @@ class AboutBlockForm extends XoopsForm
             if (!is_object($ele)) {
                 $ret .= $ele;
             } elseif (!$ele->isHidden()) {
-                if (($caption = $ele->getCaption()) !== '') {
+                if ('' !== ($caption = $ele->getCaption())) {
                     $ret .= "<div class='xoops-form-element-caption" . ($ele->isRequired() ? '-required' : '') . "'>" . "<span class='caption-text'><strong>{$caption}</strong></span>" . "<span class='caption-marker'>*</span>" . '</div>';
                 }
 

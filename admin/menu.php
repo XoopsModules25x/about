@@ -9,10 +9,11 @@
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
  * FITNESS FOR A PARTICULAR PURPOSE.
  */
+
 /**
  * Display the Administration About page
  *
- * @package    module\about\admin
+ * @package    module\About\admin
  * @copyright  The XOOPS Co.Ltd. http://www.xoops.com.cn
  * @copyright  https://xoops.org 2001-2017 XOOPS Project
  * @license    GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
@@ -21,18 +22,32 @@
  * @author     Susheng Yang <ezskyyoung@gmail.com>
  */
 
-defined('XOOPS_ROOT_PATH') || exit('Restricted access');
+use XoopsModules\About;
 
-$adminmenu = array(array('title' => _MI_ABOUT_HOME,
-                         'link' => 'admin/index.php',
-                         'icon' => Xmf\Module\Admin::menuIconPath('home.png')
-                      ),
-                   array('title' => _MI_ABOUT_PAGE,
-                         'link' => 'admin/admin.page.php',
-                         'icon'  => Xmf\Module\Admin::menuIconPath('manage.png')
-                   ),
-                   array('title' => _MI_ABOUT_ABOUT,
-                         'link' => 'admin/about.php',
-                         'icon' => Xmf\Module\Admin::menuIconPath('about.png')
-                   ),
-);
+require_once dirname(__DIR__) . '/include/common.php';
+
+/** @var \XoopsModules\About\Helper $helper */
+$helper = \XoopsModules\About\Helper::getInstance();
+
+$pathIcon32 = \Xmf\Module\Admin::menuIconPath('');
+if (is_object($helper->getModule())) {
+    $pathModIcon32 = $helper->getModule()->getInfo('modicons32');
+}
+
+$adminmenu = [
+    [
+        'title' => _MI_ABOUT_HOME,
+        'link'  => 'admin/index.php',
+        'icon'  => Xmf\Module\Admin::menuIconPath('home.png'),
+    ],
+    [
+        'title' => _MI_ABOUT_PAGE,
+        'link'  => 'admin/admin.page.php',
+        'icon'  => Xmf\Module\Admin::menuIconPath('manage.png'),
+    ],
+    [
+        'title' => _MI_ABOUT_ABOUT,
+        'link'  => 'admin/about.php',
+        'icon'  => Xmf\Module\Admin::menuIconPath('about.png'),
+    ],
+];

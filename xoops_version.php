@@ -17,12 +17,16 @@
  * @author         Susheng Yang <ezskyyoung@gmail.com>
  */
 
-$modversion['version']       = 1.05;
-$modversion['module_status'] = 'RC 1';
-$modversion['release_date']  = '2017/08/04';
+use XoopsModules\About\Constants;
+
+require_once __DIR__ . '/preloads/autoloader.php';
+
+$modversion['version']       = 1.06;
+$modversion['module_status'] = 'Beta 1';
+$modversion['release_date']  = '2018/12/04';
 $modversion['name']          = _MI_ABOUT_NAME;
 $modversion['description']   = _MI_ABOUT_DESC;
-$modversion['author']        = 'Magic.Shao <magic.shao@gmail.com>, ezsky <ezskyyoung@gmail.com>';
+$modversion['author']        = 'Magic.Shao, ezsky, Mamba, Zyspec';
 $modversion['credits']       = 'xoops.org.cn';
 $modversion['help']          = 'page=help';
 $modversion['license']       = 'GNU GPL 2.0 or later';
@@ -30,10 +34,7 @@ $modversion['license_url']   = 'www.gnu.org/licenses/gpl-2.0.html';
 
 //$moduleDirName = basename(__DIR__);
 
-$modversion['dirname'] = basename(__DIR__);
-//$modversion['dirmoduleadmin']      = 'Frameworks/moduleclasses/moduleadmin';
-//$modversion['sysicons16']          = 'Frameworks/moduleclasses/icons/16';
-//$modversion['sysicons32']          = 'Frameworks/moduleclasses/icons/32';
+$modversion['dirname']             = basename(__DIR__);
 $modversion['modicons16']          = 'assets/images/icons/16';
 $modversion['modicons32']          = 'assets/images/icons/32';
 $modversion['module_website_url']  = 'www.xoops.org';
@@ -41,7 +42,7 @@ $modversion['module_website_name'] = 'XOOPS';
 $modversion['min_php']             = '5.5';
 $modversion['min_xoops']           = '2.5.9';
 $modversion['min_admin']           = '1.2';
-$modversion['min_db']              = array('mysql' => '5.5');
+$modversion['min_db']              = ['mysql' => '5.5'];
 
 $modversion['image'] = 'assets/images/logoModule.png';
 
@@ -50,7 +51,7 @@ $modversion['adminindex'] = 'admin/index.php';
 $modversion['adminmenu']  = 'admin/menu.php';
 
 // Is performing module install/update?
-$isModuleAction            = (!empty($_POST['fct']) && 'modulesadmin' === $_POST['fct']) ? true : false;
+$isModuleAction            = (!empty($_POST['fct']) && 'modulesadmin' === $_POST['fct']);
 $modversion['onInstall']   = 'include/action.module.php';
 $modversion['onUpdate']    = 'include/action.module.php';
 $modversion['onUninstall'] = 'include/action.module.php';
@@ -62,36 +63,35 @@ global $xoopsModuleConfig, $xoopsUser, $xoopsModule;
 
 //sql
 $modversion['sqlfile']['mysql'] = 'sql/mysql.sql';
-$modversion['tables']           = array(
-    'about_page'
-);
+$modversion['tables']           = [
+    'about_page',
+];
 
 /**
  * Templates
  */
 if ($isModuleAction) {
     require_once __DIR__ . '/include/functions.render.php';
-    $modversion['templates'] =& about_getTplPageList('', true);
+    $modversion['templates'] = &about_getTplPageList('', true);
 }
 
-$modversion['templates'] = array(
-    // User
-    array('file' => 'about_admin_page.tpl', 'description' => ''),
-    array('file' => 'about_list.tpl', 'description' => ''),
-    array('file' => 'about_menu.tpl', 'description' => ''),
-    array('file' => 'about_page.tpl', 'description' => '')
-);
+//$modversion['templates'][] = [
+//    ['file' => 'about_admin_page.tpl', 'description' => ''],
+//    ['file' => 'about_list.tpl', 'description' => ''],
+//    ['file' => 'about_menu.tpl', 'description' => ''],
+//    ['file' => 'about_page.tpl', 'description' => ''],
+//];
 
 // Blocks
-$modversion['blocks'][] = array(
+$modversion['blocks'][] = [
     'file'        => 'blocks.php',
     'name'        => _MI_ABOUT_ABOUTUS,
     'description' => '',
     'show_func'   => 'about_block_menu_show',
     'options'     => '',
     'edit_func'   => '',
-    'template'    => 'about_block_menu.tpl'
-);
+    'template'    => 'about_block_menu.tpl',
+];
 
 /*
  * @param int $options[0] page id
@@ -100,49 +100,48 @@ $modversion['blocks'][] = array(
  * @param int $options[3] more link text
  */
 
-$modversion['blocks'][] = array(
+$modversion['blocks'][] = [
     'file'        => 'blocks.php',
     'name'        => _MI_ABOUT_PAGE,
     'description' => '',
     'show_func'   => 'about_block_page_show',
     'options'     => '1|0|[more]|0',
     'edit_func'   => 'about_block_page_edit',
-    'template'    => 'about_block_page.tpl'
-);
+    'template'    => 'about_block_page.tpl',
+];
 
-xoops_load('constants', basename(__DIR__));
 
 // Module Configs
-$modversion['config'][] = array(
+$modversion['config'][] = [
     'name'        => 'display',
     'title'       => '_MI_ABOUT_CONFIG_LIST',
     'description' => '',
     'formtype'    => 'select',
     'valuetype'   => 'int',
-    'options'     => array(
-        '_MI_ABOUT_CONFIG_LIST_PAGE'     => AboutConstants::PAGE,
-        '_MI_ABOUT_CONFIG_LIST_CATEGORY' => AboutConstants::CATEGORY
-    ),
-    'default'     => AboutConstants::PAGE
-);
+    'options'     => [
+        '_MI_ABOUT_CONFIG_LIST_PAGE'     => Constants::PAGE,
+        '_MI_ABOUT_CONFIG_LIST_CATEGORY' => Constants::CATEGORY,
+    ],
+    'default'     => Constants::PAGE,
+];
 
-$modversion['config'][] = array(
+$modversion['config'][] = [
     'name'        => 'str_ereg',
     'title'       => '_MI_ABOUT_CONFIG_STR_EREG',
     'description' => '',
     'formtype'    => 'textbox',
     'valuetype'   => 'int',
-    'default'     => AboutConstants::DEFAULT_EREG
-);
+    'default'     => Constants::DEFAULT_EREG,
+];
 
 xoops_load('xoopseditorhandler');
 $editorHandler          = XoopsEditorHandler::getInstance();
-$modversion['config'][] = array(
+$modversion['config'][] = [
     'name'        => 'editorAdmin',
     'title'       => '_MI_ABOUT_EDITOR',
     'description' => '_MI_ABOUT_EDITOR_DESC',
     'formtype'    => 'select',
     'valuetype'   => 'text',
     'options'     => array_flip($editorHandler->getList()),
-    'default'     => 'dhtml'
-);
+    'default'     => 'dhtml',
+];

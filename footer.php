@@ -18,8 +18,10 @@
  * @author         Susheng Yang <ezskyyoung@gmail.com>
  */
 
-if (count($xoBreadcrumbs) > 0) {
+use XoopsModules\About;
+
+if ($xoBreadcrumbs && is_array($xoBreadcrumbs)) {
     $xoopsTpl->assign('xoBreadcrumbs', $xoBreadcrumbs);
 }
 
-include XOOPS_ROOT_PATH . '/footer.php';
+require_once XOOPS_ROOT_PATH . '/footer.php';

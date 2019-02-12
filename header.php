@@ -18,14 +18,19 @@
  * @author         Susheng Yang <ezskyyoung@gmail.com>
  */
 
+use XoopsModules\About;
+use XoopsModules\About\Constants;
+
 $moduleDirName = basename(__DIR__);
-require_once __DIR__ . '/../../mainfile.php';
+require_once dirname(dirname(__DIR__)) . '/mainfile.php';
 
-$abtHelper = Xmf\Module\Helper::getHelper($moduleDirName);
+require_once __DIR__ . '/include/common.php';
 
-xoops_load('constants', $moduleDirName);
-$abtHelper->loadLanguage('modinfo');
+//$helper = \XoopsModules\AboutHelper::getInstance();
 
-$xoBreadcrumbs = array(array('title' => _YOURHOME, 'link' => XOOPS_URL),
-                       array('title' => $xoopsModule->getVar('name'), 'link' => XOOPS_URL . "/modules/{$moduleDirName}/")
-);
+$helper->loadLanguage('modinfo');
+
+$xoBreadcrumbs = [
+    ['title' => _YOURHOME, 'link' => XOOPS_URL],
+    ['title' => $xoopsModule->getVar('name'), 'link' => XOOPS_URL . "/modules/{$moduleDirName}/"],
+];

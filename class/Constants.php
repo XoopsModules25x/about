@@ -1,8 +1,11 @@
 <?php
+
+namespace XoopsModules\About;
+
 /*
                XOOPS - PHP Content Management System
                    Copyright (c) 2000 XOOPS.org
-                      <http://www.xoops.org/>
+                      <https://xoops.org/>
  This program is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
  the Free Software Foundation; either version 2 of the License, or
@@ -22,6 +25,7 @@
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
 */
+
 /**
  * About module
  *
@@ -33,22 +37,21 @@
  * work correctly if trying to upgrade if these values have been changed.
  *
  * @copyright::  {@link http://sourceforge.net/projects/xoops/ The XOOPS Project}
- * @license::    {@link http://www.gnu.org/licenses/gpl-2.0.html GNU Public License}
- * @author::     zyspec <owners@zyspec.com>
- * @package::    about
- * @since::      1.05
+ * @license  ::    {@link http://www.gnu.org/licenses/gpl-2.0.html GNU Public License}
+ * @author   ::     zyspec <owners@zyspec.com>
+ * @package  ::    about
+ * @since    ::      1.05
  **/
-
-defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
+defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 /**
- * Interface AboutConstants
+ * Class Constants
  */
-interface AboutConstants
+class Constants
 {
-/**#@+
- * Constant definition
- */
+    /**#@+
+     * Constant definition
+     */
     /**
      * display - page
      */
@@ -132,5 +135,5 @@ interface AboutConstants
      * Unset flag
      */
     const NOT_SET = 0;
-/**#@-*/
+    /**#@-*/
 }

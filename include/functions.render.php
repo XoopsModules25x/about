@@ -15,18 +15,17 @@
  * @since           1.0
  * @author          Taiwen Jiang <phppp@users.sourceforge.net>
  */
+defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
-defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
-
-include __DIR__ . '/vars.php';
+require_once __DIR__ . '/vars.php';
 define($GLOBALS['artdirname'] . '_FUNCTIONS_RENDER_LOADED', true);
 
 /**
  * Function to get template file of a specified style of a specified page
  *
- * @var string $page  page name
- * @var string $style template style
  *
+ * @param mixed      $page
+ * @param null|mixed $style
  * @return string template file name, using default style if style is invalid
  */
 function about_getTemplate($page = 'index', $style = null)
@@ -34,7 +33,7 @@ function about_getTemplate($page = 'index', $style = null)
     global $xoops;
 
     $template_dir = $xoops->path("modules/{$GLOBALS['artdirname']}/templates/");
-    $style        = empty($style) ? '' : '_' . $style;
+    $style        = null === $style ? '' : '_' . $style;
     $file_name    = "{$GLOBALS['artdirname']}_{$page}{$style}.tpl";
     if (file_exists($template_dir . $file_name)) {
         return $file_name;
@@ -55,16 +54,16 @@ function about_getTemplate($page = 'index', $style = null)
 /**
  * Function to get a list of template files of a page, indexed by file name
  *
- * @var    string       $page    page name
- * @param  bool|boolean $refresh recreate the data
- * @return array
  *
+ * @param mixed      $page
+ * @param  bool|bool $refresh recreate the data
+ * @return array
  */
-function &about_getTemplateList($page = 'index', $refresh = false)
+function about_getTemplateList($page = 'index', $refresh = false)
 {
     $TplFiles = about_getTplPageList($page, $refresh);
-    $template = array();
-    if (is_array($TplFiles) && count($TplFiles) > 0) {
+    $template = [];
+    if ($TplFiles && is_array($TplFiles)) {
         foreach (array_keys($TplFiles) as $temp) {
             $template[$temp] = $temp;
         }
@@ -78,16 +77,16 @@ function &about_getTemplateList($page = 'index', $refresh = false)
  *
  * The hardcoded path is not desirable for theme switch, however, we have to keabout it before getting a good solution for cache
  *
- * @var string $style
  *
+ * @param mixed $style
  * @return string file URL, false if not found
  */
 function about_getCss($style = 'default')
 {
     global $xoops;
 
-    if (is_readable($xoops->path('modules/' . $GLOBALS['artdirname'] . '/assets/css/style_' . strtolower($style) . '.css'))) {
-        return $xoops->path('modules/' . $GLOBALS['artdirname'] . '/assets/css/style_' . strtolower($style) . '.css', true);
+    if (is_readable($xoops->path('modules/' . $GLOBALS['artdirname'] . '/assets/css/style_' . mb_strtolower($style) . '.css'))) {
+        return $xoops->path('modules/' . $GLOBALS['artdirname'] . '/assets/css/style_' . mb_strtolower($style) . '.css', true);
     }
 
     return $xoops->path('modules/' . $GLOBALS['artdirname'] . '/assets/css/style.css', true);
@@ -96,8 +95,8 @@ function about_getCss($style = 'default')
 /**
  * Function to module header for a page with specified style
  *
- * @var string $style
  *
+ * @param mixed $style
  * @return string
  */
 function about_getModuleHeader($style = 'default')
@@ -110,8 +109,8 @@ function about_getModuleHeader($style = 'default')
 /**
  * Function to get a list of template files of a page, indexed by style
  *
- * @var string  $page page name
  *
+ * @param mixed $page
  * @param  bool $refresh
  * @return array
  */
@@ -146,8 +145,8 @@ function &about_template_lookup($index_by_page = false)
 {
     require_once XOOPS_ROOT_PATH . '/class/xoopslists.php';
 
-    $files = XoopsLists::getHtmlListAsArray(XOOPS_ROOT_PATH . '/modules/' . $GLOBALS['artdirname'] . '/templates/');
-    $list  = array();
+    $files = \XoopsLists::getHtmlListAsArray(XOOPS_ROOT_PATH . '/modules/' . $GLOBALS['artdirname'] . '/templates/');
+    $list  = [];
     foreach ($files as $file => $name) {
         // The valid file name must be: art_article_mytpl.html OR art_category-1_your-trial.html
         if (preg_match('/^' . $GLOBALS['artdirname'] . "_([^_]*)(_(.*))?\.(tpl|xotpl)$/i", $name, $matches)) {
@@ -158,7 +157,7 @@ function &about_template_lookup($index_by_page = false)
                 $matches[3] = 'default';
             }
             if (empty($index_by_page)) {
-                $list[] = array('file' => $name, 'description' => $matches[3]);
+                $list[] = ['file' => $name, 'description' => $matches[3]];
             } else {
                 $list[$matches[1]][$matches[3]] = $name;
             }

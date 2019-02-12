@@ -21,6 +21,7 @@
 </div>
 <div>
     <h4><{$page.page_title}></h4>
+    <{if $page.page_image}><span class="floatleft pad3]"><img src="<{$xoops_url}>/uploads/about/<{$page.page_image}>"></span><{/if}>
     <div><{$page.page_text}></div>
 </div>
 <br style="clear:both;">

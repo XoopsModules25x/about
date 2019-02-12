@@ -1,3 +1,21 @@
+<h5>1.06 RC1           [2019-02-11]</h5>  Dev: XOOPS 2.5.10, PHP 7.3.2
+<hr>
+- updates, cleanup (mamba)
+- added image display to pages (mamba)
+
+<h5>1.06 Beta 1           [2018-12-04]</h5>
+<hr>
+- namespaces (mamba)
+- class autoloading (mamba)
+- short array syntax (mamba)
+- Yoda notation (mamba)
+- started conversion to XMF (mamba)
+    &nbsp;&nbsp;- updated addInfoBoxLine entries (mamba)
+    &nbsp;&nbsp;- displayNavigation(basename(__FILE__))  (mamba)
+    &nbsp;&nbsp;- changed to ->displayButton('left') (mamba)
+WORK IN PROGRESS
+
+
 <h5>1.05 RC-1           [2017-08-04]</h5>
 <hr>
 - changed _handler to Handler (mamba)
@@ -5,7 +23,7 @@
 - added SCANDIR_SORT_NONE to scandir() (mamba)
 
 
-<h5>1.05 Beta 1           [2017-05-02]</h5>
+<h5>1.05 Beta 1   (Zyspec)        [2017-05-02]</h5>
 <hr>
 + add XOOPS & PHP version check on install or upgrade
 + add usage of Xmf\Request in several places to filter input
@@ -22,7 +40,7 @@
 + moved loading of js and css to immediately after header(s) in index.php
 - removed pass-by-reference for non-vars
 - removed trailing '/' for html void elements
-- renamed XoopsBlockForm to AboutBlockForm class and moved file to ./class subdirectory
+- renamed XoopsBlockForm to BlockForm class and moved file to ./class subdirectory
 - changed Criteria->setOrder($value) to Criteria->order = $value (to compensate for bug in XOOPS core)
 - changed text for example pages created during module installation
 + updated jquery-treeview to v1.42

@@ -18,64 +18,66 @@
  * @author         Susheng Yang <ezskyyoung@gmail.com>
  */
 
+use XoopsModules\About\Constants;
+
 require_once __DIR__ . '/header.php';
 require_once __DIR__ . '/include/functions.render.php';
 
-$page_id      = Xmf\Request::getInt('page_id', 0);
+$page_id = Xmf\Request::getInt('page_id', 0);
 //$page_id      = isset($_REQUEST['page_id']) ? $_REQUEST['page_id'] : '';
-$pageHandler = $abtHelper->getHandler('page');
+//$pageHandler     = new About\PageHandler($db);
 
-$myts = MyTextSanitizer::getInstance();
+$myts = \MyTextSanitizer::getInstance();
 
 // Menu
-$menu_criteria = new CriteriaCompo();
-$menu_criteria->add(new Criteria('page_status', AboutConstants::PUBLISHED), 'AND');
-$menu_criteria->add(new Criteria('page_menu_status', AboutConstants::IN_MENU), 'AND');
+$menu_criteria = new \CriteriaCompo();
+$menu_criteria->add(new \Criteria('page_status', Constants::PUBLISHED), 'AND');
+$menu_criteria->add(new \Criteria('page_menu_status', Constants::IN_MENU), 'AND');
 $menu_criteria->setSort('page_order');
 $menu_criteria->order = 'ASC';
-$fields = array(
+$fields               = [
     'page_id',
     'page_pid',
     'page_menu_title',
     'page_blank',
     'page_menu_status',
     'page_status',
-    'page_text'
-);
-$menu   = $pageHandler->getAll($menu_criteria, $fields, false);
+    'page_text',
+];
+$menu                 = $pageHandler->getAll($menu_criteria, $fields, false);
 foreach ($menu as $k => $v) {
-    $page_text = trim($v['page_text']);
+    $page_text             = trim($v['page_text']);
     $menu[$k]['page_text'] = false;
-    if (preg_match('/https?\:\/\//', $page_text)) {
+    if (preg_match('/^https?\:\/\//', $page_text)) {
         $menu[$k]['page_text'] = true;
     }
-//    $menu[$k]['page_text'] = trim($v['page_text']) === 'http://' ? true : false;
+    //    $menu[$k]['page_text'] = trim($v['page_text']) === 'http://' ? true : false;
 }
 $page_menu = $pageHandler->menuTree($menu);
 
 // Display
-if (AboutConstants::PAGE == $abtHelper->getConfig('display', AboutConstants::PAGE) || !empty($page_id)) {
+if (Constants::PAGE == $helper->getConfig('display', Constants::PAGE) || !empty($page_id)) {
     // Fun menu display
-    $criteria = new CriteriaCompo();
+    $criteria = new \CriteriaCompo();
     if (!empty($page_id)) {
-        $criteria->add(new Criteria('page_id', $page_id));
+        $criteria->add(new \Criteria('page_id', $page_id));
     } else {
-        $criteria->add(new Criteria('page_index', AboutConstants::DEFAULT_INDEX));
+        $criteria->add(new \Criteria('page_index', Constants::DEFAULT_INDEX));
     }
-    $criteria->add(new Criteria('page_status', AboutConstants::PUBLISHED));
+    $criteria->add(new \Criteria('page_status', Constants::PUBLISHED));
 
     $criteria->setSort('page_order');
     $criteria->order = 'ASC';
-    $page = current($pageHandler->getObjects($criteria, null, false, false));
+    $page            = current($pageHandler->getObjects($criteria, null, false));
     if (!empty($page)) {
-        $xoopsOption['xoops_pagetitle'] = $myts->htmlSpecialChars($page['page_title'] . ' - ' . $abtHelper->getModule()->name());
+        $xoopsOption['xoops_pagetitle'] = $myts->htmlSpecialChars($page['page_title'] . ' - ' . $helper->getModule()->name());
         $xoopsOption['template_main']   = about_getTemplate('page', $page['page_tpl']);
     } else {
-        $xoopsOption['xoops_pagetitle'] = $myts->htmlSpecialChars(_MD_ABOUT_INDEX . ' - ' . $abtHelper->getModule()->name());
+        $xoopsOption['xoops_pagetitle'] = $myts->htmlSpecialChars(_MD_ABOUT_INDEX . ' - ' . $helper->getModule()->name());
         $xoopsOption['template_main']   = about_getTemplate();
     }
 
-    include XOOPS_ROOT_PATH . '/header.php';
+    require_once XOOPS_ROOT_PATH . '/header.php';
     $GLOBALS['xoTheme']->addStylesheet("modules/{$moduleDirName}/assets/css/style.css");
     $GLOBALS['xoTheme']->addStylesheet("modules/{$moduleDirName}/assets/js/jquery-treeview/jquery.treeview.css");
     $GLOBALS['xoTheme']->addScript('browse.php?Frameworks/jquery/jquery.js');
@@ -83,7 +85,7 @@ if (AboutConstants::PAGE == $abtHelper->getConfig('display', AboutConstants::PAG
 
     if (!empty($page)) {
         $page['page_text'] = $myts->undoHtmlSpecialChars($page['page_text']);
-        if (AboutConstants::PAGE_TYPE_LINK == $page['page_type']) {
+        if (Constants::PAGE_TYPE_LINK == $page['page_type']) {
             header('location: ' . $page['page_text']);
         }
         /** @var xos_opal_Theme $xoTheme */
@@ -93,32 +95,33 @@ if (AboutConstants::PAGE == $abtHelper->getConfig('display', AboutConstants::PAG
     }
 } else {
     // List (Category) display
-    $xoopsOption['xoops_pagetitle'] = $abtHelper->getModule()->name();
+    $xoopsOption['xoops_pagetitle'] = $helper->getModule()->name();
     $xoopsOption['template_main']   = about_getTemplate('list');
-    include XOOPS_ROOT_PATH . '/header.php';
+    require_once XOOPS_ROOT_PATH . '/header.php';
     $GLOBALS['xoTheme']->addStylesheet("modules/{$moduleDirName}/assets/css/style.css");
 
-    $criteria = new CriteriaCompo();
-    $criteria->add(new Criteria('page_status', AboutConstants::PUBLISHED));
+    $criteria = new \CriteriaCompo();
+    $criteria->add(new \Criteria('page_status', Constants::PUBLISHED));
     $criteria->setSort('page_order');
     $criteria->order = 'ASC';
-    $list = $pageHandler->getAll($criteria, null, false);
+    $list            = $pageHandler->getAll($criteria, null, false);
     foreach ($list as $k => $v) {
         $text                      = strip_tags($myts->undoHtmlSpecialChars($v['page_text']));
-        $list[$k]['page_text']     = xoops_substr($text, 0, $abtHelper->getConfig('str_ereg', AboutConstants::DEFAULT_EREG));
+        $list[$k]['page_text']     = xoops_substr($text, 0, $helper->getConfig('str_ereg', Constants::DEFAULT_EREG));
         $list[$k]['page_pushtime'] = formatTimestamp($v['page_pushtime'], _SHORTDATESTRING);
     }
     $xoopsTpl->assign('list', $list);
 }
 
-// get bread
+// get breadcrumb
+$tree_open = [];
 if (!empty($bread)) {
-$bread = array_reverse($pageHandler->getBread($menu, $page_id), true);
+    $bread = array_reverse($pageHandler->getBread($menu, $page_id), true);
     foreach ($bread as $k => $v) {
         if ($k != $page_id) {
-            $xoBreadcrumbs[] = array('title' => $v, 'link' => $abtHelper->url("index.php?page_id={$k}"));
+            $xoBreadcrumbs[] = ['title' => $v, 'link' => $helper->url("index.php?page_id={$k}")];
         } else {
-            $xoBreadcrumbs[] = array('title' => $v);
+            $xoBreadcrumbs[] = ['title' => $v];
         }
         $tree_open[$k] = $k;
     }

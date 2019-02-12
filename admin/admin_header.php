@@ -12,25 +12,26 @@
 /**
  * Create and display the Administration Header for pages
  *
- * @package      module\about\admin
+ * @package      module\About\admin
  * @copyright    https://xoops.org 2001-2017 XOOPS Project
  * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
  * @author       XOOPS Module Development Team
  */
-
 $moduleDirName = basename(dirname(__DIR__));
-require_once __DIR__ . '/../../../include/cp_header.php';
+require_once dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
+require_once dirname(__DIR__) . '/include/common.php';
+
 xoops_load('xoopsformloader');
-xoops_load('constants', $moduleDirName);
 
-$abtHelper = Xmf\Module\Helper::getHelper($moduleDirName);
-$myts = MyTextSanitizer::getInstance();
+/** @var \XoopsModules\About\Helper $helper */
+$helper = \XoopsModules\About\Helper::getInstance();
+$myts   = \MyTextSanitizer::getInstance();
 
-if (!isset($GLOBALS['xoopsTpl']) || !($GLOBALS['xoopsTpl'] instanceof XoopsTpl)) {
+if (!isset($GLOBALS['xoopsTpl']) || !($GLOBALS['xoopsTpl'] instanceof \XoopsTpl)) {
     require_once $GLOBALS['xoops']->path('class/template.php');
-    $xoopsTpl = new XoopsTpl();
+    $xoopsTpl = new \XoopsTpl();
 }
 
 // Load language files
-$abtHelper->loadLanguage('modinfo');
-$abtHelper->loadLanguage('main');
+$helper->loadLanguage('modinfo');
+$helper->loadLanguage('main');
