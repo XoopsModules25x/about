@@ -27,7 +27,6 @@ defined('XOOPS_ROOT_PATH') || die('Restricted access');
 function about_block_menu_show()
 {
     $moduleDirName = basename(dirname(__DIR__));
-    xoops_load('constants', $moduleDirName);
 
     /** @var \XoopsModules\About\Helper $helper */
     $helper        = \XoopsModules\About\Helper::getInstance();
@@ -96,7 +95,6 @@ function about_block_page_edit($options)
     $moduleDirName = basename(dirname(__DIR__));
     /** @var \XoopsModules\About\Helper $helper */
     $helper = \XoopsModules\About\Helper::getInstance();
-    xoops_load('constants', $moduleDirName);
     $options_page = [];
 
     $helper->loadLanguage('blocks');

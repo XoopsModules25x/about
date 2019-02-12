@@ -20,20 +20,6 @@ require_once __DIR__ . '/common.php';
 
 $moduleDirName      = basename(dirname(__DIR__));
 $moduleDirNameUpper = mb_strtoupper($moduleDirName);
-/*
-if (!defined($capsDirName . '_DIRNAME')) {
-    //if (!defined(constant($capsDirName . '_DIRNAME'))) {
-    define($capsDirName . '_DIRNAME', $GLOBALS['xoopsModule']->dirname());
-    define($capsDirName . '_PATH', XOOPS_ROOT_PATH . '/modules/' . constant($capsDirName . '_DIRNAME'));
-    define($capsDirName . '_URL', XOOPS_URL . '/modules/' . constant($capsDirName . '_DIRNAME'));
-    define($capsDirName . '_ADMIN', constant($capsDirName . '_URL') . '/admin/index.php');
-    define($capsDirName . '_ROOT_PATH', XOOPS_ROOT_PATH . '/modules/' . constant($capsDirName . '_DIRNAME'));
-    define($capsDirName . '_AUTHOR_LOGOIMG', constant($capsDirName . '_URL') . '/assets/images/logoModule.png');
-    define($capsDirName . '_UPLOAD_URL', XOOPS_UPLOAD_URL . '/' . $moduleDirName); // WITHOUT Trailing slash
-    define($capsDirName . '_UPLOAD_PATH', XOOPS_UPLOAD_PATH . '/' . $moduleDirName); // WITHOUT Trailing slash
-}
-
-*/
 
 /**
  * @return object
@@ -48,21 +34,21 @@ function getConfig()
         'paths'         => [
             'dirname'    => $moduleDirName,
             'admin'      => XOOPS_ROOT_PATH . '/modules/' . $moduleDirName . '/admin',
-            //        'path'       => XOOPS_ROOT_PATH . '/modules/' . $moduleDirName,
-            //        'url'        => XOOPS_URL . '/modules/' . $moduleDirName,
+            'modPath'    => XOOPS_ROOT_PATH . '/modules/' . $moduleDirName,
+            'modUrl'     => XOOPS_URL . '/modules/' . $moduleDirName,
             'uploadPath' => XOOPS_UPLOAD_PATH . '/' . $moduleDirName,
             'uploadUrl'  => XOOPS_UPLOAD_URL . '/' . $moduleDirName,
         ],
         'uploadFolders' => [
             constant($moduleDirNameUpper . '_UPLOAD_PATH'),
-            constant($moduleDirNameUpper . '_UPLOAD_PATH') . '/category',
-            constant($moduleDirNameUpper . '_UPLOAD_PATH') . '/screenshots',
+//            constant($moduleDirNameUpper . '_UPLOAD_PATH') . '/category',
+//            constant($moduleDirNameUpper . '_UPLOAD_PATH') . '/screenshots',
             XOOPS_UPLOAD_PATH . '/flags',
         ],
         'blankFiles'    => [
             constant($moduleDirNameUpper . '_UPLOAD_PATH'),
-            constant($moduleDirNameUpper . '_UPLOAD_PATH') . '/category',
-            constant($moduleDirNameUpper . '_UPLOAD_PATH') . '/screenshots',
+//            constant($moduleDirNameUpper . '_UPLOAD_PATH') . '/category',
+//            constant($moduleDirNameUpper . '_UPLOAD_PATH') . '/screenshots',
             XOOPS_UPLOAD_PATH . '/flags',
         ],
 

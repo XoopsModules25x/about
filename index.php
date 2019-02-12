@@ -113,7 +113,7 @@ if (Constants::PAGE == $helper->getConfig('display', Constants::PAGE) || !empty(
     $xoopsTpl->assign('list', $list);
 }
 
-// get bread
+// get breadcrumb
 $tree_open = [];
 if (!empty($bread)) {
     $bread = array_reverse($pageHandler->getBread($menu, $page_id), true);

@@ -6,14 +6,14 @@ defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 require_once XOOPS_ROOT_PATH . '/class/tree.php';
 
-if (!class_exists('AboutTree')) {
+if (!class_exists('About\Tree')) {
     /**
-     * Class AboutTree
+     * Class Tree
      */
-    class AboutTree extends \XoopsObjectTree
+    class Tree extends \XoopsObjectTree
     {
         /**
-         * AboutTree constructor.
+         * Tree constructor.
          * @param array $objectArr
          * @param null  $rootId
          */
@@ -86,7 +86,7 @@ if (!class_exists('AboutTree')) {
             if (!empty($addEmptyOption)) {
                 $ret .= '<option value="0">' . (is_string($addEmptyOption) ? $addEmptyOption : '') . '</option>';
             }
-            $this->_makeSelBoxOptions('page_title', $selected, $key, $ret, $prefix);
+            $this->makeSelBoxOptions('page_title', $selected, $key, $ret, $prefix);
             $ret .= '</select>';
 
             return $ret;
@@ -127,7 +127,7 @@ if (!class_exists('AboutTree')) {
          * @param  int  $depth
          * @return array
          */
-        public function &makeArrayTree($key = 0, $tags = null, $depth = 0)
+        public function makeArrayTree($key = 0, $tags = null, $depth = 0)
         {
             $ret = [];
             if ($depth > 0) {

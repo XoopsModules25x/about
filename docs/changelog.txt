@@ -1,3 +1,8 @@
+<h5>1.06 RC1           [2019-02-11]</h5>  Dev: XOOPS 2.5.10, PHP 7.3.2
+<hr>
+- updates, cleanup (mamba)
+- added image display to pages (mamba)
+
 <h5>1.06 Beta 1           [2018-12-04]</h5>
 <hr>
 - namespaces (mamba)

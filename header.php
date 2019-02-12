@@ -19,6 +19,7 @@
  */
 
 use XoopsModules\About;
+use XoopsModules\About\Constants;
 
 $moduleDirName = basename(__DIR__);
 require_once dirname(dirname(__DIR__)) . '/mainfile.php';
@@ -27,7 +28,6 @@ require_once __DIR__ . '/include/common.php';
 
 //$helper = \XoopsModules\AboutHelper::getInstance();
 
-xoops_load('constants', $moduleDirName);
 $helper->loadLanguage('modinfo');
 
 $xoBreadcrumbs = [

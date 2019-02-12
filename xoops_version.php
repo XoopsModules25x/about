@@ -51,7 +51,7 @@ $modversion['adminindex'] = 'admin/index.php';
 $modversion['adminmenu']  = 'admin/menu.php';
 
 // Is performing module install/update?
-$isModuleAction            = (!empty($_POST['fct']) && 'modulesadmin' === $_POST['fct']) ? true : false;
+$isModuleAction            = (!empty($_POST['fct']) && 'modulesadmin' === $_POST['fct']);
 $modversion['onInstall']   = 'include/action.module.php';
 $modversion['onUpdate']    = 'include/action.module.php';
 $modversion['onUninstall'] = 'include/action.module.php';
@@ -110,7 +110,6 @@ $modversion['blocks'][] = [
     'template'    => 'about_block_page.tpl',
 ];
 
-xoops_load('constants', basename(__DIR__));
 
 // Module Configs
 $modversion['config'][] = [

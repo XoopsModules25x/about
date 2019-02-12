@@ -12,7 +12,7 @@ use XoopsModules\About;
 
 /**
  * Prepares system prior to attempting to uninstall module
- * @param XoopsModule $module {@link XoopsModule}
+ * @param \XoopsModule $module {@link XoopsModule}
  *
  * @return bool true if ready to uninstall, false if not
  */
@@ -24,7 +24,7 @@ function xoops_module_pre_uninstall_about(\XoopsModule $module)
 
 /**
  * Performs tasks required during uninstallation of the module
- * @param XoopsModule $module {@link XoopsModule}
+ * @param \XoopsModule $module {@link XoopsModule}
  *
  * @return bool true if uninstallation successful, false if not
  */
@@ -52,7 +52,7 @@ function xoops_module_uninstall_about(\XoopsModule $module)
         $dirInfo = new \SplFileInfo($old_dir);
         if ($dirInfo->isDir()) {
             // The directory exists so delete it
-            if (false === $utility::rrmdir($old_dir)) {
+            if (!$utility::rrmdir($old_dir)) {
                 $module->setErrors(sprintf(_AM_ABOUT_ERROR_BAD_DEL_PATH, $old_dir));
                 $success = false;
             }

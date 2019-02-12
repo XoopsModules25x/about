@@ -22,13 +22,12 @@ require_once dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
 require_once dirname(__DIR__) . '/include/common.php';
 
 xoops_load('xoopsformloader');
-xoops_load('constants', $moduleDirName);
 
 /** @var \XoopsModules\About\Helper $helper */
 $helper = \XoopsModules\About\Helper::getInstance();
 $myts   = \MyTextSanitizer::getInstance();
 
-if (!isset($GLOBALS['xoopsTpl']) || !($GLOBALS['xoopsTpl'] instanceof XoopsTpl)) {
+if (!isset($GLOBALS['xoopsTpl']) || !($GLOBALS['xoopsTpl'] instanceof \XoopsTpl)) {
     require_once $GLOBALS['xoops']->path('class/template.php');
     $xoopsTpl = new \XoopsTpl();
 }

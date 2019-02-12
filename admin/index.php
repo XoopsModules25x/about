@@ -32,7 +32,7 @@ $pageHandler = $helper->getHandler('Page');
 $criteria    = new \CriteriaCompo();
 $criteria->add(new \Criteria('page_type', Constants::PAGE_TYPE_PAGE));
 $criteria->setGroupBy('page_status');
-$pageResults = $pageHandler->getCount($criteria);
+$pageResults = $pageHandler->getCounts($criteria);
 
 $pageResults[Constants::PUBLISHED]     = array_key_exists(Constants::PUBLISHED, $pageResults) ? $pageResults[Constants::PUBLISHED] : 0;
 $pageResults[Constants::NOT_PUBLISHED] = array_key_exists(Constants::NOT_PUBLISHED, $pageResults) ? $pageResults[Constants::NOT_PUBLISHED] : 0;
@@ -41,7 +41,7 @@ $pageResults[Constants::NOT_PUBLISHED] = array_key_exists(Constants::NOT_PUBLISH
 $criteria = new \CriteriaCompo();
 $criteria->add(new \Criteria('page_type', Constants::PAGE_TYPE_LINK));
 $criteria->setGroupBy('page_status');
-$linkResults                           = $pageHandler->getCount($criteria);
+$linkResults                           = $pageHandler->getCounts($criteria);
 $linkResults[Constants::PUBLISHED]     = array_key_exists(Constants::PUBLISHED, $linkResults) ? $linkResults[Constants::PUBLISHED] : 0;
 $linkResults[Constants::NOT_PUBLISHED] = array_key_exists(Constants::NOT_PUBLISHED, $linkResults) ? $linkResults[Constants::NOT_PUBLISHED] : 0;
 

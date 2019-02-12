@@ -20,6 +20,9 @@ namespace XoopsModules\About;
  * @author         Mengjue Shao <magic.shao@gmail.com>
  * @author         Susheng Yang <ezskyyoung@gmail.com>
  */
+
+use XoopsModules\About;
+
 defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 /**
@@ -60,8 +63,7 @@ class PageHandler extends \XoopsPersistableObjectHandler
         $criteria->setSort('page_order');
         $criteria->order = 'ASC';
         $pageTree        = &$this->getAll($criteria, $tags);
-        require_once __DIR__ . '/AboutTree.php';
-        $tree = new AboutTree($pageTree);
+        $tree = new About\Tree($pageTree);
         //        $page_array = $tree->makeTree($prefix, $pid, $tags);
         //        return $page_array;
         return $tree->makeTree($prefix, $pid, $tags);

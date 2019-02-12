@@ -42,4 +42,25 @@ class Utility
     use Common\FilesManagement; // Files Management Trait
 
     //--------------- Custom module methods -----------------------------
+
+    /**
+     * @param       $dir
+     * @param  int  $mode
+     * @param  bool $recursive
+     * @return bool
+     */
+    public static function aboutmkdirs($dir, $mode = 0777, $recursive = true)
+    {
+        if ('' === $dir || null === $dir) {
+            return $dir;
+        }
+        if ('/' === $dir || is_dir($dir)) {
+            return $dir;
+        }
+        if (static::aboutmkdirs(dirname($dir), $mode, $recursive)) {
+            return mkdir($dir, $mode);
+        }
+
+        return $dir;
+    }
 }
