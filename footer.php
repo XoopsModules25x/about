@@ -20,7 +20,7 @@
 
 use XoopsModules\About;
 
-if (is_array($xoBreadcrumbs) && count($xoBreadcrumbs) > 0) {
+if ($xoBreadcrumbs && is_array($xoBreadcrumbs)) {
     $xoopsTpl->assign('xoBreadcrumbs', $xoBreadcrumbs);
 }
 

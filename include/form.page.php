@@ -65,7 +65,7 @@ if (Constants::PAGE_TYPE_PAGE == $pageType) {
 
     // Template set
     $templates = about_getTemplateList('page');
-    if (is_array($templates) && count($templates) > 0) {
+    if ($templates && is_array($templates)) {
         $template_select = new \XoopsFormSelect(_AM_ABOUT_TEMPLATE_SELECT, 'page_tpl', $page_obj->getVar('page_tpl'));
         $template_select->addOptionArray($templates);
         $form->addElement($template_select);

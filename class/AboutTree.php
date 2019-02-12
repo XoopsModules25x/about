@@ -32,7 +32,7 @@ if (!class_exists('AboutTree')) {
         public function makeTreeItems($key, &$ret, $prefix_orig, $prefix_curr = '', $tags = null)
         {
             if ($key > 0) {
-                if (is_array($tags) && count($tags) > 0) {
+                if ($tags && is_array($tags)) {
                     foreach ($tags as $tag) {
                         $ret[$key][$tag] = $this->tree[$key]['obj']->getVar($tag);
                     }
@@ -107,7 +107,7 @@ if (!class_exists('AboutTree')) {
             if (isset($this->tree[$key]['child'])) {
                 foreach ($this->tree[$key]['child'] as $childkey) {
                     if (isset($this->tree[$childkey]['obj'])):
-                        if (is_array($tags) && count($tags) > 0) {
+                        if ($tags && is_array($tags)) {
                             foreach ($tags as $tag) {
                                 $ret['child'][$childkey][$tag] = $this->tree[$childkey]['obj']->getVar($tag);
                             }

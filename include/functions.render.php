@@ -65,7 +65,7 @@ function about_getTemplateList($page = 'index', $refresh = false)
 {
     $TplFiles = about_getTplPageList($page, $refresh);
     $template = [];
-    if (is_array($TplFiles) && count($TplFiles) > 0) {
+    if ($TplFiles && is_array($TplFiles)) {
         foreach (array_keys($TplFiles) as $temp) {
             $template[$temp] = $temp;
         }
