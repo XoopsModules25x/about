@@ -23,8 +23,6 @@ define($GLOBALS['artdirname'] . '_FUNCTIONS_RENDER_LOADED', true);
 /**
  * Function to get template file of a specified style of a specified page
  *
- * @var string       $page  page name
- * @var string       $style template style
  *
  * @param mixed      $page
  * @param null|mixed $style
@@ -56,9 +54,9 @@ function about_getTemplate($page = 'index', $style = null)
 /**
  * Function to get a list of template files of a page, indexed by file name
  *
- * @var    string    $page    page name
- * @param  bool|bool $refresh recreate the data
+ *
  * @param mixed      $page
+ * @param  bool|bool $refresh recreate the data
  * @return array
  */
 function about_getTemplateList($page = 'index', $refresh = false)
@@ -79,7 +77,6 @@ function about_getTemplateList($page = 'index', $refresh = false)
  *
  * The hardcoded path is not desirable for theme switch, however, we have to keabout it before getting a good solution for cache
  *
- * @var string  $style
  *
  * @param mixed $style
  * @return string file URL, false if not found
@@ -98,7 +95,6 @@ function about_getCss($style = 'default')
 /**
  * Function to module header for a page with specified style
  *
- * @var string  $style
  *
  * @param mixed $style
  * @return string
@@ -113,10 +109,9 @@ function about_getModuleHeader($style = 'default')
 /**
  * Function to get a list of template files of a page, indexed by style
  *
- * @var string  $page page name
  *
- * @param  bool $refresh
  * @param mixed $page
+ * @param  bool $refresh
  * @return array
  */
 function &about_getTplPageList($page = '', $refresh = true)
