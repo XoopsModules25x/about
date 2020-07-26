@@ -1,8 +1,10 @@
 <?php
 
 use XoopsModules\About;
+use XoopsModules\About\Helper;
+use XoopsModules\About\Utility;
 
-defined('XOOPS_ROOT_PATH') || die('Restricted access');
+defined('XOOPS_ROOT_PATH') || exit('Restricted access');
 
 /**
  * Prepares system prior to attempting to install module
@@ -14,8 +16,7 @@ defined('XOOPS_ROOT_PATH') || die('Restricted access');
 function xoops_module_pre_install_about(\XoopsModule $module)
 {
     require_once dirname(__DIR__) . '/preloads/autoloader.php';
-    /** @var About\Utility $utility */
-    $utility      = new About\Utility();
+    $utility      = new Utility();
     $xoopsSuccess = $utility::checkVerXoops($module);
     $phpSuccess   = $utility::checkVerPhp($module);
 
@@ -30,7 +31,7 @@ function xoops_module_pre_install_about(\XoopsModule $module)
 }
 
 /**
- * @param  \XoopsModule $module
+ * @param \XoopsModule $module
  * @return bool        true if install successful, false if not
  */
 function xoops_module_install_about(\XoopsModule $module)
@@ -80,12 +81,11 @@ function xoops_module_install_about(\XoopsModule $module)
  */
 function xoops_module_pre_update_about(\XoopsModule $module)
 {
-    /** @var About\Helper $helper */
-    /** @var About\Utility $utility */
+    /** @var Helper $helper */
+    /** @var Utility $utility */
     $moduleDirName = basename(dirname(__DIR__));
-    /** @var \XoopsModules\About\Helper $helper */
-    $helper  = \XoopsModules\About\Helper::getInstance();
-    $utility = new About\Utility();
+    $helper  = Helper::getInstance();
+    $utility = new Utility();
 
     $xoopsSuccess = $utility::checkVerXoops($module);
     $phpSuccess   = $utility::checkVerPhp($module);
@@ -94,8 +94,8 @@ function xoops_module_pre_update_about(\XoopsModule $module)
 }
 
 /**
- * @param  XoopsModule $module
- * @param  null        $prev_version
+ * @param XoopsModule $module
+ * @param null        $prev_version
  * @return bool        true if update successful, false if not
  */
 function xoops_module_update_about(\XoopsModule $module, $prev_version = null)
@@ -133,7 +133,7 @@ function xoops_module_update_about(\XoopsModule $module, $prev_version = null)
 
     // Create uploads folder if it doesn't exist
     $dirOk = true;
-    if (!file_exists(XOOPS_UPLOAD_PATH . '/' . $module->dirname())) {
+    if (!is_dir(XOOPS_UPLOAD_PATH . '/' . $module->dirname())) {
         // File doesn't exist so try and create it
         $dirOk = mkdir(XOOPS_UPLOAD_PATH . '/' . $module->dirname());
         if (!$dirOk) {
@@ -154,9 +154,9 @@ function xoops_module_update_about(\XoopsModule $module, $prev_version = null)
 function xoops_module_uninstall_about(\XoopsModule $module)
 {
     $moduleDirName = $module->dirname();
-    /** @var \XoopsModules\About\Helper $helper */
-    $helper  = \XoopsModules\About\Helper::getInstance();
-    $utility = new \XoopsModules\About\Utility();
+    /** @var Helper $helper */
+    $helper  = Helper::getInstance();
+    $utility = new Utility();
 
     $success = true;
     $helper->loadLanguage('admin');

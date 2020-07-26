@@ -11,12 +11,12 @@
 
 /**
  * @copyright    XOOPS Project (https://xoops.org)
- * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
+ * @license      GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @package
- * @since
  * @author       XOOPS Development Team
  */
 
+use Xmf\Module\Admin;
 use XoopsModules\About;
 use XoopsModules\About\Constants;
 
@@ -24,7 +24,7 @@ use XoopsModules\About\Constants;
 require_once __DIR__ . '/admin_header.php';
 xoops_cp_header();
 
-$adminObject = Xmf\Module\Admin::getInstance();
+$adminObject = Admin::getInstance();
 
 // Get number of pages, grouped by status
 /** @var About\PageHandler $pageHandler */

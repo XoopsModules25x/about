@@ -11,24 +11,26 @@
  *
  * @copyright      The XOOPS Co.Ltd. http://www.xoops.com.cn
  * @copyright      XOOPS Project (https://xoops.org)
- * @license        GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
+ * @license        GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @since          1.0.0
  * @author         Mengjue Shao <magic.shao@gmail.com>
  * @author         Susheng Yang <ezskyyoung@gmail.com>
  */
 
+use Xmf\Request;
+use  Xmf\Module\Admin;
 use XoopsModules\About\Constants;
 
 require_once __DIR__ . '/admin_header.php';
 
 xoops_cp_header();
 
-$adminObject = Xmf\Module\Admin::getInstance();
+$adminObject = Admin::getInstance();
 $adminObject->displayNavigation(basename(__FILE__));
 
-$op      = Xmf\Request::getCmd('op', null);
-$op      = (null !== $op) ? $op : (isset($_REQUEST['id']) ? 'edit' : 'list');
-$page_id = Xmf\Request::getInt('id', null);
+$op      = Request::getCmd('op', null);
+$op      = $op ?? (isset($_REQUEST['id']) ? 'edit' : 'list');
+$page_id = Request::getInt('id', null);
 
 //$pageHandler = new About\PageHandler();
 
@@ -36,8 +38,8 @@ switch ($op) {
     default:
     case 'list':
         // Page order
-        if (\Xmf\Request::hasVar('page_order', 'POST')) {
-            $page_order = Xmf\Request::getArray('page_order', [], 'POST'); //$_POST['page_order'];
+        if (Request::hasVar('page_order', 'POST')) {
+            $page_order = Request::getArray('page_order', [], 'POST'); //$_POST['page_order'];
             foreach ($page_order as $page_id => $order) {
                 $pageObj = $pageHandler->get($page_id);
                 if ($page_order[$page_id] != $pageObj->getVar('page_order')) {
@@ -48,9 +50,9 @@ switch ($op) {
             }
         }
         // Set index
-        if (\Xmf\Request::hasVar('page_index', 'POST')) {
-            $page_index = Xmf\Request::getInt('page_index', Constants::NOT_INDEX, 'POST');
-            $pageObj   = $pageHandler->get($page_index);
+        if (Request::hasVar('page_index', 'POST')) {
+            $page_index = Request::getInt('page_index', Constants::NOT_INDEX, 'POST');
+            $pageObj    = $pageHandler->get($page_index);
             if ($page_index != $pageObj->getVar('page_index')) {
                 $pageObj = $pageHandler->get($page_index);
                 if (!$pageObj->getVar('page_title')) {
@@ -98,13 +100,13 @@ switch ($op) {
     case 'new':
         $GLOBALS['xoTheme']->addStylesheet("modules/{$moduleDirName}/assets/css/admin_style.css");
         $pageObj = $pageHandler->create();
-        $form     = require $helper->path('include/form.page.php');
+        $form    = require $helper->path('include/form.page.php');
         $form->display();
         break;
     case 'edit':
         $GLOBALS['xoTheme']->addStylesheet("modules/{$moduleDirName}/assets/css/admin_style.css");
         $pageObj = $pageHandler->get($page_id);
-        $form     = require $helper->path('include/form.page.php');
+        $form    = require $helper->path('include/form.page.php');
         $form->display();
         break;
     case 'save':
@@ -121,7 +123,7 @@ switch ($op) {
         }
         // Assign menu title
         if (empty($_POST['page_menu_title'])) {
-            $pageObj->setVar('page_menu_title', Xmf\Request::getString('page_title', ''));
+            $pageObj->setVar('page_menu_title', Request::getString('page_title', ''));
         }
         // Set index
         if (!$pageHandler->getCount()) {
@@ -164,7 +166,7 @@ switch ($op) {
         }
 
         // Delete image
-        if (\Xmf\Request::hasVar('delete_image', 'POST') && empty($_FILES['userfile']['name'])) {
+        if (Request::hasVar('delete_image', 'POST') && empty($_FILES['userfile']['name'])) {
             @unlink($upload_path . '/' . $pageObj->getVar('page_image'));
             $pageObj->setVar('page_image', '');
         }
@@ -182,8 +184,8 @@ switch ($op) {
         break;
     case 'delete':
         $pageObj = $pageHandler->get($page_id);
-        $image    = XOOPS_UPLOAD_PATH . "/{$moduleDirName}/" . $pageObj->getVar('page_image');
-        if (\Xmf\Request::hasVar('ok', 'REQUEST') && Constants::CONFIRM_OK == $_REQUEST['ok']) {
+        $image   = XOOPS_UPLOAD_PATH . "/{$moduleDirName}/" . $pageObj->getVar('page_image');
+        if (Request::hasVar('ok', 'REQUEST') && Constants::CONFIRM_OK == $_REQUEST['ok']) {
             if ($pageHandler->delete($pageObj)) {
                 if (file_exists($image)) {
                     @unlink($image);

@@ -14,7 +14,7 @@ namespace XoopsModules\About;
  *
  * @copyright      The XOOPS Co.Ltd. http://www.xoops.com.cn
  * @copyright      XOOPS Project (https://xoops.org)
- * @license        GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
+ * @license        GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @package        about
  * @since          1.0.0
  * @author         Mengjue Shao <magic.shao@gmail.com>
@@ -22,8 +22,6 @@ namespace XoopsModules\About;
  */
 
 use XoopsModules\About;
-
-defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 /**
  * Class PageHandler
@@ -40,15 +38,15 @@ class PageHandler extends \XoopsPersistableObjectHandler
     }
 
     /**
-     * @param  int    $pid
-     * @param  string $prefix
-     * @param  array  $tags
+     * @param int    $pid
+     * @param string $prefix
+     * @param array  $tags
      * @return array
      */
     public function getTrees($pid = 0, $prefix = '--', array $tags = [])
     {
         $pid = (int)$pid;
-        if (!is_array($tags) || 0 === count($tags)) {
+        if (!\is_array($tags) || 0 === \count($tags)) {
             $tags = [
                 'page_id',
                 'page_pid',
@@ -63,22 +61,22 @@ class PageHandler extends \XoopsPersistableObjectHandler
         $criteria->setSort('page_order');
         $criteria->order = 'ASC';
         $pageTree        = &$this->getAll($criteria, $tags);
-        $tree = new About\Tree($pageTree);
+        $tree            = new About\Tree($pageTree);
         //        $page_array = $tree->makeTree($prefix, $pid, $tags);
         //        return $page_array;
         return $tree->makeTree($prefix, $pid, $tags);
     }
 
     /**
-     * @param  array $pages
-     * @param  int   $key
-     * @param  int   $level
+     * @param array $pages
+     * @param int   $key
+     * @param int   $level
      * @return array|bool
      */
     public function menuTree(array $pages = [], $key = 0, $level = 1)
     {
         $ret = false;
-        if (!is_array($pages) || 0 === count($pages)) {
+        if (!\is_array($pages) || 0 === \count($pages)) {
             return $ret;
         }
         $menu = [];
@@ -98,13 +96,13 @@ class PageHandler extends \XoopsPersistableObjectHandler
     }
 
     /**
-     * @param  array $pages
-     * @param  int   $key
+     * @param array $pages
+     * @param int   $key
      * @return array|bool
      */
     public function getBread(array $pages = [], $key = 0)
     {
-        if (!is_array($pages) || 0 === count($pages)) {
+        if (!\is_array($pages) || 0 === \count($pages)) {
             return false;
         }
         $bread = [];

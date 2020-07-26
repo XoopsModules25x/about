@@ -21,32 +21,26 @@ namespace XoopsModules\About;
  * @package      ::    \module\About\class
  * @license      http://www.fsf.org/copyleft/gpl.html GNU public license
  * @copyright    https://xoops.org 2001-2017 &copy; XOOPS Project
- * @author       ZySpec <owners@zyspec.com>
+ * @author       ZySpec <zyspec@yahoo.com>
  * @author       Mamba <mambax7@gmail.com>
  * @since        ::      File available since version 1.54
  */
 
 use XoopsModules\About;
+use XoopsModules\About\Common;
+use XoopsModules\About\Constants;
 
 /**
- * Utility
- *
- * Static utility class to provide common functionality
+ * Class Utility
  */
-class Utility
+class Utility extends Common\SysUtility
 {
-    use Common\VersionChecks; //checkVerXoops, checkVerPhp Traits
-
-    use Common\ServerStats; // getServerStats Trait
-
-    use Common\FilesManagement; // Files Management Trait
-
     //--------------- Custom module methods -----------------------------
 
     /**
      * @param       $dir
-     * @param  int  $mode
-     * @param  bool $recursive
+     * @param int   $mode
+     * @param bool  $recursive
      * @return bool
      */
     public static function aboutmkdirs($dir, $mode = 0777, $recursive = true)
@@ -54,11 +48,11 @@ class Utility
         if ('' === $dir || null === $dir) {
             return $dir;
         }
-        if ('/' === $dir || is_dir($dir)) {
+        if ('/' === $dir || \is_dir($dir)) {
             return $dir;
         }
-        if (static::aboutmkdirs(dirname($dir), $mode, $recursive)) {
-            return mkdir($dir, $mode);
+        if (static::aboutmkdirs(\dirname($dir), $mode, $recursive)) {
+            return \mkdir($dir, $mode);
         }
 
         return $dir;
