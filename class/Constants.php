@@ -5,7 +5,7 @@ namespace XoopsModules\About;
 /*
                XOOPS - PHP Content Management System
                    Copyright (c) 2000 XOOPS.org
-                      <https://xoops.org/>
+                      <https://xoops.org>
  This program is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
  the Free Software Foundation; either version 2 of the License, or
@@ -37,17 +37,17 @@ namespace XoopsModules\About;
  * work correctly if trying to upgrade if these values have been changed.
  *
  * @copyright::  {@link http://sourceforge.net/projects/xoops/ The XOOPS Project}
- * @license  ::    {@link http://www.gnu.org/licenses/gpl-2.0.html GNU Public License}
- * @author   ::     zyspec <owners@zyspec.com>
+ * @license  ::    {@link https://www.gnu.org/licenses/gpl-2.0.html GNU Public License}
+ * @author   ::     zyspec <zyspec@yahoo.com>
  * @package  ::    about
  * @since    ::      1.05
  **/
-defined('XOOPS_ROOT_PATH') || die('Restricted access');
+
 
 /**
- * Class Constants
+ * interface Constants
  */
-class Constants
+interface Constants
 {
     /**#@+
      * Constant definition
@@ -136,4 +136,5 @@ class Constants
      */
     const NOT_SET = 0;
     /**#@-*/
+
 }

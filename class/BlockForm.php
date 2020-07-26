@@ -14,12 +14,12 @@ namespace XoopsModules\About;
  *
  * @copyright      The XOOPS Co.Ltd. http://www.xoops.com.cn
  * @copyright      XOOPS Project (https://xoops.org)
- * @license        GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
+ * @license        GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @package        about
  * @since          1.0.0
  * @author         Susheng Yang <ezskyyoung@gmail.com>
  */
-defined('XOOPS_ROOT_PATH') || die('Restricted access');
+
 
 require_once XOOPS_ROOT_PATH . '/class/xoopsform/form.php';
 
@@ -45,7 +45,7 @@ class BlockForm extends \XoopsForm
         $ret    = '<div>';
         $hidden = '';
         foreach ($this->getElements() as $ele) {
-            if (!is_object($ele)) {
+            if (!\is_object($ele)) {
                 $ret .= $ele;
             } elseif (!$ele->isHidden()) {
                 if ('' !== ($caption = $ele->getCaption())) {

@@ -11,13 +11,15 @@
 
 /**
  * @copyright    XOOPS Project https://xoops.org/
- * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
- * @package
- * @since
+ * @license      GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author       XOOPS Development Team
  */
 
-use XoopsModules\About;
+use XoopsModules\About\{
+    Helper,
+    Utility,
+    Common\Configurator
+};
 
 /**
  * Prepares system prior to attempting to install module
@@ -28,13 +30,12 @@ use XoopsModules\About;
 function xoops_module_pre_install_about(\XoopsModule $module)
 {
     require_once dirname(__DIR__) . '/preloads/autoloader.php';
-    /** @var \XoopsModules\About\Utility $utility */
-    $utility      = new \XoopsModules\About\Utility();
+    $utility      = new Utility();
     $xoopsSuccess = $utility::checkVerXoops($module);
     $phpSuccess   = $utility::checkVerPhp($module);
 
     if ($xoopsSuccess && $phpSuccess) {
-        $moduleTables = &$module->getInfo('tables');
+        $moduleTables = $module->getInfo('tables');
         foreach ($moduleTables as $table) {
             $GLOBALS['xoopsDB']->queryF('DROP TABLE IF EXISTS ' . $GLOBALS['xoopsDB']->prefix($table) . ';');
         }
@@ -51,15 +52,14 @@ function xoops_module_pre_install_about(\XoopsModule $module)
  */
 function xoops_module_install_about(\XoopsModule $module)
 {
-    require_once dirname(dirname(dirname(__DIR__))) . '/mainfile.php';
-    require_once dirname(__DIR__) . '/include/config.php';
+    require_once dirname(__DIR__, 3) . '/mainfile.php';
 
     $moduleDirName = basename(dirname(__DIR__));
 
-    /** @var \XoopsModules\About\Helper $helper */
-    $helper       = \XoopsModules\About\Helper::getInstance();
-    $utility      = new About\Utility();
-    $configurator = new About\Common\Configurator();
+    /** @var Helper $helper */
+    $helper       = Helper::getInstance();
+    $utility      = new Utility();
+    $configurator = new Configurator();
     // Load language files
     $helper->loadLanguage('admin');
     $helper->loadLanguage('modinfo');

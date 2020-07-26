@@ -29,7 +29,7 @@
         <{foreach item=page from=$pages}>
             <tr class="<{cycle values='odd, even'}> center top">
                 <td><input name="page_order[<{$page.page_id}>]" type="text" id="<{$page.page_id}>" value="<{$page.page_order}>" size="1" maxlength="4"></td>
-                <td><input name="page_index" type="radio" value="<{$page.page_id}>" id="<{$page.page_id}>" <{if $page.page_index}>checked="checked"<{/if}>></td>
+                <td><input name="page_index" type="radio" value="<{$page.page_id}>" id="<{$page.page_id}>" <{if $page.page_index}>checked<{/if}>></td>
                 <td align="left">
                     <div><a href="admin.page.php?id=<{$page.page_id}>"><{$page.page_menu_title}></a></div>
                     <div class="options" style="padding:5px 0 0 0;">

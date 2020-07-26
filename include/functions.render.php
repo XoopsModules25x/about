@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Article module for XOOPS
  *
@@ -15,7 +16,7 @@
  * @since           1.0
  * @author          Taiwen Jiang <phppp@users.sourceforge.net>
  */
-defined('XOOPS_ROOT_PATH') || die('Restricted access');
+defined('XOOPS_ROOT_PATH') || exit('Restricted access');
 
 require_once __DIR__ . '/vars.php';
 define($GLOBALS['artdirname'] . '_FUNCTIONS_RENDER_LOADED', true);
@@ -54,9 +55,8 @@ function about_getTemplate($page = 'index', $style = null)
 /**
  * Function to get a list of template files of a page, indexed by file name
  *
- *
- * @param mixed      $page
- * @param  bool|bool $refresh recreate the data
+ * @param mixed $page
+ * @param bool  $refresh recreate the data
  * @return array
  */
 function about_getTemplateList($page = 'index', $refresh = false)
@@ -111,7 +111,7 @@ function about_getModuleHeader($style = 'default')
  *
  *
  * @param mixed $page
- * @param  bool $refresh
+ * @param bool  $refresh
  * @return array
  */
 function &about_getTplPageList($page = '', $refresh = true)
@@ -138,7 +138,7 @@ function &about_getTplPageList($page = '', $refresh = true)
 }
 
 /**
- * @param  bool $index_by_page
+ * @param bool $index_by_page
  * @return array
  */
 function &about_template_lookup($index_by_page = false)

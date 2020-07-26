@@ -11,7 +11,7 @@
  *
  * @copyright      The XOOPS Co.Ltd. http://www.xoops.com.cn
  * @copyright      XOOPS Project (https://xoops.org)
- * @license        GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
+ * @license        GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @package        about
  * @since          1.0.0
  * @author         Mengjue Shao <magic.shao@gmail.com>
@@ -21,7 +21,7 @@
 use XoopsModules\About;
 use XoopsModules\About\Constants;
 
-defined('XOOPS_ROOT_PATH') || die('Restricted access');
+defined('XOOPS_ROOT_PATH') || exit('Restricted access');
 
 require_once __DIR__ . '/functions.render.php';
 //require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';

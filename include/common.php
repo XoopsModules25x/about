@@ -11,15 +11,17 @@
 
 /**
  * @copyright    XOOPS Project https://xoops.org/
- * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
+ * @license      GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @package
- * @since
  * @author       XOOPS Development Team
  */
 
+use Xmf\Module\Admin;
 use XoopsModules\About;
+use XoopsModules\About\Helper;
+use XoopsModules\About\Utility;
 
-defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
+defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
 
 require_once dirname(__DIR__) . '/preloads/autoloader.php';
 
@@ -31,14 +33,14 @@ $moduleDirNameUpper = mb_strtoupper($moduleDirName); //$capsDirName
 /** @var \XoopsModules\About\Utility $utility */
 $db = \XoopsDatabaseFactory::getDatabaseConnection();
 /** @var \XoopsModules\About\Helper $helper */
-$helper  = \XoopsModules\About\Helper::getInstance();
-$utility = new \XoopsModules\About\Utility();
+$helper  = Helper::getInstance();
+$utility = new Utility();
 //$configurator = new About\Common\Configurator();
 
 $helper->loadLanguage('common');
 
-$pathIcon16 = \Xmf\Module\Admin::iconUrl('', 16);
-$pathIcon32 = \Xmf\Module\Admin::iconUrl('', 32);
+$pathIcon16 = Admin::iconUrl('', 16);
+$pathIcon32 = Admin::iconUrl('', 32);
 if (is_object($helper->getModule())) {
     $pathModIcon16 = $helper->getModule()->getInfo('modicons16');
     $pathModIcon32 = $helper->getModule()->getInfo('modicons32');
@@ -54,7 +56,7 @@ if (!defined($moduleDirNameUpper . '_CONSTANTS_DEFINED')) {
     define($moduleDirNameUpper . '_ADMIN_PATH', constant($moduleDirNameUpper . '_ROOT_PATH') . '/admin/');
     define($moduleDirNameUpper . '_PATH', XOOPS_ROOT_PATH . '/modules/' . constant($moduleDirNameUpper . '_DIRNAME'));
     define($moduleDirNameUpper . '_ADMIN', constant($moduleDirNameUpper . '_URL') . '/admin/index.php');
-//    define($moduleDirNameUpper . '_AUTHOR_LOGOIMG', constant($moduleDirNameUpper . '_URL') . '/assets/images/logoModule.png');
+    //    define($moduleDirNameUpper . '_AUTHOR_LOGOIMG', constant($moduleDirNameUpper . '_URL') . '/assets/images/logoModule.png');
     define($moduleDirNameUpper . '_UPLOAD_URL', XOOPS_UPLOAD_URL . '/' . $moduleDirName); // WITHOUT Trailing slash
     define($moduleDirNameUpper . '_UPLOAD_PATH', XOOPS_UPLOAD_PATH . '/' . $moduleDirName); // WITHOUT Trailing slash
     define($moduleDirNameUpper . '_AUTHOR_LOGOIMG', $pathIcon32 . '/xoopsmicrobutton.gif');

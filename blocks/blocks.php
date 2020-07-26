@@ -11,7 +11,7 @@
  *
  * @copyright      The XOOPS Co.Ltd. http://www.xoops.com.cn
  * @copyright      XOOPS Project (https://xoops.org)
- * @license        GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
+ * @license        GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @package        about
  * @since          1.0.0
  * @author         Mengjue Shao <magic.shao@gmail.com>
@@ -19,8 +19,9 @@
  */
 
 use XoopsModules\About\Constants;
+use XoopsModules\About\Helper;
 
-defined('XOOPS_ROOT_PATH') || die('Restricted access');
+defined('XOOPS_ROOT_PATH') || exit('Restricted access');
 /**
  * @return mixed
  */
@@ -28,8 +29,8 @@ function about_block_menu_show()
 {
     $moduleDirName = basename(dirname(__DIR__));
 
-    /** @var \XoopsModules\About\Helper $helper */
-    $helper        = \XoopsModules\About\Helper::getInstance();
+    /** @var Helper $helper */
+    $helper        = Helper::getInstance();
     $pageHandler   = $helper->getHandler('Page');
     $menu_criteria = new \CriteriaCompo();
     $menu_criteria->add(new \Criteria('page_status', Constants::PUBLISHED), 'AND');
@@ -61,8 +62,8 @@ function about_block_page_show($options)
         return false;
     }
     $moduleDirName = basename(dirname(__DIR__));
-    /** @var \XoopsModules\About\Helper $helper */
-    $helper = \XoopsModules\About\Helper::getInstance();
+    /** @var Helper $helper */
+    $helper = Helper::getInstance();
 
     $myts        = \MyTextSanitizer::getInstance();
     $block       = [];
@@ -93,8 +94,8 @@ EOF;
 function about_block_page_edit($options)
 {
     $moduleDirName = basename(dirname(__DIR__));
-    /** @var \XoopsModules\About\Helper $helper */
-    $helper = \XoopsModules\About\Helper::getInstance();
+    /** @var Helper $helper */
+    $helper       = Helper::getInstance();
     $options_page = [];
 
     $helper->loadLanguage('blocks');
