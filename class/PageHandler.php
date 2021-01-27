@@ -14,35 +14,37 @@ namespace XoopsModules\About;
  *
  * @copyright      The XOOPS Co.Ltd. http://www.xoops.com.cn
  * @copyright      XOOPS Project (https://xoops.org)
- * @license        GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
+ * @license        GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @package        about
  * @since          1.0.0
  * @author         Mengjue Shao <magic.shao@gmail.com>
  * @author         Susheng Yang <ezskyyoung@gmail.com>
  */
 
+use CriteriaCompo;
+use XoopsDatabase;
 use XoopsModules\About;
+use XoopsPersistableObjectHandler;
 
-defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 /**
  * Class PageHandler
  */
-class PageHandler extends \XoopsPersistableObjectHandler
+class PageHandler extends XoopsPersistableObjectHandler
 {
     /**
      * PageHandler constructor.
      * @param null|\XoopsDatabase $db
      */
-    public function __construct(\XoopsDatabase $db = null)
+    public function __construct(XoopsDatabase $db = null)
     {
         parent::__construct($db, 'about_page', Page::class, 'page_id', 'page_title');
     }
 
     /**
-     * @param  int    $pid
-     * @param  string $prefix
-     * @param  array  $tags
+     * @param int    $pid
+     * @param string $prefix
+     * @param array  $tags
      * @return array
      */
     public function getTrees($pid = 0, $prefix = '--', array $tags = [])
@@ -59,20 +61,20 @@ class PageHandler extends \XoopsPersistableObjectHandler
                 'page_order',
             ];
         }
-        $criteria = new \CriteriaCompo();
+        $criteria = new CriteriaCompo();
         $criteria->setSort('page_order');
         $criteria->order = 'ASC';
         $pageTree        = &$this->getAll($criteria, $tags);
-        $tree = new About\Tree($pageTree);
+        $tree            = new About\Tree($pageTree);
         //        $page_array = $tree->makeTree($prefix, $pid, $tags);
         //        return $page_array;
         return $tree->makeTree($prefix, $pid, $tags);
     }
 
     /**
-     * @param  array $pages
-     * @param  int   $key
-     * @param  int   $level
+     * @param array $pages
+     * @param int   $key
+     * @param int   $level
      * @return array|bool
      */
     public function menuTree(array $pages = [], $key = 0, $level = 1)
@@ -98,8 +100,8 @@ class PageHandler extends \XoopsPersistableObjectHandler
     }
 
     /**
-     * @param  array $pages
-     * @param  int   $key
+     * @param array $pages
+     * @param int   $key
      * @return array|bool
      */
     public function getBread(array $pages = [], $key = 0)

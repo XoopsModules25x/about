@@ -11,22 +11,27 @@
  *
  * @copyright      The XOOPS Co.Ltd. http://www.xoops.com.cn
  * @copyright      XOOPS Project (https://xoops.org)
- * @license        GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
+ * @license        GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @package        about
  * @since          1.0.0
  * @author         Mengjue Shao <magic.shao@gmail.com>
  * @author         Susheng Yang <ezskyyoung@gmail.com>
  */
 
+use Xmf\Request;
 use XoopsModules\About;
 use XoopsModules\About\Constants;
+use XoopsModules\About\Utility;
+use XoopsModules\About\PageHandler;
+/** @var Helper $helper */
+/** @var PageHandler $pageHandler */
 
-defined('XOOPS_ROOT_PATH') || die('Restricted access');
+defined('XOOPS_ROOT_PATH') || exit('Restricted access');
 
-require_once __DIR__ . '/functions.render.php';
+//require_once __DIR__ . '/functions.render.php';
 //require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 
-$pageType = isset($_REQUEST['type']) ? Xmf\Request::getInt('type', 0) : $pageObj->getVar('page_type');
+$pageType = isset($_REQUEST['type']) ? Request::getInt('type', 0) : $pageObj->getVar('page_type');
 $format   = empty($format) ? 'e' : $format;
 
 $menu_status = $pageObj->isNew() ? 1 : $pageObj->getVar('page_menu_status');
@@ -64,7 +69,7 @@ if (Constants::PAGE_TYPE_PAGE == $pageType) {
     $form->addElement($editorTray);
 
     // Template set
-    $templates = about_getTemplateList('page');
+    $templates = Utility::getTemplateList('page');
     if ($templates && is_array($templates)) {
         $template_select = new \XoopsFormSelect(_AM_ABOUT_TEMPLATE_SELECT, 'page_tpl', $pageObj->getVar('page_tpl'));
         $template_select->addOptionArray($templates);

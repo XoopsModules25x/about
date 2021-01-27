@@ -11,16 +11,16 @@
 
 /**
  * @copyright    XOOPS Project https://xoops.org/
- * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
+ * @license      GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @package
- * @since
  * @author       XOOPS Development Team
  */
 
 use XoopsModules\About;
+use XoopsModules\About\Helper;
 
 if ((!defined('XOOPS_ROOT_PATH')) || !($GLOBALS['xoopsUser'] instanceof \XoopsUser)
-    || !$GLOBALS['xoopsUser']->IsAdmin()) {
+    || !$GLOBALS['xoopsUser']->isAdmin()) {
     exit('Restricted access' . PHP_EOL);
 }
 
@@ -45,9 +45,7 @@ function tableExists($tablename)
 function xoops_module_pre_update_about(\XoopsModule $module)
 {
     $moduleDirName = basename(dirname(__DIR__));
-    /** @var \XoopsModules\About\Helper $helper */
-    $helper = \XoopsModules\About\Helper::getInstance();
-    /** @var About\Utility $utility */
+    $helper = Helper::getInstance();
     $utility = new About\Utility();
 
     $xoopsSuccess = $utility::checkVerXoops($module);
@@ -59,7 +57,7 @@ function xoops_module_pre_update_about(\XoopsModule $module)
 /**
  * Performs tasks required during update of the module
  * @param \XoopsModule $module {@link XoopsModule}
- * @param null        $previousVersion
+ * @param null         $previousVersion
  *
  * @return bool true if update successful, false if not
  */
@@ -68,10 +66,9 @@ function xoops_module_update_about(\XoopsModule $module, $previousVersion = null
     $moduleDirName      = basename(dirname(__DIR__));
     $moduleDirNameUpper = mb_strtoupper($moduleDirName);
 
-    /** @var \XoopsModules\About\Helper $helper */
-    /** @var About\Utility $utility */
+    /** @var \XoopsModules\About\Helper $helper */ /** @var About\Utility $utility */
     /** @var About\Common\Configurator $configurator */
-    $helper       = \XoopsModules\About\Helper::getInstance();
+    $helper       = Helper::getInstance();
     $utility      = new About\Utility();
     $configurator = new About\Common\Configurator();
 
@@ -85,7 +82,7 @@ function xoops_module_update_about(\XoopsModule $module, $previousVersion = null
                     foreach ($templateList as $k => $v) {
                         $fileInfo = new \SplFileInfo($templateFolder . $v);
                         if ('html' === $fileInfo->getExtension() && 'index.html' !== $fileInfo->getFilename()) {
-                            if (file_exists($templateFolder . $v)) {
+                            if (is_file($templateFolder . $v)) {
                                 unlink($templateFolder . $v);
                             }
                         }

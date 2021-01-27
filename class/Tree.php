@@ -2,7 +2,11 @@
 
 namespace XoopsModules\About;
 
-defined('XOOPS_ROOT_PATH') || die('Restricted access');
+use XoopsObjectTree;
+
+
+
+
 
 require_once XOOPS_ROOT_PATH . '/class/tree.php';
 
@@ -10,14 +14,14 @@ if (!class_exists('About\Tree')) {
     /**
      * Class Tree
      */
-    class Tree extends \XoopsObjectTree
+    class Tree extends XoopsObjectTree
     {
         /**
          * Tree constructor.
          * @param array $objectArr
          * @param null  $rootId
          */
-        public function __construct(&$objectArr, $rootId = null)
+        public function __construct($objectArr, $rootId = null)
         {
             parent::__construct($objectArr, 'page_id', 'page_pid', $rootId);
         }
@@ -50,9 +54,9 @@ if (!class_exists('About\Tree')) {
         }
 
         /**
-         * @param  string $prefix
-         * @param  int    $key
-         * @param  null   $tags
+         * @param string $prefix
+         * @param int    $key
+         * @param null   $tags
          * @return array
          */
         public function &makeTree($prefix = '-', $key = 0, $tags = null)
@@ -64,13 +68,13 @@ if (!class_exists('About\Tree')) {
         }
 
         /**
-         * @param  string $name
-         * @param  string $fieldName
-         * @param  string $prefix
-         * @param  string $selected
-         * @param  bool   $addEmptyOption
-         * @param  int    $key
-         * @param  string $extra
+         * @param string $name
+         * @param string $fieldName
+         * @param string $prefix
+         * @param string $selected
+         * @param bool   $addEmptyOption
+         * @param int    $key
+         * @param string $extra
          * @return string
          */
         public function makeSelBox(
@@ -80,8 +84,8 @@ if (!class_exists('About\Tree')) {
             $selected = '',
             $addEmptyOption = false,
             $key = 0,
-            $extra = '')
-        {
+            $extra = ''
+        ) {
             $ret = '<select name=' . $name . '>';
             if (!empty($addEmptyOption)) {
                 $ret .= '<option value="0">' . (is_string($addEmptyOption) ? $addEmptyOption : '') . '</option>';
@@ -122,9 +126,9 @@ if (!class_exists('About\Tree')) {
         }
 
         /**
-         * @param  int  $key
-         * @param  null $tags
-         * @param  int  $depth
+         * @param int  $key
+         * @param null $tags
+         * @param int  $depth
          * @return array
          */
         public function makeArrayTree($key = 0, $tags = null, $depth = 0)

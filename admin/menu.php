@@ -16,20 +16,23 @@
  * @package    module\About\admin
  * @copyright  The XOOPS Co.Ltd. http://www.xoops.com.cn
  * @copyright  https://xoops.org 2001-2017 XOOPS Project
- * @license    GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
+ * @license    GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @since      1.0.0
  * @author     Mengjue Shao <magic.shao@gmail.com>
  * @author     Susheng Yang <ezskyyoung@gmail.com>
  */
 
+use Xmf\Module\Admin;
 use XoopsModules\About;
+use XoopsModules\About\Helper;
 
 require_once dirname(__DIR__) . '/include/common.php';
 
-/** @var \XoopsModules\About\Helper $helper */
-$helper = \XoopsModules\About\Helper::getInstance();
+$helper = Helper::getInstance();
+$helper->loadLanguage('common');
+$helper->loadLanguage('feedback');
 
-$pathIcon32 = \Xmf\Module\Admin::menuIconPath('');
+$pathIcon32 = Admin::menuIconPath('');
 if (is_object($helper->getModule())) {
     $pathModIcon32 = $helper->getModule()->getInfo('modicons32');
 }

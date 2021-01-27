@@ -11,7 +11,7 @@
  *
  * @copyright      The XOOPS Co.Ltd. http://www.xoops.com.cn
  * @copyright      XOOPS Project (https://xoops.org)
- * @license        GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
+ * @license        GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @package        about
  * @since          1.0.0
  * @author         Mengjue Shao <magic.shao@gmail.com>
@@ -20,16 +20,23 @@
 
 use XoopsModules\About;
 use XoopsModules\About\Constants;
+use XoopsModules\About\Helper;
+
+/** @var Helper $helper */
 
 $moduleDirName = basename(__DIR__);
-require_once dirname(dirname(__DIR__)) . '/mainfile.php';
+require_once dirname(__DIR__, 2) . '/mainfile.php';
 
 require_once __DIR__ . '/include/common.php';
+
+$moduleDirName = basename(__DIR__);
+$moduleDirNameUpper = mb_strtoupper($moduleDirName);
 
 //$helper = \XoopsModules\AboutHelper::getInstance();
 
 $helper->loadLanguage('modinfo');
 
+/** @var \XoopsModule $xoopsModule */
 $xoBreadcrumbs = [
     ['title' => _YOURHOME, 'link' => XOOPS_URL],
     ['title' => $xoopsModule->getVar('name'), 'link' => XOOPS_URL . "/modules/{$moduleDirName}/"],
