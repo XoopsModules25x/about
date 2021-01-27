@@ -19,6 +19,7 @@ namespace XoopsModules\About;
  * @since
  * @author       XOOPS Development Team
  */
+
 /**
  * Class Helper
  */
@@ -45,7 +46,7 @@ class Helper extends \Xmf\Module\Helper
     {
         static $instance;
         if (null === $instance) {
-            $instance = new static($debug);
+            $instance = new self($debug);
         }
 
         return $instance;

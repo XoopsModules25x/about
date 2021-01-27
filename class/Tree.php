@@ -2,15 +2,19 @@
 
 namespace XoopsModules\About;
 
+use XoopsObjectTree;
+
+
+
 
 
 require_once XOOPS_ROOT_PATH . '/class/tree.php';
 
-if (!\class_exists('About\Tree')) {
+if (!class_exists('About\Tree')) {
     /**
      * Class Tree
      */
-    class Tree extends \XoopsObjectTree
+    class Tree extends XoopsObjectTree
     {
         /**
          * Tree constructor.
@@ -32,7 +36,7 @@ if (!\class_exists('About\Tree')) {
         public function makeTreeItems($key, &$ret, $prefix_orig, $prefix_curr = '', $tags = null)
         {
             if ($key > 0) {
-                if ($tags && \is_array($tags)) {
+                if ($tags && is_array($tags)) {
                     foreach ($tags as $tag) {
                         $ret[$key][$tag] = $this->tree[$key]['obj']->getVar($tag);
                     }
@@ -84,7 +88,7 @@ if (!\class_exists('About\Tree')) {
         ) {
             $ret = '<select name=' . $name . '>';
             if (!empty($addEmptyOption)) {
-                $ret .= '<option value="0">' . (\is_string($addEmptyOption) ? $addEmptyOption : '') . '</option>';
+                $ret .= '<option value="0">' . (is_string($addEmptyOption) ? $addEmptyOption : '') . '</option>';
             }
             $this->makeSelBoxOptions('page_title', $selected, $key, $ret, $prefix);
             $ret .= '</select>';
@@ -107,7 +111,7 @@ if (!\class_exists('About\Tree')) {
             if (isset($this->tree[$key]['child'])) {
                 foreach ($this->tree[$key]['child'] as $childkey) {
                     if (isset($this->tree[$childkey]['obj'])):
-                        if ($tags && \is_array($tags)) {
+                        if ($tags && is_array($tags)) {
                             foreach ($tags as $tag) {
                                 $ret['child'][$childkey][$tag] = $this->tree[$childkey]['obj']->getVar($tag);
                             }

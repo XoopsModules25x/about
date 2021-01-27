@@ -20,16 +20,23 @@
 
 use XoopsModules\About;
 use XoopsModules\About\Constants;
+use XoopsModules\About\Helper;
+
+/** @var Helper $helper */
 
 $moduleDirName = basename(__DIR__);
 require_once dirname(__DIR__, 2) . '/mainfile.php';
 
 require_once __DIR__ . '/include/common.php';
 
+$moduleDirName = basename(__DIR__);
+$moduleDirNameUpper = mb_strtoupper($moduleDirName);
+
 //$helper = \XoopsModules\AboutHelper::getInstance();
 
 $helper->loadLanguage('modinfo');
 
+/** @var \XoopsModule $xoopsModule */
 $xoBreadcrumbs = [
     ['title' => _YOURHOME, 'link' => XOOPS_URL],
     ['title' => $xoopsModule->getVar('name'), 'link' => XOOPS_URL . "/modules/{$moduleDirName}/"],

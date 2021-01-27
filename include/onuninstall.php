@@ -8,10 +8,8 @@
  * @link            https://xoops.org XOOPS
  */
 
-use XoopsModules\About\{
-    Helper,
-    Utility
-};
+use XoopsModules\About;
+use XoopsModules\About\Helper;
 
 /**
  * Prepares system prior to attempting to uninstall module
@@ -38,9 +36,8 @@ function xoops_module_uninstall_about(\XoopsModule $module)
     require_once dirname(__DIR__) . '/preloads/autoloader.php';
     $moduleDirName = basename(dirname(__DIR__));
 
-    /** @var Helper $helper */
     $helper = Helper::getInstance();
-    $utility = new Utility();
+    $utility = new About\Utility();
 
     $success = true;
     $helper->loadLanguage('admin');

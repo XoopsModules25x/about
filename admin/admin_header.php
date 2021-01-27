@@ -27,7 +27,6 @@ require_once dirname(__DIR__) . '/include/common.php';
 
 xoops_load('xoopsformloader');
 
-/** @var Helper $helper */
 $helper = Helper::getInstance();
 $myts   = \MyTextSanitizer::getInstance();
 

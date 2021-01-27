@@ -15,11 +15,9 @@
  * @author       XOOPS Development Team
  */
 
-use XoopsModules\About\{
-    Helper,
-    Utility,
-    Common\Configurator
-};
+use XoopsModules\About;
+use XoopsModules\About\Helper;
+use XoopsModules\About\Utility;
 
 /**
  * Prepares system prior to attempting to install module
@@ -35,7 +33,7 @@ function xoops_module_pre_install_about(\XoopsModule $module)
     $phpSuccess   = $utility::checkVerPhp($module);
 
     if ($xoopsSuccess && $phpSuccess) {
-        $moduleTables = $module->getInfo('tables');
+        $moduleTables = &$module->getInfo('tables');
         foreach ($moduleTables as $table) {
             $GLOBALS['xoopsDB']->queryF('DROP TABLE IF EXISTS ' . $GLOBALS['xoopsDB']->prefix($table) . ';');
         }
@@ -56,10 +54,9 @@ function xoops_module_install_about(\XoopsModule $module)
 
     $moduleDirName = basename(dirname(__DIR__));
 
-    /** @var Helper $helper */
     $helper       = Helper::getInstance();
     $utility      = new Utility();
-    $configurator = new Configurator();
+    $configurator = new About\Common\Configurator();
     // Load language files
     $helper->loadLanguage('admin');
     $helper->loadLanguage('modinfo');

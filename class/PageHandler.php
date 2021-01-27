@@ -21,18 +21,22 @@ namespace XoopsModules\About;
  * @author         Susheng Yang <ezskyyoung@gmail.com>
  */
 
+use CriteriaCompo;
+use XoopsDatabase;
 use XoopsModules\About;
+use XoopsPersistableObjectHandler;
+
 
 /**
  * Class PageHandler
  */
-class PageHandler extends \XoopsPersistableObjectHandler
+class PageHandler extends XoopsPersistableObjectHandler
 {
     /**
      * PageHandler constructor.
      * @param null|\XoopsDatabase $db
      */
-    public function __construct(\XoopsDatabase $db = null)
+    public function __construct(XoopsDatabase $db = null)
     {
         parent::__construct($db, 'about_page', Page::class, 'page_id', 'page_title');
     }
@@ -46,7 +50,7 @@ class PageHandler extends \XoopsPersistableObjectHandler
     public function getTrees($pid = 0, $prefix = '--', array $tags = [])
     {
         $pid = (int)$pid;
-        if (!\is_array($tags) || 0 === \count($tags)) {
+        if (!is_array($tags) || 0 === count($tags)) {
             $tags = [
                 'page_id',
                 'page_pid',
@@ -57,7 +61,7 @@ class PageHandler extends \XoopsPersistableObjectHandler
                 'page_order',
             ];
         }
-        $criteria = new \CriteriaCompo();
+        $criteria = new CriteriaCompo();
         $criteria->setSort('page_order');
         $criteria->order = 'ASC';
         $pageTree        = &$this->getAll($criteria, $tags);
@@ -76,7 +80,7 @@ class PageHandler extends \XoopsPersistableObjectHandler
     public function menuTree(array $pages = [], $key = 0, $level = 1)
     {
         $ret = false;
-        if (!\is_array($pages) || 0 === \count($pages)) {
+        if (!is_array($pages) || 0 === count($pages)) {
             return $ret;
         }
         $menu = [];
@@ -102,7 +106,7 @@ class PageHandler extends \XoopsPersistableObjectHandler
      */
     public function getBread(array $pages = [], $key = 0)
     {
-        if (!\is_array($pages) || 0 === \count($pages)) {
+        if (!is_array($pages) || 0 === count($pages)) {
             return false;
         }
         $bread = [];

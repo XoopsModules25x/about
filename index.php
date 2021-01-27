@@ -19,9 +19,15 @@
  */
 
 use XoopsModules\About\Constants;
+use XoopsModules\About\Utility;
+use XoopsModules\About\PageHandler;
+use XoopsModules\About\Helper;
+
+/** @var PageHandler $pageHandler */
+/** @var Helper $helper */
 
 require_once __DIR__ . '/header.php';
-require_once __DIR__ . '/include/functions.render.php';
+//require_once __DIR__ . '/include/functions.render.php';
 
 $page_id = Xmf\Request::getInt('page_id', 0);
 //$page_id      = isset($_REQUEST['page_id']) ? $_REQUEST['page_id'] : '';
@@ -44,7 +50,8 @@ $fields               = [
     'page_status',
     'page_text',
 ];
-$menu                 = $pageHandler->getAll($menu_criteria, $fields, false);
+
+$menu = $pageHandler->getAll($menu_criteria, $fields, false);
 foreach ($menu as $k => $v) {
     $page_text             = trim($v['page_text']);
     $menu[$k]['page_text'] = false;
@@ -70,11 +77,11 @@ if (Constants::PAGE == $helper->getConfig('display', Constants::PAGE) || !empty(
     $criteria->order = 'ASC';
     $page            = current($pageHandler->getObjects($criteria, null, false));
     if (!empty($page)) {
-        $xoopsOption['xoops_pagetitle'] = $myts->htmlSpecialChars($page['page_title'] . ' - ' . $helper->getModule()->name());
-        $xoopsOption['template_main']   = about_getTemplate('page', $page['page_tpl']);
+        $xoopsOption['xoops_pagetitle'] = htmlspecialchars($page['page_title'] . ' - ' . $helper->getModule()->name(), ENT_QUOTES | ENT_HTML5);
+        $xoopsOption['template_main']   = Utility::getTemplate('page', $page['page_tpl']);
     } else {
-        $xoopsOption['xoops_pagetitle'] = $myts->htmlSpecialChars(_MD_ABOUT_INDEX . ' - ' . $helper->getModule()->name());
-        $xoopsOption['template_main']   = about_getTemplate();
+        $xoopsOption['xoops_pagetitle'] = htmlspecialchars(_MD_ABOUT_INDEX . ' - ' . $helper->getModule()->name(), ENT_QUOTES | ENT_HTML5);
+        $xoopsOption['template_main']   = Utility::getTemplate();
     }
 
     require_once XOOPS_ROOT_PATH . '/header.php';
@@ -89,14 +96,14 @@ if (Constants::PAGE == $helper->getConfig('display', Constants::PAGE) || !empty(
             header('location: ' . $page['page_text']);
         }
         /** @var xos_opal_Theme $xoTheme */
-        $xoTheme->addMeta('meta', 'description', $myts->htmlSpecialChars($page['page_menu_title']));
+        $xoTheme->addMeta('meta', 'description', htmlspecialchars($page['page_menu_title'], ENT_QUOTES | ENT_HTML5));
         $xoopsTpl->assign('pagemenu', $page_menu);
         $xoopsTpl->assign('page', $page);
     }
 } else {
     // List (Category) display
     $xoopsOption['xoops_pagetitle'] = $helper->getModule()->name();
-    $xoopsOption['template_main']   = about_getTemplate('list');
+    $xoopsOption['template_main']   = Utility::getTemplate('list');
     require_once XOOPS_ROOT_PATH . '/header.php';
     $GLOBALS['xoTheme']->addStylesheet("modules/{$moduleDirName}/assets/css/style.css");
 

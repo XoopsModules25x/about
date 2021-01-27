@@ -20,7 +20,6 @@ namespace XoopsModules\About;
  * @author         Susheng Yang <ezskyyoung@gmail.com>
  */
 
-
 require_once XOOPS_ROOT_PATH . '/class/xoopsform/form.php';
 
 /**

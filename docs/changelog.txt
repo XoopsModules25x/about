@@ -1,6 +1,6 @@
-<h5>1.06 Final           [2020-07-26]</h5>  Dev: XOOPS 2.5.11, PHP 7.4.8
+<h5>1.06 Final           [2021-01-26]</h5>  Dev: XOOPS 2.5.11, PHP 7.4.14, PHP 8.0.1
 <hr>
-- Final Release
+- PHP8 cosmetics and updates (mamba)
 
 <h5>1.06 RC1           [2019-02-11]</h5>  Dev: XOOPS 2.5.10, PHP 7.3.2
 <hr>

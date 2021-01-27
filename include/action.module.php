@@ -81,8 +81,8 @@ function xoops_module_install_about(\XoopsModule $module)
  */
 function xoops_module_pre_update_about(\XoopsModule $module)
 {
-    /** @var Helper $helper */
-    /** @var Utility $utility */
+    /** @var About\Helper $helper */
+    /** @var About\Utility $utility */
     $moduleDirName = basename(dirname(__DIR__));
     $helper  = Helper::getInstance();
     $utility = new Utility();
@@ -154,7 +154,6 @@ function xoops_module_update_about(\XoopsModule $module, $prev_version = null)
 function xoops_module_uninstall_about(\XoopsModule $module)
 {
     $moduleDirName = $module->dirname();
-    /** @var Helper $helper */
     $helper  = Helper::getInstance();
     $utility = new Utility();
 

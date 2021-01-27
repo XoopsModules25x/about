@@ -32,7 +32,6 @@ $moduleDirNameUpper = mb_strtoupper($moduleDirName); //$capsDirName
 /** @var \XoopsModules\About\Helper $helper */
 /** @var \XoopsModules\About\Utility $utility */
 $db = \XoopsDatabaseFactory::getDatabaseConnection();
-/** @var \XoopsModules\About\Helper $helper */
 $helper  = Helper::getInstance();
 $utility = new Utility();
 //$configurator = new About\Common\Configurator();

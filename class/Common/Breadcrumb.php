@@ -11,6 +11,9 @@ namespace XoopsModules\About\Common;
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  */
+
+
+
 /**
  * Breadcrumb Class
  *
@@ -26,6 +29,7 @@ namespace XoopsModules\About\Common;
  * $breadcrumb->addLink( 'bread 3', 'index3.php' );
  * echo $breadcrumb->render();
  */
+
 /**
  * Class Breadcrumb
  */
@@ -36,7 +40,7 @@ class Breadcrumb
 
     public function __construct()
     {
-        $this->dirname = \basename(dirname(__DIR__, 2));
+        $this->dirname = basename(dirname(__DIR__, 2));
     }
 
     /**
@@ -63,7 +67,6 @@ class Breadcrumb
         1) create ./templates/chess_common_breadcrumb.tpl)
         2) add declaration to  xoops_version.php
         */
-
         /*
         if (!isset($GLOBALS['xoTheme']) || !\is_object($GLOBALS['xoTheme'])) {
             require $GLOBALS['xoops']->path('class/theme.php');

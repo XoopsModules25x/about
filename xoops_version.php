@@ -18,12 +18,15 @@
  */
 
 use XoopsModules\About\Constants;
+use XoopsModules\About\Utility;
 
 require_once __DIR__ . '/preloads/autoloader.php';
 
+$moduleDirName = basename(__DIR__);
+
 $modversion['version']       = 1.06;
 $modversion['module_status'] = 'Final';
-$modversion['release_date']  = '2020/07/26';
+$modversion['release_date']  = '2021/01/26';
 $modversion['name']          = _MI_ABOUT_NAME;
 $modversion['description']   = _MI_ABOUT_DESC;
 $modversion['author']        = 'Magic.Shao, ezsky, Mamba, Zyspec';
@@ -34,21 +37,21 @@ $modversion['license_url']   = 'www.gnu.org/licenses/gpl-2.0.html';
 
 //$moduleDirName = basename(__DIR__);
 
-$modversion['dirname']             = basename(__DIR__);
+$modversion['dirname']             = $moduleDirName;
 $modversion['modicons16']          = 'assets/images/icons/16';
 $modversion['modicons32']          = 'assets/images/icons/32';
 $modversion['module_website_url']  = 'www.xoops.org';
 $modversion['module_website_name'] = 'XOOPS';
-$modversion['min_php']             = '7.1';
+$modversion['min_php']             = '7.2';
 $modversion['min_xoops']           = '2.5.10';
 $modversion['min_admin']           = '1.2';
 $modversion['min_db']              = ['mysql' => '5.5'];
 
 $modversion['image'] = 'assets/images/logoModule.png';
-
-$modversion['hasAdmin']   = 1;
-$modversion['adminindex'] = 'admin/index.php';
-$modversion['adminmenu']  = 'admin/menu.php';
+$modversion['hasAdmin']    = 1;
+$modversion['system_menu'] = 1;
+$modversion['adminindex']  = 'admin/index.php';
+$modversion['adminmenu']   = 'admin/menu.php';
 
 // Is performing module install/update?
 $isModuleAction            = (!empty($_POST['fct']) && 'modulesadmin' === $_POST['fct']);
@@ -57,8 +60,7 @@ $modversion['onUpdate']    = 'include/action.module.php';
 $modversion['onUninstall'] = 'include/action.module.php';
 
 // Menu
-$modversion['system_menu'] = 1;
-$modversion['hasMain']     = 1;
+$modversion['hasMain'] = 1;
 global $xoopsModuleConfig, $xoopsUser, $xoopsModule;
 
 //sql
@@ -71,8 +73,8 @@ $modversion['tables']           = [
  * Templates
  */
 if ($isModuleAction) {
-    require_once __DIR__ . '/include/functions.render.php';
-    $modversion['templates'] = &about_getTplPageList('', true);
+//    require_once __DIR__ . '/include/functions.render.php';
+    $modversion['templates'] = &Utility::getTplPageList('', true);
 }
 
 //$modversion['templates'][] = [

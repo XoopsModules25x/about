@@ -29,7 +29,6 @@ function about_block_menu_show()
 {
     $moduleDirName = basename(dirname(__DIR__));
 
-    /** @var Helper $helper */
     $helper        = Helper::getInstance();
     $pageHandler   = $helper->getHandler('Page');
     $menu_criteria = new \CriteriaCompo();
@@ -62,7 +61,6 @@ function about_block_page_show($options)
         return false;
     }
     $moduleDirName = basename(dirname(__DIR__));
-    /** @var Helper $helper */
     $helper = Helper::getInstance();
 
     $myts        = \MyTextSanitizer::getInstance();
@@ -94,7 +92,6 @@ EOF;
 function about_block_page_edit($options)
 {
     $moduleDirName = basename(dirname(__DIR__));
-    /** @var Helper $helper */
     $helper       = Helper::getInstance();
     $options_page = [];
 

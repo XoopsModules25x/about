@@ -22,13 +22,12 @@
  * @author     Susheng Yang <ezskyyoung@gmail.com>
  */
 
-use \Xmf\Module\Admin;
+use Xmf\Module\Admin;
 use XoopsModules\About;
 use XoopsModules\About\Helper;
 
 require_once dirname(__DIR__) . '/include/common.php';
 
-/** @var Helper $helper */
 $helper = Helper::getInstance();
 $helper->loadLanguage('common');
 $helper->loadLanguage('feedback');

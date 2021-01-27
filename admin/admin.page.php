@@ -18,14 +18,16 @@
  */
 
 use Xmf\Request;
-use  Xmf\Module\Admin;
 use XoopsModules\About\Constants;
+use XoopsModules\About\PageHandler;
+/** @var \XoopsModules\About\PageHandler $pageHandler */
+/** @var Helper $helper */
 
 require_once __DIR__ . '/admin_header.php';
 
 xoops_cp_header();
 
-$adminObject = Admin::getInstance();
+$adminObject = Xmf\Module\Admin::getInstance();
 $adminObject->displayNavigation(basename(__FILE__));
 
 $op      = Request::getCmd('op', null);
@@ -84,7 +86,8 @@ switch ($op) {
         $criteria->setSort('page_order');
         $criteria->order = 'ASC';
         $pages           = $pageHandler->getTrees(0, '--', $fields);
-        $memberHandler   = xoops_getHandler('member');
+        /** @var \XoopsMemberHandler $memberHandler */
+        $memberHandler = xoops_getHandler('member');
 
         foreach ($pages as $k => $v) {
             $pages[$k]['page_menu_title'] = $v['prefix'] . $v['page_menu_title'];

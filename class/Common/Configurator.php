@@ -11,6 +11,9 @@ namespace XoopsModules\About\Common;
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  */
+
+
+
 /**
  * Configurator Class
  *
@@ -42,6 +45,9 @@ class Configurator
      */
     public function __construct()
     {
+        $moduleDirName      = basename(dirname(__DIR__, 2));
+        $moduleDirNameUpper = mb_strtoupper($moduleDirName);
+
         $config = require dirname(__DIR__, 2) . '/config/config.php';
 
         $this->name            = $config->name;
