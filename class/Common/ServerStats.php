@@ -26,7 +26,6 @@ trait ServerStats
      */
     public static function getServerStats()
     {
-        //mb    $wfdownloads = WfdownloadsWfdownloads::getInstance();
         $moduleDirName      = \basename(dirname(__DIR__, 2));
         $moduleDirNameUpper = mb_strtoupper($moduleDirName);
         \xoops_loadLanguage('common', $moduleDirName);

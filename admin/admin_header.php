@@ -20,6 +20,7 @@
  */
 
 use XoopsModules\About\Helper;
+/** @var Helper $helper */
 
 $moduleDirName = basename(dirname(__DIR__));
 require_once dirname(__DIR__, 3) . '/include/cp_header.php';

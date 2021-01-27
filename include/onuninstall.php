@@ -8,9 +8,14 @@
  * @link            https://xoops.org XOOPS
  */
 
-use XoopsModules\About;
-use XoopsModules\About\Helper;
+use XoopsModules\About\{
+    Helper,
+    Utility
+};
 
+/** @var Helper $helper */
+/** @var Utility $utility */
+    
 /**
  * Prepares system prior to attempting to uninstall module
  * @param \XoopsModule $module {@link XoopsModule}
@@ -37,7 +42,7 @@ function xoops_module_uninstall_about(\XoopsModule $module)
     $moduleDirName = basename(dirname(__DIR__));
 
     $helper = Helper::getInstance();
-    $utility = new About\Utility();
+    $utility = new Utility();
 
     $success = true;
     $helper->loadLanguage('admin');

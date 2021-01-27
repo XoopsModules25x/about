@@ -16,8 +16,15 @@
  * @author       XOOPS Development Team
  */
 
-use XoopsModules\About;
-use XoopsModules\About\Helper;
+use XoopsModules\About\{
+    Helper,
+    Utility,
+    Common\Configurator
+};
+
+/** @var Helper $helper */
+/** @var Utility $utility */
+/** @var Configurator $configurator */
 
 if ((!defined('XOOPS_ROOT_PATH')) || !($GLOBALS['xoopsUser'] instanceof \XoopsUser)
     || !$GLOBALS['xoopsUser']->isAdmin()) {
@@ -44,9 +51,7 @@ function tableExists($tablename)
  */
 function xoops_module_pre_update_about(\XoopsModule $module)
 {
-    $moduleDirName = basename(dirname(__DIR__));
-    $helper = Helper::getInstance();
-    $utility = new About\Utility();
+    $utility = new Utility();
 
     $xoopsSuccess = $utility::checkVerXoops($module);
     $phpSuccess   = $utility::checkVerPhp($module);
@@ -66,11 +71,10 @@ function xoops_module_update_about(\XoopsModule $module, $previousVersion = null
     $moduleDirName      = basename(dirname(__DIR__));
     $moduleDirNameUpper = mb_strtoupper($moduleDirName);
 
-    /** @var \XoopsModules\About\Helper $helper */ /** @var About\Utility $utility */
-    /** @var About\Common\Configurator $configurator */
+
     $helper       = Helper::getInstance();
-    $utility      = new About\Utility();
-    $configurator = new About\Common\Configurator();
+    $utility      = new Utility();
+    $configurator = new Configurator();
 
     if ($previousVersion < 240) {
         //delete old HTML templates

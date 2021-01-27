@@ -21,6 +21,8 @@ use XoopsModules\About;
 use XoopsModules\About\Helper;
 use XoopsModules\About\Utility;
 
+/** @var \Helper $helper */
+
 defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
 
 require_once dirname(__DIR__) . '/preloads/autoloader.php';

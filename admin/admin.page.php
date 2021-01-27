@@ -18,6 +18,7 @@
  */
 
 use Xmf\Request;
+use  Xmf\Module\Admin;
 use XoopsModules\About\Constants;
 use XoopsModules\About\PageHandler;
 /** @var \XoopsModules\About\PageHandler $pageHandler */
