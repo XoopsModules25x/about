@@ -50,11 +50,11 @@ class Utility extends Common\SysUtility
         if ('' === $dir || null === $dir) {
             return $dir;
         }
-        if ('/' === $dir || is_dir($dir)) {
+        if ('/' === $dir || \is_dir($dir)) {
             return $dir;
         }
-        if (static::aboutmkdirs(dirname($dir), $mode, $recursive)) {
-            return mkdir($dir, $mode);
+        if (static::aboutmkdirs(\dirname($dir), $mode, $recursive)) {
+            return \mkdir($dir, $mode);
         }
 
         return $dir;

@@ -27,7 +27,6 @@ use XoopsModules\About\Helper;
 /** @var Helper $helper */
 
 require_once __DIR__ . '/header.php';
-//require_once __DIR__ . '/include/functions.render.php';
 
 $page_id = Xmf\Request::getInt('page_id', 0);
 //$page_id      = isset($_REQUEST['page_id']) ? $_REQUEST['page_id'] : '';

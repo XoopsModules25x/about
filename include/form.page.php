@@ -28,7 +28,6 @@ use XoopsModules\About\PageHandler;
 
 defined('XOOPS_ROOT_PATH') || exit('Restricted access');
 
-//require_once __DIR__ . '/functions.render.php';
 //require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 
 $pageType = isset($_REQUEST['type']) ? Request::getInt('type', 0) : $pageObj->getVar('page_type');

@@ -21,6 +21,8 @@
 use XoopsModules\About\Constants;
 use XoopsModules\About\Helper;
 
+/** @var Helper $helper */
+
 defined('XOOPS_ROOT_PATH') || exit('Restricted access');
 /**
  * @return mixed

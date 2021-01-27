@@ -4,6 +4,9 @@ use XoopsModules\About;
 use XoopsModules\About\Helper;
 use XoopsModules\About\Utility;
 
+    /** @var Helper $helper */
+    /** @var Utility $utility */
+
 defined('XOOPS_ROOT_PATH') || exit('Restricted access');
 
 /**
@@ -81,8 +84,6 @@ function xoops_module_install_about(\XoopsModule $module)
  */
 function xoops_module_pre_update_about(\XoopsModule $module)
 {
-    /** @var About\Helper $helper */
-    /** @var About\Utility $utility */
     $moduleDirName = basename(dirname(__DIR__));
     $helper  = Helper::getInstance();
     $utility = new Utility();
