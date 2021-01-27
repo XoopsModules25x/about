@@ -16,6 +16,7 @@
  * @author       XOOPS Development Team
  */
 
+use Xmf\Module\Admin;
 use XoopsModules\About;
 use XoopsModules\About\Constants;
 use XoopsModules\About\PageHandler;
@@ -30,7 +31,7 @@ use XoopsModules\About\Utility;
 require_once __DIR__ . '/admin_header.php';
 xoops_cp_header();
 
-$adminObject = Xmf\Module\Admin::getInstance();
+$adminObject = Admin::getInstance();
 
 // Get number of pages, grouped by status
 $pageHandler = $helper->getHandler('Page');
