@@ -35,7 +35,7 @@ class Page extends \XoopsObject
         $this->initVar('page_title', \XOBJ_DTYPE_TXTBOX, '');
         $this->initVar('page_menu_title', \XOBJ_DTYPE_TXTBOX, '');
         $this->initVar('page_image', \XOBJ_DTYPE_TXTBOX, '');
-        $this->initVar('page_text', \XOBJ_DTYPE_TXTBOX, '');
+        $this->initVar('page_text', \XOBJ_DTYPE_OTHER, '');
         $this->initVar('page_author', \XOBJ_DTYPE_TXTBOX, '');
         $this->initVar('page_pushtime', \XOBJ_DTYPE_INT);
         $this->initVar('page_blank', \XOBJ_DTYPE_INT, 0);
