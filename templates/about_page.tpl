@@ -11,7 +11,7 @@
       <li>
         <{if ($item.page_id != $page.page_id)}><a href="index.php?page_id=<{$item.page_id}>"><{$item.page_menu_title}></a><{else}><span><{$item.page_menu_title}></span><{/if}>
         <{* if !$item.page_text}><a href="index.php?page_id=<{$item.page_id}>"><{$item.page_menu_title}></a><{else}><span><{$item.page_menu_title}></span><{/if *}>
-        <{if $item.child}>
+        <{if $item.child|default:''}>
           <{assign var="children" value=$item.child}>
           <{include file="db:about_menu.tpl"}>
         <{/if}>

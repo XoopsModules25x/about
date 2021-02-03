@@ -52,7 +52,7 @@ $fields               = [
 
 $menu = $pageHandler->getAll($menu_criteria, $fields, false);
 foreach ($menu as $k => $v) {
-    $page_text             = trim($v['page_text']);
+    $page_text             = $myts->displayTarea(trim($v['page_text']), 1,1,1,1,1);
     $menu[$k]['page_text'] = false;
     if (preg_match('/^https?\:\/\//', $page_text)) {
         $menu[$k]['page_text'] = true;
@@ -90,7 +90,8 @@ if (Constants::PAGE == $helper->getConfig('display', Constants::PAGE) || !empty(
     $GLOBALS['xoTheme']->addScript("modules/{$moduleDirName}/assets/js/jquery-treeview/jquery.treeview.js");
 
     if (!empty($page)) {
-        $page['page_text'] = $myts->undoHtmlSpecialChars($page['page_text']);
+//        $page['page_text'] = $myts->undoHtmlSpecialChars($page['page_text']);
+        $page['page_text'] = $myts->undoHtmlSpecialChars($myts->displayTarea($page['page_text'], 1,1,1,1,1));
         if (Constants::PAGE_TYPE_LINK == $page['page_type']) {
             header('location: ' . $page['page_text']);
         }
@@ -112,7 +113,7 @@ if (Constants::PAGE == $helper->getConfig('display', Constants::PAGE) || !empty(
     $criteria->order = 'ASC';
     $list            = $pageHandler->getAll($criteria, null, false);
     foreach ($list as $k => $v) {
-        $text                      = strip_tags($myts->undoHtmlSpecialChars($v['page_text']));
+        $text                      = strip_tags($myts->undoHtmlSpecialChars($myts->displayTarea($v['page_text'], 1,1,1,1,1)));
         $list[$k]['page_text']     = xoops_substr($text, 0, $helper->getConfig('str_ereg', Constants::DEFAULT_EREG));
         $list[$k]['page_pushtime'] = formatTimestamp($v['page_pushtime'], _SHORTDATESTRING);
     }
