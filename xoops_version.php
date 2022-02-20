@@ -24,9 +24,9 @@ require_once __DIR__ . '/preloads/autoloader.php';
 
 $moduleDirName = basename(__DIR__);
 
-$modversion['version']       = 1.07;
-$modversion['module_status'] = 'Beta 1';
-$modversion['release_date']  = '2021/01/26';
+$modversion['version']       = '1.7.0';
+$modversion['module_status'] = 'Beta 2';
+$modversion['release_date']  = '2022/02/20';
 $modversion['name']          = _MI_ABOUT_NAME;
 $modversion['description']   = _MI_ABOUT_DESC;
 $modversion['author']        = 'Magic.Shao, ezsky, Mamba, Zyspec';
